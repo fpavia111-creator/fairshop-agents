@@ -1,0 +1,7 @@
+tracking,date,carrier,reason,amount,billed_weight
+1ZA1,2026-11-01,UPS,Dimensional weight,6.40,12
+1ZA2,2026-11-03,UPS,Dimensional weight,4.10,14
+1ZA3,2026-11-04,UPS,Dimensional weight,4.10,14
+9400B4,2026-11-05,USPS,Weight correction,3.25,3
+1ZA5,2026-09-20,UPS,Dimensional weight,5.00,10
+1ZA6,2026-11-06,UPS,Address correction,18.50,

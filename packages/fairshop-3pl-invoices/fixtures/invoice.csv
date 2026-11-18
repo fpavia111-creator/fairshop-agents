@@ -1,0 +1,10 @@
+invoice_number,date,charge_type,reference,qty,rate,amount
+INV-77,2026-10-31,Pick and pack,1001,1,,2.50
+INV-77,2026-10-31,Pick and pack,1002,3,,3.50
+INV-77,2026-10-31,Pick and pack,1002,3,,3.50
+INV-77,2026-10-31,Pick and pack,1003,2,,4.00
+INV-77,2026-10-31,Pick and pack,1099,1,,2.50
+INV-77,2026-10-31,Receiving,ASN-5,500,0.25,125.00
+INV-77,2026-10-31,Storage,2026-10,12,20.00,240.00
+INV-77,2026-10-31,Packaging mailer,1001,1,0.30,0.30
+INV-77,2026-10-31,Special project fee,,1,75.00,75.00

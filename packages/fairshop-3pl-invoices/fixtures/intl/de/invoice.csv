@@ -1,0 +1,10 @@
+Rechnungsnummer;Datum;Leistungsbeschreibung;Referenz;Menge;Frachtrate;Betrag
+INV-77;31.10.2026;Pick and pack;1001;1;;2,50
+INV-77;31.10.2026;Pick and pack;1002;3;;3,50
+INV-77;31.10.2026;Pick and pack;1002;3;;3,50
+INV-77;31.10.2026;Pick and pack;1003;2;;4,00
+INV-77;31.10.2026;Pick and pack;1099;1;;2,50
+INV-77;31.10.2026;Receiving;ASN-5;500;0,25;125,00
+INV-77;31.10.2026;Storage;2026-10;12;20,00;240,00
+INV-77;31.10.2026;Packaging mailer;1001;1;0,30;0,30
+INV-77;31.10.2026;Special project fee;;1;75,00;75,00

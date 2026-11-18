@@ -1,0 +1,1 @@
+{ "note": "Fictional rate card for the demo; use your own agreement.", "rates": { "pick_first": 2.50, "pick_additional": 0.50, "receiving_per_unit": 0.25, "storage_per_pallet": 20.00, "packaging_mailer": 0.30 }, "tolerance": 0.02 }

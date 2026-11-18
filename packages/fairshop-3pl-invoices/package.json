@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-3pl-invoices",
+  "version": "0.1.0",
+  "description": "Audits a 3PL invoice line by line against your rate card, shipped orders, receipts and pallet counts: rates above the card, orders billed twice, picks for orders that never shipped, more units received or pallets stored than counted, and charges not on the card. Drafts the invoice dispute; never pays.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-3pl-invoices": "bin/fairshop-3pl-invoices.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-3pl-invoices.js demo",
+    "eval": "node bin/fairshop-3pl-invoices.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-3pl-invoices"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-3pl-invoices#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "3pl",
+    "fulfillment",
+    "warehouse-invoice",
+    "rate-card"
+  ]
+}
