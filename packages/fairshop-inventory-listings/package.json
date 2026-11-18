@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-inventory-listings",
+  "version": "0.1.0",
+  "description": "Compares stock by location (warehouse, 3PL, FBA) with the quantities listed on each channel: listings above what their locations can ship, listings at zero while stock sits on the shelf, inactive listings with stock, listings for SKUs you do not stock, and stock listed nowhere. Drafts quantity corrections; never changes a listing.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-inventory-listings": "bin/fairshop-inventory-listings.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-inventory-listings.js demo",
+    "eval": "node bin/fairshop-inventory-listings.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-inventory-listings"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-inventory-listings#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "inventory",
+    "multichannel",
+    "overselling",
+    "listings"
+  ]
+}

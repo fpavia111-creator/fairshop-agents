@@ -1,0 +1,13 @@
+Bestellnummer;Bestelldatum;Artikelnummer;Menge;Preis;Zustand;cancel_reason
+R1;01.11.2026;ROPE-1;2;15,00;paid;
+R2;02.11.2026;ROPE-1;2;15,00;paid;
+R3;03.11.2026;ROPE-1;2;15,00;paid;
+R4;04.11.2026;ROPE-1;2;15,00;paid;
+R5;05.11.2026;ROPE-1;2;15,00;paid;
+R6;06.11.2026;ROPE-1;1;15,00;cancelled;Out of stock
+R7;07.11.2026;ROPE-1;1;15,00;paid;
+R9;09.11.2026;ROPE-1;2;15,00;paid;
+R10;10.11.2026;ROPE-1;2;15,00;paid;
+K1;02.11.2026;KNOT-2;1;8,00;paid;
+K2;05.11.2026;KNOT-2;1;8,00;paid;
+K3;08.11.2026;KNOT-2;1;8,00;paid;

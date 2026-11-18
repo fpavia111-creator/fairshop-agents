@@ -1,0 +1,13 @@
+order_id,order_date,sku,qty,price,status,cancel_reason
+R1,2026-11-01,ROPE-1,2,15.00,paid,
+R2,2026-11-02,ROPE-1,2,15.00,paid,
+R3,2026-11-03,ROPE-1,2,15.00,paid,
+R4,2026-11-04,ROPE-1,2,15.00,paid,
+R5,2026-11-05,ROPE-1,2,15.00,paid,
+R6,2026-11-06,ROPE-1,1,15.00,cancelled,Out of stock
+R7,2026-11-07,ROPE-1,1,15.00,paid,
+R9,2026-11-09,ROPE-1,2,15.00,paid,
+R10,2026-11-10,ROPE-1,2,15.00,paid,
+K1,2026-11-02,KNOT-2,1,8.00,paid,
+K2,2026-11-05,KNOT-2,1,8.00,paid,
+K3,2026-11-08,KNOT-2,1,8.00,paid,

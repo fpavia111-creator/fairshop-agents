@@ -1,0 +1,9 @@
+channel,sku,listing_id,listed_qty,status,fulfillment
+Shopify,CANDLE-1,SH-1,35,active,merchant
+eBay,CANDLE-1,EB-1,40,active,merchant
+Amazon,CANDLE-1,AMZ-1,20,active,fba
+Shopify,SOAP-2,SH-2,5,active,merchant
+Amazon,SOAP-2,AMZ-2,10,active,fba
+Etsy,MUG-4,ET-4,0,active,merchant
+Walmart,MUG-4,WM-4,0,inactive,merchant
+Shopify,LAMP-9,SH-9,3,active,merchant

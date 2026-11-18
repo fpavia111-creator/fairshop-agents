@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-stockouts",
+  "version": "0.1.0",
+  "description": "Reads daily stock snapshots and orders per SKU: orders taken while out of stock, days out of stock and an estimate of the sales lost, and SKUs that will run out before a reorder could arrive, with a suggested quantity. Drafts the purchase order; never sends it to a supplier.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-stockouts": "bin/fairshop-stockouts.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-stockouts.js demo",
+    "eval": "node bin/fairshop-stockouts.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-stockouts"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-stockouts#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "stockouts",
+    "overselling",
+    "reorder-point",
+    "inventory-planning"
+  ]
+}

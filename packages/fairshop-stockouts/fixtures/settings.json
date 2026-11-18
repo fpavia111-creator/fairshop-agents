@@ -1,0 +1,1 @@
+{ "note": "Fictional lead times for the demo.", "lead_time_days": { "default": 14 }, "safety_days": 7, "order_days": 30 }

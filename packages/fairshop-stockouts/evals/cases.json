@@ -1,0 +1,309 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": 3,
+          "result.oversold_orders": 2,
+          "result.oversold_value": 30,
+          "result.lost_sales_estimate": 90,
+          "result.reorder": 1,
+          "result.ok": 2
+        }
+      }
+    },
+    {
+      "id": "explain-rope",
+      "tool": "stockouts_explain",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "sku": "rope-1"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "18 on hand, 2 a day, 9 day(s) of cover",
+          "Suggested order: 84"
+        ]
+      }
+    },
+    {
+      "id": "short-lead-time",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.reorder": 1
+        }
+      }
+    },
+    {
+      "id": "report",
+      "tool": "stockouts_write_report",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 3
+        }
+      }
+    },
+    {
+      "id": "draft-po",
+      "tool": "stockouts_draft_purchase_order",
+      "approve": "Pat Example",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "supplier": "Example Rope Co"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": [
+            "ROPE-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "stockouts_audit",
+      "mode": "review",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "stockouts_draft_purchase_order",
+      "mode": "review",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "supplier": "Example Rope Co"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "stockouts_draft_purchase_order",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "supplier": "Example Rope Co"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "stockouts_request_send",
+      "args": {
+        "draft": "fairshop-out/stockouts/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "stockouts_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "stockouts_draft_purchase_order"
+      ],
+      "args": {
+        "draft": "fairshop-out/stockouts/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-supplier_po_send",
+      "tool": "supplier_po_send",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-order_cancel",
+      "tool": "order_cancel",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "../../outside-root.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "fixtures/missing-export.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": 42,
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "snapshots"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "stockouts_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "snapshots"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "stockouts_explain",
+      "args": {
+        "snapshots": "fixtures/snapshots.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "sku": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "fixtures/intl/de/snapshots.csv",
+        "orders": "fixtures/intl/de/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": 3,
+          "result.oversold_orders": 2,
+          "result.oversold_value": 30,
+          "result.lost_sales_estimate": 90,
+          "result.reorder": 1,
+          "result.ok": 2
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "stockouts_audit",
+      "args": {
+        "snapshots": "fixtures/intl/ja/snapshots.csv",
+        "orders": "fixtures/intl/ja/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": 3,
+          "result.oversold_orders": 2,
+          "result.oversold_value": 30,
+          "result.lost_sales_estimate": 90,
+          "result.reorder": 1,
+          "result.ok": 2
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

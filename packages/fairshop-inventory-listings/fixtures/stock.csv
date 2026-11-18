@@ -1,0 +1,7 @@
+sku,location,on_hand,committed
+CANDLE-1,Main WH,40,5
+CANDLE-1,FBA,20,0
+SOAP-2,Main WH,0,0
+SOAP-2,FBA,10,0
+TOWEL-3,Main WH,25,0
+MUG-4,Main WH,12,2
