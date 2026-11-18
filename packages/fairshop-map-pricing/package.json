@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-map-pricing",
+  "version": "0.1.0",
+  "description": "Checks advertised prices from your own channels and from resellers against your minimum advertised price (MAP) list: your own listings below MAP first, resellers below it (and repeat ones), authorised exceptions, and SKUs not on the list. Drafts a notice per reseller; never changes a price or suspends a reseller.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-map-pricing": "bin/fairshop-map-pricing.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-map-pricing.js demo",
+    "eval": "node bin/fairshop-map-pricing.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-map-pricing"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-map-pricing#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "map-pricing",
+    "minimum-advertised-price",
+    "resellers",
+    "brand-protection"
+  ]
+}

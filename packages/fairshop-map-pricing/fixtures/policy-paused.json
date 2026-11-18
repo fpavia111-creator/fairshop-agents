@@ -1,0 +1,1 @@
+{ "note": "Same fictional list with the policy paused for an announced promotion.", "map": { "LAMP-1": 49.99, "RUG-2": 129.00 }, "exempt_sellers": ["Clearwater Outlet"], "pause": [ { "from": "2026-11-01", "to": "2026-11-02" } ] }

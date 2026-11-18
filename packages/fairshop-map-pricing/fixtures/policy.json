@@ -1,0 +1,1 @@
+{ "note": "Fictional MAP list for the demo.", "map": { "LAMP-1": 49.99, "RUG-2": 129.00 }, "exempt_sellers": ["Clearwater Outlet"], "tolerance": 0.01 }

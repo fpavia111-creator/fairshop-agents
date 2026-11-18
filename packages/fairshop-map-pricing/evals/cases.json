@@ -1,0 +1,316 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "map_audit",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.sellers": 4,
+          "result.own": 1,
+          "result.notice": 2,
+          "result.review": 1,
+          "result.ok": 2,
+          "result.by_finding.repeat_below_map.count": 1
+        }
+      }
+    },
+    {
+      "id": "explain-brightway",
+      "tool": "map_explain",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "Brightway Home|LAMP-1"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "lowest 41.5, MAP 49.99",
+          "below MAP on 2 different days"
+        ]
+      }
+    },
+    {
+      "id": "paused-promo",
+      "tool": "map_audit",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy-paused.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.notice": 2,
+          "result.own": 0
+        },
+        "not_contains": [
+          "repeat_below_map"
+        ]
+      },
+      "note": "Paused dates drop the own listing and Brightway first day, so Brightway is no longer a repeat."
+    },
+    {
+      "id": "report",
+      "tool": "map_write_report",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 4
+        }
+      }
+    },
+    {
+      "id": "draft-notice",
+      "tool": "map_draft_map_notice",
+      "approve": "Pat Example",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "Brightway Home"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": [
+            "LAMP-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "draft-clean-seller",
+      "tool": "map_draft_map_notice",
+      "approve": "Pat Example",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "Clearwater Outlet"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "is below MAP"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "map_audit",
+      "mode": "review",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "map_draft_map_notice",
+      "mode": "review",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "Brightway Home"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "map_draft_map_notice",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "Brightway Home"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "map_request_send",
+      "args": {
+        "draft": "fairshop-out/map/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "map_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "map_draft_map_notice"
+      ],
+      "args": {
+        "draft": "fairshop-out/map/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-own_price_update",
+      "tool": "own_price_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-reseller_account_suspend",
+      "tool": "reseller_account_suspend",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "map_audit",
+      "args": {
+        "prices": "../../outside-root.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "map_audit",
+      "args": {
+        "prices": "fixtures/missing-export.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "map_audit",
+      "args": {
+        "prices": 42,
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "prices"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "map_audit",
+      "args": {
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "prices"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "map_explain",
+      "args": {
+        "prices": "fixtures/prices.csv",
+        "policy": "fixtures/policy.json",
+        "seller": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "map_audit",
+      "args": {
+        "prices": "fixtures/intl/de/prices.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.sellers": 4,
+          "result.own": 1,
+          "result.notice": 2,
+          "result.review": 1,
+          "result.ok": 2,
+          "result.by_finding.repeat_below_map.count": 1
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "map_audit",
+      "args": {
+        "prices": "fixtures/intl/ja/prices.csv",
+        "policy": "fixtures/policy.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.sellers": 4,
+          "result.own": 1,
+          "result.notice": 2,
+          "result.review": 1,
+          "result.ok": 2,
+          "result.by_finding.repeat_below_map.count": 1
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

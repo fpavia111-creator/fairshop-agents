@@ -1,0 +1,9 @@
+Datum;seller;Kanal;Artikelnummer;Preis;is_own
+01.11.2026;Example Goods;Shopify;LAMP-1;49,99;yes
+01.11.2026;Example Goods;Amazon;LAMP-1;44,99;yes
+02.11.2026;Brightway Home;Amazon;LAMP-1;42,00;no
+09.11.2026;Brightway Home;Amazon;LAMP-1;41,50;no
+03.11.2026;Northgate Supply;eBay;RUG-2;120,00;no
+04.11.2026;Northgate Supply;eBay;LAMP-1;49,99;no
+05.11.2026;Clearwater Outlet;Walmart;RUG-2;125,00;no
+06.11.2026;Brightway Home;Amazon;VASE-3;19,00;no

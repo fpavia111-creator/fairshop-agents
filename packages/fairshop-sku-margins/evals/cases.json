@@ -1,0 +1,321 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "margins-totals",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.combos": 5,
+          "result.fix": 1,
+          "result.review": 2,
+          "result.ok": 2,
+          "result.revenue": 130,
+          "result.contribution": 35.3
+        }
+      }
+    },
+    {
+      "id": "without-labels",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.fix": 0
+        }
+      }
+    },
+    {
+      "id": "explain-bowl",
+      "tool": "margins_explain",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "sku": "Shopify|BOWL-2"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "income 30, cost 18, fees 1.2, shipping 12, contribution -1.2"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "margins_write_report",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-review",
+      "tool": "margins_draft_pricing_review",
+      "approve": "Pat Example",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": [
+            "Amazon|BOWL-2",
+            "Shopify|BOWL-2",
+            "Etsy|VASE-3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "margins_margins",
+      "mode": "review",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "margins_draft_pricing_review",
+      "mode": "review",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "margins_draft_pricing_review",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "margins_request_approve",
+      "args": {
+        "draft": "fairshop-out/margins/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "margins_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "margins_draft_pricing_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/margins/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-price_update",
+      "tool": "price_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-promotion_create",
+      "tool": "promotion_create",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "../../outside-root.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "fixtures/missing-export.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "margins_margins",
+      "args": {
+        "sales": 42,
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "sales"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "margins_margins",
+      "args": {
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "sales"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "margins_explain",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "costs": "fixtures/costs.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "sku": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-margins-totals",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "fixtures/intl/de/sales.csv",
+        "costs": "fixtures/intl/de/costs.csv",
+        "labels": "fixtures/intl/de/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.combos": 5,
+          "result.fix": 1,
+          "result.review": 2,
+          "result.ok": 2,
+          "result.revenue": 130,
+          "result.contribution": 35.3
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"margins-totals\"."
+    },
+    {
+      "id": "intl-ja-margins-totals",
+      "tool": "margins_margins",
+      "args": {
+        "sales": "fixtures/intl/ja/sales.csv",
+        "costs": "fixtures/intl/ja/costs.csv",
+        "labels": "fixtures/intl/ja/labels.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.combos": 5,
+          "result.fix": 1,
+          "result.review": 2,
+          "result.ok": 2,
+          "result.revenue": 130,
+          "result.contribution": 35.3
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"margins-totals\"."
+    }
+  ]
+}

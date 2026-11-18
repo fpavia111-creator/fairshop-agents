@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-sku-margins",
+  "version": "0.1.0",
+  "description": "Works out contribution margin per SKU and channel from sales, fees, shipping labels and unit costs: SKUs that lose money on a channel, SKUs under your margin floor, and SKUs with no cost on file. Drafts a pricing review; never changes a price.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-sku-margins": "bin/fairshop-sku-margins.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-sku-margins.js demo",
+    "eval": "node bin/fairshop-sku-margins.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-sku-margins"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-sku-margins#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "margins",
+    "unit-economics",
+    "sku-profitability",
+    "pricing"
+  ]
+}
