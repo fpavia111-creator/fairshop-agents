@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-fba-storage-fees",
+  "version": "0.1.0",
+  "description": "Checks Amazon FBA storage fees against the storage rates you confirm, warns before inventory lots cross into the next aged-inventory bracket, lists lots already paying an aged surcharge, and SKUs whose storage costs more than their margin. Drafts a removal or sell-through plan; never creates removal orders.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-fba-storage-fees": "bin/fairshop-fba-storage-fees.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-fba-storage-fees.js demo",
+    "eval": "node bin/fairshop-fba-storage-fees.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-fba-storage-fees"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-fba-storage-fees#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "fba",
+    "storage-fees",
+    "aged-inventory",
+    "amazon"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "note": "Fictional rates and brackets for the demo, not any marketplace's real fees. Confirm your own from the current fee page.",
+  "rates": { "standard": { "jan-sep": 0.78, "oct-dec": 2.40 }, "oversize": { "jan-sep": 0.56, "oct-dec": 0.75 } },
+  "aged_brackets": [ { "from_days": 181, "per_cuft": 0.50 }, { "from_days": 271, "per_cuft": 1.50 }, { "from_days": 366, "per_cuft": 6.90 } ],
+  "unit_margin": { "LAMP-1": 8.00, "RUG-2": 3.00, "CUP-3": 2.00, "BOX-4": 5.00 },
+  "warn_days": 30
+}

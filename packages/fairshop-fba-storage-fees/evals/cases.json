@@ -1,0 +1,337 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.dispute": 1,
+          "result.act": 1,
+          "result.review": 4,
+          "result.ok": 5,
+          "result.over": 6,
+          "result.aged_monthly": 109
+        }
+      }
+    },
+    {
+      "id": "fees-only",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.dispute": 1,
+          "result.act": 0,
+          "result.review": 0
+        }
+      }
+    },
+    {
+      "id": "explain-lamp",
+      "tool": "storage_explain",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "sku": "LOT:LAMP-1:2026-06-01"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "act by 2026-11-29",
+          "adding about 10 a month"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "storage_write_report",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 6
+        }
+      }
+    },
+    {
+      "id": "draft-plan",
+      "tool": "storage_draft_aged_inventory_plan",
+      "approve": "Pat Example",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "length": {
+          "result.lots": 3
+        }
+      }
+    },
+    {
+      "id": "draft-no-lots",
+      "tool": "storage_draft_aged_inventory_plan",
+      "approve": "Pat Example",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "no lot is near"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "storage_audit",
+      "mode": "review",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "storage_draft_aged_inventory_plan",
+      "mode": "review",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "storage_draft_aged_inventory_plan",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "storage_request_approve",
+      "args": {
+        "draft": "fairshop-out/storage/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "storage_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "storage_draft_aged_inventory_plan"
+      ],
+      "args": {
+        "draft": "fairshop-out/storage/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-removal_order_create",
+      "tool": "removal_order_create",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-storage_fee_case_submit",
+      "tool": "storage_fee_case_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "../../outside-root.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "fixtures/missing-export.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "storage_audit",
+      "args": {
+        "storage": 42,
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "storage"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "storage_audit",
+      "args": {
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "storage"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "storage_explain",
+      "args": {
+        "storage": "fixtures/storage.csv",
+        "lots": "fixtures/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "sku": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "fixtures/intl/de/storage.csv",
+        "lots": "fixtures/intl/de/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.dispute": 1,
+          "result.act": 1,
+          "result.review": 4,
+          "result.ok": 5,
+          "result.over": 6,
+          "result.aged_monthly": 109
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "storage_audit",
+      "args": {
+        "storage": "fixtures/intl/ja/storage.csv",
+        "lots": "fixtures/intl/ja/lots.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.dispute": 1,
+          "result.act": 1,
+          "result.review": 4,
+          "result.ok": 5,
+          "result.over": 6,
+          "result.aged_monthly": 109
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}
