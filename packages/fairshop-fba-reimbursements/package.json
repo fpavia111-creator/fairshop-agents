@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-fba-reimbursements",
+  "version": "0.1.0",
+  "description": "Finds Amazon FBA reimbursements owed: units lost or damaged in Amazon's warehouses and not found or reimbursed, refunds with no customer return, and reimbursements below your unit value, each with a claim-by date. Drafts the case text; a person files it in Seller Central.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-fba-reimbursements": "bin/fairshop-fba-reimbursements.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-fba-reimbursements.js demo",
+    "eval": "node bin/fairshop-fba-reimbursements.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-fba-reimbursements"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-fba-reimbursements#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "fba",
+    "amazon-reimbursements",
+    "lost-inventory",
+    "fba-claims"
+  ]
+}

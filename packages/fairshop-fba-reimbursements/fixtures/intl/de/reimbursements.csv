@@ -1,0 +1,4 @@
+Datum;reimbursement_id;Artikelnummer;Grund;Menge;Betrag;Bestellnummer
+20.10.2026;R-1;TEE-02;Damaged_Warehouse;2;30,00;
+30.10.2026;R-2;SOCK-05;Damaged_Warehouse;5;10,00;
+02.10.2026;R-3;MUG-01;CustomerReturn;2;24,00;113-5555555-5555555

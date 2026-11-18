@@ -1,0 +1,8 @@
+{
+  "note": "Fictional settings for the demo. Reason codes and windows: confirm them against your own reports and the current program rules.",
+  "wait_days": 30,
+  "claim_window_days": 60,
+  "return_grace_days": 45,
+  "unit_values": { "MUG-01": 12, "TEE-02": 15, "CAP-03": 9, "BAG-04": 40, "SOCK-05": 6 },
+  "low_pct": 20
+}

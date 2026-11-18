@@ -1,0 +1,10 @@
+{
+  "note": "Fictional fee schedule for the demo. Write your own from the marketplace fee pages or your agreement, and confirm it.",
+  "channels": {
+    "amazon": { "referral": { "percent": 15, "min": 0.30, "by_category": { "jewelry": 20 } }, "fba fulfillment": { "fixed": 3.22 } },
+    "etsy": { "transaction": { "percent": 6.5 }, "listing": { "fixed": 0.20 }, "processing": { "percent": 3, "fixed": 0.25 } },
+    "ebay": { "final value": { "percent": 13.25, "fixed": 0.40 } }
+  },
+  "tolerance": 0.02,
+  "rate_change_points": 1
+}

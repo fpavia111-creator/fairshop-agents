@@ -1,0 +1,327 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 14,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.ok": 9,
+          "result.over": 2.68
+        },
+        "length": {
+          "result.rate_changes": 2
+        }
+      }
+    },
+    {
+      "id": "rate-changes-listed",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "15% in 2026-09, 20% in 2026-10",
+          "6.5% in 2026-10, 8% in 2026-11"
+        ]
+      }
+    },
+    {
+      "id": "explain-order",
+      "tool": "fees_explain",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "order_id": "A-1003"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "charged 6, expected 4.5"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "fees_write_report",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-amazon",
+      "tool": "fees_draft_fee_review",
+      "approve": "Pat Example",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 2.38,
+          "result.lines": 2
+        }
+      }
+    },
+    {
+      "id": "draft-ebay-nothing",
+      "tool": "fees_draft_fee_review",
+      "approve": "Pat Example",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "channel": "eBay"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "no fee above your schedule on eBay"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "fees_audit",
+      "mode": "review",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "fees_draft_fee_review",
+      "mode": "review",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "fees_draft_fee_review",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "fees_request_send",
+      "args": {
+        "draft": "fairshop-out/fees/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "fees_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "fees_draft_fee_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/fees/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-fee_dispute_submit",
+      "tool": "fee_dispute_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-listing_price_update",
+      "tool": "listing_price_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "../../outside-root.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "fixtures/missing-export.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "fees_audit",
+      "args": {
+        "fees": 42,
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "fees"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "fees_audit",
+      "args": {
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "fees"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "fees_explain",
+      "args": {
+        "fees": "fixtures/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "fixtures/intl/de/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 14,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.ok": 9,
+          "result.over": 2.68
+        },
+        "length": {
+          "result.rate_changes": 2
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "fees_audit",
+      "args": {
+        "fees": "fixtures/intl/ja/fees.csv",
+        "schedule": "fixtures/schedule.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 14,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.ok": 9,
+          "result.over": 2.68
+        },
+        "length": {
+          "result.rate_changes": 2
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

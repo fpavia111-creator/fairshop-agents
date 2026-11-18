@@ -34,4 +34,4 @@ export { REPORT_TEXT, reportText } from './report-text.js';
 export { MODEL_PIN, OPEN_MARKER, filesHash, appendRow, htmlTable, writeWorklist, refusedTools, draftPair, LIMITS } from './kit.js';
 export { PiiMasker, PII_MODES, PII_KINDS, PII_KEY_FILE, piiKindOf, loadPiiKey, luhn } from './pii.js';
 export { channelKey, channelLabel, sameChannel, CHANNEL_LABELS, stateCode, stateName, US_STATES, skuKey, emailKey, addressKey, monthOf, pct, ageDays, ageBucket, money, close, finding, byFinding, byStatus, sortBy, rollup } from './commerce.js';
-export { shopAgent, worklistRows, AS_OF, today, OUT_ROOT } from './agent.js';
+export { shopAgent, shopDemo, worklistRows, AS_OF, today, OUT_ROOT } from './agent.js';

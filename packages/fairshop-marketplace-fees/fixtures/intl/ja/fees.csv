@@ -1,0 +1,15 @@
+注文番号,チャネル,日付,手数料種別,手数料,sale_amount,経費科目,品番
+A-1001,Amazon,2026/09/05,Commission,-4.50,30.00,home,HM-100
+A-1002,Amazon,2026/09/12,Commission,-3.00,20.00,home,HM-101
+A-1003,Amazon,2026/10/03,Commission,-6.00,30.00,home,HM-100
+A-1004,Amazon,2026/10/08,Commission,-8.00,40.00,jewelry,JW-200
+A-1005,Amazon,2026/10/10,FBAPerUnitFulfillmentFee,-3.22,30.00,home,HM-100
+A-1006,Amazon,2026/10/10,FBAPerUnitFulfillmentFee,-4.10,30.00,home,HM-102
+A-1007,Amazon,2026/10/15,Commission,-0.30,1.50,home,HM-103
+A-1008,Amazon,2026/10/20,Inbound placement fee,-12.00,,home,HM-100
+E-2001,Etsy,2026/10/02,Transaction fee,-1.30,20.00,,ET-1
+E-2001,Etsy,2026/10/02,Listing fee,-0.20,,,ET-1
+E-2002,Etsy,2026/10/05,Processing fee,-0.85,20.00,,ET-2
+E-2003,Etsy,2026/11/03,Transaction fee,-1.60,20.00,,ET-1
+B-3001,eBay,2026/10/04,Final Value Fee,-5.70,40.00,,EB-1
+B-3002,eBay,2026/10/09,Final Value Fee,-6.00,,,EB-2

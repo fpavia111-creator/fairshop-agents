@@ -1,0 +1,57 @@
+{
+  "name": "fairshop-marketplace-fees",
+  "version": "0.1.0",
+  "description": "Checks every marketplace fee line (Amazon, eBay, Etsy, Walmart) against the fee schedule you confirm: fees above the schedule, fee types not in it, percent fees with no sale amount, and fee rates that changed month to month. Drafts a fee dispute per channel; never files it.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-marketplace-fees": "bin/fairshop-marketplace-fees.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-marketplace-fees.js demo",
+    "eval": "node bin/fairshop-marketplace-fees.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-marketplace-fees"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-marketplace-fees#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "marketplace-fees",
+    "amazon-fees",
+    "etsy-fees",
+    "ebay-fees",
+    "fee-audit"
+  ]
+}

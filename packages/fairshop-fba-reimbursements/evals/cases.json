@@ -1,0 +1,375 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.claim": 2,
+          "result.waiting": 2,
+          "result.window_closed": 2,
+          "result.review": 1,
+          "result.ok": 4,
+          "result.claimable": 36,
+          "result.lost": 80
+        }
+      }
+    },
+    {
+      "id": "adjustments-only",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.claim": 3,
+          "result.waiting": 1,
+          "result.window_closed": 1
+        },
+        "not_contains": [
+          "refund_no_return"
+        ]
+      }
+    },
+    {
+      "id": "explain-mug",
+      "tool": "reimburse_explain",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "item": "MUG-01"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "2 unit(s) to claim (24)",
+          "claim by 2026-11-30"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "reimburse_write_report",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 7
+        },
+        "contains": [
+          "claim-deadlines.ics"
+        ]
+      }
+    },
+    {
+      "id": "draft-case",
+      "tool": "reimburse_draft_reimbursement_case",
+      "approve": "Pat Example",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 56
+        },
+        "length": {
+          "result.claims": 3
+        }
+      }
+    },
+    {
+      "id": "draft-nothing-late",
+      "tool": "reimburse_draft_reimbursement_case",
+      "approve": "Pat Example",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2027-03-01"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "nothing to claim"
+        ]
+      },
+      "note": "Low reimbursements are reviewed even late; without them nothing is left to claim."
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "reimburse_audit",
+      "mode": "review",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "reimburse_draft_reimbursement_case",
+      "mode": "review",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "reimburse_draft_reimbursement_case",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "reimburse_request_file",
+      "args": {
+        "draft": "fairshop-out/reimburse/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "reimburse_request_file",
+      "mode": "auto",
+      "auto_actions": [
+        "reimburse_draft_reimbursement_case"
+      ],
+      "args": {
+        "draft": "fairshop-out/reimburse/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-seller_central_case_submit",
+      "tool": "seller_central_case_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-removal_order_create",
+      "tool": "removal_order_create",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "../../outside-root.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "fixtures/missing-export.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": 42,
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "adjustments"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "reimburse_audit",
+      "args": {
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "adjustments"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "reimburse_explain",
+      "args": {
+        "adjustments": "fixtures/adjustments.csv",
+        "reimbursements": "fixtures/reimbursements.csv",
+        "returns": "fixtures/returns.csv",
+        "refunds": "fixtures/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "item": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "fixtures/intl/de/adjustments.csv",
+        "reimbursements": "fixtures/intl/de/reimbursements.csv",
+        "returns": "fixtures/intl/de/returns.csv",
+        "refunds": "fixtures/intl/de/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.claim": 2,
+          "result.waiting": 2,
+          "result.window_closed": 2,
+          "result.review": 1,
+          "result.ok": 4,
+          "result.claimable": 36,
+          "result.lost": 80
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "reimburse_audit",
+      "args": {
+        "adjustments": "fixtures/intl/ja/adjustments.csv",
+        "reimbursements": "fixtures/intl/ja/reimbursements.csv",
+        "returns": "fixtures/intl/ja/returns.csv",
+        "refunds": "fixtures/intl/ja/refunds.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.claim": 2,
+          "result.waiting": 2,
+          "result.window_closed": 2,
+          "result.review": 1,
+          "result.ok": 4,
+          "result.claimable": 36,
+          "result.lost": 80
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

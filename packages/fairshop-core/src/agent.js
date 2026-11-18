@@ -126,3 +126,29 @@ export function shopAgent(spec) {
 export function worklistRows(items, cols, amountKey = 'amount') {
   return items.map((i) => ({ ...Object.fromEntries(cols.map((c) => [c, i[c] ?? ''])), status: i.status, [amountKey]: i[amountKey] ?? '', findings: (i.findings || []).map((f) => f.code).join(' '), reasons: (i.findings || []).map((f) => f.detail).join(' '), decision: '' }));
 }
+
+/**
+ * The demo every Fairshop agent runs (`<agent> demo`): the main check on the fictional
+ * fixtures, the report, one draft on Auto, the one-click request (which stays a click),
+ * and a refused tool. show(item) prints one line per item.
+ */
+export async function shopDemo(manifest, fixturesDir, { title, args, draftArgs = null, show = null, intro = '' }) {
+  const { demoRuntime, printStep } = await import('./demo.js');
+  const tools = manifest.tools.map((t) => t.name);
+  const check = manifest.tools.find((t) => t.kind === 'read').name;
+  const draft = tools.find((n) => /_draft_/.test(n)); const req = tools.find((n) => /_request_/.test(n)); const report = tools.find((n) => /_write_report$/.test(n));
+  const refused = manifest.policy.rules.find((r) => r.decision === 'block' && r.tool !== '*');
+  const rt = demoRuntime(manifest, fixturesDir, { mode: 'auto', autoActions: draft ? [draft] : [] });
+  process.stdout.write(`${title} demo (fictional data${args.as_of ? `, as of ${args.as_of}` : ''}), Auto mode on for drafts\n`);
+  if (intro) process.stdout.write(`${intro}\n`);
+  const a = await rt.call(check, args);
+  printStep('Check the files', a);
+  if (show && a.result) for (const i of (a.result.items || []).slice(0, 25)) process.stdout.write(`    ${show(i)}\n`);
+  if (report) printStep('Write the worklist', await rt.call(report, args));
+  if (draft && draftArgs) {
+    const d = await rt.call(draft, { ...args, ...draftArgs });
+    printStep('Write a draft (Auto)', d);
+    if (req && d.result) printStep('Approve it: one named click, even in Auto', await rt.call(req, { draft: d.result.draft, draft_sha256: d.result.draft_sha256 }));
+  }
+  if (refused) printStep(`The agent tries ${refused.tool} itself`, await rt.call(refused.tool, {}));
+}
