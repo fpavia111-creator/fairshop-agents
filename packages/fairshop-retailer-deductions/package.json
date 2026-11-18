@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-retailer-deductions",
+  "version": "0.1.0",
+  "description": "Checks deductions retailers take from wholesale remittances against your invoices and proof of delivery: shortages your signed POD disproves, promotional allowances above what you agreed, deductions taken twice, compliance fines needing evidence, small ones to write off and ones past the dispute window. Drafts a dispute per retailer; never submits it.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-retailer-deductions": "bin/fairshop-retailer-deductions.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-retailer-deductions.js demo",
+    "eval": "node bin/fairshop-retailer-deductions.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-retailer-deductions"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-retailer-deductions#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "retailer-deductions",
+    "chargebacks",
+    "wholesale",
+    "edi-deductions"
+  ]
+}

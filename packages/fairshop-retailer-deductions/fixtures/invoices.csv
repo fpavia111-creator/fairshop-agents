@@ -1,0 +1,5 @@
+invoice_number,po,retailer,amount,units_shipped,ship_date
+INV-100,RPO-1,Example Mart,5000.00,500,2026-09-01
+INV-101,RPO-2,Example Mart,3000.00,300,2026-09-10
+INV-102,RPO-3,Corner Grocers,2000.00,200,2026-09-15
+INV-103,RPO-4,Corner Grocers,1000.00,100,2026-06-01

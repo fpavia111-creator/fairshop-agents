@@ -1,0 +1,348 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.deductions": 8,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.write_off": 1,
+          "result.window_closed": 1,
+          "result.ok": 1,
+          "result.to_dispute": 750,
+          "result.deducted": 1408
+        }
+      }
+    },
+    {
+      "id": "explain-inv100",
+      "tool": "deductions_explain",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "invoice_number": "INV-100"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "signed proof of delivery shows all 500",
+          "you agreed 5% (250)",
+          "more than once"
+        ]
+      }
+    },
+    {
+      "id": "no-pods",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.dispute": 2,
+          "result.by_finding.shortage_no_pod.count": 3
+        }
+      }
+    },
+    {
+      "id": "report",
+      "tool": "deductions_write_report",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 7
+        }
+      }
+    },
+    {
+      "id": "draft-example-mart",
+      "tool": "deductions_draft_deduction_dispute",
+      "approve": "Pat Example",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "retailer": "Example Mart"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 750
+        },
+        "length": {
+          "result.deductions": 3
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "deductions_audit",
+      "mode": "review",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "deductions_draft_deduction_dispute",
+      "mode": "review",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "retailer": "Example Mart"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "deductions_draft_deduction_dispute",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "retailer": "Example Mart"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "deductions_request_send",
+      "args": {
+        "draft": "fairshop-out/deductions/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "deductions_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "deductions_draft_deduction_dispute"
+      ],
+      "args": {
+        "draft": "fairshop-out/deductions/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-retailer_portal_submit",
+      "tool": "retailer_portal_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-credit_memo_issue",
+      "tool": "credit_memo_issue",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "../../outside-root.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "fixtures/missing-export.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": 42,
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "deductions"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "deductions_audit",
+      "args": {
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "deductions"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "deductions_explain",
+      "args": {
+        "deductions": "fixtures/deductions.csv",
+        "invoices": "fixtures/invoices.csv",
+        "pods": "fixtures/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "invoice_number": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "fixtures/intl/de/deductions.csv",
+        "invoices": "fixtures/intl/de/invoices.csv",
+        "pods": "fixtures/intl/de/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.deductions": 8,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.write_off": 1,
+          "result.window_closed": 1,
+          "result.ok": 1,
+          "result.to_dispute": 750,
+          "result.deducted": 1408
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "deductions_audit",
+      "args": {
+        "deductions": "fixtures/intl/ja/deductions.csv",
+        "invoices": "fixtures/intl/ja/invoices.csv",
+        "pods": "fixtures/intl/ja/pods.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.deductions": 8,
+          "result.dispute": 3,
+          "result.review": 2,
+          "result.write_off": 1,
+          "result.window_closed": 1,
+          "result.ok": 1,
+          "result.to_dispute": 750,
+          "result.deducted": 1408
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

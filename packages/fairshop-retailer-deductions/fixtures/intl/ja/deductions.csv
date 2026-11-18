@@ -1,0 +1,9 @@
+å⁄ãq,remit_id,êøãÅèëî‘çÜ,î≠íçî‘çÜ,deduction_type,deduction_code,ã‡äz,deduction_date
+Example Mart,RM-1,INV-100,RPO-1,Shortage,SH01,200.00,2026/10/01
+Example Mart,RM-1,INV-101,RPO-2,Shortage,SH01,100.00,2026/10/05
+Example Mart,RM-2,INV-100,RPO-1,Promo allowance,PR05,400.00,2026/10/10
+Example Mart,RM-3,INV-100,RPO-1,Promo allowance,PR05,400.00,2026/10/17
+Corner Grocers,CG-9,INV-102,RPO-3,Compliance fine,ASN-LATE,150.00,2026/10/12
+Corner Grocers,CG-9,INV-102,RPO-3,Damage,DMG,18.00,2026/10/12
+Corner Grocers,CG-3,INV-103,RPO-4,Shortage,SH,80.00,2026/06/20
+Corner Grocers,CG-9,INV-999,RPO-9,Pricing,PRC,60.00,2026/10/15

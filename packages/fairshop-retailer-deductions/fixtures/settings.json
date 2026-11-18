@@ -1,0 +1,1 @@
+{ "note": "Fictional terms for the demo; take windows and allowances from your vendor agreements.", "dispute_window_days": { "default": 90 }, "write_off_under": 25, "allowances": { "Example Mart": { "promo": 5 } } }

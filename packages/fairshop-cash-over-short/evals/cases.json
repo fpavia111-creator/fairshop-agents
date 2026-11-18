@@ -1,0 +1,313 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.closeouts": 6,
+          "result.chase": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.short": 23.5,
+          "result.over": 0,
+          "result.deposit_gap": 194.5
+        }
+      }
+    },
+    {
+      "id": "explain-uptown",
+      "tool": "cash_explain",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "store": "uptown"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "461 should have been deposited; the bank shows 451"
+        ],
+        "not_contains": [
+          "Bram"
+        ]
+      }
+    },
+    {
+      "id": "loose-tolerance",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings-loose.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.short": 10,
+          "result.review": 1
+        }
+      }
+    },
+    {
+      "id": "report",
+      "tool": "cash_write_report",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-downtown",
+      "tool": "cash_draft_cash_review",
+      "approve": "Pat Example",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json",
+        "store": "Downtown"
+      },
+      "expect": {
+        "status": "executed",
+        "length": {
+          "result.lines": 4
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "cash_audit",
+      "mode": "review",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "cash_draft_cash_review",
+      "mode": "review",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json",
+        "store": "Downtown"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "cash_draft_cash_review",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json",
+        "store": "Downtown"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "cash_request_send",
+      "args": {
+        "draft": "fairshop-out/cash/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "cash_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "cash_draft_cash_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/cash/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-payroll_deduction",
+      "tool": "payroll_deduction",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-employee_access_revoke",
+      "tool": "employee_access_revoke",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "../../outside-root.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "fixtures/missing-export.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": 42,
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "closeouts"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "cash_audit",
+      "args": {
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "closeouts"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "cash_explain",
+      "args": {
+        "closeouts": "fixtures/closeouts.csv",
+        "deposits": "fixtures/deposits.csv",
+        "settings": "fixtures/settings.json",
+        "store": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "fixtures/intl/de/closeouts.csv",
+        "deposits": "fixtures/intl/de/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.closeouts": 6,
+          "result.chase": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.short": 23.5,
+          "result.over": 0,
+          "result.deposit_gap": 194.5
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "cash_audit",
+      "args": {
+        "closeouts": "fixtures/intl/ja/closeouts.csv",
+        "deposits": "fixtures/intl/ja/deposits.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.closeouts": 6,
+          "result.chase": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.short": 23.5,
+          "result.over": 0,
+          "result.deposit_gap": 194.5
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

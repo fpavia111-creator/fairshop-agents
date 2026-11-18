@@ -1,0 +1,7 @@
+Datum;Filiale;Kasse;cashier;Soll-Bargeld;Gezähltes Bargeld;float
+01.11.2026;Downtown;R1;Wren Halloway;812,40;812,40;200,00
+01.11.2026;Downtown;R2;Ilse Marchetti;455,00;445,00;200,00
+02.11.2026;Downtown;R2;Ilse Marchetti;390,00;384,50;200,00
+03.11.2026;Downtown;R2;Ilse Marchetti;420,00;412,00;200,00
+02.11.2026;Uptown;R1;Bram Okonkwo;610,00;611,00;150,00
+03.11.2026;Uptown;R1;Bram Okonkwo;500,00;500,00;150,00
