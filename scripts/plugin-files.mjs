@@ -16,9 +16,9 @@ for (const n of pkgs) {
   const desc = ((s) => s[0].toUpperCase() + s.slice(1))(p.description.replace(/^[A-Z]\w+ of [A-Z]\w+:\s*/, ''));
   want.set(join('packages', n, '.claude-plugin', 'plugin.json'), { name: n, version: p.version, description: desc, author: { name: p.author }, license: p.license, homepage: p.homepage, keywords: p.keywords });
   want.set(join('packages', n, '.mcp.json'), { mcpServers: { [n]: { command: 'npx', args: ['-y', `${n}@${p.version}`, 'mcp'] } } });
-  plugins.push({ name: n, source: `./packages/${n}`, description: desc, version: p.version, category: 'freight', keywords: [...new Set(p.keywords.filter((k) => !['mcp', 'mcp-server', 'fairshop'].includes(k)))] });
+  plugins.push({ name: n, source: `./packages/${n}`, description: desc, version: p.version, category: 'ecommerce', keywords: [...new Set(p.keywords.filter((k) => !['mcp', 'mcp-server', 'fairshop'].includes(k)))] });
 }
-want.set(join('.claude-plugin', 'marketplace.json'), { name: 'fairshop-freight', owner: { name: 'Fairshop' }, metadata: { description: 'Thirty freight and shipping cost agents. Each reads your exported files, writes reports locally and waits for a named person before anything that moves money, sends a message or changes a live system.' }, plugins });
+want.set(join('.claude-plugin', 'marketplace.json'), { name: 'fairshop-ecommerce', owner: { name: 'Fairshop' }, metadata: { description: 'Thirty e-commerce and retail back-office agents. Each reads your exported files, writes reports locally and waits for a named person before anything that moves money, sends a message or changes a live system.' }, plugins });
 let stale = 0;
 for (const [rel, obj] of want) {
   const f = join(root, rel); const text = JSON.stringify(obj, null, 2) + '\n';

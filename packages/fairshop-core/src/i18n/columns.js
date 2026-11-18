@@ -306,6 +306,7 @@ export const COLUMN_WORDS = {
  */
 export const FIELD_CONCEPTS = Object.freeze({
   // Fairshop
+  total: 'amount', gateway: 'method', order_total: 'amount', payout_amount: 'net', received: 'paid_amount',
   order_number: 'order_id', ordered_at: 'order_date', refund_amount: 'refunded', refunded_amount: 'refunded', refunded_at: 'date', returned_at: 'received_date',
   ship_state: 'state', ship_to_state: 'state', ship_zip: 'dest_postal', item_price: 'price', list_price: 'price', advertised_price: 'price', unit_price_paid: 'unit_price',
   fees: 'fee', fee_amount: 'fee', fee_rate: 'rate', net_amount: 'net', gross_amount: 'gross', sales: 'gross', tax: 'tax_collected', posted_at: 'date', posted_date: 'date',

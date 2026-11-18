@@ -3,14 +3,14 @@
 // and the shared tests (MCP stdio, arg docs, evals). The agent's own manifest,
 // logic, demo, fixtures, evals and README are written by hand.
 //
-//   node scripts/new-agent.mjs <star>-of-<process> "<one-line description>" kw1,kw2
+//   node scripts/new-agent.mjs <sea>-of-<process> "<one-line description>" kw1,kw2
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), '..');
 const [name, description, kw = ''] = process.argv.slice(2);
-if (!name || !/^[a-z]+-of-[a-z]+$/.test(name) || !description) { console.error('usage: new-agent.mjs <star>-of-<process> "<description>" kw1,kw2'); process.exit(2); }
+if (!name || !/^[a-z]+-of-[a-z]+$/.test(name) || !description) { console.error('usage: new-agent.mjs <sea>-of-<process> "<description>" kw1,kw2'); process.exit(2); }
 const root = join(repo, 'packages', name);
 const prefix = name.split('-')[0];
 const corePkg = JSON.parse(readFileSync(join(repo, 'packages/fairshop-core/package.json'), 'utf8'));
@@ -25,7 +25,7 @@ write('package.json', JSON.stringify({
   repository: { type: 'git', url: 'git+https://github.com/fpavia111-creator/fairshop-agents.git', directory: `packages/${name}` },
   homepage: `https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/${name}#readme`,
   bugs: { url: 'https://github.com/fpavia111-creator/fairshop-agents/issues' },
-  keywords: ['mcp', 'mcp-server', 'freight', 'logistics', 'freight-audit', 'fairshop', ...kw.split(',').filter(Boolean)],
+  keywords: ['mcp', 'mcp-server', 'ecommerce', 'retail', 'fairshop', ...kw.split(',').filter(Boolean)],
 }, null, 2) + '\n');
 write(`bin/${name}.js`, `#!/usr/bin/env node\nimport { fileURLToPath } from 'node:url';\nimport { main } from 'fairshop-core';\nimport { manifest } from '../src/manifest.js';\nimport { demo } from '../src/demo.js';\n\nmain(manifest, { bin: '${name}', demo, evalFile: fileURLToPath(new URL('../evals/cases.json', import.meta.url)) });\n`);
 write('src/index.js', `export { manifest } from './manifest.js';\nexport * from './${process.argv[5] || 'logic'}.js';\n`, { keep: true });
@@ -83,3 +83,13 @@ test('stdio MCP: initialize, list, refuse an unknown tool, write the audit log',
 });
 `);
 console.log(`wrote ${root}`);
+write('test/contract.test.js', `// Shared contract checks on this agent's own manifest, fixtures and eval cases.
+// canaries: fictional shopper and staff names planted in the fixtures; none may reach a result.
+import { readFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { agentContract } from 'fairshop-core/testkit';
+import { manifest } from '../src/index.js';
+
+const cf = fileURLToPath(new URL('../fixtures/canaries.json', import.meta.url));
+agentContract({ manifest, casesFile: fileURLToPath(new URL('../evals/cases.json', import.meta.url)), canaries: existsSync(cf) ? JSON.parse(readFileSync(cf, 'utf8')) : [] });
+`);
