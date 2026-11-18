@@ -1,0 +1,1 @@
+{ "note": "Fictional rules for the demo; set your own from each channel's rules.", "channels": { "default": { "required": ["title", "gtin", "brand", "weight", "price"], "min_images": 1, "min_description": 60 }, "etsy": { "title_max": 60 } } }

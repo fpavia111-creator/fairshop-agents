@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-duplicate-listings",
+  "version": "0.1.0",
+  "description": "Finds duplicate and orphan listings across channels: the same SKU listed twice on one channel (and at different prices), near-identical titles under different SKUs, one GTIN shared by several SKUs, and listings for SKUs not in your catalog. Drafts a clean-up list; never ends or merges a listing.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-duplicate-listings": "bin/fairshop-duplicate-listings.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-duplicate-listings.js demo",
+    "eval": "node bin/fairshop-duplicate-listings.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-duplicate-listings"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-duplicate-listings#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "duplicate-listings",
+    "catalog",
+    "listings",
+    "marketplaces"
+  ]
+}

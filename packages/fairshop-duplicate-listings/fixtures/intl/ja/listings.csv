@@ -1,0 +1,8 @@
+チャネル,出品ID,品番,商品名,JANコード,価格,ステータス
+Amazon,B0EX001,MUG-1,Speckled Ceramic Mug 12 oz,036000291452,18.00,active
+Amazon,B0EX002,MUG-1,Speckled Ceramic Mug 12oz Blue,036000291452,16.50,active
+Amazon,B0EX003,MUG-2,Speckled Ceramic Mug 12 oz,012345678905,18.00,active
+eBay,EB-10,MUG-1,Speckled ceramic mug,036000291452,17.00,active
+eBay,EB-11,BOWL-3,Stoneware Bowl,036000291452,22.00,active
+Etsy,ET-20,VASE-9,Tall Vase,,30.00,active
+Etsy,ET-21,MUG-1,Handmade mug,,18.00,inactive

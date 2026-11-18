@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-product-data",
+  "version": "0.1.0",
+  "description": "Checks product data before it goes to a channel: missing GTIN, brand, weight, price or images, titles over the channel limit you set, GTINs with a wrong check digit or shared by two SKUs, zero weights and prices, and thin descriptions. Drafts the fix list; never changes a listing.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-product-data": "bin/fairshop-product-data.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-product-data.js demo",
+    "eval": "node bin/fairshop-product-data.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-product-data"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-product-data#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "product-data",
+    "catalog",
+    "gtin",
+    "listing-quality"
+  ]
+}
