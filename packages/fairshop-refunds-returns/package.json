@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-refunds-returns",
+  "version": "0.1.0",
+  "description": "Matches refunds to returns received: refunds whose item never came back, returns received but never refunded, refunds paid twice or above the price paid, and full refunds on returns received damaged. Drafts return reminders; never refunds or emails anyone.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-refunds-returns": "bin/fairshop-refunds-returns.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-refunds-returns.js demo",
+    "eval": "node bin/fairshop-refunds-returns.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-refunds-returns"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-refunds-returns#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "refunds",
+    "returns",
+    "rma",
+    "returns-reconciliation"
+  ]
+}

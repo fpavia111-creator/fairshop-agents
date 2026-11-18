@@ -1,0 +1,357 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 7,
+          "result.chase": 1,
+          "result.owed": 1,
+          "result.review": 3,
+          "result.waiting": 1,
+          "result.ok": 1,
+          "result.at_risk": 25,
+          "result.owed_to_customers": 45
+        }
+      }
+    },
+    {
+      "id": "without-orders",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.review": 0,
+          "result.owed_to_customers": 0
+        }
+      }
+    },
+    {
+      "id": "explain-masked",
+      "tool": "refunds_explain",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "as_of": "2026-11-16",
+        "order_id": "#1005"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "2 refunds for 2 unit(s) of TEE-1"
+        ],
+        "not_contains": [
+          "elsa.voigt"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "refunds_write_report",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 6
+        }
+      }
+    },
+    {
+      "id": "draft-reminders",
+      "tool": "refunds_draft_return_reminders",
+      "approve": "Pat Example",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "as_of": "2026-11-16",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": [
+            "1002:TEE-1"
+          ]
+        }
+      },
+      "note": "With order lines, a second refund for the same unit is not a unit to get back."
+    },
+    {
+      "id": "draft-none-early",
+      "tool": "refunds_draft_return_reminders",
+      "approve": "Pat Example",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "as_of": "2026-10-10"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "no refund is past its return window"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "refunds_audit",
+      "mode": "review",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "refunds_draft_return_reminders",
+      "mode": "review",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "as_of": "2026-11-16",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "refunds_draft_return_reminders",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "as_of": "2026-11-16",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "refunds_request_send",
+      "args": {
+        "draft": "fairshop-out/refunds/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "refunds_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "refunds_draft_return_reminders"
+      ],
+      "args": {
+        "draft": "fairshop-out/refunds/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-issue_refund",
+      "tool": "issue_refund",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-customer_email_send",
+      "tool": "customer_email_send",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "../../outside-root.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "fixtures/missing-export.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": 42,
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "refunds"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "refunds_audit",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "refunds"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "refunds_explain",
+      "args": {
+        "refunds": "fixtures/refunds.csv",
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "fixtures/intl/de/refunds.csv",
+        "returns": "fixtures/intl/de/returns.csv",
+        "orders": "fixtures/intl/de/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 7,
+          "result.chase": 1,
+          "result.owed": 1,
+          "result.review": 3,
+          "result.waiting": 1,
+          "result.ok": 1,
+          "result.at_risk": 25,
+          "result.owed_to_customers": 45
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "refunds_audit",
+      "args": {
+        "refunds": "fixtures/intl/ja/refunds.csv",
+        "returns": "fixtures/intl/ja/returns.csv",
+        "orders": "fixtures/intl/ja/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.lines": 7,
+          "result.chase": 1,
+          "result.owed": 1,
+          "result.review": 3,
+          "result.waiting": 1,
+          "result.ok": 1,
+          "result.at_risk": 25,
+          "result.owed_to_customers": 45
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-return-reasons",
+  "version": "0.1.0",
+  "description": "Reads return reasons by SKU and by customer: SKUs returned far more than the rest and why (listing, size, quality, fulfilment), and customers who return most of what they buy, with customer names and e-mails masked. Drafts a listing review; never blocks a customer or changes a listing.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-return-reasons": "bin/fairshop-return-reasons.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-return-reasons.js demo",
+    "eval": "node bin/fairshop-return-reasons.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-return-reasons"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-return-reasons#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "return-reasons",
+    "return-rate",
+    "serial-returners",
+    "listings"
+  ]
+}

@@ -1,0 +1,8 @@
+order_id,sku,refund_date,amount,qty,channel,customer_email
+1001,TEE-1,2026-10-01,25.00,1,Shopify,avery.quill@example.test
+1002,TEE-1,2026-10-05,25.00,1,Shopify,bram.holloway@example.test
+1003,MUG-2,2026-11-10,18.00,1,Shopify,celia.marsh@example.test
+1004,LAMP-3,2026-10-20,60.00,1,Shopify,dov.ingram@example.test
+1005,TEE-1,2026-10-12,25.00,1,Shopify,elsa.voigt@example.test
+1005,TEE-1,2026-10-14,25.00,1,Shopify,elsa.voigt@example.test
+1006,MUG-2,2026-10-02,40.00,1,Amazon,finn.okafor@example.test
