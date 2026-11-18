@@ -1,0 +1,7 @@
+Bestellnummer;Bestelldatum;Kanal;Versandkosten berechnet;subtotal;ship_method
+1001;01.10.2026;Shopify;5,99;40,00;Ground
+1002;02.10.2026;Shopify;0,00;80,00;Free
+1003;03.10.2026;Shopify;0,00;30,00;Free
+1004;04.10.2026;Shopify;7,99;60,00;Ground
+1005;05.10.2026;Shopify;5,99;25,00;Ground
+1006;06.10.2026;Etsy;4,50;35,00;Ground

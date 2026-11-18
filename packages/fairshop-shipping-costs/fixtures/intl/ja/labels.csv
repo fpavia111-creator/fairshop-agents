@@ -1,0 +1,10 @@
+注文番号,出荷日,運送会社,サービス,ラベル費用,追跡番号,voided,refund_status
+1001,2026/10/01,USPS,Ground Advantage,6.20,9400EX0001,no,
+1002,2026/10/02,UPS,Ground,9.10,1ZEX0002,no,
+1003,2026/10/03,USPS,Ground Advantage,7.50,9400EX0003,no,
+1004,2026/10/04,UPS,Ground,15.40,1ZEX0004,no,
+1005,2026/10/05,USPS,Ground Advantage,6.10,9400EX0005,no,
+1005,2026/10/05,USPS,Ground Advantage,6.10,9400EX0006,no,
+1006,2026/10/06,USPS,Priority,5.00,9400EX0007,yes,pending
+1006,2026/10/06,USPS,Ground Advantage,4.80,9400EX0008,no,
+9999,2026/10/07,UPS,Ground,8.00,1ZEX0009,no,

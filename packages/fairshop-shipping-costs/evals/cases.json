@@ -1,0 +1,328 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 6,
+          "result.claim": 2,
+          "result.review": 3,
+          "result.ok": 3,
+          "result.to_claim": 11.1,
+          "result.charged": 24.47
+        }
+      }
+    },
+    {
+      "id": "no-threshold",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "not_contains": [
+          "free_below_threshold"
+        ],
+        "equals": {
+          "result.by_finding.label_over_charged.count": 4
+        }
+      }
+    },
+    {
+      "id": "explain-duplicate",
+      "tool": "shipping_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "order_id": "#1005"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "has 2 labels (9400EX0005, 9400EX0006)"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "shipping_write_report",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-refund",
+      "tool": "shipping_draft_label_refund_request",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "platform": "Example Ship"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 11.1,
+          "result.labels": [
+            "LABEL:9400EX0007",
+            "1005"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "shipping_audit",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "shipping_draft_label_refund_request",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "platform": "Example Ship"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "shipping_draft_label_refund_request",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "platform": "Example Ship"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "shipping_request_send",
+      "args": {
+        "draft": "fairshop-out/shipping/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "shipping_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "shipping_draft_label_refund_request"
+      ],
+      "args": {
+        "draft": "fairshop-out/shipping/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-label_purchase",
+      "tool": "label_purchase",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-shipping_rule_update",
+      "tool": "shipping_rule_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "../../outside-root.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "fixtures/missing-export.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": 42,
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "shipping_audit",
+      "args": {
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "shipping_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "labels": "fixtures/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "fixtures/intl/de/orders.csv",
+        "labels": "fixtures/intl/de/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 6,
+          "result.claim": 2,
+          "result.review": 3,
+          "result.ok": 3,
+          "result.to_claim": 11.1,
+          "result.charged": 24.47
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "shipping_audit",
+      "args": {
+        "orders": "fixtures/intl/ja/orders.csv",
+        "labels": "fixtures/intl/ja/labels.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 6,
+          "result.claim": 2,
+          "result.review": 3,
+          "result.ok": 3,
+          "result.to_claim": 11.1,
+          "result.charged": 24.47
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

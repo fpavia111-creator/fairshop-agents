@@ -1,0 +1,57 @@
+{
+  "name": "fairshop-ad-spend",
+  "version": "0.1.0",
+  "description": "Reads ad platform exports (Amazon Ads, Google Ads, Meta) against your orders and stock: campaigns under your target return, spend with no sales, campaigns over budget, ads for SKUs that are out of stock, and platforms that claim more sales than the SKU sold. Drafts a campaign review; never pauses a campaign or changes a budget.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-ad-spend": "bin/fairshop-ad-spend.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-ad-spend.js demo",
+    "eval": "node bin/fairshop-ad-spend.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-ad-spend"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-ad-spend#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "ad-spend",
+    "roas",
+    "acos",
+    "amazon-ads",
+    "google-ads"
+  ]
+}

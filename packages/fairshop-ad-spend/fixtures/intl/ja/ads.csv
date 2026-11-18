@@ -1,0 +1,7 @@
+日付,チャネル,キャンペーン,品番,広告費,クリック数,表示回数,広告経由売上
+2026/10/05,Amazon Ads,Lamp exact,LAMP-1,200.00,400,"20,000",900.00
+2026/10/12,Amazon Ads,Lamp exact,LAMP-1,150.00,300,"15,000",600.00
+2026/10/05,Google Ads,Shopping lamps,LAMP-1,300.00,500,"30,000",700.00
+2026/10/05,Meta Ads,Rug prospecting,RUG-2,120.00,200,"40,000",0.00
+2026/10/06,Google Ads,Vase brand,VASE-3,90.00,80,"5,000",400.00
+2026/10/20,Amazon Ads,Mug auto,MUG-4,700.00,900,"50,000","2,600.00"

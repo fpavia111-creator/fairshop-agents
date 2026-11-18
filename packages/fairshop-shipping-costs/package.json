@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-shipping-costs",
+  "version": "0.1.0",
+  "description": "Compares what each order charged for shipping with the labels bought for it: labels costing more than was charged, free shipping under your threshold, two labels on one order, voided labels not refunded, and labels with no order. Drafts a label refund request; never buys or voids a label.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-shipping-costs": "bin/fairshop-shipping-costs.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-shipping-costs.js demo",
+    "eval": "node bin/fairshop-shipping-costs.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-shipping-costs"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-shipping-costs#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "shipping-costs",
+    "shipstation",
+    "shippo",
+    "label-refunds"
+  ]
+}

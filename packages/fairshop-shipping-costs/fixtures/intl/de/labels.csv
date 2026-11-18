@@ -1,0 +1,10 @@
+Bestellnummer;Versanddatum;Spediteur;Serviceart;Etikettenkosten;Sendungsnummer;voided;refund_status
+1001;01.10.2026;USPS;Ground Advantage;6,20;9400EX0001;no;
+1002;02.10.2026;UPS;Ground;9,10;1ZEX0002;no;
+1003;03.10.2026;USPS;Ground Advantage;7,50;9400EX0003;no;
+1004;04.10.2026;UPS;Ground;15,40;1ZEX0004;no;
+1005;05.10.2026;USPS;Ground Advantage;6,10;9400EX0005;no;
+1005;05.10.2026;USPS;Ground Advantage;6,10;9400EX0006;no;
+1006;06.10.2026;USPS;Priority;5,00;9400EX0007;yes;pending
+1006;06.10.2026;USPS;Ground Advantage;4,80;9400EX0008;no;
+9999;07.10.2026;UPS;Ground;8,00;1ZEX0009;no;

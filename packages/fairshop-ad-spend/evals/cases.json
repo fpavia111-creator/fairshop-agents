@@ -1,0 +1,324 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.campaigns": 5,
+          "result.spend": 1560,
+          "result.attributed": 5200,
+          "result.fix": 2,
+          "result.review": 3,
+          "result.ok": 1,
+          "result.wasted": 210
+        }
+      }
+    },
+    {
+      "id": "ads-only",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "fixtures/ads.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.fix": 1
+        },
+        "not_contains": [
+          "attribution_exceeds_sales",
+          "spend_on_out_of_stock"
+        ]
+      }
+    },
+    {
+      "id": "explain-lamp",
+      "tool": "ads_explain",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "campaign": "LAMP-1"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "credit ads with 2200 of LAMP-1 sales; your orders show 1800"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "ads_write_report",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-review",
+      "tool": "ads_draft_campaign_review",
+      "approve": "Pat Example",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 210
+        },
+        "length": {
+          "result.campaigns": 5
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "ads_audit",
+      "mode": "review",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "ads_draft_campaign_review",
+      "mode": "review",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "ads_draft_campaign_review",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "ads_request_approve",
+      "args": {
+        "draft": "fairshop-out/ads/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "ads_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "ads_draft_campaign_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/ads/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-campaign_pause",
+      "tool": "campaign_pause",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-budget_increase",
+      "tool": "budget_increase",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "../../outside-root.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "fixtures/missing-export.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "ads_audit",
+      "args": {
+        "ads": 42,
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "ads"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "ads_audit",
+      "args": {
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "ads"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "ads_explain",
+      "args": {
+        "ads": "fixtures/ads.csv",
+        "sales": "fixtures/sales.csv",
+        "stock": "fixtures/stock.csv",
+        "settings": "fixtures/settings.json",
+        "campaign": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "fixtures/intl/de/ads.csv",
+        "sales": "fixtures/intl/de/sales.csv",
+        "stock": "fixtures/intl/de/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.campaigns": 5,
+          "result.spend": 1560,
+          "result.attributed": 5200,
+          "result.fix": 2,
+          "result.review": 3,
+          "result.ok": 1,
+          "result.wasted": 210
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "ads_audit",
+      "args": {
+        "ads": "fixtures/intl/ja/ads.csv",
+        "sales": "fixtures/intl/ja/sales.csv",
+        "stock": "fixtures/intl/ja/stock.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.campaigns": 5,
+          "result.spend": 1560,
+          "result.attributed": 5200,
+          "result.fix": 2,
+          "result.review": 3,
+          "result.ok": 1,
+          "result.wasted": 210
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}
