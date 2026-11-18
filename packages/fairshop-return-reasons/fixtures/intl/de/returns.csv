@@ -1,0 +1,7 @@
+Bestellnummer;Artikelnummer;return_date;Grund;Menge;customer_email;customer_name
+D1;DRESS-1;12.09.2026;Not as described;1;kit.larkspur@example.test;Kit Larkspur
+D2;DRESS-1;20.09.2026;Colour looks different from photos;1;kit.larkspur@example.test;Kit Larkspur
+D3;DRESS-1;30.09.2026;Too small;1;kit.larkspur@example.test;Kit Larkspur
+D4;DRESS-1;22.09.2026;Not as described;1;otto.vance@example.test;Otto Vance
+S2;SHOE-2;28.09.2026;Size too big;2;lena.morrow@example.test;Lena Morrow
+M1;MUG-3;26.09.2026;Arrived damaged;2;quinn.abara@example.test;Quinn Abara

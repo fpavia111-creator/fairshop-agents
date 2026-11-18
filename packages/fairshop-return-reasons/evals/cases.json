@@ -1,0 +1,354 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "analyse-totals",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.units_sold": 35,
+          "result.units_returned": 8,
+          "result.return_rate_pct": 22.9,
+          "result.flagged_skus": 1,
+          "result.repeat_returners": 1,
+          "result.by_reason": [
+            {
+              "reason": "listing",
+              "units": 3,
+              "owner": "merchandising (product page)"
+            },
+            {
+              "reason": "size",
+              "units": 3,
+              "owner": "merchandising (size chart)"
+            },
+            {
+              "reason": "quality",
+              "units": 2,
+              "owner": "product and packaging"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "strict-thresholds",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.flagged_skus": 1,
+          "result.repeat_returners": 1
+        }
+      }
+    },
+    {
+      "id": "explain-dress",
+      "tool": "returns_explain",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "sku": "dress-1"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "4 of 10 returned (40%)",
+          "top reason listing"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "returns_write_report",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 2
+        }
+      }
+    },
+    {
+      "id": "draft-review",
+      "tool": "returns_draft_listing_review",
+      "approve": "Pat Example",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": [
+            "DRESS-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "returns_analyse",
+      "mode": "review",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "returns_draft_listing_review",
+      "mode": "review",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "returns_draft_listing_review",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "returns_request_approve",
+      "args": {
+        "draft": "fairshop-out/returns/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "returns_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "returns_draft_listing_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/returns/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-customer_block",
+      "tool": "customer_block",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-listing_update",
+      "tool": "listing_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "../../outside-root.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "fixtures/missing-export.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": 42,
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "returns"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "returns_analyse",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "returns"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "returns_explain",
+      "args": {
+        "returns": "fixtures/returns.csv",
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "sku": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-analyse-totals",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "fixtures/intl/de/returns.csv",
+        "orders": "fixtures/intl/de/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.units_sold": 35,
+          "result.units_returned": 8,
+          "result.return_rate_pct": 22.9,
+          "result.flagged_skus": 1,
+          "result.repeat_returners": 1,
+          "result.by_reason": [
+            {
+              "reason": "listing",
+              "units": 3,
+              "owner": "merchandising (product page)"
+            },
+            {
+              "reason": "size",
+              "units": 3,
+              "owner": "merchandising (size chart)"
+            },
+            {
+              "reason": "quality",
+              "units": 2,
+              "owner": "product and packaging"
+            }
+          ]
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"analyse-totals\"."
+    },
+    {
+      "id": "intl-ja-analyse-totals",
+      "tool": "returns_analyse",
+      "args": {
+        "returns": "fixtures/intl/ja/returns.csv",
+        "orders": "fixtures/intl/ja/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.units_sold": 35,
+          "result.units_returned": 8,
+          "result.return_rate_pct": 22.9,
+          "result.flagged_skus": 1,
+          "result.repeat_returners": 1,
+          "result.by_reason": [
+            {
+              "reason": "listing",
+              "units": 3,
+              "owner": "merchandising (product page)"
+            },
+            {
+              "reason": "size",
+              "units": 3,
+              "owner": "merchandising (size chart)"
+            },
+            {
+              "reason": "quality",
+              "units": 2,
+              "owner": "product and packaging"
+            }
+          ]
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"analyse-totals\"."
+    }
+  ]
+}

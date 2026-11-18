@@ -1,0 +1,9 @@
+Bestellnummer;Artikelnummer;Menge;Bestelldatum;customer_email
+D1;DRESS-1;1;02.09.2026;kit.larkspur@example.test
+D2;DRESS-1;1;10.09.2026;kit.larkspur@example.test
+D3;DRESS-1;1;20.09.2026;kit.larkspur@example.test
+S1;SHOE-2;1;25.09.2026;kit.larkspur@example.test
+D4;DRESS-1;1;12.09.2026;otto.vance@example.test
+D5;DRESS-1;6;14.09.2026;pia.sorel@example.test
+S2;SHOE-2;19;15.09.2026;lena.morrow@example.test
+M1;MUG-3;5;16.09.2026;quinn.abara@example.test
