@@ -1,0 +1,311 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.states": 6,
+          "result.over_not_registered": 1,
+          "result.approaching": 1,
+          "result.no_threshold": 1,
+          "result.registered": 1,
+          "result.under": 2
+        }
+      }
+    },
+    {
+      "id": "crossed-date",
+      "tool": "nexus_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "state": "wa"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "met your threshold on 2026-06-15",
+          "110000 in sales"
+        ]
+      }
+    },
+    {
+      "id": "explain-ca",
+      "tool": "nexus_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "state": "CA"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "approaching",
+          "82% of your threshold in 2025"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "nexus_write_report",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 6
+        }
+      }
+    },
+    {
+      "id": "draft-memo",
+      "tool": "nexus_draft_adviser_memo",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.states": [
+            "CA",
+            "FL",
+            "WA"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "nexus_audit",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "nexus_draft_adviser_memo",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "nexus_draft_adviser_memo",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "nexus_request_send",
+      "args": {
+        "draft": "fairshop-out/nexus/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "nexus_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "nexus_draft_adviser_memo"
+      ],
+      "args": {
+        "draft": "fairshop-out/nexus/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-state_registration_submit",
+      "tool": "state_registration_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-tax_return_file",
+      "tool": "tax_return_file",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": "../../outside-root.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": "fixtures/missing-export.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": 42,
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "nexus_audit",
+      "args": {
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "nexus_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "state": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": "fixtures/intl/de/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.states": 6,
+          "result.over_not_registered": 1,
+          "result.approaching": 1,
+          "result.no_threshold": 1,
+          "result.registered": 1,
+          "result.under": 2
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "nexus_audit",
+      "args": {
+        "orders": "fixtures/intl/ja/orders.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.states": 6,
+          "result.over_not_registered": 1,
+          "result.approaching": 1,
+          "result.no_threshold": 1,
+          "result.registered": 1,
+          "result.under": 2
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

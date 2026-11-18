@@ -1,0 +1,55 @@
+{
+  "name": "fairshop-sales-tax",
+  "version": "0.1.0",
+  "description": "Compares the sales tax collected on each order with what the rates and rules you confirm give, by state: under- and over-collection, tax collected where you are not registered, exempt orders with no certificate, and orders a marketplace collects for under your facilitator settings. Drafts a filing worksheet per state; never files or pays.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-sales-tax": "bin/fairshop-sales-tax.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-sales-tax.js demo",
+    "eval": "node bin/fairshop-sales-tax.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-sales-tax"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-sales-tax#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "sales-tax",
+    "marketplace-facilitator",
+    "tax-reconciliation"
+  ]
+}

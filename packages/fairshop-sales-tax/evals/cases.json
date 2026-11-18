@@ -1,0 +1,316 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 10,
+          "result.short": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.marketplace": 2,
+          "result.outside": 1,
+          "result.under": 5.78
+        }
+      }
+    },
+    {
+      "id": "by-state",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "\"state\":\"TX\",\"registered\":true,\"orders\":7,\"marketplace_sales\":130,\"direct_sales\":800,\"collected\":24.75,\"expected\":30.53,\"difference\":-5.78"
+        ]
+      }
+    },
+    {
+      "id": "explain-shipping",
+      "tool": "salestax_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "order_id": "T2"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "collected 8.25, settings give 9.9",
+          "shipping taxed"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "salestax_write_report",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-tx",
+      "tool": "salestax_draft_filing_worksheet",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "state": "Texas",
+        "period": "October 2026"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 24.75,
+          "result.difference": -5.78
+        }
+      }
+    },
+    {
+      "id": "draft-unregistered",
+      "tool": "salestax_draft_filing_worksheet",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "state": "CA"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "do not list CA as registered"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "salestax_audit",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "salestax_draft_filing_worksheet",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "state": "Texas",
+        "period": "October 2026"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "salestax_draft_filing_worksheet",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "state": "Texas",
+        "period": "October 2026"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "salestax_request_file",
+      "args": {
+        "draft": "fairshop-out/salestax/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "salestax_request_file",
+      "mode": "auto",
+      "auto_actions": [
+        "salestax_draft_filing_worksheet"
+      ],
+      "args": {
+        "draft": "fairshop-out/salestax/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-tax_return_file",
+      "tool": "tax_return_file",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-tax_payment_send",
+      "tool": "tax_payment_send",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "../../outside-root.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "fixtures/missing-export.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": 42,
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "salestax_audit",
+      "args": {
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "salestax_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "settings": "fixtures/settings.json",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "fixtures/intl/de/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 10,
+          "result.short": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.marketplace": 2,
+          "result.outside": 1,
+          "result.under": 5.78
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "salestax_audit",
+      "args": {
+        "orders": "fixtures/intl/ja/orders.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders": 10,
+          "result.short": 2,
+          "result.review": 3,
+          "result.ok": 2,
+          "result.marketplace": 2,
+          "result.outside": 1,
+          "result.under": 5.78
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "note": "Fictional settings for the demo. Your registrations, rates, shipping rules and marketplace facilitator rules are yours to confirm with your adviser.",
+  "registered": { "TX": { "rate": 8.25, "tax_shipping": true }, "WA": { "rate": 10, "tax_shipping": true } },
+  "marketplace_facilitator": { "amazon": ["*"], "etsy": ["*"], "ebay": ["*"], "walmart": ["*"] },
+  "exemption_certificates": ["EX-77"],
+  "tolerance": 0.05
+}

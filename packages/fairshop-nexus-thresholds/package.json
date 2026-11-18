@@ -1,0 +1,55 @@
+{
+  "name": "fairshop-nexus-thresholds",
+  "version": "0.1.0",
+  "description": "Tracks sales and order counts by state against the economic nexus thresholds you confirm, over the period each state uses in your settings: states crossed where you are not registered (with the date), states approaching, and states with sales but no threshold set. Drafts a memo for your tax adviser; never registers or files.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-nexus-thresholds": "bin/fairshop-nexus-thresholds.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-nexus-thresholds.js demo",
+    "eval": "node bin/fairshop-nexus-thresholds.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-nexus-thresholds"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-nexus-thresholds#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "nexus",
+    "economic-nexus",
+    "sales-tax-thresholds"
+  ]
+}

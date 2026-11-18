@@ -1,0 +1,12 @@
+{
+  "note": "Fictional thresholds for the demo, not any state's real rules. Confirm every threshold and period with your adviser.",
+  "thresholds": {
+    "TX": { "sales": 500000, "period": "previous_or_current_year", "include_marketplace": true },
+    "CA": { "sales": 500000, "period": "previous_or_current_year", "include_marketplace": true },
+    "WA": { "sales": 100000, "period": "previous_or_current_year", "include_marketplace": true },
+    "CO": { "sales": 100000, "period": "previous_or_current_year", "include_marketplace": false },
+    "NY": { "sales": 500000, "transactions": 3, "test": "both", "period": "rolling_12", "include_marketplace": true }
+  },
+  "registered": ["TX"],
+  "warn_pct": 80
+}

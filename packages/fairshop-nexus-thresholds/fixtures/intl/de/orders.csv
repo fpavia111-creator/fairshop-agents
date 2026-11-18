@@ -1,0 +1,14 @@
+Bestellnummer;Bestelldatum;Bundesland;Kanal;Betrag;Zustand
+N1;10.02.2026;TX;Shopify;300.000,00;paid
+N2;10.07.2026;TX;Shopify;220.000,00;paid
+N3;01.03.2026;WA;Shopify;60.000,00;paid
+N4;15.06.2026;WA;Shopify;50.000,00;paid
+N5;01.05.2025;CA;Shopify;410.000,00;paid
+N6;01.04.2026;CO;Shopify;40.000,00;paid
+N7;01.05.2026;CO;Amazon;90.000,00;paid
+N8;05.01.2026;NY;Shopify;5.000,00;paid
+N9;05.02.2026;NY;Shopify;5.000,00;paid
+N10;05.03.2026;NY;Shopify;5.000,00;paid
+N11;05.04.2026;NY;Shopify;5.000,00;paid
+N12;01.08.2026;FL;Shopify;15.000,00;paid
+N13;01.09.2026;WA;Shopify;9.000,00;cancelled

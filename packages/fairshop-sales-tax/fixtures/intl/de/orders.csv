@@ -1,0 +1,11 @@
+Bestellnummer;Bestelldatum;Kanal;Bundesland;subtotal;shipping;Erhobene Steuer;exempt;exemption_id
+T1;02.10.2026;Shopify;TX;200,00;0,00;16,50;;
+T2;03.10.2026;Shopify;Texas;100,00;20,00;8,25;;
+T3;04.10.2026;Shopify;TX;50,00;0,00;0,00;;
+T4;05.10.2026;Shopify;WA;80,00;10,00;9,50;;
+T5;06.10.2026;Shopify;CA;120,00;0,00;0,00;;
+T6;07.10.2026;Shopify;NY;60,00;0,00;5,00;;
+T7;08.10.2026;Amazon;TX;90,00;0,00;7,43;;
+T8;09.10.2026;Etsy;TX;40,00;0,00;0,00;;
+T9;10.10.2026;Shopify;TX;300,00;0,00;0,00;yes;EX-77
+T10;11.10.2026;Shopify;TX;150,00;0,00;0,00;yes;
