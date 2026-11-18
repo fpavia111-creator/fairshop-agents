@@ -1,0 +1,15 @@
+{
+  "note": "Fictional account map for the demo. Use your own chart of accounts.",
+  "clearing_account": "1210 Marketplace clearing",
+  "suspense_account": "9999 Suspense",
+  "accounts": {
+    "Principal": "4000 Sales",
+    "Refund/Principal": "4010 Sales returns",
+    "Tax": "2200 Sales tax payable",
+    "MarketplaceFacilitatorTax-Principal": "2200 Sales tax payable",
+    "Commission": "6100 Marketplace fees",
+    "FBAPerUnitFulfillmentFee": "6110 Fulfillment fees",
+    "Subscription Fee": "6120 Seller subscription"
+  },
+  "deposit_days": 10
+}

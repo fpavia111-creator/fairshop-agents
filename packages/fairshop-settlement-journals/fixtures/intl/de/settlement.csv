@@ -1,0 +1,14 @@
+Abrechnungs-ID;Datum;Typ;Beschreibung;Betrag;Bestellnummer
+S-100;01.11.2026;Order;Principal;100,00;O1
+S-100;01.11.2026;Order;Tax;8,25;O1
+S-100;01.11.2026;Order;MarketplaceFacilitatorTax-Principal;-8,25;O1
+S-100;01.11.2026;Order;Commission;-15,00;O1
+S-100;01.11.2026;Order;FBAPerUnitFulfillmentFee;-3,22;O1
+S-100;02.11.2026;Order;Principal;50,00;O2
+S-100;02.11.2026;Order;Commission;-7,50;O2
+S-100;03.11.2026;Refund;Principal;-20,00;O3
+S-100;03.11.2026;Refund;Commission;3,00;O3
+S-100;05.11.2026;other-transaction;Subscription Fee;-39,99;
+S-200;10.11.2026;Order;Principal;80,00;O4
+S-200;10.11.2026;Order;Commission;-12,00;O4
+S-200;11.11.2026;other-transaction;Inbound Placement Service Fee;-25,00;

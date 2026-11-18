@@ -1,0 +1,5 @@
+{
+  "note": "Fictional settings for the demo. Respond-by days and the signature rule are your own; check each claim's real deadline on the marketplace.",
+  "respond_days": { "amazon": 3, "walmart": 3, "default": 3 },
+  "signature_over": 750
+}

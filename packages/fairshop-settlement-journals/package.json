@@ -1,0 +1,57 @@
+{
+  "name": "fairshop-settlement-journals",
+  "version": "0.1.0",
+  "description": "Turns marketplace settlement reports into one summarized journal entry per settlement using the account map you confirm, matches each settlement to its bank deposit, and lists descriptions with no account. Drafts the entry; posting to your ledger is one human click.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-settlement-journals": "bin/fairshop-settlement-journals.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-settlement-journals.js demo",
+    "eval": "node bin/fairshop-settlement-journals.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-settlement-journals"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-settlement-journals#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "settlement",
+    "journal-entries",
+    "amazon-settlement",
+    "bookkeeping",
+    "accounting"
+  ]
+}

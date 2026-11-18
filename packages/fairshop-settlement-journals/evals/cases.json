@@ -1,0 +1,347 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.settlements": 2,
+          "result.ready": 1,
+          "result.chase": 1,
+          "result.unbalanced": 0,
+          "result.net": 110.29,
+          "result.by_finding.unmapped_description.count": 1,
+          "result.by_finding.deposit_not_found.amount": 43
+        }
+      }
+    },
+    {
+      "id": "no-deposits-file",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.ready": 1,
+          "result.review": 1,
+          "result.chase": 0
+        }
+      }
+    },
+    {
+      "id": "explain-s100",
+      "tool": "journals_explain",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30",
+        "settlement_id": "S-100"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "1210 Marketplace clearing Dr 67.29",
+          "4000 Sales Cr 150",
+          "6100 Marketplace fees Dr 19.5"
+        ],
+        "not_contains": [
+          "2200 Sales tax payable"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "journals_write_report",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 10
+        }
+      }
+    },
+    {
+      "id": "draft-s100",
+      "tool": "journals_draft_journal_entry",
+      "approve": "Pat Example",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30",
+        "settlement_id": "S-100"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 67.29
+        }
+      }
+    },
+    {
+      "id": "draft-unknown",
+      "tool": "journals_draft_journal_entry",
+      "approve": "Pat Example",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "settlement_id": "S-999"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "journals_audit",
+      "mode": "review",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "journals_draft_journal_entry",
+      "mode": "review",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30",
+        "settlement_id": "S-100"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "journals_draft_journal_entry",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30",
+        "settlement_id": "S-100"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "journals_request_post",
+      "args": {
+        "draft": "fairshop-out/journals/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "journals_request_post",
+      "mode": "auto",
+      "auto_actions": [
+        "journals_draft_journal_entry"
+      ],
+      "args": {
+        "draft": "fairshop-out/journals/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-accounting_api_post",
+      "tool": "accounting_api_post",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-settlement_dispute_submit",
+      "tool": "settlement_dispute_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "../../outside-root.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "fixtures/missing-export.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": 42,
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "settlement"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "journals_audit",
+      "args": {
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "settlement"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "journals_explain",
+      "args": {
+        "settlement": "fixtures/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/deposits.csv",
+        "as_of": "2026-11-30",
+        "settlement_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "fixtures/intl/de/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/intl/de/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.settlements": 2,
+          "result.ready": 1,
+          "result.chase": 1,
+          "result.unbalanced": 0,
+          "result.net": 110.29,
+          "result.by_finding.unmapped_description.count": 1,
+          "result.by_finding.deposit_not_found.amount": 43
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "journals_audit",
+      "args": {
+        "settlement": "fixtures/intl/ja/settlement.csv",
+        "map": "fixtures/map.json",
+        "deposits": "fixtures/intl/ja/deposits.csv",
+        "as_of": "2026-11-30"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.settlements": 2,
+          "result.ready": 1,
+          "result.chase": 1,
+          "result.unbalanced": 0,
+          "result.net": 110.29,
+          "result.by_finding.unmapped_description.count": 1,
+          "result.by_finding.deposit_not_found.amount": 43
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

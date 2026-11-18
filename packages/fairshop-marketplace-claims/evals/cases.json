@@ -1,0 +1,371 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.respond": 4,
+          "result.overdue": 1,
+          "result.closed": 1,
+          "result.at_stake": 980,
+          "result.by_advice": {
+            "defend": 1,
+            "weak": 1,
+            "gather_evidence": 1,
+            "refund_likely": 2
+          },
+          "result.urgent": [
+            "AZ-2",
+            "AZ-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "no-signature-rule",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.by_advice.defend": 2,
+          "result.by_advice.weak": 0
+        }
+      }
+    },
+    {
+      "id": "explain-weak",
+      "tool": "claims_explain",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "claim_id": "AZ-2"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "advice weak",
+          "still needed: signature"
+        ],
+        "not_contains": [
+          "Juniper"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "claims_write_report",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        },
+        "contains": [
+          "claim-deadlines.ics"
+        ]
+      }
+    },
+    {
+      "id": "draft-defend",
+      "tool": "claims_draft_claim_response",
+      "approve": "Pat Example",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "claim_id": "AZ-1"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.advice": "defend",
+          "result.amount": 45
+        }
+      }
+    },
+    {
+      "id": "draft-closed",
+      "tool": "claims_draft_claim_response",
+      "approve": "Pat Example",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "as_of": "2026-11-16",
+        "claim_id": "AZ-3"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "is closed"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "claims_audit",
+      "mode": "review",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "claims_draft_claim_response",
+      "mode": "review",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "claim_id": "AZ-1"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "claims_draft_claim_response",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "claim_id": "AZ-1"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "claims_request_send",
+      "args": {
+        "draft": "fairshop-out/claims/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "claims_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "claims_draft_claim_response"
+      ],
+      "args": {
+        "draft": "fairshop-out/claims/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-claim_response_submit",
+      "tool": "claim_response_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-issue_refund",
+      "tool": "issue_refund",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "../../outside-root.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "fixtures/missing-export.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "claims_audit",
+      "args": {
+        "claims": 42,
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "claims"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "claims_audit",
+      "args": {
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "claims"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "claims_explain",
+      "args": {
+        "claims": "fixtures/claims.csv",
+        "shipments": "fixtures/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "claim_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "fixtures/intl/de/claims.csv",
+        "shipments": "fixtures/intl/de/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.respond": 4,
+          "result.overdue": 1,
+          "result.closed": 1,
+          "result.at_stake": 980,
+          "result.by_advice": {
+            "defend": 1,
+            "weak": 1,
+            "gather_evidence": 1,
+            "refund_likely": 2
+          },
+          "result.urgent": [
+            "AZ-2",
+            "AZ-1"
+          ]
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "claims_audit",
+      "args": {
+        "claims": "fixtures/intl/ja/claims.csv",
+        "shipments": "fixtures/intl/ja/shipments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.respond": 4,
+          "result.overdue": 1,
+          "result.closed": 1,
+          "result.at_stake": 980,
+          "result.by_advice": {
+            "defend": 1,
+            "weak": 1,
+            "gather_evidence": 1,
+            "refund_likely": 2
+          },
+          "result.urgent": [
+            "AZ-2",
+            "AZ-1"
+          ]
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

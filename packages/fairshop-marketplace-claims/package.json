@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-marketplace-claims",
+  "version": "0.1.0",
+  "description": "Lines up Amazon A-to-z, eBay, Walmart and Etsy claims with your shipment and delivery records: respond-by dates, which claims your tracking can defend, which need a signature or photos, which are likely refunds, and which are overdue. Drafts each response; never submits it or refunds.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-marketplace-claims": "bin/fairshop-marketplace-claims.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-marketplace-claims.js demo",
+    "eval": "node bin/fairshop-marketplace-claims.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-marketplace-claims"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-marketplace-claims#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "a-to-z",
+    "ebay-cases",
+    "marketplace-claims",
+    "dispute-evidence"
+  ]
+}

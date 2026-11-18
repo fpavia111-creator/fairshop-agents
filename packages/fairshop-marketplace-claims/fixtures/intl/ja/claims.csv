@@ -1,0 +1,7 @@
+事故番号,チャネル,注文番号,申請日,理由,金額,ステータス,期日,buyer_name,buyer_email
+AZ-1,Amazon,111-1000001-0000001,2026/11/14,Item not received,45.00,open,,Rowan Pemberly,rowan.pemberly@example.test
+AZ-2,Amazon,111-1000002-0000002,2026/11/13,Item not received,820.00,open,,Juniper Ashcombe,juniper.ashcombe@example.test
+EB-1,eBay,22-10001-00001,2026/11/12,Item not as described,60.00,open,2026/11/18,Thaddeus Wren,thaddeus.wren@example.test
+EB-2,eBay,22-10002-00002,2026/11/08,Item not received,30.00,open,2026/11/11,Marigold Fenwick,marigold.fenwick@example.test
+WM-1,Walmart,WM-5001,2026/11/15,Never arrived,25.00,open,,Cosmo Lindqvist,cosmo.lindqvist@example.test
+AZ-3,Amazon,111-1000003-0000003,2026/10/01,Item not received,15.00,closed,,Ottilie Brandt,ottilie.brandt@example.test
