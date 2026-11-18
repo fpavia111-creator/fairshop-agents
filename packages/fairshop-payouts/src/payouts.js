@@ -1,4 +1,4 @@
-// Baltic payout reconciliation: pure functions over order rows and payout lines.
+// Payout reconciliation: pure functions over order rows and payout lines.
 import { exportProfile, firstRowPer, round2, str, num, isoDate, addDays, channelKey, channelLabel, finding, byFinding, byStatus, sortBy, rollup, pct, today } from 'fairshop-core';
 
 const t = (aliases, extra = {}) => ({ aliases, ...extra });

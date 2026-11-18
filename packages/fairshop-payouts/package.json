@@ -1,7 +1,7 @@
 {
-  "name": "baltic-of-payouts",
+  "name": "fairshop-payouts",
   "version": "0.1.0",
-  "description": "Baltic of Payouts: matches every order to the payout lines from Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy and Walmart exports, by channel: orders never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate and payout lines with no order. Drafts an inquiry per channel; never contacts support or moves money.",
+  "description": "Matches every order to the payout lines in Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy and Walmart exports, by channel: orders never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate and payout lines with no order. Drafts an inquiry per channel; never contacts support or moves money.",
   "type": "module",
   "license": "MIT",
   "author": "Kurt Francisco",
@@ -14,7 +14,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "baltic-of-payouts": "bin/baltic-of-payouts.js"
+    "fairshop-payouts": "bin/fairshop-payouts.js"
   },
   "files": [
     "src",
@@ -27,8 +27,8 @@
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",
-    "demo": "node bin/baltic-of-payouts.js demo",
-    "eval": "node bin/baltic-of-payouts.js eval"
+    "demo": "node bin/fairshop-payouts.js demo",
+    "eval": "node bin/fairshop-payouts.js eval"
   },
   "dependencies": {
     "fairshop-core": "^0.1.0"
@@ -36,9 +36,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
-    "directory": "packages/baltic-of-payouts"
+    "directory": "packages/fairshop-payouts"
   },
-  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/baltic-of-payouts#readme",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-payouts#readme",
   "bugs": {
     "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
   },

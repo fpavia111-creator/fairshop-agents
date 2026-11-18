@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Scaffold a new Fairshop domain agent: fairshop-new-agent <figure>-of-<process> [--dir packages]
+// Scaffold a new Fairshop domain agent: fairshop-new-agent <product>-<what-it-does> [--dir packages]
 // The output passes `npm test`, `eval` and `npm pack --dry-run` untouched.
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -7,7 +7,7 @@ import { join, resolve } from 'node:path';
 const name = process.argv[2];
 const dirFlag = process.argv.indexOf('--dir');
 const base = resolve(dirFlag > 0 ? process.argv[dirFlag + 1] : '.');
-if (!name || !/^[a-z]+-of-[a-z]+$/.test(name)) { process.stdout.write('Usage: fairshop-new-agent <figure>-of-<process> [--dir packages]\n'); process.exit(2); }
+if (!name || !/^[a-z]+(-[a-z]+){1,4}$/.test(name)) { process.stdout.write('Usage: fairshop-new-agent <product>-<what-it-does> [--dir packages]\n'); process.exit(2); }
 const root = join(base, name);
 if (existsSync(root)) { process.stderr.write(`${root} already exists\n`); process.exit(1); }
 const pre = name.split('-')[0];

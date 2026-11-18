@@ -48,7 +48,8 @@ export function agentContract({ manifest, casesFile, canaries = [] }) {
   const runs = manifest.tools.filter((t) => decision(t) !== 'block');
   const caseFor = (t) => cases.find((c) => c.tool === t.name && (!c.expect || !c.expect.status || ['executed', 'needs_approval'].includes(c.expect.status)));
   const sandbox = () => { const d = mkdtempSync(join(tmpdir(), `${manifest.name}-contract-`)); cpSync(srcRoot, d, { recursive: true, filter: (p) => !/[\\/](node_modules|fairshop-out|\.fairshop)([\\/]|$)/.test(p) }); return d; };
-  const rtIn = (root, opts = {}) => new AgentRuntime(manifest, { root, stateDir: join(root, '.fairshop-test'), audit: false, ...opts });
+  // One fixed pseudonym key, so results of two runtimes can be compared (pseudonyms differ between keys by design).
+  const rtIn = (root, opts = {}) => new AgentRuntime(manifest, { root, stateDir: join(root, '.fairshop-test'), audit: false, piiKey: '7'.repeat(64), ...opts });
   async function run(rt, tool, args) {
     const first = await rt.call(tool, args);
     if (first.status !== 'needs_approval') return first;

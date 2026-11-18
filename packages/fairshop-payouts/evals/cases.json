@@ -1,0 +1,354 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.owed": 191.49,
+          "result.chase": 3,
+          "result.waiting": 1,
+          "result.review": 5,
+          "result.ok": 4,
+          "result.skipped": 2,
+          "result.by_finding.paid_twice.amount": 150
+        }
+      }
+    },
+    {
+      "id": "audit-default-settings",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.chase": 3,
+          "result.review": 4
+        },
+        "not_contains": [
+          "fee_above_rate"
+        ]
+      }
+    },
+    {
+      "id": "explain-paid-twice",
+      "tool": "payouts_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "order_id": "#1006"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "paid in 2 payouts",
+          "P-2001, P-2002"
+        ]
+      }
+    },
+    {
+      "id": "report-worklist",
+      "tool": "payouts_write_report",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 11
+        },
+        "contains": [
+          "payouts.html"
+        ]
+      }
+    },
+    {
+      "id": "draft-amazon-inquiry",
+      "tool": "payouts_draft_payout_inquiry",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 101.99,
+          "result.orders": [
+            "112-0000002-0000002",
+            "112-0000003-0000003"
+          ]
+        }
+      }
+    },
+    {
+      "id": "draft-etsy-nothing-to-chase",
+      "tool": "payouts_draft_payout_inquiry",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "channel": "Etsy"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "nothing to chase on Etsy"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "payouts_audit",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "payouts_draft_payout_inquiry",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "payouts_draft_payout_inquiry",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "channel": "Amazon"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "payouts_request_send",
+      "args": {
+        "draft": "fairshop-out/payouts/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "payouts_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "payouts_draft_payout_inquiry"
+      ],
+      "args": {
+        "draft": "fairshop-out/payouts/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-balance_withdraw",
+      "tool": "balance_withdraw",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-support_case_submit",
+      "tool": "support_case_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "../../outside-root.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "fixtures/missing-export.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": 42,
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "payouts_audit",
+      "args": {
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "payouts_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "payouts": "fixtures/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "fixtures/intl/de/orders.csv",
+        "payouts": "fixtures/intl/de/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.owed": 191.49,
+          "result.chase": 3,
+          "result.waiting": 1,
+          "result.review": 5,
+          "result.ok": 4,
+          "result.skipped": 2,
+          "result.by_finding.paid_twice.amount": 150
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "payouts_audit",
+      "args": {
+        "orders": "fixtures/intl/ja/orders.csv",
+        "payouts": "fixtures/intl/ja/payouts.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.owed": 191.49,
+          "result.chase": 3,
+          "result.waiting": 1,
+          "result.review": 5,
+          "result.ok": 4,
+          "result.skipped": 2,
+          "result.by_finding.paid_twice.amount": 150
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

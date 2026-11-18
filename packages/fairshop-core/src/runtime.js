@@ -125,7 +125,8 @@ export class AgentRuntime {
     // Customer and staff data masking of every result (pii.js): 'mask' (default), 'strict' or 'off'.
     this.piiMode = options.pii || 'mask';
     if (!PII_MODES.includes(this.piiMode)) throw new Error(`pii must be one of ${PII_MODES.join(', ')}`);
-    this.piiKeyOption = options.piiKey ? (Buffer.isBuffer(options.piiKey) ? options.piiKey : Buffer.from(String(options.piiKey), 'hex')) : null;
+    const pk = options.piiKey || options.phiKey; // phiKey: the name the shared ver 6 checks use
+    this.piiKeyOption = pk ? (Buffer.isBuffer(pk) ? pk : Buffer.from(String(pk), 'hex')) : null;
     if (this.piiKeyOption && this.piiKeyOption.length !== 32) throw new Error('piiKey must be 32 bytes (64 hex characters)');
     this.piiPersist = persist;
   }

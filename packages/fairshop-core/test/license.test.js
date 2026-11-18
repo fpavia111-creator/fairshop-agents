@@ -139,7 +139,7 @@ test('no agent in this repository marks a tool as paid until the owner sets the 
   const { readdirSync } = await import('node:fs');
   const pkgs = new URL('../../', import.meta.url);
   const paid = [];
-  for (const p of readdirSync(pkgs).filter((n) => /-of-/.test(n))) {
+  for (const p of readdirSync(pkgs).filter((n) => /^fairshop-(?!core$)/.test(n))) {
     const { manifest: m } = await import(new URL(`${p}/src/index.js`, pkgs));
     for (const tool of m.tools) if (tool.tier === 'pro') paid.push(`${p}:${tool.name}`);
   }

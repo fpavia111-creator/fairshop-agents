@@ -1,0 +1,6 @@
+{
+  "note": "Fictional settings for the demo. Payout days and fee caps come from your own agreements.",
+  "payout_days": { "shopify": 3, "amazon": 14, "etsy": 3, "default": 7 },
+  "max_fee_pct": { "shopify": 3.5, "amazon": 16, "etsy": 9.5 },
+  "tolerance": 0.05
+}

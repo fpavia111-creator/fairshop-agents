@@ -1,0 +1,14 @@
+Bestellnummer;Kanal;Bestelldatum;Betrag;Erstattet;Zustand;Zahlungsart
+#1001;Shopify;28.10.2026;120,00;0,00;paid;Shopify Payments
+#1002;Shopify;29.10.2026;89,50;0,00;paid;Shopify Payments
+#1003;Shopify;14.11.2026;45,00;0,00;paid;Shopify Payments
+#1004;Shopify;30.10.2026;200,00;50,00;partially_refunded;Shopify Payments
+#1005;Shopify;31.10.2026;64,00;64,00;refunded;Shopify Payments
+#1006;Shopify;01.11.2026;150,00;0,00;paid;Shopify Payments
+#1007;Shopify;02.11.2026;75,00;0,00;voided;Shopify Payments
+#1008;Shopify;02.11.2026;30,00;0,00;paid;Manual
+112-0000001-0000001;Amazon;20.10.2026;58,99;0,00;shipped;Amazon
+112-0000002-0000002;Amazon;21.10.2026;42,00;0,00;shipped;Amazon
+112-0000003-0000003;Amazon;22.10.2026;99,99;0,00;shipped;Amazon
+E-3001;Etsy;03.11.2026;35,00;0,00;paid;Etsy Payments
+E-3002;Etsy;04.11.2026;52,00;0,00;paid;Etsy Payments

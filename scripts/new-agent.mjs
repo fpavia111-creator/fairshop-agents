@@ -1,18 +1,17 @@
 #!/usr/bin/env node
-// Fairshop package boilerplate: package.json, bin, index, test runner, licence,
-// and the shared tests (MCP stdio, arg docs, evals). The agent's own manifest,
-// logic, demo, fixtures, evals and README are written by hand.
+// Fairshop package boilerplate: package.json, bin, index, test runner, licence, changelog,
+// the shared tests (MCP stdio, arg docs, evals, the ver 6 shared checks) and the contract
+// tests. The agent's own logic, manifest, demo, fixtures, evals and README are written by hand.
 //
-//   node scripts/new-agent.mjs <sea>-of-<process> "<one-line description>" kw1,kw2
+//   node scripts/new-agent.mjs fairshop-<what-it-does> "<one-line description>" kw1,kw2 <logic-file>
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), '..');
-const [name, description, kw = ''] = process.argv.slice(2);
-if (!name || !/^[a-z]+-of-[a-z]+$/.test(name) || !description) { console.error('usage: new-agent.mjs <sea>-of-<process> "<description>" kw1,kw2'); process.exit(2); }
+const [name, description, kw = '', logic = 'logic'] = process.argv.slice(2);
+if (!name || !/^fairshop-[a-z0-9]+(-[a-z0-9]+){0,3}$/.test(name) || !description) { console.error('usage: new-agent.mjs fairshop-<what-it-does> "<description>" kw1,kw2 <logic-file>'); process.exit(2); }
 const root = join(repo, 'packages', name);
-const prefix = name.split('-')[0];
 const corePkg = JSON.parse(readFileSync(join(repo, 'packages/fairshop-core/package.json'), 'utf8'));
 const write = (f, text, { keep = false } = {}) => { const p = join(root, f); if (keep && existsSync(p)) return; mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, text); };
 
@@ -26,9 +25,9 @@ write('package.json', JSON.stringify({
   homepage: `https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/${name}#readme`,
   bugs: { url: 'https://github.com/fpavia111-creator/fairshop-agents/issues' },
   keywords: ['mcp', 'mcp-server', 'ecommerce', 'retail', 'fairshop', ...kw.split(',').filter(Boolean)],
-}, null, 2) + '\n');
+}, null, 2) + '\n', { keep: true });
 write(`bin/${name}.js`, `#!/usr/bin/env node\nimport { fileURLToPath } from 'node:url';\nimport { main } from 'fairshop-core';\nimport { manifest } from '../src/manifest.js';\nimport { demo } from '../src/demo.js';\n\nmain(manifest, { bin: '${name}', demo, evalFile: fileURLToPath(new URL('../evals/cases.json', import.meta.url)) });\n`);
-write('src/index.js', `export { manifest } from './manifest.js';\nexport * from './${process.argv[5] || 'logic'}.js';\n`, { keep: true });
+write('src/index.js', `export { manifest } from './manifest.js';\nexport * from './${logic}.js';\n`, { keep: true });
 write('scripts/run-tests.cjs', readFileSync(join(repo, 'packages/fairshop-core/scripts/run-tests.cjs'), 'utf8'));
 write('LICENSE', readFileSync(join(repo, 'LICENSE'), 'utf8'));
 write('CHANGELOG.md', `# Changelog\n\n## 0.1.0 (unreleased)\n\n- First version (Fairshop ver 1).\n`, { keep: true });
@@ -36,11 +35,11 @@ write('test/shared.test.js', `// Shared checks every Fairshop agent passes. Gene
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtempSync, existsSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, writeFileSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runEvalFile, undocumentedArgs, ONE_CLICK_CATEGORIES } from 'fairshop-core';
+import { runEvalFile, undocumentedArgs, ONE_CLICK_CATEGORIES, AgentRuntime } from 'fairshop-core';
 import { manifest } from '../src/index.js';
 
 const bin = fileURLToPath(new URL('../bin/${name}.js', import.meta.url));
@@ -57,10 +56,45 @@ test('one-click categories are never allow, and the default is block', () => {
   assert.deepEqual(manifest.policy.rules.at(-1), { ...manifest.policy.rules.at(-1), tool: '*', decision: 'block' });
 });
 
-test('private evals all pass', async () => {
+test('private evals all pass, at least fifteen of them', async () => {
   const r = await runEvalFile(manifest, fileURLToPath(new URL('../evals/cases.json', import.meta.url)));
   for (const c of r.results) assert.ok(c.pass, \`\${c.id}: \${c.fails.join('; ')}\`);
-  assert.ok(r.total >= 6, 'at least six eval cases');
+  assert.ok(r.total >= 15, 'at least fifteen eval cases');
+});
+
+// ver 6 shared checks (18 Nov 2026): same answer twice, nothing outside --root, Windows exports.
+const TABLE = /[.](csv|tsv|txt)$/i;
+function readCase() {
+  const data = JSON.parse(readFileSync(new URL('../evals/cases.json', import.meta.url), 'utf8'));
+  const root = fileURLToPath(new URL('../evals/' + (data.root || '.') + '/', import.meta.url));
+  const allow = (t) => (manifest.policy.rules.find((r) => r.tool === t) || {}).decision === 'allow';
+  const c = data.cases.find((x) => allow(x.tool) && !x.mode && !x.approve && !x.auto_actions && !/_write_report$/.test(x.tool) && (!x.expect || !['error', 'blocked'].includes(x.expect.status)) && Object.values(x.args || {}).some((v) => typeof v === 'string' && TABLE.test(v)));
+  return { root, c };
+}
+const quiet = (root) => new AgentRuntime(manifest, { root, stateDir: null, audit: false, piiKey: '7'.repeat(64) }); // one fixed test key: pseudonyms differ between keys by design
+
+test('the same files give the same answer twice (nothing depends on the clock or on chance)', async () => {
+  const { root, c } = readCase(); assert.ok(c, 'an eval case reads a table file');
+  const a = await quiet(root).call(c.tool, c.args); const b = await quiet(root).call(c.tool, c.args);
+  assert.equal(a.status, 'executed', a.reason); assert.deepEqual(b.result, a.result);
+});
+
+test('a file outside --root is refused before anything is read', async () => {
+  const { root, c } = readCase(); const k = Object.keys(c.args).find((x) => typeof c.args[x] === 'string' && TABLE.test(c.args[x]));
+  const BS = String.fromCharCode(92);
+  for (const bad of ['../../outside.csv', '/etc/passwd', 'C:/Windows/win.ini', '..' + BS + '..' + BS + 'outside.csv']) {
+    const r = await quiet(root).call(c.tool, { ...c.args, [k]: bad });
+    assert.equal(r.status, 'error', bad); assert.match(String(r.reason), /outside the allowed root|not found/i, bad);
+  }
+});
+
+test('a Windows export (CRLF line ends and a byte order mark) reads the same as the plain file', async () => {
+  const { root, c } = readCase(); const tmp = mkdtempSync(join(tmpdir(), (manifest.name || 'agent') + '-crlf-'));
+  cpSync(root, tmp, { recursive: true, filter: (p) => !/(^|[/])(node_modules|[a-z]+-out|[.]fairshop)([/]|$)/.test(p.split(String.fromCharCode(92)).join('/')) });
+  const CR = String.fromCharCode(13), LF = String.fromCharCode(10), BOM = String.fromCharCode(0xfeff);
+  for (const v of Object.values(c.args)) if (typeof v === 'string' && TABLE.test(v)) { const f = join(tmp, v); const text = readFileSync(f, 'utf8').replace(BOM, ''); writeFileSync(f, BOM + text.split(CR + LF).join(LF).split(LF).join(CR + LF)); }
+  const a = await quiet(root).call(c.tool, c.args); const b = await quiet(tmp).call(c.tool, c.args);
+  assert.equal(b.status, 'executed', b.reason); assert.deepEqual(b.result, a.result);
 });
 
 test('stdio MCP: initialize, list, refuse an unknown tool, write the audit log', async () => {
@@ -82,7 +116,6 @@ test('stdio MCP: initialize, list, refuse an unknown tool, write the audit log',
   } finally { child.kill(); }
 });
 `);
-console.log(`wrote ${root}`);
 write('test/contract.test.js', `// Shared contract checks on this agent's own manifest, fixtures and eval cases.
 // canaries: fictional shopper and staff names planted in the fixtures; none may reach a result.
 import { readFileSync, existsSync } from 'node:fs';
@@ -93,3 +126,4 @@ import { manifest } from '../src/index.js';
 const cf = fileURLToPath(new URL('../fixtures/canaries.json', import.meta.url));
 agentContract({ manifest, casesFile: fileURLToPath(new URL('../evals/cases.json', import.meta.url)), canaries: existsSync(cf) ? JSON.parse(readFileSync(cf, 'utf8')) : [] });
 `);
+console.log(`wrote ${root}`);
