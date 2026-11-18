@@ -1,0 +1,308 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "calculate-totals",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.shipments": 2,
+          "result.skus": 3,
+          "result.allocated": 1840,
+          "result.unallocated": 300,
+          "result.review": 3,
+          "result.ok": 2
+        }
+      }
+    },
+    {
+      "id": "explain-bowl",
+      "tool": "landed_explain",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv",
+        "sku": "bowl-2"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "unit cost 6, landed 7.72, recorded 6.5",
+          "recorded_cost_low"
+        ]
+      }
+    },
+    {
+      "id": "all-by-value",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv",
+        "settings": "fixtures/settings-value.json"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "\"sku\":\"MUG-1\",\"units\":1000,\"unit_cost\":4,\"landed_unit\":5.05"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "landed_write_report",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        }
+      }
+    },
+    {
+      "id": "draft-updates",
+      "tool": "landed_draft_cost_updates",
+      "approve": "Pat Example",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.skus": [
+            "BOWL-2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "landed_calculate",
+      "mode": "review",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "landed_draft_cost_updates",
+      "mode": "review",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "landed_draft_cost_updates",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "landed_request_approve",
+      "args": {
+        "draft": "fairshop-out/landed/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "landed_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "landed_draft_cost_updates"
+      ],
+      "args": {
+        "draft": "fairshop-out/landed/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-store_cost_update",
+      "tool": "store_cost_update",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-inventory_revalue_post",
+      "tool": "inventory_revalue_post",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "../../outside-root.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "fixtures/missing-export.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": 42,
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "lines"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "landed_calculate",
+      "args": {
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "lines"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "landed_explain",
+      "args": {
+        "lines": "fixtures/lines.csv",
+        "costs": "fixtures/costs.csv",
+        "recorded": "fixtures/recorded.csv",
+        "sku": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-calculate-totals",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "fixtures/intl/de/lines.csv",
+        "costs": "fixtures/intl/de/costs.csv",
+        "recorded": "fixtures/intl/de/recorded.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.shipments": 2,
+          "result.skus": 3,
+          "result.allocated": 1840,
+          "result.unallocated": 300,
+          "result.review": 3,
+          "result.ok": 2
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"calculate-totals\"."
+    },
+    {
+      "id": "intl-ja-calculate-totals",
+      "tool": "landed_calculate",
+      "args": {
+        "lines": "fixtures/intl/ja/lines.csv",
+        "costs": "fixtures/intl/ja/costs.csv",
+        "recorded": "fixtures/intl/ja/recorded.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.shipments": 2,
+          "result.skus": 3,
+          "result.allocated": 1840,
+          "result.unallocated": 300,
+          "result.review": 3,
+          "result.ok": 2
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"calculate-totals\"."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{ "note": "Fictional tolerances for the demo.", "price_tolerance_pct": 1, "over_receipt_pct": 5, "late_grace_days": 3 }

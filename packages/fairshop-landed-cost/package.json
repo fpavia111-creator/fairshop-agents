@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-landed-cost",
+  "version": "0.1.0",
+  "description": "Spreads freight, duty, broker and other import costs over the SKUs of each shipment (by weight or value, as you set) to get a landed unit cost, compares it with the cost recorded in your store, and lists shipments with no costs and costs with no shipment. Drafts cost updates; never changes a cost.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-landed-cost": "bin/fairshop-landed-cost.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-landed-cost.js demo",
+    "eval": "node bin/fairshop-landed-cost.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-landed-cost"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-landed-cost#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "landed-cost",
+    "import-costs",
+    "duty",
+    "cogs"
+  ]
+}

@@ -1,0 +1,1 @@
+{ "note": "Every cost spread by value.", "basis": { "freight": "value", "default": "value" }, "variance_pct": 5 }

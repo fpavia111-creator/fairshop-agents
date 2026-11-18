@@ -1,0 +1,6 @@
+Rechnungsnummer;Lieferant;Bestellnummer;Artikelnummer;qty_billed;Einzelpreis;Rechnungsdatum
+NW-901;Northwind Ceramics;PO-1;MUG-1;100;4,00;21.10.2026
+NW-901;Northwind Ceramics;PO-1;BOWL-2;50;6,00;21.10.2026
+HT-55;Harbor Textiles;PO-2;TOWEL-3;220;3,20;26.10.2026
+NW-902;Northwind Ceramics;PO-1;MUG-1;100;4,00;28.10.2026
+HT-56;Harbor Textiles;PO-9;LAMP-6;10;12,00;30.10.2026

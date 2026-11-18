@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-po-receiving",
+  "version": "0.1.0",
+  "description": "Three-way match of supplier purchase orders, receipts and invoices: units billed but not received, invoices billed twice, prices above the PO, short and over shipments, late deliveries and POs past due with nothing received. Drafts a supplier claim; never pays or cancels a PO.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-po-receiving": "bin/fairshop-po-receiving.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-po-receiving.js demo",
+    "eval": "node bin/fairshop-po-receiving.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-po-receiving"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-po-receiving#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "purchase-orders",
+    "three-way-match",
+    "receiving",
+    "supplier-invoices"
+  ]
+}
