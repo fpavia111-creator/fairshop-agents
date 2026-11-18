@@ -1,0 +1,8 @@
+Kennung;issued_date;Ausgegeben;source;Bestellnummer;customer_email;Saldo
+GC-1001;01.10.2026;50,00;sale;3001;lia.brook@example.test;20,00
+GC-1002;15.06.2026;100,00;sale;3002;max.dale@example.test;100,00
+GC-1003;01.09.2025;75,00;sale;3003;nora.finch@example.test;75,00
+GC-1004;20.09.2026;250,00;manual;;omar.gale@example.test;250,00
+GC-1005;10.08.2026;40,00;sale;3005;pam.hart@example.test;25,00
+GC-1006;10.10.2026;30,00;sale;3006;quin.ives@example.test;0,00
+GC-1007;01.11.2026;20,00;promo;;rae.joss@example.test;20,00

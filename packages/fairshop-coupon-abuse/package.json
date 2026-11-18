@@ -1,0 +1,56 @@
+{
+  "name": "fairshop-coupon-abuse",
+  "version": "0.1.0",
+  "description": "Checks every order that used a discount code against your code rules: single-use and limited codes used too often, codes used outside their dates or under the minimum order, new-customer codes used by returning shoppers, staff codes used outside staff, and codes you never issued. Drafts a code review; never disables a code or cancels an order.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-coupon-abuse": "bin/fairshop-coupon-abuse.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-coupon-abuse.js demo",
+    "eval": "node bin/fairshop-coupon-abuse.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-coupon-abuse"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-coupon-abuse#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "coupons",
+    "discount-codes",
+    "promo-abuse",
+    "promotions"
+  ]
+}

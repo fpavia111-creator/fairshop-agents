@@ -1,0 +1,16 @@
+Bestellnummer;Bestelldatum;customer_email;ship_address;PLZ Empfänger;Rabattcode;Rabatt;subtotal
+2001;05.09.2026;ana.weller@example.test;12 Birch Lane;78701;;0,00;40,00
+2002;02.10.2026;ana.weller@example.test;12 Birch Lane;78701;WELCOME10;4,50;45,00
+2003;03.10.2026;bo.rains@example.test;40 Cedar Court;73301;WELCOME10;3,50;35,00
+2004;04.10.2026;b.rains+2@example.test;40 Cedar Ct;73301;WELCOME10;3,20;32,00
+2005;05.10.2026;cy.dunmore@example.test;9 Elm St;10001;WELCOME10;2,00;20,00
+2006;06.10.2026;dee.harlow@example.test;3 Oak Ave;60601;VIP50;50,00;120,00
+2007;07.10.2026;eli.marsh@example.test;8 Pine Rd;94105;VIP50;50,00;130,00
+2008;10.09.2026;fay.oduya@example.test;5 Ash Way;30301;FALL20;10,00;60,00
+2009;11.09.2026;gus.penrose@example.test;6 Fir Pl;02108;FALL20;12,00;70,00
+2010;12.09.2026;hal.quist@example.test;7 Yew Ct;98101;FALL20;11,00;65,00
+2011;13.09.2026;ida.renn@example.test;2 Bay St;33101;FALL20;10,00;55,00
+2012;02.11.2026;jo.sato@example.test;4 Elm Ct;85001;FALL20;9,00;58,00
+2013;20.10.2026;kai.lund@example.test;1 Sea Rd;97201;STAFF30;15,00;50,00
+2014;21.10.2026;mia.cole@examplegoods.test;10 Main St;78701;STAFF30;12,00;40,00
+2015;22.10.2026;ned.fry@example.test;11 Main St;78702;SPRING99;25,00;60,00

@@ -1,0 +1,312 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders_with_code": 14,
+          "result.abuse": 7,
+          "result.review": 1,
+          "result.ok": 6,
+          "result.at_stake": 93.7,
+          "result.by_finding.same_address_many_accounts.count": 1
+        }
+      }
+    },
+    {
+      "id": "no-staff-domains",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.abuse": 8,
+          "result.by_finding.staff_code_outside.count": 2
+        }
+      }
+    },
+    {
+      "id": "explain-code",
+      "tool": "coupons_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "order_id": "VIP50"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "Use 2 of VIP50; its limit is 1."
+        ],
+        "not_contains": [
+          "eli.marsh"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "coupons_write_report",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 8
+        }
+      }
+    },
+    {
+      "id": "draft-review",
+      "tool": "coupons_draft_code_review",
+      "approve": "Pat Example",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.codes": [
+            "FALL20",
+            "SPRING99",
+            "STAFF30",
+            "VIP50",
+            "WELCOME10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "coupons_audit",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "coupons_draft_code_review",
+      "mode": "review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "coupons_draft_code_review",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "coupons_request_approve",
+      "args": {
+        "draft": "fairshop-out/coupons/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "coupons_request_approve",
+      "mode": "auto",
+      "auto_actions": [
+        "coupons_draft_code_review"
+      ],
+      "args": {
+        "draft": "fairshop-out/coupons/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-discount_code_disable",
+      "tool": "discount_code_disable",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-order_cancel",
+      "tool": "order_cancel",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "../../outside-root.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "fixtures/missing-export.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": 42,
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "coupons_audit",
+      "args": {
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "orders"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "coupons_explain",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "codes": "fixtures/codes.csv",
+        "settings": "fixtures/settings.json",
+        "order_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "fixtures/intl/de/orders.csv",
+        "codes": "fixtures/intl/de/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders_with_code": 14,
+          "result.abuse": 7,
+          "result.review": 1,
+          "result.ok": 6,
+          "result.at_stake": 93.7,
+          "result.by_finding.same_address_many_accounts.count": 1
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "coupons_audit",
+      "args": {
+        "orders": "fixtures/intl/ja/orders.csv",
+        "codes": "fixtures/intl/ja/codes.csv",
+        "settings": "fixtures/settings.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.orders_with_code": 14,
+          "result.abuse": 7,
+          "result.review": 1,
+          "result.ok": 6,
+          "result.at_stake": 93.7,
+          "result.by_finding.same_address_many_accounts.count": 1
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

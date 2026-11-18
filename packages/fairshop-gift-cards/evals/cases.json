@@ -1,0 +1,372 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "liability-totals",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.cards": 7,
+          "result.liability": 460,
+          "result.promo_balance": 20,
+          "result.review": 3,
+          "result.dormant": 1,
+          "result.ok": 3,
+          "result.by_age": [
+            {
+              "age": "0-90",
+              "cards": 2,
+              "liability": 270
+            },
+            {
+              "age": "91-180",
+              "cards": 2,
+              "liability": 115
+            },
+            {
+              "age": "366+",
+              "cards": 1,
+              "liability": 75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "promo-counted",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.liability": 460,
+          "result.dormant": 1
+        }
+      }
+    },
+    {
+      "id": "explain-mismatch",
+      "tool": "giftcards_explain",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "as_of": "2026-11-16",
+        "card_id": "gc-1005"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "shows 25; issue and activity give 15"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "giftcards_write_report",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 4
+        }
+      }
+    },
+    {
+      "id": "draft-entry",
+      "tool": "giftcards_draft_liability_entry",
+      "approve": "Pat Example",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "gl_balance": "400"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.adjustment": 60
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "giftcards_liability",
+      "mode": "review",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "giftcards_draft_liability_entry",
+      "mode": "review",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "gl_balance": "400"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "giftcards_draft_liability_entry",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "gl_balance": "400"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "giftcards_request_post",
+      "args": {
+        "draft": "fairshop-out/giftcards/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "go_live: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "giftcards_request_post",
+      "mode": "auto",
+      "auto_actions": [
+        "giftcards_draft_liability_entry"
+      ],
+      "args": {
+        "draft": "fairshop-out/giftcards/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-gift_card_adjust",
+      "tool": "gift_card_adjust",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-gift_card_deactivate",
+      "tool": "gift_card_deactivate",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "../../outside-root.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "fixtures/missing-export.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": 42,
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "cards"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "giftcards_liability",
+      "args": {
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "cards"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "giftcards_explain",
+      "args": {
+        "cards": "fixtures/cards.csv",
+        "activity": "fixtures/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "card_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-liability-totals",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "fixtures/intl/de/cards.csv",
+        "activity": "fixtures/intl/de/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.cards": 7,
+          "result.liability": 460,
+          "result.promo_balance": 20,
+          "result.review": 3,
+          "result.dormant": 1,
+          "result.ok": 3,
+          "result.by_age": [
+            {
+              "age": "0-90",
+              "cards": 2,
+              "liability": 270
+            },
+            {
+              "age": "91-180",
+              "cards": 2,
+              "liability": 115
+            },
+            {
+              "age": "366+",
+              "cards": 1,
+              "liability": 75
+            }
+          ]
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"liability-totals\"."
+    },
+    {
+      "id": "intl-ja-liability-totals",
+      "tool": "giftcards_liability",
+      "args": {
+        "cards": "fixtures/intl/ja/cards.csv",
+        "activity": "fixtures/intl/ja/activity.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.cards": 7,
+          "result.liability": 460,
+          "result.promo_balance": 20,
+          "result.review": 3,
+          "result.dormant": 1,
+          "result.ok": 3,
+          "result.by_age": [
+            {
+              "age": "0-90",
+              "cards": 2,
+              "liability": 270
+            },
+            {
+              "age": "91-180",
+              "cards": 2,
+              "liability": 115
+            },
+            {
+              "age": "366+",
+              "cards": 1,
+              "liability": 75
+            }
+          ]
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"liability-totals\"."
+    }
+  ]
+}
