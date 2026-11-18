@@ -1,0 +1,313 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.actions": 8,
+          "result.reverse": 5,
+          "result.clawback": 1,
+          "result.review": 1,
+          "result.ok": 1,
+          "result.to_recover": 29.5
+        }
+      }
+    },
+    {
+      "id": "no-terms",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.reverse": 3,
+          "result.clawback": 0
+        },
+        "not_contains": [
+          "rate_above_terms"
+        ]
+      }
+    },
+    {
+      "id": "explain-duplicate",
+      "tool": "affiliates_explain",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json",
+        "action_id": "AC-4"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "already earned commission on AC-1"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "affiliates_write_report",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 7
+        }
+      }
+    },
+    {
+      "id": "draft-reversal",
+      "tool": "affiliates_draft_reversal_request",
+      "approve": "Pat Example",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json",
+        "network": "Example Network"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 29.5
+        },
+        "length": {
+          "result.actions": 6
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "affiliates_audit",
+      "mode": "review",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "affiliates_draft_reversal_request",
+      "mode": "review",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json",
+        "network": "Example Network"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "affiliates_draft_reversal_request",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json",
+        "network": "Example Network"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "affiliates_request_send",
+      "args": {
+        "draft": "fairshop-out/affiliates/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "affiliates_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "affiliates_draft_reversal_request"
+      ],
+      "args": {
+        "draft": "fairshop-out/affiliates/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-affiliate_payout_approve",
+      "tool": "affiliate_payout_approve",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-network_reversal_submit",
+      "tool": "network_reversal_submit",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "../../outside-root.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "fixtures/missing-export.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": 42,
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "commissions"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "affiliates_audit",
+      "args": {
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "commissions"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "affiliates_explain",
+      "args": {
+        "commissions": "fixtures/commissions.csv",
+        "orders": "fixtures/orders.csv",
+        "terms": "fixtures/terms.json",
+        "action_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "fixtures/intl/de/commissions.csv",
+        "orders": "fixtures/intl/de/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.actions": 8,
+          "result.reverse": 5,
+          "result.clawback": 1,
+          "result.review": 1,
+          "result.ok": 1,
+          "result.to_recover": 29.5
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "affiliates_audit",
+      "args": {
+        "commissions": "fixtures/intl/ja/commissions.csv",
+        "orders": "fixtures/intl/ja/orders.csv",
+        "terms": "fixtures/terms.json"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.actions": 8,
+          "result.reverse": 5,
+          "result.clawback": 1,
+          "result.review": 1,
+          "result.ok": 1,
+          "result.to_recover": 29.5
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

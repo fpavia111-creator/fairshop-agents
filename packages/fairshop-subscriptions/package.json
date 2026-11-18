@@ -1,0 +1,57 @@
+{
+  "name": "fairshop-subscriptions",
+  "version": "0.1.0",
+  "description": "Reads subscription and payment exports (Recharge, Stripe Billing, Shopify subscriptions) for failed payments: not retried, retries used up, cards about to expire, active plans with no payment, and churn split into voluntary and payment-failure. Drafts dunning messages; never charges a card or cancels a plan.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-subscriptions": "bin/fairshop-subscriptions.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-subscriptions.js demo",
+    "eval": "node bin/fairshop-subscriptions.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-subscriptions"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-subscriptions#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "subscriptions",
+    "failed-payments",
+    "dunning",
+    "churn",
+    "recharge"
+  ]
+}

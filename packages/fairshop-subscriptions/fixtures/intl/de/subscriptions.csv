@@ -1,0 +1,8 @@
+Abonnement-ID;customer_email;Zustand;plan;Preis;started;cancelled_at;cancel_reason;Nächste Abrechnung;card_expiry
+SUB-1;alma.reyes@example.test;active;Coffee monthly;30,00;10.01.2026;;;10.12.2026;2028-04
+SUB-2;ben.tamura@example.test;active;Coffee monthly;30,00;05.03.2026;;;05.11.2026;2027-09
+SUB-3;cara.velez@example.test;past_due;Tea box;25,00;01.02.2026;;;01.11.2026;2027-01
+SUB-4;dax.monroe@example.test;active;Tea box;25,00;20.05.2026;;;20.11.2026;11/26
+SUB-5;eve.okoro@example.test;active;Coffee monthly;30,00;01.04.2026;;;01.12.2026;2028-01
+SUB-6;finn.bauer@example.test;cancelled;Coffee monthly;30,00;15.01.2026;20.10.2026;Payment failed;;2026-09
+SUB-7;gia.rossi@example.test;cancelled;Tea box;25,00;15.02.2026;25.10.2026;Too much coffee;;2028-02

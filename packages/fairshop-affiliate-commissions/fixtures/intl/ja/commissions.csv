@@ -1,0 +1,9 @@
+action_id,アフィリエイト,注文番号,注文日,sale_amount,報酬額,ステータス,affiliate_email
+AC-1,Brightside Blog,5001,2026/10/02,100.00,10.00,pending,partners@brightside.example.test
+AC-2,Brightside Blog,5002,2026/10/03,80.00,8.00,pending,partners@brightside.example.test
+AC-3,Coupon Cove,5003,2026/10/04,60.00,9.00,pending,deals@couponcove.example.test
+AC-4,Coupon Cove,5001,2026/10/05,100.00,10.00,pending,deals@couponcove.example.test
+AC-5,Trailhead Reviews,5099,2026/10/06,45.00,4.50,approved,hello@trailhead.example.test
+AC-6,Lind Lifestyle,5004,2026/10/07,50.00,5.00,paid,petra.lind@example.test
+AC-7,Brightside Blog,5005,2026/10/08,120.00,12.00,paid,partners@brightside.example.test
+AC-8,Trailhead Reviews,5006,2026/10/09,40.00,4.00,pending,hello@trailhead.example.test

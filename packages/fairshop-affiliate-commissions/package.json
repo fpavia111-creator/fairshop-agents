@@ -1,0 +1,55 @@
+{
+  "name": "fairshop-affiliate-commissions",
+  "version": "0.1.0",
+  "description": "Checks affiliate commission statements against your orders and terms: commission on refunded or cancelled orders, orders not found, rates above your terms, sale amounts above the order, the same order paid twice, and affiliates buying through their own link. Drafts the reversal request; never approves a payout.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kurt Francisco",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fairshop-affiliate-commissions": "bin/fairshop-affiliate-commissions.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "fixtures",
+    "evals",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-tests.cjs",
+    "demo": "node bin/fairshop-affiliate-commissions.js demo",
+    "eval": "node bin/fairshop-affiliate-commissions.js eval"
+  },
+  "dependencies": {
+    "fairshop-core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
+    "directory": "packages/fairshop-affiliate-commissions"
+  },
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-affiliate-commissions#readme",
+  "bugs": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "affiliates",
+    "affiliate-commissions",
+    "partner-marketing"
+  ]
+}

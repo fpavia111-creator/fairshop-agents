@@ -1,0 +1,355 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.mrr": 140,
+          "result.mrr_at_risk": 55,
+          "result.chase": 1,
+          "result.at_risk": 1,
+          "result.review": 1,
+          "result.heads_up": 1,
+          "result.ok": 1,
+          "result.churned": 2,
+          "result.churn_by_month": [
+            {
+              "month": "2026-10",
+              "voluntary": 1,
+              "payment_failure": 1,
+              "mrr_lost": 55
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "early-date",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "as_of": "2026-11-06"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.chase": 0
+        }
+      }
+    },
+    {
+      "id": "explain-exhausted",
+      "tool": "subscriptions_explain",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "as_of": "2026-11-16",
+        "subscription_id": "SUB-3"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "3 failed payment(s) since 2026-10-01",
+          "retries are used up"
+        ],
+        "not_contains": [
+          "cara.velez"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "subscriptions_write_report",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 4
+        }
+      }
+    },
+    {
+      "id": "draft-messages",
+      "tool": "subscriptions_draft_payment_update_requests",
+      "approve": "Pat Example",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.subscriptions": [
+            "SUB-2",
+            "SUB-3",
+            "SUB-4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "subscriptions_audit",
+      "mode": "review",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "subscriptions_draft_payment_update_requests",
+      "mode": "review",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "subscriptions_draft_payment_update_requests",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "subscriptions_request_send",
+      "args": {
+        "draft": "fairshop-out/subscriptions/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "subscriptions_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "subscriptions_draft_payment_update_requests"
+      ],
+      "args": {
+        "draft": "fairshop-out/subscriptions/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-charge_card",
+      "tool": "charge_card",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-subscription_cancel",
+      "tool": "subscription_cancel",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "../../outside-root.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "fixtures/missing-export.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": 42,
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "subscriptions"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "subscriptions_audit",
+      "args": {
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "subscriptions"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "subscriptions_explain",
+      "args": {
+        "subscriptions": "fixtures/subscriptions.csv",
+        "payments": "fixtures/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16",
+        "subscription_id": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "fixtures/intl/de/subscriptions.csv",
+        "payments": "fixtures/intl/de/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.mrr": 140,
+          "result.mrr_at_risk": 55,
+          "result.chase": 1,
+          "result.at_risk": 1,
+          "result.review": 1,
+          "result.heads_up": 1,
+          "result.ok": 1,
+          "result.churned": 2,
+          "result.churn_by_month": [
+            {
+              "month": "2026-10",
+              "voluntary": 1,
+              "payment_failure": 1,
+              "mrr_lost": 55
+            }
+          ]
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "subscriptions_audit",
+      "args": {
+        "subscriptions": "fixtures/intl/ja/subscriptions.csv",
+        "payments": "fixtures/intl/ja/payments.csv",
+        "settings": "fixtures/settings.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.mrr": 140,
+          "result.mrr_at_risk": 55,
+          "result.chase": 1,
+          "result.at_risk": 1,
+          "result.review": 1,
+          "result.heads_up": 1,
+          "result.ok": 1,
+          "result.churned": 2,
+          "result.churn_by_month": [
+            {
+              "month": "2026-10",
+              "voluntary": 1,
+              "payment_failure": 1,
+              "mrr_lost": 55
+            }
+          ]
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

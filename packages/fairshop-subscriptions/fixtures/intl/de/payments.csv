@@ -1,0 +1,13 @@
+Abonnement-ID;Datum;Betrag;Zustand;failure_reason
+SUB-1;10.10.2026;30,00;succeeded;
+SUB-1;10.11.2026;30,00;succeeded;
+SUB-2;05.10.2026;30,00;succeeded;
+SUB-2;05.11.2026;30,00;failed;card_declined
+SUB-3;01.10.2026;25,00;succeeded;
+SUB-3;01.11.2026;25,00;failed;insufficient_funds
+SUB-3;04.11.2026;25,00;failed;insufficient_funds
+SUB-3;08.11.2026;25,00;failed;insufficient_funds
+SUB-4;20.10.2026;25,00;succeeded;
+SUB-5;01.09.2026;30,00;succeeded;
+SUB-6;15.10.2026;30,00;failed;expired_card
+SUB-7;15.10.2026;25,00;succeeded;

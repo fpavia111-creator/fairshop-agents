@@ -1,0 +1,7 @@
+Bestellnummer;Betrag;Zustand;Erstattet;customer_email
+5001;100,00;paid;0,00;ula.marsh@example.test
+5002;80,00;refunded;80,00;vic.noor@example.test
+5003;60,00;paid;0,00;wes.oaks@example.test
+5004;50,00;paid;0,00;petra.lind@example.test
+5005;100,00;paid;0,00;xena.pike@example.test
+5006;40,00;partially_refunded;20,00;yuri.quinn@example.test

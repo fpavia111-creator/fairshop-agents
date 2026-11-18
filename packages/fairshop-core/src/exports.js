@@ -77,7 +77,7 @@ export const EXPORTS = Object.freeze(Object.fromEntries([
   // Ads and affiliates
   e('google_ads_campaigns', 'Google Ads', 'Campaigns report (CSV)', ['Campaign', ['Impr.', 'Impressions'], 'Clicks', 'Cost', ['Conv. value', 'All conv. value']]),
   e('meta_ads_campaigns', 'Meta Ads Manager', 'Campaigns export (CSV)', ['Campaign name', ['Amount spent (USD)', 'Amount spent'], ['Purchases conversion value', 'Website purchases conversion value']]),
-  e('affiliate_actions', 'Affiliate network (generic)', 'Actions or transactions report (CSV)', [['Action Id', 'Transaction ID', 'Trans ID'], ['Partner', 'Affiliate', 'Publisher'], ['Payout', 'Commission'], ['Sale Amount', 'Order Amount']]),
+  e('affiliate_actions', 'Affiliate network (generic)', 'Actions or transactions report (CSV)', [['Action Id', 'Transaction ID', 'Trans ID'], ['Partner', 'Publisher', 'Media Partner'], ['Payout', 'Commission'], ['Sale Amount', 'Order Amount']]),
 
 ].map((x) => [x.id, x])));
 
