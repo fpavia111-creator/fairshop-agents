@@ -1,0 +1,31 @@
+{
+  "name": "fairshop-agents",
+  "private": true,
+  "description": "Fairshop: e-commerce and retail back-office agents monorepo (30 agents), built on fairshop-core.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/fairshop-core",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm test --workspaces",
+    "evals": "node scripts/run-all-evals.mjs",
+    "hostile": "node scripts/hostile-inputs.mjs",
+    "hostile:args": "node scripts/hostile-inputs.mjs --args",
+    "release:check": "node scripts/release-check.mjs",
+    "release:check:offline": "node scripts/release-check.mjs --offline",
+    "bench": "node scripts/bench.mjs",
+    "samples": "node scripts/sample-reports.mjs",
+    "check": "node scripts/family-check.mjs",
+    "plugin": "node scripts/plugin-files.mjs",
+    "plugin:check": "node scripts/plugin-files.mjs --check",
+    "intl": "node scripts/intl-check.mjs",
+    "intl:fixtures": "node scripts/make-intl-fixtures.mjs",
+    "mcp:check": "node scripts/mcp-conformance.mjs",
+    "readme": "node scripts/readme-sections.mjs",
+    "readme:check": "node scripts/readme-sections.mjs --check"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
