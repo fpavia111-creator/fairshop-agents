@@ -16,6 +16,7 @@ import { rowsToRecords } from './csv.js';
 import { DomainMemory, memoryFile } from './memory.js';
 import { adaptRecords, loadSourceOverrides, overrideFor, kindsByArg, describeSources, columnShape, findHeaderRow, encodingWarning, SOURCES_FILE } from './sources.js';
 import { normLang } from './lang.js';
+import { PiiMasker, PII_MODES, loadPiiKey } from './pii.js';
 
 // Error text goes back to the model and into logs. A hostile or broken argument
 // (a 200,000-character "path") must not be echoed back whole.
@@ -121,7 +122,21 @@ export class AgentRuntime {
     const lt = readLicenseToken({ token: options.license || null, file: options.licenseFile || null, stateDir: this.stateDir });
     this.licenseToken = lt.token; this.licenseSource = lt.source;
     this.licenseKeys = options.licenseKeys || null;
+    // Customer and staff data masking of every result (pii.js): 'mask' (default), 'strict' or 'off'.
+    this.piiMode = options.pii || 'mask';
+    if (!PII_MODES.includes(this.piiMode)) throw new Error(`pii must be one of ${PII_MODES.join(', ')}`);
+    this.piiKeyOption = options.piiKey ? (Buffer.isBuffer(options.piiKey) ? options.piiKey : Buffer.from(String(options.piiKey), 'hex')) : null;
+    if (this.piiKeyOption && this.piiKeyOption.length !== 32) throw new Error('piiKey must be 32 bytes (64 hex characters)');
+    this.piiPersist = persist;
   }
+
+  get piiKey() {
+    if (!this._piiKey) this._piiKey = this.piiKeyOption || loadPiiKey(this.piiPersist ? this.stateDir : null);
+    return this._piiKey;
+  }
+
+  /** A masker for one call. */
+  piiMasker() { return new PiiMasker({ mode: this.piiMode, key: this.piiKey }); }
 
   /** The licence as checked now (expiry is evaluated on every call). Never includes the key. */
   licenseStatus(now = new Date()) {
@@ -164,7 +179,7 @@ export class AgentRuntime {
    * `kind`), an export from a real system is mapped onto the agent's own columns.
    * Returns { rows, report } where report is null for a file of no declared kind.
    */
-  #readSource(p, opt, args, toolName, config) {
+  #readSource(p, opt, args, toolName, config, pii = null) {
     const root = this.root; const abs = safePath(root, p);
     const o = typeof opt === 'string' ? { kind: opt } : opt || {};
     const sources = this.manifest.sources || {};
@@ -182,9 +197,11 @@ export class AgentRuntime {
       const rows = table.records || rowsToRecords(table.matrix, Number(ov.skip_rows) || 0);
       // A file read without column mapping still says when its text encoding was a guess.
       const w = encodingWarning(table);
+      if (pii) pii.registerRecords(rows);
       return { rows, report: w ? { arg: o.arg || '', file: rel, kind: null, format: table.format, encoding: table.encoding.name, adapted: false, rows: rows.length, mapped: {}, unmapped: [], missing: [], skipped_rows: 0, warnings: [w] } : null, table };
     }
     const r = adaptRecords(table, sources[kind], { override: ov, kind, arg, file: rel });
+    if (pii) pii.registerRecords(r.rows, Object.fromEntries(Object.entries(sources[kind].fields || {}).filter(([, fd]) => fd && fd.pii).map(([f, fd]) => [f, fd.pii])));
     return { ...r, table };
   }
 
@@ -193,8 +210,13 @@ export class AgentRuntime {
     const configSchemas = this.manifest.configSchemas || {};
     const applied = call.applied || []; const memWarnings = call.memWarnings || [];
     let config; let memState;
+    const pii = call.pii || this.piiMasker();
     return {
       root,
+      // Customer-data masker for this call: pii.same(raw, given, 'name'|'email'|...) matches a
+      // pseudonym the model passed back; pii.register(kind, value) masks a value the tool
+      // found some other way. Results are masked after the handler returns.
+      pii,
       manifest: this.manifest,
       // Language for text people read (reports, summaries written to files): 'en', 'de', 'fr', 'es', 'pt', 'it', 'ja', 'zh' or 'ko'.
       lang: this.lang,
@@ -222,7 +244,7 @@ export class AgentRuntime {
       // records(path, { raw: true }) skips column mapping.
       records: (p, opt) => {
         if (config === undefined) config = loadSourceOverrides(root);
-        const r = this.#readSource(p, opt, args, toolName, config);
+        const r = this.#readSource(p, opt, args, toolName, config, pii);
         if (r.report && (r.report.adapted || r.report.warnings.length) && !seen.some((x) => x.file === r.report.file && x.kind === r.report.kind)) seen.push(r.report);
         return r.rows;
       },
@@ -334,7 +356,21 @@ export class AgentRuntime {
     }
   }
 
+  /**
+   * Run one tool call. Whatever path it takes (blocked, needs approval, executed,
+   * error), the result passes the customer-data masker (pii.js) before it is returned.
+   */
   async call(tool, args = {}) {
+    const pii = this.piiMasker();
+    let out;
+    try { out = await this.#callInner(tool, args, pii); } catch (e) { out = { status: 'error', decision: null, reason: clip(friendlyError(e, this.root)) }; }
+    if (!pii.on) return { ...out, warnings: [...(out.warnings || []), 'Customer-data masking is OFF (pii: off): shopper names, e-mail addresses, phone numbers and street addresses in this result are real.'] };
+    const masked = pii.maskResult(out);
+    const rep = pii.report();
+    return rep ? { ...masked, pii: rep } : masked;
+  }
+
+  async #callInner(tool, args = {}, pii) {
     if (args === null || typeof args !== 'object' || Array.isArray(args)) args = {};
     if (this.isKilled()) {
       this.#record(tool, args, { decision: 'block', status: 'blocked', reason: 'kill switch engaged' });
@@ -425,7 +461,7 @@ export class AgentRuntime {
     const started = Date.now();
     try {
       const seen = []; const applied = []; const memWarnings = [];
-      const result = await t.handler(args, this.context(args, tool, seen, { approvedBy, approvalId: approvedBy ? approvalId : null, applied, memWarnings }));
+      const result = await t.handler(args, this.context(args, tool, seen, { approvedBy, approvalId: approvedBy ? approvalId : null, applied, memWarnings, pii }));
       // Results quote the person's data back to a model. Flag text that reads like
       // instructions to an AI, so the model and the audit trail both see it.
       let signals = [];

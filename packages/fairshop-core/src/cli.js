@@ -49,6 +49,7 @@ export function runtimeFromFlags(manifest, flags) {
     approvalWebhook: flags['approval-webhook'] || env.FAIRSHOP_APPROVAL_WEBHOOK || undefined,
     memory: !(flags['no-memory'] || /^(1|true|yes)$/i.test(env.FAIRSHOP_NO_MEMORY || '')),
     lang: flags.lang || env.FAIRSHOP_LANG || undefined,
+    pii: flags.pii || env.FAIRSHOP_PII || undefined,
   });
 }
 
@@ -94,7 +95,8 @@ Options:
   --audit-mirror FILE             Also append every audit line to this file
   --approval-ttl HOURS            Approvals expire this long after approval (default 24)
   --approval-webhook URL          POST pending approvals, HMAC-signed with FAIRSHOP_WEBHOOK_SECRET
-  --lang en|de|fr|es|pt|it|ja|zh|ko   Language of reports and the approvals page (FAIRSHOP_LANG); tool results stay in English${manifest.memory ? `
+  --lang en|de|fr|es|pt|it|ja|zh|ko   Language of reports and the approvals page (FAIRSHOP_LANG); tool results stay in English
+  --pii mask|strict|off           Customer-data masking of results the model sees (FAIRSHOP_PII, default mask); files written stay unmasked${manifest.memory ? `
   --no-memory                     Run without the facts this agent has learned (recall and learn still work)` : ''}
 `;
 }

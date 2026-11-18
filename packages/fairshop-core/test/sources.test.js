@@ -169,7 +169,7 @@ test('runtime: ctx.records maps by argument, reports once per file, warns at the
   writeFileSync(join(root, 'hr.csv'), 'Emp #,Display Name,Mail,Hired,Stat\n7,Ana Ortiz,ana,03/04/2026,Y\n');
   writeFileSync(join(root, 'own.csv'), 'name,start\nBen,2026-01-01\n');
   writeFileSync(join(root, 'free.csv'), 'Full Name,Anything\nCy,1\n');
-  const rt = new AgentRuntime(manifest(), { root });
+  const rt = new AgentRuntime(manifest(), { root, pii: 'off' }); // column mapping is checked on the raw values; masking has its own tests
   const r = await rt.call('list_people', { people: 'hr.csv', previous: 'own.csv', other: 'free.csv' });
   assert.equal(r.status, 'executed', r.reason);
   assert.deepEqual(r.result.rows, [{ 'Emp #': '7', name: 'Ana Ortiz', email: 'ana@example.test', start: '2026-03-04', status: 'active', pay: '0' }]);

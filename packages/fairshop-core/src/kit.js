@@ -119,7 +119,9 @@ export function draftPair(cfg) {
 
 /** Standard one-line limit sentences used in reports. */
 export const LIMITS = Object.freeze({
-  files: 'Reads only the files you give it. It does not log in to a carrier, TMS, bank or ERP.',
-  contract: 'Amounts are checked against the contract file you supply. It is not a tariff service and does not know your carrier\'s current rules.',
-  advice: 'Not legal, tax, customs or accounting advice. A person decides what to dispute, claim or pay.',
+  files: 'Reads only the files you export and give it. It does not log in to a store, marketplace, payment processor, carrier, 3PL or bank, and changes nothing there.',
+  settings: "Fees, rates, windows and thresholds come from the settings file you write and confirm. The agent does not know a marketplace's, carrier's or state's current rules.",
+  contract: "Amounts are checked against the rate card or contract file you supply. It is not a tariff service and does not know your provider's current rules.",
+  estimate: 'Amounts marked as estimates are worked out from your files; the exact figure is whatever the other party confirms.',
+  advice: 'Not legal, tax or accounting advice. A person decides what to claim, refund, dispute, pay or change.',
 });

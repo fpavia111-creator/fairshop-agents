@@ -252,6 +252,49 @@ export const COLUMN_WORDS = {
   account_name: W(['Kontobezeichnung', 'Kontoname'], ['Libellé du compte', 'Intitulé du compte'], ['Nombre de la cuenta', 'Descripción de la cuenta'], ['Nome da conta', 'Descrição da conta'], ['Descrizione conto', 'Nome conto'], ['勘定科目名', '科目名'], ['科目名称', '会计科目名称'], ['계정과목명', '계정명']),
   balance: W(['Saldo', 'Endsaldo', 'Kontostand'], ['Solde', 'Solde final'], ['Saldo', 'Saldo final'], ['Saldo', 'Saldo final'], ['Saldo', 'Saldo finale'], ['残高', '期末残高'], ['余额', '期末余额', '餘額'], ['잔액', '기말잔액']),
   subsidiary: W(['Gesellschaft', 'Buchungskreis', 'Tochtergesellschaft'], ['Société', 'Filiale', 'Entité'], ['Sociedad', 'Filial', 'Entidad'], ['Empresa', 'Filial', 'Entidade'], ['Società', 'Filiale', 'Entità'], ['会社', '子会社', '会社コード'], ['子公司', '公司代码', '核算主体'], ['법인', '자회사', '회사코드']),
+// ---- E-commerce and retail (Fairshop) ----
+  // Written from common shop, marketplace, payment and point-of-sale exports in each market
+  // (Shopify, Amazon Seller Central, eBay, Etsy, Rakuten, Mercari, Taobao, Coupang, Square and
+  // local POS style reports). None was checked against a live account; "columns" in
+  // fairshop-sources.json fixes any miss.
+  channel: W(['Kanal', 'Verkaufskanal', 'Marktplatz', 'Plattform'], ['Canal', 'Canal de vente', 'Place de marché', 'Plateforme'], ['Canal', 'Canal de venta', 'Marketplace', 'Plataforma'], ['Canal', 'Canal de venda', 'Marketplace', 'Plataforma'], ['Canale', 'Canale di vendita', 'Marketplace', 'Piattaforma'], ['チャネル', '販売チャネル', 'モール', 'プラットフォーム'], ['渠道', '销售渠道', '平台', '店铺平台'], ['채널', '판매 채널', '마켓', '플랫폼']),
+  payout_id: W(['Auszahlungs-ID', 'Auszahlungsnummer'], ['N° de versement', 'ID de versement'], ['ID de liquidación', 'N.º de pago'], ['ID do repasse', 'Nº do repasse'], ['ID accredito', 'N. accredito'], ['入金ID', '振込ID', '入金番号'], ['回款编号', '提现编号', '打款编号'], ['정산 ID', '지급 번호']),
+  payout_date: W(['Auszahlungsdatum', 'Ausgezahlt am'], ['Date de versement', 'Versé le'], ['Fecha de liquidación', 'Fecha de pago'], ['Data do repasse', 'Data de pagamento'], ['Data accredito', 'Data di pagamento'], ['入金日', '振込日', '入金予定日'], ['回款日期', '打款日期', '到账日期'], ['정산일', '지급일', '입금일']),
+  settlement_id: W(['Abrechnungs-ID', 'Abrechnungsnummer'], ['ID de règlement', 'N° de règlement'], ['ID de liquidación', 'N.º de liquidación'], ['ID do acerto', 'Nº do acerto'], ['ID regolamento', 'N. regolamento'], ['精算ID', '精算番号', '締め番号'], ['结算编号', '结算单号'], ['정산 번호', '정산 ID']),
+  gross: W(['Brutto', 'Bruttobetrag', 'Bruttoumsatz'], ['Brut', 'Montant brut'], ['Bruto', 'Importe bruto'], ['Bruto', 'Valor bruto'], ['Lordo', 'Importo lordo'], ['総額', '売上総額', '税込金額'], ['总额', '销售总额', '毛额'], ['총액', '총매출', '판매 금액']),
+  fee: W(['Gebühr', 'Gebühren', 'Provision'], ['Frais', 'Commission'], ['Comisión', 'Tarifa', 'Cargo'], ['Taxa', 'Tarifa', 'Comissão'], ['Commissione', 'Tariffa', 'Costo'], ['手数料', '販売手数料', '決済手数料'], ['手续费', '费用', '佣金'], ['수수료', '판매 수수료', '결제 수수료']),
+  fee_type: W(['Gebührenart', 'Gebührentyp'], ['Type de frais', 'Nature des frais'], ['Tipo de comisión', 'Tipo de cargo'], ['Tipo de taxa', 'Tipo de tarifa'], ['Tipo di commissione', 'Tipo di costo'], ['手数料種別', '手数料区分', '費目'], ['费用类型', '费用名称'], ['수수료 유형', '수수료 구분']),
+  net: W(['Netto', 'Nettobetrag', 'Auszahlungsbetrag'], ['Net', 'Montant net'], ['Neto', 'Importe neto'], ['Líquido', 'Valor líquido'], ['Netto', 'Importo netto'], ['純額', '入金額', '差引金額'], ['净额', '实收金额', '到账金额'], ['순액', '정산 금액', '입금액']),
+  tax_collected: W(['Erhobene Steuer', 'Steuerbetrag', 'Umsatzsteuer'], ['Taxe perçue', 'Montant de la taxe', 'TVA'], ['Impuesto cobrado', 'Importe del impuesto', 'IVA'], ['Imposto cobrado', 'Valor do imposto'], ['Imposta riscossa', 'Importo imposta', 'IVA'], ['徴収税額', '消費税額', '税額'], ['已收税额', '税额', '代收税款'], ['징수 세액', '세액', '부가세']),
+  state: W(['Bundesland', 'Bundesstaat', 'Region'], ['Région', 'État', 'Département'], ['Estado', 'Provincia', 'Región'], ['Estado', 'UF', 'Região'], ['Regione', 'Provincia', 'Stato'], ['都道府県', '州', '地域'], ['省份', '省/州', '州'], ['시/도', '주', '지역']),
+  title: W(['Titel', 'Artikelbezeichnung', 'Produktname'], ['Titre', 'Nom du produit', 'Libellé article'], ['Título', 'Nombre del producto'], ['Título', 'Nome do produto'], ['Titolo', 'Nome prodotto'], ['商品名', 'タイトル', '品名'], ['商品名称', '标题', '品名'], ['상품명', '제목', '품명']),
+  price: W(['Preis', 'Verkaufspreis', 'VK-Preis'], ['Prix', 'Prix de vente'], ['Precio', 'Precio de venta'], ['Preço', 'Preço de venda'], ['Prezzo', 'Prezzo di vendita'], ['価格', '販売価格', '売価'], ['价格', '售价', '销售价'], ['가격', '판매가', '판매 가격']),
+  shipping_charged: W(['Versandkosten berechnet', 'Versandgebühr', 'Versand'], ['Frais de port facturés', 'Frais de livraison'], ['Envío cobrado', 'Gastos de envío'], ['Frete cobrado', 'Valor do frete'], ['Spedizione addebitata', 'Spese di spedizione'], ['送料', '配送料', '請求送料'], ['运费', '已收运费', '配送费'], ['배송비', '청구 배송비']),
+  label_cost: W(['Etikettenkosten', 'Portokosten', 'Versandlabel Kosten'], ['Coût de l’étiquette', 'Coût d’affranchissement'], ['Costo de la etiqueta', 'Costo de envío'], ['Custo da etiqueta', 'Custo do envio'], ['Costo etichetta', 'Costo affrancatura'], ['ラベル費用', '送料原価', '配送ラベル料金'], ['面单费用', '快递成本', '运单费用'], ['라벨 비용', '송장 비용', '택배비 원가']),
+  store: W(['Filiale', 'Geschäft', 'Laden', 'Filialnummer'], ['Magasin', 'Boutique', 'Point de vente'], ['Tienda', 'Sucursal', 'Punto de venta'], ['Loja', 'Filial', 'Ponto de venda'], ['Negozio', 'Punto vendita', 'Filiale'], ['店舗', '店舗名', '店舗コード'], ['门店', '店铺', '门店编号'], ['매장', '점포', '매장명']),
+  register: W(['Kasse', 'Kassennummer', 'Kassenplatz'], ['Caisse', 'N° de caisse'], ['Caja', 'Terminal', 'N.º de caja'], ['Caixa', 'PDV', 'Nº do caixa'], ['Cassa', 'Numero cassa'], ['レジ', 'レジ番号', '端末'], ['收银台', '收银机', '收银台编号'], ['계산대', '포스', '포스 번호']),
+  discount_code: W(['Rabattcode', 'Gutscheincode', 'Aktionscode'], ['Code promo', 'Code de réduction', 'Bon de réduction'], ['Código de descuento', 'Cupón'], ['Cupom', 'Código de desconto'], ['Codice sconto', 'Coupon'], ['クーポンコード', '割引コード', 'クーポン'], ['优惠码', '折扣码', '优惠券'], ['할인 코드', '쿠폰 코드', '쿠폰']),
+  discount: W(['Rabatt', 'Nachlass', 'Rabattbetrag'], ['Remise', 'Réduction', 'Montant de la remise'], ['Descuento', 'Importe del descuento'], ['Desconto', 'Valor do desconto'], ['Sconto', 'Importo sconto'], ['割引', '値引額', '割引額'], ['折扣', '优惠金额', '折扣金额'], ['할인', '할인 금액', '할인액']),
+  campaign: W(['Kampagne', 'Kampagnenname'], ['Campagne', 'Nom de la campagne'], ['Campaña', 'Nombre de la campaña'], ['Campanha', 'Nome da campanha'], ['Campagna', 'Nome campagna'], ['キャンペーン', 'キャンペーン名'], ['广告活动', '推广计划', '活动名称'], ['캠페인', '캠페인명']),
+  spend: W(['Kosten', 'Ausgaben', 'Werbekosten'], ['Dépenses', 'Coût', 'Montant dépensé'], ['Gasto', 'Inversión', 'Costo'], ['Gasto', 'Investimento', 'Custo'], ['Spesa', 'Costo', 'Importo speso'], ['広告費', '費用', 'ご利用額'], ['花费', '广告费', '消耗'], ['광고비', '지출', '비용']),
+  clicks: W(['Klicks'], ['Clics'], ['Clics'], ['Cliques'], ['Clic'], ['クリック数', 'クリック'], ['点击量', '点击次数'], ['클릭수', '클릭']),
+  impressions: W(['Impressionen', 'Einblendungen'], ['Impressions'], ['Impresiones'], ['Impressões'], ['Impressioni'], ['表示回数', 'インプレッション'], ['展现量', '曝光量'], ['노출수', '노출']),
+  attributed_sales: W(['Zugeordneter Umsatz', 'Werbeumsatz'], ['Ventes attribuées', 'Chiffre d’affaires attribué'], ['Ventas atribuidas'], ['Vendas atribuídas'], ['Vendite attribuite'], ['広告経由売上', '売上（広告）', 'コンバージョン金額'], ['归因销售额', '广告成交额', '成交金额'], ['광고 매출', '전환 매출', '기여 매출']),
+  commission: W(['Provision', 'Provisionsbetrag'], ['Commission', 'Montant de la commission'], ['Comisión', 'Importe de la comisión'], ['Comissão', 'Valor da comissão'], ['Commissione', 'Importo commissione'], ['報酬額', '成果報酬', 'コミッション'], ['佣金', '佣金金额'], ['커미션', '수수료액', '제휴 수수료']),
+  affiliate: W(['Partner', 'Affiliate', 'Publisher'], ['Affilié', 'Partenaire', 'Éditeur'], ['Afiliado', 'Socio', 'Editor'], ['Afiliado', 'Parceiro', 'Publisher'], ['Affiliato', 'Partner', 'Publisher'], ['アフィリエイト', 'パートナー', 'メディア'], ['推广者', '联盟伙伴', '推客'], ['제휴사', '파트너', '퍼블리셔']),
+  listing_id: W(['Angebots-ID', 'Angebotsnummer', 'Artikelnummer Marktplatz'], ['ID de l’annonce', 'N° d’annonce'], ['ID de la publicación', 'N.º de anuncio'], ['ID do anúncio', 'Nº do anúncio'], ['ID inserzione', 'N. inserzione'], ['出品ID', '商品管理番号', '出品番号'], ['商品ID', '刊登编号', '宝贝ID'], ['상품 번호', '등록 번호', '리스팅 ID']),
+  gtin: W(['GTIN', 'EAN', 'EAN-Code'], ['GTIN', 'EAN', 'Code EAN'], ['GTIN', 'EAN', 'Código EAN'], ['GTIN', 'EAN', 'Código de barras'], ['GTIN', 'EAN', 'Codice EAN'], ['JANコード', 'GTIN', 'EAN'], ['条形码', 'GTIN', 'EAN'], ['바코드', 'GTIN', 'EAN']),
+  issued: W(['Ausgegeben', 'Ausgabebetrag'], ['Émis', 'Montant émis'], ['Emitido', 'Importe emitido'], ['Emitido', 'Valor emitido'], ['Emesso', 'Importo emesso'], ['発行額', '発行金額'], ['发放金额', '已发行'], ['발행액', '발행 금액']),
+  redeemed: W(['Eingelöst', 'Einlösebetrag'], ['Utilisé', 'Montant utilisé'], ['Canjeado', 'Importe canjeado'], ['Resgatado', 'Valor resgatado'], ['Riscattato', 'Importo utilizzato'], ['利用額', '使用額'], ['已使用', '核销金额'], ['사용액', '사용 금액']),
+  expected_cash: W(['Soll-Bargeld', 'Erwarteter Kassenbestand'], ['Espèces attendues', 'Fond théorique'], ['Efectivo esperado', 'Efectivo teórico'], ['Dinheiro esperado', 'Saldo esperado'], ['Contante atteso', 'Cassa teorica'], ['理論在高', '現金予定額'], ['应有现金', '账面现金'], ['예상 현금', '장부 시재']),
+  counted_cash: W(['Gezähltes Bargeld', 'Ist-Kassenbestand'], ['Espèces comptées', 'Fond compté'], ['Efectivo contado', 'Arqueo'], ['Dinheiro contado', 'Contagem do caixa'], ['Contante contato', 'Cassa contata'], ['実在高', '現金実査額'], ['实点现金', '盘点现金'], ['실제 현금', '실사 시재']),
+  deposit: W(['Einzahlung', 'Bankeinzahlung'], ['Dépôt', 'Remise en banque'], ['Depósito', 'Ingreso bancario'], ['Depósito', 'Depósito bancário'], ['Versamento', 'Deposito'], ['入金', '銀行入金'], ['存款', '银行存入'], ['입금', '은행 입금']),
+  reserve: W(['Rückbehalt', 'Sicherheitseinbehalt', 'Reserve'], ['Réserve', 'Retenue'], ['Reserva', 'Retención'], ['Reserva', 'Retenção'], ['Riserva', 'Trattenuta'], ['留保金', '保留額'], ['保证金', '冻结金额', '预留款'], ['유보금', '보류 금액']),
+  release_date: W(['Freigabedatum', 'Freigabe am'], ['Date de libération'], ['Fecha de liberación'], ['Data de liberação'], ['Data di rilascio'], ['解放日', '解除予定日'], ['释放日期', '解冻日期'], ['해제일', '지급 예정일']),
+  deduction: W(['Abzug', 'Abzugsbetrag', 'Kürzung'], ['Déduction', 'Montant déduit'], ['Deducción', 'Importe deducido'], ['Dedução', 'Valor deduzido'], ['Detrazione', 'Importo detratto'], ['控除額', '差引額'], ['扣款', '扣减金额'], ['공제액', '차감액']),
+  subscription_id: W(['Abonnement-ID', 'Abonummer'], ['ID d’abonnement', 'N° d’abonnement'], ['ID de suscripción'], ['ID da assinatura'], ['ID abbonamento'], ['定期購入ID', '契約番号'], ['订阅编号', '订阅ID'], ['구독 ID', '구독 번호']),
+  next_billing: W(['Nächste Abrechnung', 'Nächstes Zahlungsdatum'], ['Prochaine facturation', 'Prochain prélèvement'], ['Próximo cobro', 'Próxima facturación'], ['Próxima cobrança'], ['Prossimo addebito'], ['次回請求日', '次回決済日'], ['下次扣款日期', '下次续费日期'], ['다음 결제일', '다음 청구일']),
+
   ledger_debit: W(['Soll', 'Soll-Betrag'], ['Débit'], ['Debe', 'Débito'], ['Débito'], ['Dare'], ['借方', '借方金額'], ['借方', '借方金额'], ['차변', '차변금액']),
   ledger_credit: W(['Haben', 'Haben-Betrag'], ['Crédit'], ['Haber', 'Crédito'], ['Crédito'], ['Avere'], ['貸方', '貸方金額'], ['贷方', '贷方金额'], ['대변', '대변금액']),
 };
@@ -262,6 +305,15 @@ export const COLUMN_WORDS = {
  * that is not here reads the entry of its own name, when there is one.
  */
 export const FIELD_CONCEPTS = Object.freeze({
+  // Fairshop
+  order_number: 'order_id', ordered_at: 'order_date', refund_amount: 'refunded', refunded_amount: 'refunded', refunded_at: 'date', returned_at: 'received_date',
+  ship_state: 'state', ship_to_state: 'state', ship_zip: 'dest_postal', item_price: 'price', list_price: 'price', advertised_price: 'price', unit_price_paid: 'unit_price',
+  fees: 'fee', fee_amount: 'fee', fee_rate: 'rate', net_amount: 'net', gross_amount: 'gross', sales: 'gross', tax: 'tax_collected', posted_at: 'date', posted_date: 'date',
+  sku_title: 'title', product_title: 'title', on_hand_qty: 'system_qty', available: 'system_qty', listed_qty: 'qty', ordered_qty: 'qty', received_qty: 'units_received',
+  spend_amount: 'spend', ad_sales: 'attributed_sales', commission_amount: 'commission', coupon: 'discount_code', discount_amount: 'discount',
+  card_id: 'id', issued_amount: 'issued', redeemed_amount: 'redeemed', deposit_amount: 'deposit', reserve_amount: 'reserve',
+  deduction_amount: 'deduction', retailer: 'customer', claim_amount_requested: 'claim_amount', opened_at: 'requested_at', respond_by: 'due_date',
+  label_date: 'ship_date', shipped_at: 'ship_date', marketplace: 'channel', processor: 'channel', platform: 'channel',
   load_id: 'shipment_id', invoice_number: 'invoice', carrier_name: 'carrier',
   bl: 'bol', delivery_date: 'delivered_date', delivered_at: 'delivered_date', delivery_actual: 'delivered_date', pod_delivery_date: 'delivered_date',
   pickup_actual: 'pickup_date', actual_weight: 'weight', declared_weight: 'weight', billed_kg: 'billed_weight', actual_kg: 'weight',

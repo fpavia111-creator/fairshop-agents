@@ -40,7 +40,7 @@ const canon = (v) => {
   return v;
 };
 
-export function agentContract({ manifest, casesFile }) {
+export function agentContract({ manifest, casesFile, canaries = [] }) {
   const data = JSON.parse(readFileSync(casesFile, 'utf8'));
   const srcRoot = resolve(dirname(casesFile), data.root || '.');
   const cases = (data.cases || data).filter((c) => !/^intl-/.test(c.id));
@@ -233,6 +233,21 @@ export function agentContract({ manifest, casesFile }) {
           });
         }
       }
+    });
+  }
+
+  // Customer-data masking: fictional shopper names, e-mails and staff names planted in the
+  // fixtures never reach what the model sees, whatever the tool or the outcome.
+  if (canaries.length) {
+    test(`${manifest.name} contract: no shopper or staff name planted in the fixtures reaches a result (masking)`, async () => {
+      const root = sandbox(); let checked = 0;
+      for (const c of cases) {
+        const r = await run(rtIn(root, { mode: c.mode || 'assist', autoActions: c.auto_actions || [] }), c.tool, c.args || {});
+        const text = JSON.stringify(r).toLowerCase();
+        for (const k of canaries) assert.ok(!text.includes(String(k).toLowerCase()), `${c.id}: "${k}" reached the result`);
+        checked++;
+      }
+      assert.ok(checked > 0);
     });
   }
 
