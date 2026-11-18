@@ -1,0 +1,11 @@
+Datum;Kanal;Typ;Betrag;Referenz;Freigabedatum
+01.07.2026;Stripe;charge;1.000,00;ch_1;
+01.07.2026;Stripe;reserve hold;-100,00;rsv_1;
+01.08.2026;Stripe;charge;2.000,00;ch_2;
+01.08.2026;Stripe;reserve hold;-250,00;rsv_2;
+30.10.2026;Stripe;reserve release;250,00;rsv_2;
+15.09.2026;Stripe;charge;500,00;ch_3;
+15.09.2026;Stripe;reserve hold;-50,00;rsv_3;
+25.08.2026;PayPal;payment;800,00;pp_1;
+25.08.2026;PayPal;reserve hold;-80,00;pp_rsv_1;23.11.2026
+01.06.2026;PayPal;dispute hold;-60,00;pp_dsp_1;

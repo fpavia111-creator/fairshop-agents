@@ -1,0 +1,11 @@
+date,processor,type,amount,reference,release_date
+2026-07-01,Stripe,charge,1000.00,ch_1,
+2026-07-01,Stripe,reserve hold,-100.00,rsv_1,
+2026-08-01,Stripe,charge,2000.00,ch_2,
+2026-08-01,Stripe,reserve hold,-250.00,rsv_2,
+2026-10-30,Stripe,reserve release,250.00,rsv_2,
+2026-09-15,Stripe,charge,500.00,ch_3,
+2026-09-15,Stripe,reserve hold,-50.00,rsv_3,
+2026-08-25,PayPal,payment,800.00,pp_1,
+2026-08-25,PayPal,reserve hold,-80.00,pp_rsv_1,2026-11-23
+2026-06-01,PayPal,dispute hold,-60.00,pp_dsp_1,

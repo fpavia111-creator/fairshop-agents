@@ -1,0 +1,339 @@
+{
+  "root": "..",
+  "cases": [
+    {
+      "id": "audit-totals",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.holds": 5,
+          "result.chase": 1,
+          "result.review": 2,
+          "result.upcoming": 1,
+          "result.held": 1,
+          "result.ok": 0,
+          "result.held_now": 290,
+          "result.overdue": 100
+        }
+      }
+    },
+    {
+      "id": "no-terms",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.chase": 0,
+          "result.upcoming": 1
+        },
+        "not_contains": [
+          "hold_above_terms"
+        ]
+      }
+    },
+    {
+      "id": "explain-overdue",
+      "tool": "reserves_explain",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16",
+        "hold": "rsv_1"
+      },
+      "expect": {
+        "status": "executed",
+        "contains": [
+          "due back on 2026-09-29"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "tool": "reserves_write_report",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.rows": 5
+        },
+        "contains": [
+          "release-dates.ics"
+        ]
+      }
+    },
+    {
+      "id": "draft-stripe",
+      "tool": "reserves_draft_release_inquiry",
+      "approve": "Pat Example",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16",
+        "processor": "Stripe"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.amount": 100,
+          "result.holds": [
+            "rsv_1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "draft-nothing-early",
+      "tool": "reserves_draft_release_inquiry",
+      "approve": "Pat Example",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-08-01",
+        "processor": "Stripe"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "nothing overdue at Stripe"
+        ]
+      }
+    },
+    {
+      "id": "gen-review-check",
+      "tool": "reserves_audit",
+      "mode": "review",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed"
+      },
+      "note": "Review mode reads and reports."
+    },
+    {
+      "id": "gen-review-draft",
+      "tool": "reserves_draft_release_inquiry",
+      "mode": "review",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16",
+        "processor": "Stripe"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Review mode writes nothing."
+    },
+    {
+      "id": "gen-draft-asks",
+      "tool": "reserves_draft_release_inquiry",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16",
+        "processor": "Stripe"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "A draft is written only after a person says yes."
+    },
+    {
+      "id": "gen-request-one-click",
+      "tool": "reserves_request_send",
+      "args": {
+        "draft": "fairshop-out/reserves/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval",
+        "decision": "ask"
+      },
+      "note": "binding_send: one named click."
+    },
+    {
+      "id": "gen-request-auto",
+      "tool": "reserves_request_send",
+      "mode": "auto",
+      "auto_actions": [
+        "reserves_draft_release_inquiry"
+      ],
+      "args": {
+        "draft": "fairshop-out/reserves/drafts/example.md",
+        "draft_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": {
+        "status": "needs_approval"
+      },
+      "note": "Still one click with the draft on Auto."
+    },
+    {
+      "id": "gen-refused-balance_transfer",
+      "tool": "balance_transfer",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-refused-payout_schedule_change",
+      "tool": "payout_schedule_change",
+      "args": {},
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Refused by name."
+    },
+    {
+      "id": "gen-unknown-tool",
+      "tool": "shell_exec",
+      "args": {
+        "cmd": "whoami"
+      },
+      "expect": {
+        "status": "blocked"
+      },
+      "note": "Anything not on the allowlist is blocked."
+    },
+    {
+      "id": "gen-outside-root",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "../../outside-root.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "outside the allowed root"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-file",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "fixtures/missing-export.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "missing-export.csv"
+        ]
+      }
+    },
+    {
+      "id": "gen-wrong-type",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": 42,
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "balance"
+        ]
+      }
+    },
+    {
+      "id": "gen-missing-arg",
+      "tool": "reserves_audit",
+      "args": {
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "balance"
+        ]
+      }
+    },
+    {
+      "id": "gen-explain-unknown",
+      "tool": "reserves_explain",
+      "args": {
+        "balance": "fixtures/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16",
+        "hold": "NO-SUCH-ITEM-0000"
+      },
+      "expect": {
+        "status": "error",
+        "contains": [
+          "not found"
+        ]
+      }
+    },
+    {
+      "id": "intl-de-audit-totals",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "fixtures/intl/de/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.holds": 5,
+          "result.chase": 1,
+          "result.review": 2,
+          "result.upcoming": 1,
+          "result.held": 1,
+          "result.ok": 0,
+          "result.held_now": 290,
+          "result.overdue": 100
+        }
+      },
+      "note": "German export of the same data (fixtures/intl/de); must match the English case \"audit-totals\"."
+    },
+    {
+      "id": "intl-ja-audit-totals",
+      "tool": "reserves_audit",
+      "args": {
+        "balance": "fixtures/intl/ja/balance.csv",
+        "terms": "fixtures/terms.json",
+        "as_of": "2026-11-16"
+      },
+      "expect": {
+        "status": "executed",
+        "equals": {
+          "result.holds": 5,
+          "result.chase": 1,
+          "result.review": 2,
+          "result.upcoming": 1,
+          "result.held": 1,
+          "result.ok": 0,
+          "result.held_now": 290,
+          "result.overdue": 100
+        }
+      },
+      "note": "Japanese export of the same data (fixtures/intl/ja); must match the English case \"audit-totals\"."
+    }
+  ]
+}

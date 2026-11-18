@@ -1,0 +1,7 @@
+{
+  "note": "Fictional reserve terms for the demo. Use the percent and days from your own processor notice.",
+  "processors": { "stripe": { "percent": 10, "days": 90 }, "paypal": { "percent": 10, "days": 90 } },
+  "grace_days": 3,
+  "upcoming_days": 14,
+  "dispute_days": 75
+}
