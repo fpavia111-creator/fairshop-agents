@@ -7,7 +7,7 @@ export const COMMISSION_PROFILES = Object.freeze([
 ]);
 export const COMMISSION_FIELDS = Object.freeze({
   action_id: t(['Action ID', 'Transaction ID', 'Commission ID'], { required: true }),
-  affiliate: t(['Affiliate', 'Partner', 'Publisher']),
+  affiliate: t(['Affiliate', 'Partner', 'Publisher'], { pii: 'partner' }),
   order_id: t(['Order ID', 'Order', 'OID']),
   order_date: t(['Order Date', 'Action Date', 'Date'], { type: 'date' }),
   sale_amount: t(['Sale Amount', 'Order Amount', 'Sale'], { type: 'money' }),

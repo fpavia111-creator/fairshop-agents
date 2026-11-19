@@ -25,7 +25,7 @@ import { join, dirname } from 'node:path';
 
 export const PII_MODES = Object.freeze(['mask', 'strict', 'off']);
 export const PII_KEY_FILE = 'pii.key';
-export const PII_KINDS = Object.freeze(['name', 'email', 'phone', 'address', 'staff', 'zip', 'order']);
+export const PII_KINDS = Object.freeze(['name', 'email', 'phone', 'address', 'staff', 'partner', 'zip', 'order']);
 
 /** Keys whose values describe the file's columns (field → header), never personal data. Free-text scrubbing still applies. */
 const META_KEYS = new Set(['mapped', 'unmapped', 'missing', 'translated', 'columns', 'recognised_by', 'signature', 'also_called']);
@@ -39,14 +39,16 @@ const KEY_KIND = new Map([
   ...keys('phone', ['phone', 'phone_number', 'customer_phone', 'buyer_phone', 'shipping_phone', 'billing_phone', 'mobile', 'mobile_phone', 'telephone']),
   ...keys('address', ['address', 'address1', 'address2', 'address_line_1', 'address_line_2', 'street', 'street_address', 'ship_to_address', 'shipping_address', 'shipping_address1', 'billing_address', 'billing_address1', 'recipient_address', 'customer_address']),
   ...keys('staff', ['cashier', 'cashier_name', 'employee', 'employee_name', 'associate', 'clerk', 'staff', 'staff_name', 'counted_by', 'opened_by', 'closed_by']),
+  // Affiliates and creators are often one person trading under their own name (final pass, 19 Nov 2026).
+  ...keys('partner', ['affiliate', 'affiliate_name', 'partner', 'partner_name', 'publisher', 'publisher_name', 'creator', 'creator_name', 'influencer', 'influencer_name']),
   ...keys('zip', ['zip', 'zip_code', 'postal_code', 'ship_to_zip', 'shipping_zip', 'billing_zip', 'postcode']),
   ...keys('order', ['order_id', 'order_number', 'order_no']),
 ]);
 const STRICT_ONLY = new Set(['zip', 'order']);
-const PREFIX = { name: 'CUS', email: 'CUS', staff: 'STAFF', order: 'ORD' };
+const PREFIX = { name: 'CUS', email: 'CUS', staff: 'STAFF', partner: 'AFF', order: 'ORD' };
 const FIXED = { address: '[ADDRESS]', phone: '[PHONE]' };
 // Minimum length before a registered value is also searched for inside free text.
-const MIN_TEXT = { name: 4, email: 6, staff: 4, order: 4 };
+const MIN_TEXT = { name: 4, email: 6, staff: 4, partner: 4, order: 4 };
 
 /** Luhn check, so order numbers and tracking numbers of card length are not taken for card numbers. */
 export function luhn(digits) {
@@ -105,7 +107,7 @@ export class PiiMasker {
 
   /** Stable pseudonym for a value of one kind. A name and an e-mail share the CUS prefix but not the token. */
   token(kind, value) {
-    const v = kind === 'name' || kind === 'staff' ? nameKey(value) : String(value).trim().toLowerCase();
+    const v = kind === 'name' || kind === 'staff' || kind === 'partner' ? nameKey(value) : String(value).trim().toLowerCase();
     return `${PREFIX[kind] || 'ID'}-${createHmac('sha256', this.key).update(`${kind}|${v}`).digest('hex').slice(0, 8)}`;
   }
 
@@ -136,7 +138,7 @@ export class PiiMasker {
     if (!this.on || raw === null || raw === undefined) return;
     if (STRICT_ONLY.has(kind) && this.mode !== 'strict') return;
     if (kind === 'zip') return;
-    const vals = kind === 'name' || kind === 'staff' ? nameVariants(raw) : [String(raw).trim()];
+    const vals = kind === 'name' || kind === 'staff' || kind === 'partner' ? nameVariants(raw) : [String(raw).trim()];
     const rep = FIXED[kind] || this.token(kind, raw);
     // Leading and trailing punctuation is dropped for matching, so a value with junk in front of it
     // (a spreadsheet formula, a quote, a bullet) is still found where it appears in text.

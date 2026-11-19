@@ -13,7 +13,7 @@ Give it the network's commission statement (Impact, ShareASale, Awin style or yo
 - **duplicate**: an order that already earned commission (the earliest action keeps it);
 - **own-link purchase**: the affiliate's e-mail placed the order (for a person to read against your terms).
 
-Commissions still pending are "reverse"; ones the statement shows as paid are "clawback". E-mails are masked in what the model sees.
+Commissions still pending are "reverse"; ones the statement shows as paid are "clawback". Affiliate names and e-mails are masked in what the model sees (affiliates show as `AFF-…`); the worklist and draft files on your machine keep the real names.
 
 <!-- generated:start -->
 

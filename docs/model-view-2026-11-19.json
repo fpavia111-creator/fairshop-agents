@@ -1,0 +1,484 @@
+[
+  {
+    "agent": "fairshop-3pl-invoices",
+    "check": "fulfillment_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "charge_type",
+      "invoice_number",
+      "period",
+      "reference"
+    ],
+    "free_text_in_clear": [
+      "reference"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-ad-spend",
+    "check": "ads_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "campaign",
+      "platform",
+      "sku"
+    ],
+    "free_text_in_clear": [
+      "campaign"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-affiliate-commissions",
+    "check": "affiliates_audit",
+    "masked": [
+      "affiliate (partner)",
+      "affiliate_email (email)",
+      "customer_email (email)"
+    ],
+    "canaries": 10,
+    "leaked": [],
+    "text_in_clear": [
+      "action_id",
+      "status"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-carrier-adjustments",
+    "check": "adjustments_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "carrier",
+      "reason",
+      "sku",
+      "tracking"
+    ],
+    "free_text_in_clear": [
+      "reason"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-cash-over-short",
+    "check": "cash_audit",
+    "masked": [
+      "cashier (staff)"
+    ],
+    "canaries": 3,
+    "leaked": [],
+    "text_in_clear": [
+      "store"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-coupon-abuse",
+    "check": "coupons_audit",
+    "masked": [
+      "customer_email (email)",
+      "ship_address (address)"
+    ],
+    "canaries": 7,
+    "leaked": [],
+    "text_in_clear": [
+      "code",
+      "discount_code",
+      "type"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-duplicate-listings",
+    "check": "listings_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "listing_id",
+      "sku",
+      "status",
+      "title"
+    ],
+    "free_text_in_clear": [
+      "title"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-fba-reimbursements",
+    "check": "reimburse_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "fnsku",
+      "order_id",
+      "reimbursement_id",
+      "sku",
+      "transaction_id"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-fba-storage-fees",
+    "check": "storage_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "month",
+      "sku"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-gift-cards",
+    "check": "giftcards_liability",
+    "masked": [
+      "customer_email (email)"
+    ],
+    "canaries": 7,
+    "leaked": [],
+    "text_in_clear": [
+      "card_id",
+      "source",
+      "type"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-inventory-listings",
+    "check": "inventory_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "fulfillment",
+      "listing_id",
+      "location",
+      "sku",
+      "status"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-landed-cost",
+    "check": "landed_calculate",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "shipment_id",
+      "sku"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-map-pricing",
+    "check": "map_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "seller",
+      "sku"
+    ],
+    "free_text_in_clear": [
+      "seller"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-marketplace-claims",
+    "check": "claims_audit",
+    "masked": [
+      "buyer_email (email)",
+      "buyer_name (name)"
+    ],
+    "canaries": 7,
+    "leaked": [],
+    "text_in_clear": [
+      "carrier",
+      "channel",
+      "claim_id",
+      "order_id",
+      "reason",
+      "status",
+      "tracking"
+    ],
+    "free_text_in_clear": [
+      "reason"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-marketplace-fees",
+    "check": "fees_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "category",
+      "channel",
+      "fee_type",
+      "order_id",
+      "sku"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-nexus-thresholds",
+    "check": "nexus_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-payouts",
+    "check": "payouts_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "gateway",
+      "order_id",
+      "payout_id",
+      "status",
+      "type"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-po-receiving",
+    "check": "receiving_match",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "invoice_number",
+      "po",
+      "sku",
+      "vendor"
+    ],
+    "free_text_in_clear": [
+      "vendor"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-processor-reserves",
+    "check": "reserves_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "processor",
+      "reference",
+      "type"
+    ],
+    "free_text_in_clear": [
+      "reference"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-product-data",
+    "check": "catalog_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "title"
+    ],
+    "free_text_in_clear": [
+      "title"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-refunds-returns",
+    "check": "refunds_audit",
+    "masked": [
+      "customer_email (email)"
+    ],
+    "canaries": 6,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "condition",
+      "sku"
+    ],
+    "free_text_in_clear": [
+      "condition"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-retailer-deductions",
+    "check": "deductions_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "deduction_code",
+      "deduction_type",
+      "invoice_number",
+      "remit_id",
+      "retailer"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-return-reasons",
+    "check": "returns_analyse",
+    "masked": [
+      "customer_email (email)",
+      "customer_name (name)"
+    ],
+    "canaries": 8,
+    "leaked": [],
+    "text_in_clear": [
+      "sku"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-sales-tax",
+    "check": "salestax_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "order_id"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-settlement-journals",
+    "check": "journals_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "description",
+      "settlement_id"
+    ],
+    "free_text_in_clear": [
+      "description"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-shipping-costs",
+    "check": "shipping_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "refund_status",
+      "tracking"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-sku-margins",
+    "check": "margins_margins",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "channel",
+      "sku"
+    ],
+    "free_text_in_clear": [],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-stockouts",
+    "check": "stockouts_audit",
+    "masked": [],
+    "canaries": 0,
+    "leaked": [],
+    "text_in_clear": [
+      "cancel_reason",
+      "sku",
+      "status"
+    ],
+    "free_text_in_clear": [
+      "cancel_reason"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-store-shrink",
+    "check": "shrink_measure",
+    "masked": [
+      "counted_by (staff)"
+    ],
+    "canaries": 3,
+    "leaked": [],
+    "text_in_clear": [
+      "category",
+      "reason",
+      "sku",
+      "store"
+    ],
+    "free_text_in_clear": [
+      "reason"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  },
+  {
+    "agent": "fairshop-subscriptions",
+    "check": "subscriptions_audit",
+    "masked": [
+      "customer_email (email)"
+    ],
+    "canaries": 7,
+    "leaked": [],
+    "text_in_clear": [
+      "cancel_reason",
+      "card_expiry",
+      "failure_reason",
+      "plan",
+      "status",
+      "subscription_id"
+    ],
+    "free_text_in_clear": [
+      "cancel_reason",
+      "failure_reason"
+    ],
+    "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
+  }
+]

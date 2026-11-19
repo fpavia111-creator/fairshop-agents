@@ -100,3 +100,11 @@ test('runtime: results are masked, files on disk keep the real values, and the r
   assert.match(JSON.stringify(off.result), /Grace Hopper/); assert.ok(off.warnings.some((w) => /masking is OFF/.test(w)));
   assert.throws(() => new AgentRuntime(manifest(), { root, pii: 'sometimes' }), /pii must be/);
 });
+
+test('affiliate and creator names are a kind of their own (AFF-…), also inside free text (final pass)', () => {
+  assert.equal(piiKindOf('Affiliate'), 'partner'); assert.equal(piiKindOf('publisher_name'), 'partner');
+  const m = new PiiMasker({ key });
+  const t = m.maskValue('partner', 'Petra Lind Studio');
+  assert.match(t, /^AFF-[0-9a-f]{8}$/);
+  assert.notEqual(t, m.maskValue('name', 'Petra Lind Studio'));
+});
