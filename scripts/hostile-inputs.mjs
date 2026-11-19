@@ -108,7 +108,7 @@ async function dataPass(n) {
 async function argsPass(n) {
   const { manifest, cases } = await load(n);
   for (const t of manifest.tools) {
-    const c = cases.find((x) => x.tool === t.name); const base = c ? (c.args || {}) : {}; const idx = c ? cases.indexOf(c) : -1;
+    const c = cases.find((x) => x.tool === t.name); const base = c ? (c.args || {}) : {};
     const muts = [['no arguments', {}]];
     for (const k of new Set([...Object.keys(base), ...Object.keys((t.inputSchema && t.inputSchema.properties) || {})])) {
       if (/^(offline|live|resolver|fetch|network)$/.test(k)) continue;
@@ -116,11 +116,17 @@ async function argsPass(n) {
         ['../ x6', '../../../../../../etc/passwd'], ['/etc/passwd', '/etc/passwd'], ['../escape', '../escape-' + n], ['a folder', 'fixtures'], ['missing file', 'fixtures/nope-does-not-exist.csv']]) muts.push([`${k} = ${label}`, { ...base, [k]: val }]);
     }
     for (const [label, args] of muts) {
-      const { parent, root } = sandbox(n); const where = `${t.name} [${label}]`; info.calls++;
-      try { for (let i = 0; i < idx; i++) await call(manifest, root, cases[i].tool, cases[i].args || {}); } catch { /* setup only */ }
+      const tS = Date.now(); const { parent, root } = sandbox(n); const where = `${t.name} [${label}]`; info.calls++; if (process.env.HOSTILE_TRACE) process.stderr.write(`
+[${new Date().toISOString().slice(11, 19)}] ${where} `);
+      // Setup: Fairshop tools are stateless except the one-click request, which needs a draft on disk;
+      // only that draft is written first (replaying every earlier case made this pass take hours).
+      const setup = /_request_/.test(t.name) ? cases.filter((x) => /_draft_/.test(x.tool) && !x.mode).slice(0, 1) : [];
+      try { for (const sc of setup) await call(manifest, root, sc.tool, sc.args || {}); } catch { /* setup only */ }
       const t0 = Date.now(); let out;
       try { out = await call(manifest, root, t.name, args); } catch (e) { add({ n, kind: 'THROW', where, detail: String(e.stack || e).slice(0, 240) }); rmSync(parent, { recursive: true, force: true }); continue; }
-      const ms = Date.now() - t0; const reason = String(out.reason || ''); const txt = JSON.stringify(out);
+      const ms = Date.now() - t0; const reason = String(out.reason || ''); const txt = JSON.stringify(out); if (process.env.HOSTILE_TRACE && ms > 300) process.stderr.write(`
+SLOWCALL ${where} ${ms}ms
+`);
       if (ms > 10000) add({ n, kind: 'SLOW', where, detail: `${ms} ms` });
       if (out.status === 'error' && CRASH.test(reason)) add({ n, kind: 'CRASH', where, detail: reason.slice(0, 200) });
       if (reason.length > 2000) add({ n, kind: 'HUGE_ERROR', where, detail: `${reason.length} characters` });
