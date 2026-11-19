@@ -23,7 +23,10 @@
     "intl:fixtures": "node scripts/make-intl-fixtures.mjs",
     "mcp:check": "node scripts/mcp-conformance.mjs",
     "readme": "node scripts/readme-sections.mjs",
-    "readme:check": "node scripts/readme-sections.mjs --check"
+    "readme:check": "node scripts/readme-sections.mjs --check",
+    "accuracy": "node scripts/accuracy.mjs",
+    "model-view": "node scripts/model-view.mjs",
+    "realdata": "node --max-old-space-size=4096 scripts/realdata.mjs"
   },
   "engines": {
     "node": ">=20"

@@ -61,12 +61,12 @@
     "Reads the files you export; it does not log in to your store, a marketplace, a payment processor, a carrier, your 3PL or your bank.",
     "Fee schedules, reserve terms, rate cards, MAP lists, claim and dispute windows are settings you confirm; the agents do not know a marketplace's or carrier's current terms.",
     "Sales tax rates, marketplace facilitator rules and nexus thresholds are settings you confirm with your adviser; nothing here is tax advice and no agent files a return or registers with a state.",
-    "Export layouts for Shopify, WooCommerce, BigCommerce, Amazon Seller Central, eBay, Etsy, Walmart, Stripe, PayPal, Square, ShipStation, Shippo and the ad platforms were written from knowledge of those exports and not checked against live accounts; the first setup confirms them on your files.",
+    "Export layouts for Shopify, WooCommerce, BigCommerce, Amazon Seller Central, eBay, Etsy, Walmart, Stripe, PayPal, Square, ShipStation, Shippo and the ad platforms were written from knowledge of those exports and not checked against live accounts. Shopify's current product export, its inventory export and WooCommerce's product export were also run on the vendors' own published sample files (19 Nov 2026). The first setup confirms every layout on your files.",
     "Lost sales, reimbursement values and aged-inventory surcharges are estimates from your own files and are marked as such.",
     "Not legal, tax or accounting advice.",
     "Report pages come in nine languages, translated by Claude and not yet reviewed by native speakers."
   ],
-  "warn": "Your files and reports stay on your computer. Shopper names, e-mails, phone numbers, addresses and staff names are masked in anything sent to the AI model. No agent refunds, charges, pays, reprices, changes a listing or a discount code, files a tax return, registers with a state, opens a marketplace case or messages anyone: drafts wait for one named person.",
+  "warn": "Your files and reports stay on your computer. Shopper names, e-mails, phone numbers, addresses, staff names and affiliate names are masked in what the AI model sees; free-text notes and reasons are sent as typed. No agent refunds, charges, pays, reprices, changes a listing or a discount code, files a tax return, registers with a state, opens a marketplace case or messages anyone: drafts wait for one named person.",
   "groups": [
     [
       "Payouts, fees and marketplace money",

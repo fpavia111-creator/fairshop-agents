@@ -36,7 +36,7 @@ Included: installation on your computer, column mapping for your exports, settin
 
 Not included: refunding, charging, paying, repricing, changing listings or discount codes, filing tax returns, registering with a state, opening marketplace cases, contacting carriers, suppliers, retailers or customers, or logging in to any of your systems. The agents draft; a named person on your team decides and acts. Nothing here is legal, tax or accounting advice.
 
-Your files and reports stay on your computer. Shopper names, e-mail addresses, phone numbers, addresses and staff names are masked in anything sent to the AI model.
+Your files and reports stay on your computer. Shopper names, e-mail addresses, phone numbers, addresses, staff names and affiliate names are masked in what the AI model sees; free-text notes and reasons are sent as typed.
 
 ## Works with
 
