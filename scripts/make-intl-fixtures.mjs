@@ -44,7 +44,7 @@ for (const n of readdirSync(PK).filter((x) => /^fairshop-(?!core$)/.test(x) && (
       const out = localise(readFileSync(join(PK, n, file), 'utf8'), def, lang);
       const target = join(dir, basename(file)); const rel = `fixtures/intl/${lang}/${basename(file)}`;
       let buf; try { buf = encodeText(out.text, MARKETS[lang].enc); } catch { buf = encodeText(out.text, 'utf-8'); }
-      if (!existsSync(target) || !readFileSync(target).equals(buf)) { if (check) { console.log(`${n}: ${rel} is stale`); stale++; } else writeFileSync(target, buf); }
+      if (!existsSync(target) || readFileSync(target).toString('latin1').replace(/\r\n/g, '\n') !== buf.toString('latin1').replace(/\r\n/g, '\n')) { if (check) { console.log(`${n}: ${rel} is stale`); stale++; } else writeFileSync(target, buf); }
       const swap = (v) => (v === file ? rel : Array.isArray(v) ? v.map(swap) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, swap(x)])) : v);
       args[arg] = swap(args[arg]);
     }
@@ -54,7 +54,7 @@ for (const n of readdirSync(PK).filter((x) => /^fairshop-(?!core$)/.test(x) && (
   const kept = cases.filter((c) => !c.id.startsWith('intl-'));
   const next = [...kept, ...added];
   const txt = JSON.stringify({ ...(Array.isArray(data) ? {} : data), cases: next }, null, 2) + '\n';
-  if (readFileSync(casesFile, 'utf8') !== txt) { if (check) { console.log(`${n}: evals/cases.json lacks the intl cases`); stale++; } else writeFileSync(casesFile, txt); }
+  if (readFileSync(casesFile, 'utf8').replace(/\r\n/g, '\n') !== txt) { if (check) { console.log(`${n}: evals/cases.json lacks the intl cases`); stale++; } else writeFileSync(casesFile, txt); }
 }
 if (check && stale) process.exit(1);
 console.log(check ? 'intl fixtures up to date' : 'intl fixtures written');

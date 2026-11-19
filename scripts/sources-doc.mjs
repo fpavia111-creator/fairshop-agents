@@ -24,7 +24,7 @@ for (const n of readdirSync(PK).filter((x) => /^fairshop-(?!core$)/.test(x)).sor
   }
   L.push(`Columns named differently? Run \`npx ${bin} inspect <file>\` to see how a file is read (column names and shapes only, never values), then name your columns in \`fairshop-sources.json\` in the root:`, '', '```json', '{ "files": { "exports/users.csv": { "columns": { "email": "Work E-mail" }, "date_order": "dmy" } } }', '```', '', `${EXPORTS_BASIS_NOTE} If a real export does not match, the result says which columns were missing; please report it.`, END);
   const block = L.join('\n');
-  const txt = readFileSync(f, 'utf8');
+  const txt = readFileSync(f, 'utf8').replace(/\r\n/g, '\n');
   const next = txt.includes(START) ? txt.replace(new RegExp(`${START}[\\s\\S]*?${END}`), block) : txt.replace(/\n## Install\b/, `\n${block}\n\n## Install`);
   if (next === txt) continue;
   if (!txt.includes(START) && next === txt) { console.error(`${n}: no "## Install" heading to insert before`); stale++; continue; }

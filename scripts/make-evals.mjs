@@ -29,7 +29,7 @@ const TABLE = /\.(csv|tsv|txt|xlsx)$/i;
 let stale = 0;
 for (const n of readdirSync(PK).filter((x) => /^fairshop-(?!core$)/.test(x) && existsSync(join(PK, x, 'evals', 'cases.json')) && (!only.length || only.includes(x))).sort()) {
   const { manifest } = await import(pathToFileURL(join(PK, n, 'src', 'index.js')).href);
-  const file = join(PK, n, 'evals', 'cases.json'); const before = readFileSync(file, 'utf8'); const data = JSON.parse(before);
+  const file = join(PK, n, 'evals', 'cases.json'); const before = readFileSync(file, 'utf8').replace(/\r\n/g, '\n'); const data = JSON.parse(before);
   const own = data.cases.filter((c) => !/^(gen|intl)-/.test(c.id)); const intl = data.cases.filter((c) => /^intl-/.test(c.id));
   const rule = (t) => (manifest.policy.rules.find((r) => r.tool === t) || {}).decision;
   const main = manifest.tools.find((t) => t.kind === 'read' && rule(t.name) === 'allow' && !/_explain$/.test(t.name));

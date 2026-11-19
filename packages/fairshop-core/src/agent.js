@@ -26,8 +26,8 @@ const rel = (ctx, f) => relative(ctx.root, f).split('\\').join('/');
  *
  * spec: {
  *   pkg                 package.json object (name, version)
- *   prefix              tool prefix ("baltic")
- *   label               human name ("Baltic of Payouts")
+ *   prefix              tool prefix ("payouts")
+ *   label               human name ("Fairshop Payouts")
  *   description         one paragraph for the manifest
  *   files               input arguments (JSON Schema properties); every one described
  *   required            required input arguments

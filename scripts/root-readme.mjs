@@ -38,7 +38,7 @@ for (const [lang, file, name] of LANGS) {
   for (const [g, list] of reg.groups) { L.push(`### ${lang === 'en' ? g : G[g][lang]}`, '', '| Agent | Package | |', '|---|---|---|'); for (const [n, d] of list) L.push(`| [${titleOf(n)}](packages/${n}) | \`${n}\` | ${d} |`); L.push(''); }
   L.push(`## ${t.try}`, '', '```bash', 'npx -y fairshop-payouts demo', 'npx -y fairshop-payouts mcp --root /path/to/your/exports', 'npx -y fairshop-payouts call payouts_audit \'{"orders":"orders.csv","payouts":"payouts.csv"}\' --lang de', '```', '', `## ${t.checks}`, '', t.checksText, '', `## ${t.licence}`, '', t.licenceText, '');
   const text = L.join('\n'); const f = join(ROOT, file);
-  if (check) { if (!existsSync(f) || readFileSync(f, 'utf8') !== text) { console.log(`${file} is out of date`); stale++; } } else writeFileSync(f, text);
+  if (check) { if (!existsSync(f) || readFileSync(f, 'utf8').replace(/\r\n/g, '\n') !== text) { console.log(`${file} is out of date`); stale++; } } else writeFileSync(f, text);
 }
 if (check && stale) process.exit(1);
 console.log(check ? 'root READMEs up to date' : `wrote ${LANGS.length} root READMEs`);

@@ -15,7 +15,7 @@
 
 import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -107,20 +107,20 @@ claimHits.length ? add('honest copy', 'fail', `${claimHits.length} sentence(s) m
 
 // ---------- policy guard rails ----------
 const corePath = join(core.dir, 'src', 'index.js');
-const { ONE_CLICK_CATEGORIES } = await import(new URL(`file://${corePath.split('\\').join('/')}`));
+const { ONE_CLICK_CATEGORIES } = await import(pathToFileURL(corePath).href);
 const EXPECTED = ['go_live', 'revoke_access', 'delete_personal_data', 'move_money', 'binding_send', 'production_deploy', 'accept_learning'];
 const missingCat = EXPECTED.filter((c) => !ONE_CLICK_CATEGORIES.includes(c));
 missingCat.length ? add('one-click categories', 'fail', `missing from ONE_CLICK_CATEGORIES: ${missingCat.join(', ')}`) : add('one-click categories', 'pass', `${ONE_CLICK_CATEGORIES.length} categories, all ${EXPECTED.length} required ones present`);
 const paid = []; const allowAction = [];
 for (const p of pkgs.filter((x) => x !== core)) {
-  const { manifest } = await import(new URL(`file://${join(p.dir, 'src', 'index.js').split('\\').join('/')}`));
+  const { manifest } = await import(pathToFileURL(join(p.dir, 'src', 'index.js')).href);
   for (const t of manifest.tools) { if (t.tier === 'pro') paid.push(`${p.json.name}:${t.name}`); }
   const rules = manifest.policy?.rules || [];
   for (const t of manifest.tools) if (EXPECTED.includes(t.category)) { const r = rules.find((x) => (x.tool === t.name || x.category === t.category)); if (r && r.decision === 'allow') allowAction.push(`${p.json.name}:${t.name}`); }
 }
 allowAction.length ? add('one-click policy', 'fail', 'one-click tools set to allow', allowAction) : add('one-click policy', 'pass', 'no one-click tool is set to allow');
 add('paid tier', paid.length ? 'warn' : 'pass', paid.length ? `${paid.length} tool(s) marked paid: make sure the trusted licence key is in license-keys.js` : 'no tool is marked paid', paid.length ? paid : null);
-const { LICENSE_PUBLIC_KEYS } = await import(new URL(`file://${corePath.split('\\').join('/')}`));
+const { LICENSE_PUBLIC_KEYS } = await import(pathToFileURL(corePath).href);
 if (paid.length && !LICENSE_PUBLIC_KEYS.length) add('licence keys', 'fail', 'tools are marked paid but LICENSE_PUBLIC_KEYS is empty, so nobody could unlock them');
 
 // ---------- tests, evals, hostile ----------

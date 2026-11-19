@@ -47,7 +47,7 @@ test('findings roll up by code and status, and order never depends on input orde
 
 function demo() {
   return shopAgent({
-    pkg: { name: 'demo-of-things', version: '0.0.1' }, prefix: 'demo', label: 'Demo of Things', description: 'A demo agent that checks rows.',
+    pkg: { name: 'fairshop-demo-checks', version: '0.0.1' }, prefix: 'demo', label: 'Fairshop Demo Checks', description: 'A demo agent that checks rows.',
     files: { rows: { type: 'string', description: 'Rows file under --root' } }, required: ['rows'],
     sources: { rows: { label: 'Rows', args: ['rows'], fields: { id: { required: true }, amount: { type: 'money' } } } },
     run: (a, ctx) => { const items = ctx.records(a.rows).map((r) => ({ id: r.id, amount: Number(r.amount), status: Number(r.amount) > 5 ? 'review' : 'ok', findings: Number(r.amount) > 5 ? [finding('big', Number(r.amount), `Row ${r.id} is big.`)] : [] })); return { rows: items.length, by_finding: byFinding(items), items }; },
