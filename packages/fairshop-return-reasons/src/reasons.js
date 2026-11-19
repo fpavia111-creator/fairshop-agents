@@ -27,6 +27,7 @@ export const REASON_SETTINGS_SCHEMA = Object.freeze({
     returner_min_returns: { type: 'integer', minimum: 1, description: 'Returned orders before a customer is listed (default 3)' },
     returner_rate_pct: { type: 'number', minimum: 0, maximum: 100, description: 'Share of a customer\'s orders returned at or above which they are listed (default 50)' },
     groups: { type: 'object', additionalProperties: { type: 'string' }, description: 'Your own reason wording → group (listing, size, quality, fulfillment, customer, other)' },
+    ignore_skus: { type: 'array', items: { type: 'string' }, description: 'Line codes that are not products (postage, discounts, fees, manual adjustments) and are left out of every count' },
   },
 });
 
@@ -36,8 +37,12 @@ export function reasonGroup(reason, own = {}) { const s = str(reason).toLowerCas
 const custId = (email) => `CUST-${sha256(emailKey(email)).slice(0, 10)}`;
 
 /** Statuses: review, ok. Findings: sku_high_return_rate, listing_mismatch, repeat_returner. */
-export function analyseReturns(returns, orders, s = {}) {
+export function analyseReturns(returnsIn, ordersIn, s = {}) {
   const minU = s.sku_min_units ?? 10; const rate = s.sku_rate_pct ?? 15; const minR = s.returner_min_returns ?? 3; const rRate = s.returner_rate_pct ?? 50;
+  // Real exports carry lines that are not products (a real shop's file had "POST", "M" for manual and "BANK CHARGES").
+  const ignore = new Set((s.ignore_skus || []).map((x) => skuKey(x)));
+  const keep = (r) => !ignore.has(skuKey(r.sku));
+  const returns = returnsIn.filter(keep); const orders = ordersIn.filter(keep);
   const sold = new Map(); const custOrders = new Map(); const custEmail = new Map();
   for (const o of orders) { const k = skuKey(o.sku); sold.set(k, (sold.get(k) || 0) + Math.abs(num(o.qty) || 1)); const e = str(o.customer_email); if (e) { const c = custId(e); (custOrders.get(c) || custOrders.set(c, new Set()).get(c)).add(str(o.order_id)); if (!custEmail.has(c)) custEmail.set(c, e); } }
   const skus = new Map(); const custRet = new Map(); const groups = {};

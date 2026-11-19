@@ -89,11 +89,22 @@ const RULE = { type: 'object', additionalProperties: false, properties: { title_
 export const CATALOG_SETTINGS_SCHEMA = Object.freeze({ type: 'object', additionalProperties: false, properties: { note: { type: 'string' }, channels: { type: 'object', additionalProperties: RULE, description: 'Per channel (and "default"): title_max, required fields, min_images, min_description characters, from the channel\'s own rules as you read them' } } });
 
 const DEFAULT = { title_max: 200, required: ['title', 'gtin', 'brand', 'weight', 'price'], min_images: 1, min_description: 100 };
-/** True when a GTIN-8, 12, 13 or 14 has a valid check digit. */
+const mod10 = (d) => { let sum = 0; for (let i = d.length - 2, w = 3; i >= 0; i--, w = w === 3 ? 1 : 3) sum += Number(d[i]) * w; return (10 - (sum % 10)) % 10 === Number(d.at(-1)); };
+
+/** The 12-digit UPC-A a zero-suppressed UPC-E code stands for (number system 0 or 1), or null. */
+export function upcEToA(code) {
+  const d = str(code); if (!/^[01]\d{7}$/.test(d)) return null;
+  const x = d.slice(1, 7); const last = x[5];
+  const body = '012'.includes(last) ? `${x[0]}${x[1]}${last}0000${x[2]}${x[3]}${x[4]}` : last === '3' ? `${x[0]}${x[1]}${x[2]}00000${x[3]}${x[4]}` : last === '4' ? `${x[0]}${x[1]}${x[2]}${x[3]}00000${x[4]}` : `${x.slice(0, 5)}0000${last}`;
+  return `${d[0]}${body}${d[7]}`;
+}
+
+/** True when a GTIN-8, 12, 13 or 14 has a valid check digit; an 8-digit code may also be a UPC-E (final pass). */
 export function gtinValid(v) {
   const d = str(v).replace(/[\s-]/g, ''); if (!/^\d+$/.test(d) || ![8, 12, 13, 14].includes(d.length)) return false;
-  let sum = 0; for (let i = d.length - 2, w = 3; i >= 0; i--, w = w === 3 ? 1 : 3) sum += Number(d[i]) * w;
-  return (10 - (sum % 10)) % 10 === Number(d.at(-1));
+  if (mod10(d)) return true;
+  const a = d.length === 8 ? upcEToA(d) : null;
+  return !!a && mod10(a);
 }
 
 /** Statuses: fix, ok. */

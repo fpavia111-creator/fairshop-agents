@@ -34,3 +34,11 @@ test('the listing review lists flagged SKUs with a change marker', () => {
   const res = analyseReturns([r('1', 'A', 'too small', 3)], [o('1', 'A', 10)]);
   const d = reviewText(res.items, {}); assert.deepEqual(d.skus, ['A']); assert.match(d.text, /\[CHECK proposed change\]/);
 });
+
+test('ignore_skus leaves lines that are not products out of every count (final pass, real shop data)', () => {
+  const orders = [{ order_id: 'O1', sku: 'MUG', qty: '10', customer_email: 'a@example.test' }, { order_id: 'O1', sku: 'POST', qty: '10', customer_email: 'a@example.test' }];
+  const returns = [{ order_id: 'C1', sku: 'POST', qty: '5', reason: '', customer_email: 'a@example.test' }];
+  assert.ok(analyseReturns(returns, orders).items.find((i) => i.id === 'SKU:POST').findings.length);
+  const r = analyseReturns(returns, orders, { ignore_skus: ['post'] });
+  assert.ok(!r.items.some((i) => i.id === 'SKU:POST')); assert.equal(r.units_returned, 0);
+});

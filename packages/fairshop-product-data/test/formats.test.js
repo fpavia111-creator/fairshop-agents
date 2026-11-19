@@ -56,3 +56,9 @@ test('WooCommerce layout: variations take the parent\'s description, images and 
   assert.deepEqual(Object.keys(items).sort(), ['EX-ALBUM', 'EX-HOODIE-RED', 'EX-PENNANT']);
   assert.equal(items['EX-HOODIE-RED'], ''); assert.equal(items['EX-ALBUM'], ''); assert.equal(items['EX-PENNANT'], '');
 });
+
+test('an 8-digit UPC-E code passes when its expanded UPC-A does (final pass, real barcodes)', async () => {
+  const { gtinValid, upcEToA } = await import('../src/index.js');
+  assert.equal(upcEToA('01234565'), '012345000065'); assert.ok(gtinValid('01234565'));
+  assert.ok(!gtinValid('06153153'), 'fails as EAN-8 and as UPC-E');
+});

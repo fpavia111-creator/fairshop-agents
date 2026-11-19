@@ -1,0 +1,337 @@
+{
+  "date": "2026-11-19",
+  "downloaded": "2026-11-19T07:38:07.201Z",
+  "runs": [
+    {
+      "agent": "fairshop-return-reasons",
+      "source": "UCI Machine Learning Repository: Online Retail (Chen, 2015)",
+      "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+      "licence": "CC BY 4.0",
+      "rows": 541909,
+      "summary": "541,909 published rows read from the Excel file in 18.3 s; 530,104 sale lines and 9,288 cancellation lines (read as returns). Check ran in 2.2 s: 127 of 3828 SKUs above a 15% return rate with 10+ units sold, 183 customers who cancelled 3+ orders and half or more of their orders. Independent re-count: 0 disagreement(s). With ignore_skus set to the shop's 11 non-product codes: 125 SKUs.",
+      "findings": {
+        "repeat_returner": 183,
+        "sku_high_return_rate": 127
+      },
+      "disagreements": 0,
+      "flagged_skus": 127,
+      "flagged_skus_with_ignore": 125,
+      "flagged_customers": 183,
+      "flagged_non_product": [
+        "BANK CHARGES",
+        "M"
+      ],
+      "single_order_mistakes": [
+        "23166 74215 units (2011-01-18)",
+        "23843 80995 units (2011-12-09)"
+      ],
+      "lines": [
+        "flagged codes that are not products (postage, manual, discount, fees): BANK CHARGES, M",
+        "cancellations of 10,000 units or more in one line: 23166 74215 units (2011-01-18); 23843 80995 units (2011-12-09)",
+        "23843: 80995 of 80995 (100%)",
+        "23166: 74494 of 78033 (95.5%)",
+        "84347: 9376 of 9476 (98.9%)",
+        "M: 4066 of 7225 (56.3%)",
+        "21108: 3150 of 10253 (30.7%)",
+        "20971: 2617 of 11001 (23.8%)",
+        "21175: 2030 of 12225 (16.6%)",
+        "22920: 1527 of 3427 (44.6%)"
+      ]
+    },
+    {
+      "agent": "fairshop-duplicate-listings",
+      "source": "UCI Machine Learning Repository: Online Retail (Chen, 2015)",
+      "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+      "licence": "CC BY 4.0",
+      "rows": 3812,
+      "summary": "3,812 listings (one per stock code). 32 near-duplicate title(s) flagged in 0.2 s; an independent brute-force comparison of all 7,263,766 pairs found 36 pair(s) at 0.9 or more: 0 disagreement(s).",
+      "findings": {
+        "near_duplicate_title": 32
+      },
+      "disagreements": 0,
+      "pairs": [
+        [
+          "82580: BATHROOM METAL SIGN",
+          "21171: BATHROOM METAL SIGN"
+        ],
+        [
+          "21711: FOLDING UMBRELLA WHITE/RED POLKADOT",
+          "21706: FOLDING UMBRELLA RED/WHITE POLKADOT"
+        ],
+        [
+          "84032B: CHARLIE + LOLA RED HOT WATER BOTTLE",
+          "84031A: CHARLIE+LOLA RED HOT WATER BOTTLE"
+        ],
+        [
+          "10133: COLOURING PENCILS BROWN TUBE",
+          "10135: COLOURING PENCILS BROWN TUBE"
+        ],
+        [
+          "21814: HEART T-LIGHT HOLDER",
+          "85118: HEART T-LIGHT HOLDER"
+        ],
+        [
+          "82613B: METAL SIGN,CUPCAKE SINGLE HOOK",
+          "82613C: METAL SIGN,CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "82613B: METAL SIGN,CUPCAKE SINGLE HOOK",
+          "82613D: METAL SIGN CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "82613B: METAL SIGN,CUPCAKE SINGLE HOOK",
+          "82613A: METAL SIGN,CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "82613C: METAL SIGN,CUPCAKE SINGLE HOOK",
+          "82613D: METAL SIGN CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "82613C: METAL SIGN,CUPCAKE SINGLE HOOK",
+          "82613A: METAL SIGN,CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "82613D: METAL SIGN CUPCAKE SINGLE HOOK",
+          "82613A: METAL SIGN,CUPCAKE SINGLE HOOK"
+        ],
+        [
+          "84279P: CHERRY BLOSSOM  DECORATIVE FLASK",
+          "84279B: CHERRY BLOSSOM DECORATIVE FLASK"
+        ],
+        [
+          "20835: FRENCH LATTICE CUSHION COVER",
+          "20838: FRENCH LATTICE CUSHION COVER"
+        ],
+        [
+          "20839: FRENCH PAISLEY CUSHION COVER",
+          "20836: FRENCH PAISLEY CUSHION COVER"
+        ],
+        [
+          "20840: FRENCH FLORAL CUSHION COVER",
+          "20837: FRENCH FLORAL CUSHION COVER"
+        ],
+        [
+          "84509B: SET OF 4 FAIRY CAKE PLACEMATS",
+          "84509G: SET OF 4 FAIRY CAKE PLACEMATS"
+        ],
+        [
+          "72134: COLUMBIAN  CUBE CANDLE",
+          "72132: COLUMBIAN CUBE CANDLE"
+        ],
+        [
+          "40001: WHITE BAMBOO RIBS LAMPSHADE",
+          "40003: WHITE BAMBOO RIBS LAMPSHADE"
+        ],
+        [
+          "72127: COLUMBIAN CANDLE ROUND",
+          "72130: COLUMBIAN CANDLE ROUND"
+        ],
+        [
+          "72127: COLUMBIAN CANDLE ROUND",
+          "72128: COLUMBIAN CANDLE ROUND"
+        ],
+        [
+          "72133: COLUMBIAN CANDLE RECTANGLE",
+          "72131: COLUMBIAN CANDLE RECTANGLE"
+        ],
+        [
+          "79191B: RETRO PLASTIC POLKA TRAY",
+          "79190B: RETRO PLASTIC POLKA TRAY"
+        ],
+        [
+          "72130: COLUMBIAN CANDLE ROUND",
+          "72128: COLUMBIAN CANDLE ROUND"
+        ],
+        [
+          "79190A: RETRO PLASTIC 70'S TRAY",
+          "79192A: RETRO PLASTIC 70'S TRAY"
+        ],
+        [
+          "79190D: RETRO PLASTIC DAISY TRAY",
+          "79191D: RETRO PLASTIC DAISY TRAY"
+        ],
+        [
+          "84712B: PINK JEWELLED PHOTO FRAME",
+          "84708B: PINK JEWELLED PHOTO FRAME"
+        ],
+        [
+          "47586A: PINK FAIRY CAKE CUSHION COVER",
+          "47585A: PINK FAIRY CAKE CUSHION COVER"
+        ],
+        [
+          "84665: SQUARE CHERRY BLOSSOM CABINET",
+          "84666: SQUARE CHERRY BLOSSOM CABINET"
+        ],
+        [
+          "79403: FROSTED WHITE BASE",
+          "79406: FROSTED WHITE BASE"
+        ],
+        [
+          "35817P: ACRYLIC JEWEL SNOWFLAKE,PINK",
+          "35815P: ACRYLIC JEWEL SNOWFLAKE, PINK"
+        ],
+        [
+          "79329: PINK FLOCK GLASS CANDLEHOLDER",
+          "79331: PINK FLOCK GLASS CANDLEHOLDER"
+        ],
+        [
+          "85023B: EAU DE NILE JEWELLED PHOTOFRAME",
+          "85024B: EAU DE NILE JEWELLED PHOTOFRAME"
+        ],
+        [
+          "21003: ROSE DU SUD CUSHION COVER",
+          "20997: ROSE DU SUD CUSHION COVER"
+        ],
+        [
+          "35909B: PINK FLOWERS RABBIT EASTER",
+          "35910B: PINK FLOWERS RABBIT EASTER"
+        ],
+        [
+          "23041: PAPER LANTERN 9 POINT SNOW STAR",
+          "23040: PAPER LANTERN 9 POINT SNOW STAR"
+        ],
+        [
+          "81952B: ROUND BLUE CLOCK WITH SUCKER",
+          "81953B: ROUND BLUE CLOCK WITH SUCKER"
+        ]
+      ],
+      "lines": [
+        "82580 \"BATHROOM METAL SIGN\"  ~  21171 \"BATHROOM METAL SIGN\"",
+        "21711 \"FOLDING UMBRELLA WHITE/RED POLKADOT\"  ~  21706 \"FOLDING UMBRELLA RED/WHITE POLKADOT\"",
+        "84032B \"CHARLIE + LOLA RED HOT WATER BOTTLE\"  ~  84031A \"CHARLIE+LOLA RED HOT WATER BOTTLE\"",
+        "10133 \"COLOURING PENCILS BROWN TUBE\"  ~  10135 \"COLOURING PENCILS BROWN TUBE\"",
+        "21814 \"HEART T-LIGHT HOLDER\"  ~  85118 \"HEART T-LIGHT HOLDER\"",
+        "82613B \"METAL SIGN,CUPCAKE SINGLE HOOK\"  ~  82613C \"METAL SIGN,CUPCAKE SINGLE HOOK\"",
+        "82613B \"METAL SIGN,CUPCAKE SINGLE HOOK\"  ~  82613D \"METAL SIGN CUPCAKE SINGLE HOOK\"",
+        "82613B \"METAL SIGN,CUPCAKE SINGLE HOOK\"  ~  82613A \"METAL SIGN,CUPCAKE SINGLE HOOK\"",
+        "82613C \"METAL SIGN,CUPCAKE SINGLE HOOK\"  ~  82613D \"METAL SIGN CUPCAKE SINGLE HOOK\"",
+        "82613C \"METAL SIGN,CUPCAKE SINGLE HOOK\"  ~  82613A \"METAL SIGN,CUPCAKE SINGLE HOOK\"",
+        "82613D \"METAL SIGN CUPCAKE SINGLE HOOK\"  ~  82613A \"METAL SIGN,CUPCAKE SINGLE HOOK\"",
+        "84279P \"CHERRY BLOSSOM  DECORATIVE FLASK\"  ~  84279B \"CHERRY BLOSSOM DECORATIVE FLASK\"",
+        "20835 \"FRENCH LATTICE CUSHION COVER\"  ~  20838 \"FRENCH LATTICE CUSHION COVER\"",
+        "20839 \"FRENCH PAISLEY CUSHION COVER\"  ~  20836 \"FRENCH PAISLEY CUSHION COVER\"",
+        "20840 \"FRENCH FLORAL CUSHION COVER\"  ~  20837 \"FRENCH FLORAL CUSHION COVER\"",
+        "84509B \"SET OF 4 FAIRY CAKE PLACEMATS\"  ~  84509G \"SET OF 4 FAIRY CAKE PLACEMATS\"",
+        "72134 \"COLUMBIAN  CUBE CANDLE\"  ~  72132 \"COLUMBIAN CUBE CANDLE\"",
+        "40001 \"WHITE BAMBOO RIBS LAMPSHADE\"  ~  40003 \"WHITE BAMBOO RIBS LAMPSHADE\"",
+        "72127 \"COLUMBIAN CANDLE ROUND\"  ~  72130 \"COLUMBIAN CANDLE ROUND\"",
+        "72127 \"COLUMBIAN CANDLE ROUND\"  ~  72128 \"COLUMBIAN CANDLE ROUND\"",
+        "72133 \"COLUMBIAN CANDLE RECTANGLE\"  ~  72131 \"COLUMBIAN CANDLE RECTANGLE\"",
+        "79191B \"RETRO PLASTIC POLKA TRAY\"  ~  79190B \"RETRO PLASTIC POLKA TRAY\"",
+        "72130 \"COLUMBIAN CANDLE ROUND\"  ~  72128 \"COLUMBIAN CANDLE ROUND\"",
+        "79190A \"RETRO PLASTIC 70'S TRAY\"  ~  79192A \"RETRO PLASTIC 70'S TRAY\"",
+        "79190D \"RETRO PLASTIC DAISY TRAY\"  ~  79191D \"RETRO PLASTIC DAISY TRAY\"",
+        "84712B \"PINK JEWELLED PHOTO FRAME\"  ~  84708B \"PINK JEWELLED PHOTO FRAME\"",
+        "47586A \"PINK FAIRY CAKE CUSHION COVER\"  ~  47585A \"PINK FAIRY CAKE CUSHION COVER\"",
+        "84665 \"SQUARE CHERRY BLOSSOM CABINET\"  ~  84666 \"SQUARE CHERRY BLOSSOM CABINET\"",
+        "79403 \"FROSTED WHITE BASE\"  ~  79406 \"FROSTED WHITE BASE\"",
+        "35817P \"ACRYLIC JEWEL SNOWFLAKE,PINK\"  ~  35815P \"ACRYLIC JEWEL SNOWFLAKE, PINK\"",
+        "79329 \"PINK FLOCK GLASS CANDLEHOLDER\"  ~  79331 \"PINK FLOCK GLASS CANDLEHOLDER\"",
+        "85023B \"EAU DE NILE JEWELLED PHOTOFRAME\"  ~  85024B \"EAU DE NILE JEWELLED PHOTOFRAME\"",
+        "21003 \"ROSE DU SUD CUSHION COVER\"  ~  20997 \"ROSE DU SUD CUSHION COVER\"",
+        "35909B \"PINK FLOWERS RABBIT EASTER\"  ~  35910B \"PINK FLOWERS RABBIT EASTER\"",
+        "23041 \"PAPER LANTERN 9 POINT SNOW STAR\"  ~  23040 \"PAPER LANTERN 9 POINT SNOW STAR\"",
+        "81952B \"ROUND BLUE CLOCK WITH SUCKER\"  ~  81953B \"ROUND BLUE CLOCK WITH SUCKER\""
+      ]
+    },
+    {
+      "agent": "fairshop-product-data",
+      "source": "Shopify product CSV template",
+      "url": "https://help.shopify.com/en/manual/products/import-export/using-csv",
+      "licence": "Published by Shopify as a sample for its importer; Shopify terms of service",
+      "rows": 16,
+      "summary": "16 product row(s) read as Shopify \"Products > Export (CSV), current layout (\"URL handle\", \"Variant Barcodes\")\"; findings: missing_fields 1, images_below_min 3, gtin_invalid 11.",
+      "findings": {
+        "missing_fields": 1,
+        "images_below_min": 3,
+        "gtin_invalid": 11
+      },
+      "layout": "Shopify Products > Export (CSV), current layout (\"URL handle\", \"Variant Barcodes\")",
+      "lines": [
+        "EX-PERF-MEN: EX-PERF-MEN: gtin missing.",
+        "HRM-EBK-AUD: HRM-EBK-AUD: 0 image(s); your minimum is 1.",
+        "HRM-EBK-KND: HRM-EBK-KND: 0 image(s); your minimum is 1.",
+        "HRM-EBK-PDF: HRM-EBK-PDF: 0 image(s); your minimum is 1.",
+        "THEBANDTSHIRT-LA: THEBANDTSHIRT-LA: GTIN 5784397772 has a wrong check digit or length.",
+        "THEBANDTSHIRT-LG: THEBANDTSHIRT-LG: GTIN 5784397771 has a wrong check digit or length.",
+        "THEBANDTSHIRT-LR: THEBANDTSHIRT-LR: GTIN 5784397773 has a wrong check digit or length.",
+        "THEBANDTSHIRT-MA: THEBANDTSHIRT-MA: GTIN 5784397769 has a wrong check digit or length.",
+        "THEBANDTSHIRT-MG: THEBANDTSHIRT-MG: GTIN 5784397768 has a wrong check digit or length.",
+        "THEBANDTSHIRT-MR: THEBANDTSHIRT-MR: GTIN 5784397770 has a wrong check digit or length.",
+        "THEBANDTSHIRT-SA: THEBANDTSHIRT-SA: GTIN 5784397766 has a wrong check digit or length.",
+        "THEBANDTSHIRT-SR: THEBANDTSHIRT-SR: GTIN 5784397767 has a wrong check digit or length.",
+        "THEBANDTSHIRT-XA: THEBANDTSHIRT-XA: GTIN 5784397775 has a wrong check digit or length.",
+        "THEBANDTSHIRT-XG: THEBANDTSHIRT-XG: GTIN 5784397774 has a wrong check digit or length.",
+        "THEBANDTSHIRT-XR: THEBANDTSHIRT-XR: GTIN 5784397776 has a wrong check digit or length."
+      ]
+    },
+    {
+      "agent": "fairshop-product-data",
+      "source": "WooCommerce sample_products.csv",
+      "url": "https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce/sample-data",
+      "licence": "GPL-3.0 (WooCommerce)",
+      "rows": 22,
+      "summary": "22 product row(s) read as WooCommerce \"Products > Export (CSV), built-in product exporter\"; findings: missing_fields 22.",
+      "findings": {
+        "missing_fields": 22
+      },
+      "layout": "WooCommerce Products > Export (CSV), built-in product exporter",
+      "lines": [
+        "WOO-ALBUM: WOO-ALBUM: gtin, brand missing.",
+        "WOO-BEANIE: WOO-BEANIE: gtin, brand missing.",
+        "WOO-BEANIE-LOGO: WOO-BEANIE-LOGO: gtin, brand missing.",
+        "WOO-BELT: WOO-BELT: gtin, brand missing.",
+        "WOO-CAP: WOO-CAP: gtin, brand missing.",
+        "WOO-HOODIE-BLUE: WOO-HOODIE-BLUE: gtin, brand missing.",
+        "WOO-HOODIE-BLUE-LOGO: WOO-HOODIE-BLUE-LOGO: gtin, brand missing.",
+        "WOO-HOODIE-GREEN: WOO-HOODIE-GREEN: gtin, brand missing.",
+        "WOO-HOODIE-RED: WOO-HOODIE-RED: gtin, brand missing.",
+        "WOO-HOODIE-WITH-LOGO: WOO-HOODIE-WITH-LOGO: gtin, brand missing.",
+        "WOO-HOODIE-WITH-POCKET: WOO-HOODIE-WITH-POCKET: gtin, brand missing.",
+        "WOO-HOODIE-WITH-ZIPPER: WOO-HOODIE-WITH-ZIPPER: gtin, brand missing.",
+        "WOO-LONG-SLEEVE-TEE: WOO-LONG-SLEEVE-TEE: gtin, brand missing.",
+        "WOO-POLO: WOO-POLO: gtin, brand missing.",
+        "WOO-SINGLE: WOO-SINGLE: gtin, brand missing.",
+        "WOO-SUNGLASSES: WOO-SUNGLASSES: gtin, brand missing.",
+        "WOO-TSHIRT: WOO-TSHIRT: gtin, brand missing.",
+        "WOO-TSHIRT-LOGO: WOO-TSHIRT-LOGO: gtin, brand missing.",
+        "WOO-VNECK-TEE-BLUE: WOO-VNECK-TEE-BLUE: gtin, brand missing.",
+        "WOO-VNECK-TEE-GREEN: WOO-VNECK-TEE-GREEN: gtin, brand missing.",
+        "WOO-VNECK-TEE-RED: WOO-VNECK-TEE-RED: gtin, brand missing.",
+        "WP-PENNANT: WP-PENNANT: gtin, brand missing."
+      ]
+    },
+    {
+      "agent": "fairshop-inventory-listings",
+      "source": "Shopify inventory CSV template",
+      "url": "https://help.shopify.com/en/manual/products/inventory/getting-started-with-inventory/inventory-csv",
+      "licence": "Published by Shopify as a sample for its importer; Shopify terms of service",
+      "rows": 2,
+      "summary": "Stock rows read; findings: stock_no_sku 1, stock_not_listed 1 (no listings file, so every item in stock is reported as not listed).",
+      "findings": {
+        "stock_no_sku": 1,
+        "stock_not_listed": 1
+      },
+      "lines": [
+        "NO-SKU: 1 stock row(s) with 8 unit(s) have no SKU (Custard buns), so no listing can be matched to them. Give each item a SKU.",
+        "SKU:175756/MA: 80 unit(s) of 175756/MA are in stock (123 William Street 80) with no active listing anywhere."
+      ]
+    },
+    {
+      "agent": "fairshop-product-data",
+      "source": "Open Food Facts product database (products read through its public search API)",
+      "url": "https://world.openfoodfacts.org/data",
+      "licence": "ODbL 1.0 (database), DbCL 1.0 (contents)",
+      "rows": 400,
+      "summary": "400 real products (barcode lengths: 8 digits 22, 13 digits 378). 2 barcode(s) failed the GS1 check digit or length, 17 product(s) lack a name or brand. Independent check-digit re-count: 0 disagreement(s).",
+      "findings": {
+        "gtin_invalid": 2,
+        "missing_fields": 17
+      },
+      "disagreements": 0,
+      "lines": [
+        "barcodes that fail: 06153153, 06175700"
+      ]
+    }
+  ]
+}
