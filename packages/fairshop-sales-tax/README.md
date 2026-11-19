@@ -81,8 +81,8 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `order_date` | date | Order Date, Created at, Date | Bestelldatum, Date de commande, 注文日, 下单日期 |
 | `channel` | text | Channel, Source, Marketplace, Sales Channel | Kanal, Canal, チャネル, 渠道 |
 | `ship_state` (required) | text | Ship State, Shipping Province, Shipping State, State, Ship To State, ship-state | Bundesland, Région, 都道府県, 省份 |
-| `subtotal` (required) | amount | Subtotal, Taxable Amount, Item Total, Net Sales | - |
-| `shipping` | amount | Shipping, Shipping Charged, Shipping Amount | - |
+| `subtotal` (required) | amount | Subtotal, Taxable Amount, Item Total, Net Sales | Betrag, Montant, 金額, 金额 |
+| `shipping` | amount | Shipping, Shipping Charged, Shipping Amount | Versandkosten berechnet, Frais de port facturés, 送料, 运费 |
 | `tax_collected` (required) | amount | Tax, Taxes, Tax Collected, Sales Tax | Erhobene Steuer, Taxe perçue, 徴収税額, 已收税额 |
 | `exempt` | yes/no | Exempt, Tax Exempt | - |
 | `exemption_id` | text | Exemption ID, Exemption Certificate, Certificate | - |

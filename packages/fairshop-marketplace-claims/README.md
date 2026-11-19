@@ -80,8 +80,8 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `amount` | amount | Amount, Claim Amount, Amount Requested | Betrag, Montant, 金額, 金额 |
 | `status` | text | Status, Claim Status, Case Status | Status, Statut, ステータス, 状态 |
 | `respond_by` | date | Respond By, Response Due, Due Date | Fälligkeitsdatum, Date d'échéance, 期日, 截止日期 |
-| `buyer_name` | text | Buyer Name, Buyer, Customer Name | - |
-| `buyer_email` | text | Buyer Email, Customer Email, Email | - |
+| `buyer_name` | text | Buyer Name, Buyer, Customer Name | Kunde, Client, 顧客, 客户 |
+| `buyer_email` | text | Buyer Email, Customer Email, Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 
 Named exports recognised by their column names:
 

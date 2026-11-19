@@ -75,14 +75,14 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
-| `action_id` (required) | text | Action ID, Transaction ID, Commission ID | - |
+| `action_id` (required) | text | Action ID, Transaction ID, Commission ID | Kennung, Identifiant, 番号, 编号 |
 | `affiliate` | text | Affiliate, Partner, Publisher | Partner, Affilié, アフィリエイト, 推广者 |
 | `order_id` | text | Order ID, Order, OID | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `order_date` | date | Order Date, Action Date, Date | Bestelldatum, Date de commande, 注文日, 下单日期 |
-| `sale_amount` | amount | Sale Amount, Order Amount, Sale | - |
+| `sale_amount` | amount | Sale Amount, Order Amount, Sale | Brutto, Brut, 総額, 总额 |
 | `commission` (required) | amount | Commission, Payout, Amount | Provision, Commission, 報酬額, 佣金 |
 | `status` | text | Status, State | Status, Statut, ステータス, 状态 |
-| `affiliate_email` | text | Affiliate Email, Partner Email | - |
+| `affiliate_email` | text | Affiliate Email, Partner Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 
 Named exports recognised by their column names:
 
@@ -100,7 +100,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | `total` | amount | Total, Subtotal, Order Total | Betrag, Montant, 金額, 金额 |
 | `status` | text | Status, Financial Status, Order Status | Status, Statut, ステータス, 状态 |
 | `refunded` | amount | Refunded, Refunded Amount | Erstattet, Remboursé, 返金額, 退款金额 |
-| `customer_email` | text | Customer Email, Email | - |
+| `customer_email` | text | Customer Email, Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 
 ### Files from other countries
 

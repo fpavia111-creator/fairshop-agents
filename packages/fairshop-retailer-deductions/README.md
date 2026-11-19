@@ -75,13 +75,13 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `retailer` (required) | text | Retailer, Customer, Trading Partner | Kunde, Client, 顧客, 客户 |
-| `remit_id` | text | Remit ID, Remittance, Check Number, Payment ID | - |
+| `remit_id` | text | Remit ID, Remittance, Check Number, Payment ID | Referenz, Référence, 参照番号, 参考号 |
 | `invoice_number` (required) | text | Invoice, Invoice Number | Rechnungsnummer, N° de facture, 請求書番号, 发票号 |
 | `po` | text | PO, PO Number | Bestellnummer, Bon de commande, 発注番号, 采购订单号 |
-| `deduction_type` (required) | text | Deduction Type, Type, Reason | - |
-| `deduction_code` | text | Deduction Code, Reason Code, Code | - |
+| `deduction_type` (required) | text | Deduction Type, Type, Reason | Typ, Type, 種類, 类型 |
+| `deduction_code` | text | Deduction Code, Reason Code, Code | Grundcode, Code motif, 理由コード, 原因代码 |
 | `amount` (required) | amount | Amount, Deduction Amount | Betrag, Montant, 金額, 金额 |
-| `deduction_date` | date | Deduction Date, Date, Remit Date | - |
+| `deduction_date` | date | Deduction Date, Date, Remit Date | Datum, Date, 日付, 日期 |
 
 ### Wholesale invoices (`invoices`)
 
@@ -91,7 +91,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `po` | text | PO, PO Number | Bestellnummer, Bon de commande, 発注番号, 采购订单号 |
 | `retailer` | text | Retailer, Customer | Kunde, Client, 顧客, 客户 |
 | `amount` | amount | Amount, Invoice Amount, Total | Betrag, Montant, 金額, 金额 |
-| `units_shipped` | number | Units Shipped, Units, Quantity | - |
+| `units_shipped` | number | Units Shipped, Units, Quantity | Menge, Quantité, 数量, 数量 |
 | `ship_date` | date | Ship Date, Date | Versanddatum, Date d'expédition, 出荷日, 发货日期 |
 
 ### Proof of delivery (`pods`)
@@ -99,7 +99,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `invoice_number` (required) | text | Invoice, Invoice Number | Rechnungsnummer, N° de facture, 請求書番号, 发票号 |
-| `units_delivered` | number | Units Delivered, Delivered, Received | - |
+| `units_delivered` | number | Units Delivered, Delivered, Received | Zugestellte Packstücke, Colis livrés, 配達個数, 签收件数 |
 | `signed` | yes/no | Signed, Signature | - |
 
 ### Files from other countries

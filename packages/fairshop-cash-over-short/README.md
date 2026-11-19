@@ -76,7 +76,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `date` (required) | date | Date, Business Date, Closed At | Datum, Date, 日付, 日期 |
 | `store` (required) | text | Store, Location, Site | Filiale, Magasin, 店舗, 门店 |
 | `register` | text | Register, Drawer, Terminal | Kasse, Caisse, レジ, 收银台 |
-| `cashier` | text | Cashier, Employee, Closed By | - |
+| `cashier` | text | Cashier, Employee, Closed By | Mitarbeiter, Employé, 社員名, 员工 |
 | `expected_cash` (required) | amount | Expected Cash, Expected, Expected In Drawer | Soll-Bargeld, Espèces attendues, 理論在高, 应有现金 |
 | `counted_cash` (required) | amount | Counted Cash, Counted, Actual Cash | Gezähltes Bargeld, Espèces comptées, 実在高, 实点现金 |
 | `float` | amount | Float, Starting Cash, Opening Float | - |

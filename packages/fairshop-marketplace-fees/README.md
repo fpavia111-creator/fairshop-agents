@@ -89,7 +89,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `date` | date | Date, Posted Date, posted-date, Transaction Date, Fee Date | Datum, Date, 日付, 日期 |
 | `fee_type` (required) | text | Fee Type, Fee, Fee Description, amount-description, Description, Charge Type | Gebührenart, Type de frais, 手数料種別, 费用类型 |
 | `fee` (required) | amount | Fee Amount, Amount, Fees, Charge | Gebühr, Frais, 手数料, 手续费 |
-| `sale_amount` | amount | Sale Amount, Item Price, Principal, Product Sales, Order Amount, Sale Price | - |
+| `sale_amount` | amount | Sale Amount, Item Price, Principal, Product Sales, Order Amount, Sale Price | Brutto, Brut, 総額, 总额 |
 | `category` | text | Category, Product Category, Fee Category | Kategorie, Catégorie, 経費科目, 费用类别 |
 | `sku` | text | SKU, Seller SKU, sku | Artikelnummer, Référence, 品番, 物料编码 |
 

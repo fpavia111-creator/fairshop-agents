@@ -74,11 +74,11 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 |---|---|---|---|
 | `order_id` (required) | text | Order, Order ID, Order Number | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `sku` (required) | text | SKU, Item SKU, Lineitem sku | Artikelnummer, Référence, 品番, 物料编码 |
-| `return_date` | date | Return Date, Returned At, Date | - |
+| `return_date` | date | Return Date, Returned At, Date | Datum, Date, 日付, 日期 |
 | `reason` | text | Reason, Return Reason, Customer Reason | Grund, Motif, 理由, 原因 |
 | `qty` | number | Quantity, Qty, Units | Menge, Quantité, 数量, 数量 |
-| `customer_email` | text | Customer Email, Email, Buyer Email | - |
-| `customer_name` | text | Customer Name, Customer, Buyer Name | - |
+| `customer_email` | text | Customer Email, Email, Buyer Email | E-Mail, E-mail, メールアドレス, 邮箱 |
+| `customer_name` | text | Customer Name, Customer, Buyer Name | Kunde, Client, 顧客, 客户 |
 
 ### Order lines (`orders`)
 
@@ -88,7 +88,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `sku` (required) | text | SKU, Lineitem sku | Artikelnummer, Référence, 品番, 物料编码 |
 | `qty` | number | Quantity, Qty, Lineitem quantity | Menge, Quantité, 数量, 数量 |
 | `order_date` | date | Order Date, Created at, Date | Bestelldatum, Date de commande, 注文日, 下单日期 |
-| `customer_email` | text | Customer Email, Email | - |
+| `customer_email` | text | Customer Email, Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 
 ### Files from other countries
 

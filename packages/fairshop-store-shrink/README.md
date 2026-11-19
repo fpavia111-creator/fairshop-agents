@@ -76,7 +76,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `qty` (required) | number | Quantity, Adjustment, Qty Change | Menge, Quantité, 数量, 数量 |
 | `unit_cost` | amount | Unit Cost, Cost | Stückkosten, Coût unitaire, 単価, 单位成本 |
 | `reason` | text | Reason, Adjustment Reason | Grund, Motif, 理由, 原因 |
-| `counted_by` | text | Counted By, Employee, User | - |
+| `counted_by` | text | Counted By, Employee, User | Gezählt von, Compté par, 棚卸担当者, 盘点人 |
 
 Named exports recognised by their column names:
 
@@ -92,7 +92,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 |---|---|---|---|
 | `store` (required) | text | Store, Location | Filiale, Magasin, 店舗, 门店 |
 | `category` | text | Category, Department | Kategorie, Catégorie, 経費科目, 费用类别 |
-| `net_sales` (required) | amount | Net Sales, Sales, Revenue | - |
+| `net_sales` (required) | amount | Net Sales, Sales, Revenue | Brutto, Brut, 総額, 总额 |
 
 ### Files from other countries
 

@@ -84,12 +84,12 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 |---|---|---|---|
 | `order_id` (required) | text | Order, Order ID, Name, Order Number | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `order_date` (required) | date | Order Date, Created at, Date | Bestelldatum, Date de commande, 注文日, 下单日期 |
-| `customer_email` | text | Customer Email, Email | - |
-| `ship_address` | text | Ship Address, Shipping Address1, Shipping Address, Address | - |
+| `customer_email` | text | Customer Email, Email | E-Mail, E-mail, メールアドレス, 邮箱 |
+| `ship_address` | text | Ship Address, Shipping Address1, Shipping Address, Address | Adresse, Adresse, 住所, 地址 |
 | `ship_zip` | text | Ship Zip, Shipping Zip, Postal Code, Zip | PLZ Empfänger, Code postal destination, 届け先郵便番号, 目的地邮编 |
 | `discount_code` | text | Discount Code, Coupon, Promo Code, Code | Rabattcode, Code promo, クーポンコード, 优惠码 |
 | `discount_amount` | amount | Discount Amount, Discount, Coupon Amount | Rabatt, Remise, 割引, 折扣 |
-| `subtotal` | amount | Subtotal, Items Total, Merchandise Total | - |
+| `subtotal` | amount | Subtotal, Items Total, Merchandise Total | Betrag, Montant, 金額, 金额 |
 
 Named exports recognised by their column names:
 
@@ -106,8 +106,8 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | `discount_code` (required) | text | Code, Discount Code, Coupon | Rabattcode, Code promo, クーポンコード, 优惠码 |
 | `type` | text | Type, Code Type, Kind | Typ, Type, 種類, 类型 |
 | `max_uses` | number | Max Uses, Usage Limit, Limit | - |
-| `starts` | date | Starts, Start Date, Valid From | - |
-| `ends` | date | Ends, End Date, Valid To, Expires | - |
+| `starts` | date | Starts, Start Date, Valid From | Eintrittsdatum, Date d'entrée, 入社日, 入职日期 |
+| `ends` | date | Ends, End Date, Valid To, Expires | Austrittsdatum, Date de sortie, 退職日, 离职日期 |
 | `min_order` | amount | Minimum Order, Min Order, Minimum Subtotal | - |
 
 ### Files from other countries

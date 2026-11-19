@@ -83,7 +83,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `qty` | number | Quantity, Qty, Lineitem quantity | Menge, Quantité, 数量, 数量 |
 | `price` | amount | Price, Unit Price, Lineitem price | Preis, Prix, 価格, 价格 |
 | `status` | text | Status, Financial Status, Order Status | Status, Statut, ステータス, 状态 |
-| `cancel_reason` | text | Cancel Reason, Cancellation Reason | - |
+| `cancel_reason` | text | Cancel Reason, Cancellation Reason | Grund, Motif, 理由, 原因 |
 
 ### Files from other countries
 

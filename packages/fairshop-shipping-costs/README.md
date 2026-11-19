@@ -78,8 +78,8 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `order_date` | date | Order Date, Created at, Date | Bestelldatum, Date de commande, 注文日, 下单日期 |
 | `channel` | text | Channel, Source, Marketplace | Kanal, Canal, チャネル, 渠道 |
 | `shipping_charged` (required) | amount | Shipping Charged, Shipping, Shipping Paid | Versandkosten berechnet, Frais de port facturés, 送料, 运费 |
-| `subtotal` | amount | Subtotal, Items Total | - |
-| `ship_method` | text | Shipping Method, Ship Method, Requested Service | - |
+| `subtotal` | amount | Subtotal, Items Total | Betrag, Montant, 金額, 金额 |
+| `ship_method` | text | Shipping Method, Ship Method, Requested Service | Service, Service, サービス, 服务 |
 
 ### Shipping labels (`labels`)
 
@@ -92,7 +92,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `label_cost` (required) | amount | Label Cost, Shipping Cost, Postage, Rate Amount | Etikettenkosten, Coût de l’étiquette, ラベル費用, 面单费用 |
 | `tracking` (required) | text | Tracking, Tracking Number | Sendungsnummer, Numéro de suivi, 追跡番号, 运单号 |
 | `voided` | yes/no | Voided, Void | - |
-| `refund_status` | text | Refund Status, Void Status | - |
+| `refund_status` | text | Refund Status, Void Status | Status, Statut, ステータス, 状态 |
 
 Named exports recognised by their column names:
 

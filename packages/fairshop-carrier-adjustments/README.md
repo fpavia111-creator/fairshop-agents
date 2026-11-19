@@ -95,7 +95,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | `tracking` (required) | text | Tracking, Tracking Number | Sendungsnummer, Numéro de suivi, 追跡番号, 运单号 |
 | `order_id` | text | Order, Order ID, Order Number | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `sku` | text | SKU, Item SKU | Artikelnummer, Référence, 品番, 物料编码 |
-| `entered_weight` | number | Entered Weight, Weight, Declared Weight | - |
+| `entered_weight` | number | Entered Weight, Weight, Declared Weight | Gewicht, Poids, 重量, 重量 |
 | `length` | inches (cm converted) | Length, Package Length | Länge, Longueur, 長さ, 长 |
 | `width` | inches (cm converted) | Width, Package Width | Breite, Largeur, 幅, 宽 |
 | `height` | inches (cm converted) | Height, Package Height | Höhe, Hauteur, 高さ, 高 |

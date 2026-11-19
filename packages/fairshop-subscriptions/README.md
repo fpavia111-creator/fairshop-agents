@@ -75,15 +75,15 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `subscription_id` (required) | text | Subscription ID, Subscription, ID | Abonnement-ID, ID d’abonnement, 定期購入ID, 订阅编号 |
-| `customer_email` | text | Customer Email, Email | - |
+| `customer_email` | text | Customer Email, Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 | `status` (required) | text | Status, Subscription Status | Status, Statut, ステータス, 状态 |
-| `plan` | text | Plan, Product, Product Title | - |
+| `plan` | text | Plan, Product, Product Title | Lizenz, Licence, ライセンス, 许可证 |
 | `price` | amount | Price, Amount, Plan Amount, Recurring Price | Preis, Prix, 価格, 价格 |
-| `started` | date | Started, Created, Start Date | - |
-| `cancelled_at` | date | Cancelled At, Canceled At, Ended At | - |
-| `cancel_reason` | text | Cancel Reason, Cancellation Reason | - |
+| `started` | date | Started, Created, Start Date | Eintrittsdatum, Date d'entrée, 入社日, 入职日期 |
+| `cancelled_at` | date | Cancelled At, Canceled At, Ended At | Austrittsdatum, Date de sortie, 退職日, 离职日期 |
+| `cancel_reason` | text | Cancel Reason, Cancellation Reason | Grund, Motif, 理由, 原因 |
 | `next_billing` | date | Next Billing, Next Charge, Next Payment Date, Renews | Nächste Abrechnung, Prochaine facturation, 次回請求日, 下次扣款日期 |
-| `card_expiry` | text | Card Expiry, Card Expiration, Exp | - |
+| `card_expiry` | text | Card Expiry, Card Expiration, Exp | Ablaufdatum, Date d'expiration, 有効期限, 到期日 |
 
 Named exports recognised by their column names:
 
@@ -102,7 +102,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | `date` (required) | date | Date, Created, Attempted At, Charge Date | Datum, Date, 日付, 日期 |
 | `amount` | amount | Amount, Total | Betrag, Montant, 金額, 金额 |
 | `status` (required) | text | Status, Result, Outcome | Status, Statut, ステータス, 状态 |
-| `failure_reason` | text | Failure Reason, Decline Code, Error | - |
+| `failure_reason` | text | Failure Reason, Decline Code, Error | Grund, Motif, 理由, 原因 |
 
 ### Files from other countries
 

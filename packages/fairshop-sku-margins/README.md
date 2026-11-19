@@ -75,7 +75,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `channel` | text | Channel, Source, Marketplace | Kanal, Canal, チャネル, 渠道 |
 | `sku` (required) | text | SKU, Lineitem sku, Item SKU | Artikelnummer, Référence, 品番, 物料编码 |
 | `qty` | number | Quantity, Qty, Units | Menge, Quantité, 数量, 数量 |
-| `revenue` (required) | amount | Revenue, Net Sales, Line Total, Item Price | - |
+| `revenue` (required) | amount | Revenue, Net Sales, Line Total, Item Price | Brutto, Brut, 総額, 总额 |
 | `shipping_charged` | amount | Shipping Charged, Shipping, Shipping Revenue | Versandkosten berechnet, Frais de port facturés, 送料, 运费 |
 | `fees` | amount | Fees, Marketplace Fees, Selling Fees, Payment Fees | Gebühr, Frais, 手数料, 手续费 |
 

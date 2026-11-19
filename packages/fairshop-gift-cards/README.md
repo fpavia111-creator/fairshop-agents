@@ -75,11 +75,11 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `card_id` (required) | text | Card, Card ID, Gift Card, Last Characters, Code Ending | Kennung, Identifiant, 番号, 编号 |
-| `issued_date` | date | Issued, Issued Date, Created at, Date | - |
+| `issued_date` | date | Issued, Issued Date, Created at, Date | Datum, Date, 日付, 日期 |
 | `issued_amount` | amount | Initial Value, Issued Amount, Amount, Value | Ausgegeben, Émis, 発行額, 发放金额 |
 | `source` | text | Source, Issued By, Reason, Type | - |
 | `order_id` | text | Order, Order ID, Order Name | Bestellnummer, N° de commande, 注文番号, 订单号 |
-| `customer_email` | text | Customer Email, Email, Recipient Email | - |
+| `customer_email` | text | Customer Email, Email, Recipient Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 | `balance` | amount | Balance, Current Balance, Remaining | Saldo, Solde, 残高, 余额 |
 
 ### Card activity (`activity`)

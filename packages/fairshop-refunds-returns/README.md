@@ -76,11 +76,11 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 |---|---|---|---|
 | `order_id` (required) | text | Order, Order ID, Order Number, Name | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `sku` | text | SKU, Lineitem sku, Item SKU | Artikelnummer, Référence, 品番, 物料编码 |
-| `refund_date` (required) | date | Refund Date, Refunded At, Date | - |
+| `refund_date` (required) | date | Refund Date, Refunded At, Date | Datum, Date, 日付, 日期 |
 | `amount` (required) | amount | Refund Amount, Amount, Refunded | Betrag, Montant, 金額, 金额 |
 | `qty` | number | Quantity, Qty, Units | Menge, Quantité, 数量, 数量 |
 | `channel` | text | Channel, Source, Marketplace | Kanal, Canal, チャネル, 渠道 |
-| `customer_email` | text | Customer Email, Email, Buyer Email | - |
+| `customer_email` | text | Customer Email, Email, Buyer Email | E-Mail, E-mail, メールアドレス, 邮箱 |
 
 ### Returns received (`returns`)
 

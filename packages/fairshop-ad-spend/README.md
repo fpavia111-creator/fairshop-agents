@@ -98,7 +98,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | `order_id` (required) | text | Order, Order ID | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `date` | date | Date, Order Date | Datum, Date, 日付, 日期 |
 | `sku` (required) | text | SKU, Lineitem sku | Artikelnummer, Référence, 品番, 物料编码 |
-| `revenue` (required) | amount | Revenue, Net Sales, Line Total | - |
+| `revenue` (required) | amount | Revenue, Net Sales, Line Total | Brutto, Brut, 総額, 总额 |
 
 ### Stock (`stock`)
 

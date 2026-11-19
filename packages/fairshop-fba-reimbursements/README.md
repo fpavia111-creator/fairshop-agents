@@ -86,7 +86,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `sku` (required) | text | SKU, Seller SKU, MSKU, sku | Artikelnummer, Référence, 品番, 物料编码 |
 | `reason` (required) | text | Reason, Reason Code, Disposition, reason | Grund, Motif, 理由, 原因 |
 | `quantity` (required) | number | Quantity, Qty, quantity, Units | Menge, Quantité, 数量, 数量 |
-| `transaction_id` | text | Transaction ID, transaction-item-id, Reference ID | - |
+| `transaction_id` | text | Transaction ID, transaction-item-id, Reference ID | Referenz, Référence, 参照番号, 参考号 |
 
 Named exports recognised by their column names:
 
@@ -102,7 +102,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `date` | date | Approval Date, approval-date, Date | Datum, Date, 日付, 日期 |
-| `reimbursement_id` (required) | text | Reimbursement ID, reimbursement-id | - |
+| `reimbursement_id` (required) | text | Reimbursement ID, reimbursement-id | Referenz, Référence, 参照番号, 参考号 |
 | `sku` | text | SKU, sku, Seller SKU | Artikelnummer, Référence, 品番, 物料编码 |
 | `reason` | text | Reason, reason | Grund, Motif, 理由, 原因 |
 | `quantity` | number | Quantity, Quantity Reimbursed, Units | Menge, Quantité, 数量, 数量 |
@@ -140,7 +140,7 @@ Where a layout says "checked", its column names were compared with the vendor's 
 |---|---|---|---|
 | `order_id` (required) | text | Order ID, order-id, Order | Bestellnummer, N° de commande, 注文番号, 订单号 |
 | `sku` | text | SKU, sku | Artikelnummer, Référence, 品番, 物料编码 |
-| `refund_date` | date | Refund Date, Date, posted-date | - |
+| `refund_date` | date | Refund Date, Date, posted-date | Datum, Date, 日付, 日期 |
 | `amount` | amount | Refund Amount, Amount, Refunded | Betrag, Montant, 金額, 金额 |
 | `quantity` | number | Quantity, Qty, quantity-purchased | Menge, Quantité, 数量, 数量 |
 

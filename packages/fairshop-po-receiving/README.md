@@ -75,9 +75,9 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `po` (required) | text | PO, PO Number, Purchase Order | Bestellnummer, Bon de commande, 発注番号, 采购订单号 |
 | `vendor` | text | Vendor, Supplier | Lieferant, Fournisseur, 仕入先, 供应商 |
 | `sku` (required) | text | SKU, Item, Item SKU | Artikelnummer, Référence, 品番, 物料编码 |
-| `qty_ordered` (required) | number | Qty Ordered, Ordered, Quantity | - |
+| `qty_ordered` (required) | number | Qty Ordered, Ordered, Quantity | Menge, Quantité, 数量, 数量 |
 | `unit_cost` | amount | Unit Cost, Cost, PO Price | Stückkosten, Coût unitaire, 単価, 单位成本 |
-| `promised_date` | date | Promised Date, Expected Date, Due Date, ETA | - |
+| `promised_date` | date | Promised Date, Expected Date, Due Date, ETA | Liefertermin, Date de livraison prévue, 納期, 承诺送达日期 |
 
 ### Receipts (`receipts`)
 
@@ -85,7 +85,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 |---|---|---|---|
 | `po` (required) | text | PO, PO Number | Bestellnummer, Bon de commande, 発注番号, 采购订单号 |
 | `sku` (required) | text | SKU, Item | Artikelnummer, Référence, 品番, 物料编码 |
-| `qty_received` (required) | number | Qty Received, Received, Quantity | - |
+| `qty_received` (required) | number | Qty Received, Received, Quantity | Erhaltene Menge, Quantité reçue, 入荷数, 收货数量 |
 | `received_date` | date | Received Date, Date, Receipt Date | Eingangsdatum, Date de réception, 受領日, 收到日期 |
 
 ### Supplier invoice lines (`invoices`)
@@ -96,7 +96,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `vendor` | text | Vendor, Supplier | Lieferant, Fournisseur, 仕入先, 供应商 |
 | `po` (required) | text | PO, PO Number | Bestellnummer, Bon de commande, 発注番号, 采购订单号 |
 | `sku` (required) | text | SKU, Item | Artikelnummer, Référence, 品番, 物料编码 |
-| `qty_billed` (required) | number | Qty Billed, Quantity, Billed | - |
+| `qty_billed` (required) | number | Qty Billed, Quantity, Billed | Menge, Quantité, 数量, 数量 |
 | `unit_price` (required) | amount | Unit Price, Price, Rate | Einzelpreis, Prix unitaire, 単価, 单价 |
 | `invoice_date` | date | Invoice Date, Date | Rechnungsdatum, Date de facture, 請求日, 发票日期 |
 

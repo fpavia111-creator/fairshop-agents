@@ -71,7 +71,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `date` | date | Date, Seen On, Checked, Captured At | Datum, Date, 日付, 日期 |
-| `seller` (required) | text | Seller, Reseller, Merchant, Store Name | - |
+| `seller` (required) | text | Seller, Reseller, Merchant, Store Name | Händler, Commerçant, 支払先, 商户 |
 | `channel` | text | Channel, Marketplace, Site | Kanal, Canal, チャネル, 渠道 |
 | `sku` (required) | text | SKU, Item SKU, MPN, Model | Artikelnummer, Référence, 品番, 物料编码 |
 | `advertised_price` (required) | amount | Advertised Price, Price, Listed Price | Preis, Prix, 価格, 价格 |

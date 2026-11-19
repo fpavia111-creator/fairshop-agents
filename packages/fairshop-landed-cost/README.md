@@ -75,14 +75,14 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `sku` (required) | text | SKU, Item | Artikelnummer, Référence, 品番, 物料编码 |
 | `qty` (required) | number | Quantity, Qty, Units | Menge, Quantité, 数量, 数量 |
 | `unit_cost` (required) | amount | Unit Cost, FOB, Price | Stückkosten, Coût unitaire, 単価, 单位成本 |
-| `unit_weight` | number | Unit Weight, Weight per Unit | - |
+| `unit_weight` | number | Unit Weight, Weight per Unit | Gewicht, Poids, 重量, 重量 |
 
 ### Import costs (`costs`)
 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `shipment_id` (required) | text | Shipment, Shipment ID, Container, Entry | Sendungs-ID, N° d'expédition, 出荷番号, 发货单号 |
-| `cost_type` (required) | text | Cost Type, Type, Charge | - |
+| `cost_type` (required) | text | Cost Type, Type, Charge | Leistungsbeschreibung, Libellé de la prestation, 請求項目, 费用名称 |
 | `amount` (required) | amount | Amount, Cost, Total | Betrag, Montant, 金額, 金额 |
 
 ### Recorded costs (`recorded`)
@@ -90,7 +90,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | Column | Type | Also read as | For example, in other languages |
 |---|---|---|---|
 | `sku` (required) | text | SKU, Variant SKU | Artikelnummer, Référence, 品番, 物料编码 |
-| `recorded_cost` (required) | amount | Recorded Cost, Cost per item, Unit Cost, Cost | - |
+| `recorded_cost` (required) | amount | Recorded Cost, Cost per item, Unit Cost, Cost | Stückkosten, Coût unitaire, 単価, 单位成本 |
 
 ### Files from other countries
 
