@@ -1,4 +1,4 @@
-日付,参照番号,品番,理由,数量,金額,注文番号
+日付,reimbursement_id,品番,理由,数量,金額,注文番号
 2026/10/20,R-1,TEE-02,Damaged_Warehouse,2,30.00,
 2026/10/30,R-2,SOCK-05,Damaged_Warehouse,5,10.00,
 2026/10/02,R-3,MUG-01,CustomerReturn,2,24.00,113-5555555-5555555

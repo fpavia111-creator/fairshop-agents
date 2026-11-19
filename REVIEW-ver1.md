@@ -21,17 +21,17 @@ Every agent reads files the seller already exports, writes a worklist (CSV with 
 
 | Check | Result |
 |---|---|
-| `npm test` (all 31 workspaces) | **863 tests, 863 pass, 0 fail**: 149 in `fairshop-core`, 23 to 26 per agent |
+| `npm test` (all 31 workspaces) | **865 tests, 865 pass, 0 fail**: 151 in `fairshop-core`, 23 to 26 per agent |
 | `npm run evals` | **610 eval cases, 610 pass**; 20 or 21 per agent (domain cases, the standard policy and safety cases, and a German and a Japanese export of the main case) |
 | `npm run check` (family rules) | 30 agents, 30 distinct tool prefixes, 203 distinct tool names, every one-click tool waits for a click, the last policy rule blocks everything else, 9 agents read customer or staff fields and all list canaries; pass |
 | `npm run hostile` (formulas, HTML, `../` ids and AI-aimed instructions planted in every fixture, every eval case) | 30 agents, 3,050 calls, 1,431 planted values, 83 results flagged for instruction-like text, **0 findings** |
 | `npm run hostile:args` (null, numbers, arrays, a 200,000-character string, NUL, `../` and absolute paths in every argument of every tool) | 30 agents, 14,495 calls, **0 findings** (511 s on this machine, after the hang fix below) |
-| `npm run intl` (every spreadsheet eval case re-run as a German, French, Spanish, Brazilian, Italian, Japanese, Chinese and Korean export: local column names, legacy encodings, comma decimals, local dates) | 388 cases with spreadsheet inputs, **every case that passes in English passes in all 8 languages**; 336 of 358 column names have a translated word (the rest keep their English name and are still read) |
+| `npm run intl` (every spreadsheet eval case re-run as a German, French, Spanish, Brazilian, Italian, Japanese, Chinese and Korean export: local column names, legacy encodings, comma decimals, local dates) | 388 cases with spreadsheet inputs, **every case that passes in English passes in all 8 languages**; 334 of 358 column names have a translated word (the rest keep their English name and are still read) |
 | Masking canaries | Every eval case of the 9 agents with customer or staff fields runs through the contract test; no listed fictional name or e-mail reaches any result |
 | MCP stdio smoke test | Every agent: initialize, list tools, refuse an unknown tool, write the audit log |
 | ver 6 shared checks | Every agent: same answer twice, nothing read outside `--root` (four path forms), a Windows export with CRLF and a BOM reads the same |
 | `npm run bench` (10,000 rows per table) | 90 tools across 30 agents, each in its own process at 1,000 and 10,000 rows per table file: median 366 ms, slowest 4.1 s (`claims_audit`), peak memory 258 MB (Intel i7-9700K, 8 cores). 89 ok; one flag (`inventory_explain` 1,194 ms once) was a timing blip, 113 ms on the rerun. Three real slow spots were fixed first (below). Full table: `docs/bench-ver1.md` |
-| `npm run release:check:offline` | {{RELEASE}} |
+| `npm run release:check:offline` | **Dry run passed**: workspaces, package metadata, clean git tree, no `.npmrc`, secret scan of 942 tracked files, honest-copy scan of 94 README/package/manifest files, one-click categories and policy, no paid tools, 865 tests, 610/610 evals, hostile data and export passes 0 findings, `npm pack` of 31 packages (575 KB, no tests, state, output, keys or `.npmrc`). npm names skipped offline (checked separately below). Nothing was published |
 | `npm view` for all 31 package names (read-only) | all 31 free on npm (E404) |
 | MCP Registry | `node ..\add-mcp-registry.cjs fairshop-agents fairshop.html`: `mcpName` and `server.json` in all 30 agents |
 
@@ -44,6 +44,7 @@ Every agent reads files the seller already exports, writes a worklist (CSV with 
 - **Core, pseudonyms in tests:** a runtime without a state folder makes a fresh pseudonym key, so two runtimes gave different pseudonyms and every "same answer twice" style check failed as soon as a result was masked. The contract and shared checks now pass one fixed test key; the runtime also accepts the `phiKey` name the shared ver 6 checks use.
 - **Core, masking of card numbers:** the first pattern would have masked 17-digit Amazon order numbers. Card numbers are now masked only as 4-4-4-4 groups or 15 to 16 plain digits that pass the Luhn check; order and tracking numbers survive (test added).
 - **Core, generic affiliate export:** its column signature matched the agent's own column names, so a file already in the agent's own layout was reported as an adapted export. Signature narrowed (contract test caught it).
+- **Column words, Portuguese:** mapping a transaction id to the dictionary's "reference" words gave that column a Portuguese name the SKU field also accepts, so the SKU was read from the wrong column in the Portuguese FBA export (4 eval cases failed in `pt` only). The mapping was removed for transaction and reimbursement ids; all 8 languages pass. The international check exists to catch exactly this.
 - **fairshop-fba-storage-fees:** the monthly aged-surcharge total counted each SKU's summary line as well as its lots (218 instead of 109).
 - **fairshop-refunds-returns:** a second refund for the same unit was chased as a second unit to get back. Units to get back are now capped at the units ordered; the double refund is reported as such.
 - **fairshop-duplicate-listings:** look-alike titles were compared case-sensitively ("Blue ceramic mug" against "Ceramic mug blue" scored 0.43). Titles are lower-cased and punctuation folded first.

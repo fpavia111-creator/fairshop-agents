@@ -309,7 +309,7 @@ export const FIELD_CONCEPTS = Object.freeze({
   customer_email: 'email', buyer_email: 'email', affiliate_email: 'email', customer_name: 'customer', buyer_name: 'customer', ship_address: 'address', subtotal: 'amount', revenue: 'gross', sale_amount: 'gross', net_sales: 'gross',
   refund_date: 'date', return_date: 'date', issued_date: 'date', deduction_date: 'date', cancel_reason: 'reason', failure_reason: 'reason', starts: 'start_date', ends: 'end_date', started: 'start_date', cancelled_at: 'end_date',
   cost_type: 'charge_description', recorded_cost: 'unit_cost', seller: 'merchant', promised_date: 'deliver_by', qty_ordered: 'qty', qty_billed: 'qty', qty_received: 'units_received', units_shipped: 'qty', units_delivered: 'pieces_delivered',
-  deduction_type: 'type', deduction_code: 'reason_code', remit_id: 'reference', transaction_id: 'reference', reimbursement_id: 'reference', counted_by: 'counter', cashier: 'employee', shipping: 'shipping_charged', ship_method: 'service',
+  deduction_type: 'type', deduction_code: 'reason_code', remit_id: 'reference', counted_by: 'counter', cashier: 'employee', shipping: 'shipping_charged', ship_method: 'service',
   refund_status: 'status', plan: 'tier', card_expiry: 'expires', action_id: 'id', unit_weight: 'weight', entered_weight: 'weight',
   total: 'amount', gateway: 'method', order_total: 'amount', payout_amount: 'net', received: 'paid_amount',
   order_number: 'order_id', ordered_at: 'order_date', refund_amount: 'refunded', refunded_amount: 'refunded', refunded_at: 'date', returned_at: 'received_date',
