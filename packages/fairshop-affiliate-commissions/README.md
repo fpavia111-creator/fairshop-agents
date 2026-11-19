@@ -27,14 +27,14 @@ Fairshop Affiliate Commissions demo (fictional data), Auto mode on for drafts
 ▶ Check the files
   status: executed  decision: allow
   8 commission(s), 62.5 in total: 5 to reverse before payout and 1 already paid (29.5 to recover), 1 to review, 1 fine.
-    AC-1  Brightside Blog    5001      10 ok       0
-    AC-2  Brightside Blog    5002       8 reverse  8
-    AC-3  Coupon Cove        5003       9 reverse  3
-    AC-4  Coupon Cove        5001      10 reverse  10
-    AC-5  Trailhead Reviews  5099     4.5 reverse  4.5
-    AC-6  Lind Lifestyle     5004       5 review   0
-    AC-7  Brightside Blog    5005      12 clawback 2
-    AC-8  Trailhead Reviews  5006       4 reverse  2
+    AC-1  AFF-5256989c       5001      10 ok       0
+    AC-2  AFF-5256989c       5002       8 reverse  8
+    AC-3  AFF-3cd0ae1a       5003       9 reverse  3
+    AC-4  AFF-3cd0ae1a       5001      10 reverse  10
+    AC-5  AFF-58fd14e0       5099     4.5 reverse  4.5
+    AC-6  AFF-c5ef0203       5004       5 review   0
+    AC-7  AFF-5256989c       5005      12 clawback 2
+    AC-8  AFF-58fd14e0       5006       4 reverse  2
 
 ▶ Write the worklist
   status: executed  decision: allow
@@ -90,7 +90,7 @@ Named exports recognised by their column names:
 |---|---|---|---|
 | Affiliate network (generic) | Actions or transactions report (CSV) | Action Id or Transaction ID or Trans ID, Partner or Publisher or Media Partner, Payout or Commission, Sale Amount or Order Amount | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Orders (`orders`)
 

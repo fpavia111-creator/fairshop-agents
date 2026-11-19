@@ -86,7 +86,7 @@ Named exports recognised by their column names:
 | UPS Billing Center | Billing data, adjustment lines (CSV with header row) | Tracking Number, Charge Description, Net Amount, Adjustment Reason or Charge Category Detail Code | no |
 | USPS (via your shipping platform) | Automated Package Verification adjustments export | Tracking Number, APV Amount or Adjustment Amount, Entered Weight or Declared Weight | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Labels as bought (`labels`)
 

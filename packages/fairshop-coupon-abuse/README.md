@@ -97,7 +97,7 @@ Named exports recognised by their column names:
 |---|---|---|---|
 | Shopify | Orders > Export (CSV), discount columns | Name, Discount Code, Discount Amount, Email | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Discount codes (`codes`)
 

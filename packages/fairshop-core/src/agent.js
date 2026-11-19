@@ -57,7 +57,13 @@ export function shopAgent(spec) {
   tools.push({
     name: checkName, kind: 'read', title: spec.check.title, description: spec.check.description,
     inputSchema: { type: 'object', additionalProperties: false, required, properties: files },
-    handler: async (a, ctx) => { const r = run(a, ctx); return { summary: line(r), ...r }; },
+    // The result names the settings files it used and their sha256, so a person can tell which fee schedule,
+    // rate table or window a finding came from (final pass, 19 Nov 2026).
+    handler: async (a, ctx) => {
+      const r = run(a, ctx);
+      const used = Object.entries(a).filter(([, v]) => typeof v === 'string' && /\.json$/i.test(v)).map(([arg, file]) => ({ arg, file, sha256: ctx.hashFile(file) }));
+      return { summary: line(r), ...r, ...(used.length ? { settings_files: used } : { settings_files: [], settings_note: 'No settings file given: the built-in defaults were used (see the README).' }) };
+    },
   });
   rules.push({ tool: checkName, decision: 'allow' });
 

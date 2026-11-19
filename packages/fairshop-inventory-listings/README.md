@@ -11,7 +11,8 @@ Give it stock by location (Shopify inventory, WMS, 3PL or FBA export) and your c
 - **listed above what can ship** (units that could be oversold);
 - **listed at zero with stock**, and **inactive with stock** (sales missed);
 - **unknown SKU**: listed but not in the stock file;
-- **stock listed nowhere**.
+- **stock listed nowhere**;
+- **no SKU**: stock rows or listings without a SKU are reported once by name, since nothing can be matched to them (Shopify allows a variant with no SKU; its own inventory template has one).
 
 <!-- generated:start -->
 
@@ -83,9 +84,9 @@ Named exports recognised by their column names:
 
 | System | Export | Recognised by | Layout checked against vendor docs |
 |---|---|---|---|
-| Shopify | Inventory > Export (CSV), one row per variant and location | Handle, SKU, Location, Available or On hand | no |
+| Shopify | Inventory > Export (CSV), one row per variant and location | Handle, SKU, Location, Available or On hand | run on Shopify's inventory CSV template (help.shopify.com/csv/inventory_template.csv) on 2026-11-19 |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Channel listings (`listings`)
 
@@ -105,7 +106,7 @@ Named exports recognised by their column names:
 | Amazon Seller Central | All Listings report | seller-sku, asin1, item-name, price, quantity | no |
 | eBay Seller Hub | Listings > Active > Download report (CSV) | Item number, Title, Custom label (SKU), Current price or Start price | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Files from other countries
 

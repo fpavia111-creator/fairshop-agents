@@ -1,13 +1,18 @@
+import { createHash } from 'node:crypto';
 import { mkdtempSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { AgentRuntime } from './runtime.js';
 
+// The demo runs on fictional fixtures only, so it uses a fixed masking key: the pseudonyms it prints
+// (CUS-…, AFF-…) are the same on every run and in the README. Real runs use the key kept in .fairshop/.
+const DEMO_PII_KEY = createHash('sha256').update('fairshop demo: fictional data only').digest();
+
 /** Copy bundled fixtures into a temp folder and return a runtime rooted there. */
 export function demoRuntime(manifest, fixturesDir, options = {}) {
   const root = mkdtempSync(join(tmpdir(), `${manifest.name}-demo-`));
   cpSync(fixturesDir, root, { recursive: true });
-  return new AgentRuntime(manifest, { root, ...options });
+  return new AgentRuntime(manifest, { root, piiKey: DEMO_PII_KEY, ...options });
 }
 
 export function printStep(label, r) {

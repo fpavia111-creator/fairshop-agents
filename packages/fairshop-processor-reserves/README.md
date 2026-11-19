@@ -84,7 +84,7 @@ Named exports recognised by their column names:
 | Stripe | Balance > Balance transactions export (CSV) | Available On (UTC) or Available On, Source, Fee, Net | no |
 | PayPal | Activity > Download (CSV) | Gross, Fee, Net, Transaction ID | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Files from other countries
 

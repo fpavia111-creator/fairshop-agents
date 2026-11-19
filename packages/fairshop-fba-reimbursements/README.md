@@ -95,7 +95,7 @@ Named exports recognised by their column names:
 | Amazon Seller Central | FBA Inventory Adjustments report | adjusted-date, transaction-item-id, fnsku, reason, quantity | no |
 | Amazon Seller Central | Inventory Ledger, detailed view | Date, FNSKU, MSIN, Event Type, Reason, Quantity | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### FBA reimbursements (`reimbursements`)
 
@@ -115,7 +115,7 @@ Named exports recognised by their column names:
 |---|---|---|---|
 | Amazon Seller Central | FBA Reimbursements report | approval-date, reimbursement-id, reason, amount-total | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### FBA customer returns (`returns`)
 
@@ -132,7 +132,7 @@ Named exports recognised by their column names:
 |---|---|---|---|
 | Amazon Seller Central | FBA Customer Returns report | return-date, order-id, fnsku, detailed-disposition | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Refunds (`refunds`)
 

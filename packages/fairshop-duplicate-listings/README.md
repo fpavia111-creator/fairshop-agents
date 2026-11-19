@@ -25,7 +25,7 @@ Fairshop Duplicate Listings demo (fictional data), Auto mode on for drafts
 ▶ Check the files
   status: executed  decision: allow
   7 listing(s): 2 to clean up (duplicates and orphans), 2 to review (look-alike titles, shared GTINs), 4 fine.
-    GTIN:036000291452      BOWL-3 MUG-1  review gtin_shared
+    GTIN:9520000000011     BOWL-3 MUG-1  review gtin_shared
     Amazon:B0EX001         MUG-1         ok     
     Amazon:B0EX002         MUG-1         fix    duplicate_sku_listing
     Amazon:B0EX003         MUG-2         review near_duplicate_title
@@ -88,7 +88,7 @@ Named exports recognised by their column names:
 | Amazon Seller Central | All Listings report | seller-sku, asin1, item-name, price, quantity | no |
 | eBay Seller Hub | Listings > Active > Download report (CSV) | Item number, Title, Custom label (SKU), Current price or Start price | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Catalog SKUs (`catalog`)
 

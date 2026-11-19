@@ -12,6 +12,8 @@ Give it your returns (order, SKU, reason, quantity, customer) and the order line
 - **listing mismatch**: two or more "not as described" returns on one SKU;
 - **repeat returners**: customers with at least `returner_min_returns` returned orders (default 3) and `returner_rate_pct` of their orders returned (default 50%). E-mail spellings are folded ("Jo.Doe+x@gmail.com" is "jodoe@gmail.com") and the customer id is a one-way code.
 
+List line codes that are not products (postage, discounts, fees, manual adjustments) under `ignore_skus`; they are left out of every count. On a real shop's published data (UCI Online Retail, 541,909 rows) the codes `M` and `BANK CHARGES` were otherwise listed among the most returned "products".
+
 <!-- generated:start -->
 
 ## A demo run

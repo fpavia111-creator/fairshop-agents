@@ -88,7 +88,7 @@ Named exports recognised by their column names:
 | Square | Cash drawer report (CSV) | Drawer, Starting Cash or Starting Cash Amount, Expected Cash or Expected In Drawer, Actual Cash or Actual In Drawer | no |
 | Shopify POS | Cash tracking sessions export (CSV) | Session, Location, Expected cash, Counted cash | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Bank deposits (`deposits`)
 

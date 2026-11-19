@@ -13,6 +13,8 @@ Give it a product export (Shopify products, an Amazon flat file, WooCommerce or 
 - **GTIN with a wrong check digit or length** (GTIN-8, 12, 13, 14), and **a GTIN shared by two SKUs**;
 - **zero weight**, **zero price**, **too few images**, **short description**.
 
+Shopify's product export (classic and current layouts) and WooCommerce's product export are read as those stores write them: Shopify's title, description, vendor and type are carried down from a product's first row to its variant rows, images are counted per product, and a WooCommerce variation takes its parent's weight, description and images when its own are blank. Barcode cells such as `ean:…; upc:…` and hyphenated ISBNs are read, and an 8-digit UPC-E code is checked through its 12-digit form. A product that does not ship (Shopify "Requires shipping" false, a WooCommerce virtual or external product) is not asked for a weight. These rules were found by running the agent on Shopify's and WooCommerce's own published sample files on 19 Nov 2026.
+
 <!-- generated:start -->
 
 ## A demo run
@@ -84,14 +86,17 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 | `hs_code` | text | HS Code, Harmonized Code, HTS Code | - |
 | `country_of_origin` | text | Country of Origin, Origin Country, Made In | Ursprungsland, Pays d'origine, 原産国, 原产国 |
 | `category` | text | Category, Product Type, Type | Kategorie, Catégorie, 経費科目, 费用类别 |
+| `requires_shipping` | yes/no | Requires Shipping, Variant Requires Shipping, Shipping Required, Ships | - |
 
 Named exports recognised by their column names:
 
 | System | Export | Recognised by | Layout checked against vendor docs |
 |---|---|---|---|
-| Shopify | Products > Export (CSV) | Handle, Title, Variant SKU, Variant Price | no |
+| Shopify | Products > Export (CSV), classic layout ("Handle", "Variant SKU") | Handle, Title, Variant SKU, Variant Price | no |
+| Shopify | Products > Export (CSV), current layout ("URL handle", "Variant Barcodes") | Title, URL handle, SKU, Price | run on Shopify's product CSV template (help.shopify.com/csv/product_template.csv) on 2026-11-19 |
+| WooCommerce | Products > Export (CSV), built-in product exporter | ID, Type, SKU, Name, Regular price | run on WooCommerce's sample_products.csv (woocommerce/woocommerce on GitHub) on 2026-11-19 |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Files from other countries
 

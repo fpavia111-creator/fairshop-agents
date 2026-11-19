@@ -101,7 +101,7 @@ Named exports recognised by their column names:
 | ShipStation | Shipments > Export (CSV) | Order Number, Tracking Number, Shipping Cost or Shipment Cost or Label Cost | no |
 | Shippo | Transactions export (CSV) | Object ID, Tracking Number, Rate Amount, Order Number | no |
 
-Where a layout says "checked", its column names were compared with the vendor's documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
+Where a layout says "checked", its column names were compared with the vendor's documentation on that date; where it names a sample file, the agent was run on the vendor's own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.
 
 ### Files from other countries
 
