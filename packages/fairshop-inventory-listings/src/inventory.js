@@ -36,7 +36,10 @@ export function compareListings(stock, listings, s = {}) {
   const buffer = Object.fromEntries(Object.entries(s.buffer || {}).map(([k, v]) => [channelKey(k), v]));
   const isFba = (loc) => /\bfba\b|amazon/i.test(loc);
   const avail = new Map(); const locs = new Set();
-  for (const r of stock) { const k = skuKey(r.sku); const loc = str(r.location) || '(default)'; locs.add(loc); const a = Math.max(0, (num(r.on_hand) || 0) - (num(r.committed) || 0)); const m = avail.get(k) || new Map(); m.set(loc, (m.get(loc) || 0) + a); avail.set(k, m); }
+  // A stock row with no SKU cannot be matched to any listing (Shopify allows a variant without one; its own
+  // inventory template has such a row). It is reported once, by product name, not as a SKU called "".
+  const noSku = [];
+  for (const r of stock) { if (!skuKey(r.sku)) { noSku.push({ name: str(r.Title || r.title || r.Handle || r.handle || r.location) || 'unnamed', units: Math.max(0, (num(r.on_hand) || 0) - (num(r.committed) || 0)) }); continue; } const k = skuKey(r.sku); const loc = str(r.location) || '(default)'; locs.add(loc); const a = Math.max(0, (num(r.on_hand) || 0) - (num(r.committed) || 0)); const m = avail.get(k) || new Map(); m.set(loc, (m.get(loc) || 0) + a); avail.set(k, m); }
   const feeding = (type) => { const set = feeds[type]; return (loc) => (set ? set.includes(loc.toLowerCase()) : type === 'fba' ? isFba(loc) : !isFba(loc)); };
   const items = []; const listed = new Set();
   for (const l of sortBy(listings.map((l) => ({ ...l, id: `${channelLabel(channelKey(l.channel))}:${str(l.listing_id) || skuKey(l.sku)}` })))) {
@@ -44,7 +47,8 @@ export function compareListings(stock, listings, s = {}) {
     const m = avail.get(sku); const can = m ? Math.max(0, [...m.entries()].filter(([loc]) => feeding(type)(loc)).reduce((a, [, v]) => a + v, 0) - (buffer[ch] || 0)) : 0;
     const f = []; let status = 'ok'; let over = 0;
     if (active) listed.add(sku);
-    if (!m) { f.push(finding('unknown_sku', null, `${channelLabel(ch)} lists ${sku}, which is not in your stock file.`)); status = 'review'; }
+    if (!sku) { f.push(finding('listing_no_sku', null, `${channelLabel(ch)} listing ${str(l.listing_id) || '(no id)'} has no SKU, so it cannot be matched to stock. Give it the SKU of the item it sells.`)); status = 'review'; }
+    else if (!m) { f.push(finding('unknown_sku', null, `${channelLabel(ch)} lists ${sku}, which is not in your stock file.`)); status = 'review'; }
     else if (active && qty > can) { over = qty - can; f.push(finding('listed_over_available', null, `${channelLabel(ch)} lists ${qty} of ${sku}; its ${type} locations can ship ${can}${buffer[ch] ? ` after a buffer of ${buffer[ch]}` : ''}. ${over} unit(s) could be oversold.`)); status = 'fix'; }
     else if (active && qty === 0 && can > 0) { f.push(finding('listed_zero_with_stock', null, `${channelLabel(ch)} lists 0 of ${sku} while ${can} can ship.`)); status = 'fix'; }
     else if (!active && can > 0) { f.push(finding('inactive_with_stock', null, `The ${channelLabel(ch)} listing for ${sku} is ${str(l.status) || 'inactive'} while ${can} can ship.`)); status = 'review'; }
@@ -53,6 +57,10 @@ export function compareListings(stock, listings, s = {}) {
   for (const [sku, m] of [...avail.entries()].sort(([a], [b]) => (a < b ? -1 : 1))) {
     const total = [...m.values()].reduce((a, b) => a + b, 0);
     if (total > 0 && !listed.has(sku)) items.push({ id: `SKU:${sku}`, kind: 'stock', channel: '', sku, listing_id: '', fulfillment: '', listed: 0, can_ship: total, suggested: null, oversell_units: 0, units: total, status: 'review', findings: [finding('stock_not_listed', null, `${total} unit(s) of ${sku} are in stock (${[...m.entries()].filter(([, v]) => v > 0).map(([k, v]) => `${k} ${v}`).join(', ')}) with no active listing anywhere.`)] });
+  }
+  if (noSku.length) {
+    const units = noSku.reduce((a, x) => a + x.units, 0); const names = [...new Set(noSku.map((x) => x.name))];
+    items.push({ id: 'NO-SKU', kind: 'stock', channel: '', sku: '', listing_id: '', fulfillment: '', listed: 0, can_ship: units, suggested: null, oversell_units: 0, units: 0, status: 'review', findings: [finding('stock_no_sku', null, `${noSku.length} stock row(s) with ${units} unit(s) have no SKU (${names.slice(0, 5).join(', ')}${names.length > 5 ? ', …' : ''}), so no listing can be matched to them. Give each item a SKU.`)] });
   }
   const sorted = sortBy(items, (i) => `${i.kind}|${i.id}`);
   return { listings: sorted.filter((i) => i.kind === 'listing').length, oversell_units: sorted.reduce((a, i) => a + i.oversell_units, 0), stranded_units: sorted.reduce((a, i) => a + i.units, 0), ...byStatus(sorted, ['fix', 'review', 'ok']), by_channel: rollup(sorted.filter((i) => i.kind === 'listing'), (i) => i.channel, ['listed', 'can_ship', 'oversell_units']).map(({ key, ...v }) => ({ channel: key, ...v })), by_finding: byFinding(sorted), items: sorted };

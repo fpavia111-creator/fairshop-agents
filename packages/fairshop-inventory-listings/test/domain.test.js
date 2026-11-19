@@ -30,3 +30,11 @@ test('feeding locations can be set by name', () => {
   const r = compareListings([st('A', 'East', 5), st('A', 'West', 5)], [li('Shopify', 'A', 10)], { feeds: { merchant: ['east'] } });
   assert.equal(r.items[0].can_ship, 5); assert.deepEqual(updatesText(r.items).listings, ['Shopify:Shopify-A']);
 });
+
+test('a stock row or a listing with no SKU is reported once by name, not as a SKU called "" (final pass, Shopify inventory template)', () => {
+  const r = compareListings([{ sku: '', location: 'Main', on_hand: '8', Title: 'Example buns' }, { sku: 'A', location: 'Main', on_hand: '5' }], [{ channel: 'Shopify', sku: 'A', listing_id: 'L1', listed_qty: '5' }, { channel: 'eBay', sku: '', listing_id: 'L2', listed_qty: '1' }]);
+  const none = r.items.find((i) => i.id === 'NO-SKU');
+  assert.deepEqual(none.findings.map((f) => f.code), ['stock_no_sku']); assert.match(none.findings[0].detail, /Example buns/);
+  assert.deepEqual(r.items.find((i) => i.id === 'eBay:L2').findings.map((f) => f.code), ['listing_no_sku']);
+  assert.ok(!r.items.some((i) => i.id === 'SKU:'));
+});

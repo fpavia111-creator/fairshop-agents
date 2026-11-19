@@ -128,9 +128,11 @@ test('fairshop-sources.json is schema-checked when read', () => {
 
 test('the catalogue: every entry has a system, a label and a way to be recognised; only checked layouts say so', () => {
   const all = Object.values(EXPORTS); assert.ok(all.length >= 13);
-  for (const e of all) { assert.match(e.id, /^[a-z0-9_]+$/); assert.ok(e.system && e.label, e.id); assert.ok((e.signature && e.signature.length) || (e.headerless && typeof e.detect === 'function'), e.id); assert.ok(['documented', 'recalled'].includes(e.basis), e.id); }
+  for (const e of all) { assert.match(e.id, /^[a-z0-9_]+$/); assert.ok(e.system && e.label, e.id); assert.ok((e.signature && e.signature.length) || (e.headerless && typeof e.detect === 'function'), e.id); assert.ok(['documented', 'recalled', 'sample'].includes(e.basis), e.id); }
   assert.deepEqual(all.filter((e) => e.basis === 'documented').map((e) => e.id).sort(), []);
-  for (const e of all.filter((x) => x.basis === 'documented')) assert.ok(e.source && /^\d{4}-\d{2}-\d{2}$/.test(e.checked), e.id);
+  // Run on the vendor's own published sample file (final pass, 19 Nov 2026).
+  assert.deepEqual(all.filter((e) => e.basis === 'sample').map((e) => e.id).sort(), ['shopify_inventory', 'shopify_products_2025', 'woocommerce_products']);
+  for (const e of all.filter((x) => x.basis === 'documented' || x.basis === 'sample')) assert.ok(e.source && /^\d{4}-\d{2}-\d{2}$/.test(e.checked), e.id);
   assert.match(EXPORTS_BASIS_NOTE, /None was tested against a live account/);
   assert.throws(() => exportProfile('nope', {}), /unknown export "nope"/);
   const p = exportProfile('fedex_fbo_csv', { tracking: 'Express or Ground Tracking ID' }, { note: 'n' }); assert.equal(p.system, 'FedEx Billing Online'); assert.equal(p.note, 'n'); assert.deepEqual(p.map, { tracking: 'Express or Ground Tracking ID' });

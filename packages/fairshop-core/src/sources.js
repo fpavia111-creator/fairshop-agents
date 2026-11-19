@@ -303,6 +303,9 @@ export function adaptRecords(table, def, { override = null, kind = '', arg = '',
   let rows = [];
   const planNorm = new Set([...planFields].map(normHeader));
   const helpers = { date: (v, o) => { const d = parseAnyDate(v, { order: o || (dateOrder === 'dmy' ? 'dmy' : 'mdy') }); return d ? d.date : ''; }, amount: (v, o) => cleanAmount(v, o) ?? '', norm: normHeader };
+  // A profile's prepare hook sees the raw rows under the file's own column names, before any mapping
+  // (Shopify fills product columns only on a product's first row; the hook fills them down).
+  if (profile && profile.prepare) records = profile.prepare(records.filter((r) => r && typeof r === 'object' && !Array.isArray(r))) || records;
   for (const r of records) {
     if (!r || typeof r !== 'object' || Array.isArray(r)) { skipped++; continue; }
     const get = getter(r, index);
@@ -429,7 +432,7 @@ export function describeSources(manifest) {
   return Object.entries(manifest.sources || {}).map(([kind, def]) => ({
     kind, label: def.label || kind, args: (def.args || [kind]).map((a) => a.split('.').pop()).filter((a, i, arr) => arr.indexOf(a) === i),
     columns: Object.entries(def.fields || {}).map(([name, fd]) => ({ name, type: (fd && fd.type) || 'text', required: !!(fd && fd.required), also_called: (fd && fd.aliases) || [] })),
-    exports: (def.profiles || []).map((p) => ({ id: p.id, system: p.system, label: p.label || '', layout_checked: p.basis === 'documented' ? `against ${p.source || 'vendor documentation'} on ${p.checked || 'an unrecorded date'}` : 'no', recognised_by: (p.signature || []).map((s) => (Array.isArray(s) ? s.join(' or ') : s)), ...(p.headerless ? { headerless: true } : {}), ...(p.howTo ? { how_to_export: p.howTo } : {}) })),
+    exports: (def.profiles || []).map((p) => ({ id: p.id, system: p.system, label: p.label || '', layout_checked: p.basis === 'documented' ? `against ${p.source || 'vendor documentation'} on ${p.checked || 'an unrecorded date'}` : p.basis === 'sample' ? `run on ${p.source || 'the vendor\'s published sample file'} on ${p.checked || 'an unrecorded date'}` : 'no', recognised_by: (p.signature || []).map((s) => (Array.isArray(s) ? s.join(' or ') : s)), ...(p.headerless ? { headerless: true } : {}), ...(p.howTo ? { how_to_export: p.howTo } : {}) })),
   }));
 }
 

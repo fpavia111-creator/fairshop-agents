@@ -10,8 +10,10 @@
 //   'documented'  the column names were checked against the vendor's own
 //                 documentation (source and date given);
 //   'recalled'    the layout was written from knowledge of the export and was
-//                 not checked against documentation or a live account.
-// Neither kind was tested against a live account. When a header differs, the
+//                 not checked against documentation or a live account;
+//   'sample'      the agent was run on the vendor's own published sample file
+//                 (source and date given).
+// None was tested against a live account. When a header differs, the
 // file still maps by each column's "also called" list, `inspect` shows what was
 // matched, and fairshop-sources.json names the columns by hand.
 
@@ -37,11 +39,13 @@ export const EXPORTS = Object.freeze(Object.fromEntries([
   e('shopify_orders', 'Shopify', 'Orders > Export (CSV)', ['Name', 'Financial Status', 'Lineitem name']),
   // ---- E-commerce and retail (Fairshop) ----
   // Stores
-  e('shopify_products', 'Shopify', 'Products > Export (CSV)', ['Handle', 'Title', 'Variant SKU', 'Variant Price']),
-  e('shopify_inventory', 'Shopify', 'Inventory > Export (CSV), one row per variant and location', ['Handle', 'SKU', 'Location', ['Available', 'On hand']]),
+  e('shopify_products', 'Shopify', 'Products > Export (CSV), classic layout ("Handle", "Variant SKU")', ['Handle', 'Title', 'Variant SKU', 'Variant Price']),
+  e('shopify_products_2025', 'Shopify', 'Products > Export (CSV), current layout ("URL handle", "Variant Barcodes")', ['Title', 'URL handle', 'SKU', 'Price'], { basis: 'sample', source: 'Shopify\'s product CSV template (help.shopify.com/csv/product_template.csv)', checked: '2026-11-19' }),
+  e('shopify_inventory', 'Shopify', 'Inventory > Export (CSV), one row per variant and location', ['Handle', 'SKU', 'Location', ['Available', 'On hand']], { basis: 'sample', source: 'Shopify\'s inventory CSV template (help.shopify.com/csv/inventory_template.csv)', checked: '2026-11-19' }),
   e('shopify_payout_transactions', 'Shopify Payments', 'Payouts > Export transactions (CSV)', ['Payout Date', 'Order', 'Fee', 'Net']),
   e('shopify_discounts_orders', 'Shopify', 'Orders > Export (CSV), discount columns', ['Name', 'Discount Code', 'Discount Amount', 'Email']),
   e('woocommerce_orders', 'WooCommerce', 'Orders export (CSV)', ['Order Number', 'Order Status', 'Order Total Amount']),
+  e('woocommerce_products', 'WooCommerce', 'Products > Export (CSV), built-in product exporter', ['ID', 'Type', 'SKU', 'Name', 'Regular price'], { basis: 'sample', source: 'WooCommerce\'s sample_products.csv (woocommerce/woocommerce on GitHub)', checked: '2026-11-19' }),
   e('bigcommerce_orders', 'BigCommerce', 'Orders > Export (default template)', ['Order ID', 'Order Status', 'Order Total (inc tax)']),
   // Marketplaces
   e('amazon_settlement_v2', 'Amazon Seller Central', 'Settlement report, flat file V2', ['settlement-id', 'amount-type', 'amount-description', 'amount']),
@@ -88,7 +92,7 @@ export function exportProfile(key, map, extra = {}) {
   return { ...base, map, ...extra };
 }
 
-export const EXPORTS_BASIS_NOTE = 'Where a layout says "checked", its column names were compared with the vendor\'s documentation on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.';
+export const EXPORTS_BASIS_NOTE = 'Where a layout says "checked", its column names were compared with the vendor\'s documentation on that date; where it names a sample file, the agent was run on the vendor\'s own published sample on that date. The other layouts were written from knowledge of the export and were not checked. None was tested against a live account.';
 
 /**
  * Row hook for grouped reports (QuickBooks style): a row with only its first
