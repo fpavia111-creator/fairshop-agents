@@ -128,7 +128,21 @@ No public data in a real format exists for the other 26 agents' inputs (payouts,
 
 ### Final numbers
 
-⟨BAR⟩
+| Check (fresh clone, Windows 10, Node 24.20.0, `core.autocrlf=true`) | Result |
+|---|---|
+| `try_it`: `git clone`, `npm install`, `node packages/fairshop-payouts/bin/fairshop-payouts.js demo` | `npm install --offline` in 4 s (no dependencies outside the repository), demo in 1 s, no setup, no network; the tree stays clean |
+| `npm test` | **876 tests, 876 pass**: 154 in `fairshop-core`, 23 to 28 per agent |
+| `npm run evals` | **610/610** (20 or 21 per agent) |
+| `npm run check` | 30 agents, 30 prefixes, 203 tool names, 9 agents with personal fields, all masked with canaries listed; pass |
+| `readme:check`, `plugin:check`, `make-evals --check`, `make-intl-fixtures --check`, `root-readme --check` | all pass on the CRLF-converting clone (they failed there before this pass) |
+| `npm run accuracy` | 158/158 planted found, 0 of 64 near-misses flagged, 0 findings on 380 clean rows, 82/82 mutations caught |
+| `npm run model-view` | 9 agents with personal data, 58 canaries, **0 leaks** |
+| `npm run intl` | 388 cases with spreadsheet inputs, 8 languages, every case that passes in English passes in every language |
+| `npm run hostile` | 30 agents, 3,050 calls, 1,889 planted values, **0 findings** |
+| `npm run hostile:args` | 30 agents, 14,495 calls, **0 findings** (727 s) |
+| `npm run bench` (10,000 rows per table) | 90 tools, 0 need attention; median 633 ms, slowest 5.8 s (`affiliates_audit`, about twice its build-time cost now that affiliate names are masked), peak memory 258 MB. Other sessions were running their own final passes on this machine, so timings run about 25% above the build's |
+| `npm run release:check:offline` | **Dry run passed**: secret scan of 1,043 tracked files, honest-copy scan of 94 README/package/manifest files, one-click categories and policy, no paid tools, 876 tests, 610/610 evals, hostile 0 findings, `npm pack` of 31 packages (590 KB, no tests, state, output, keys or `.npmrc`). One warning: `npm install` rewrote `package-lock.json` in the clone (it listed only the core workspace); the lockfile was regenerated and committed, and a fresh clone of the final commit installs with no change. npm names not rechecked offline (all 31 free on 18 Nov) |
+| `npm run mcp:check` | not run (needs the MCP SDK installed) |
 
 ### For Kurt to decide
 
