@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.fpavia111-creator/fairshop-marketplace-claims",
+  "title": "Fairshop Marketplace Claims",
+  "description": "Lines up Amazon A-to-z, eBay, Walmart and Etsy claims with your shipment and delivery records",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents",
+    "source": "github",
+    "subfolder": "packages/fairshop-marketplace-claims"
+  },
+  "websiteUrl": "https://fair-agents.com/fairshop.html",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "fairshop-marketplace-claims",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "named",
+          "name": "--root",
+          "description": "Folder holding the exports this agent may read and write (it cannot reach outside it)",
+          "isRequired": true,
+          "format": "filepath",
+          "valueHint": "exports_folder"
+        }
+      ]
+    }
+  ]
+}

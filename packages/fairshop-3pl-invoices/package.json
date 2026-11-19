@@ -1,6 +1,7 @@
 {
   "name": "fairshop-3pl-invoices",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-3pl-invoices",
   "description": "Audits a 3PL invoice line by line against your rate card, shipped orders, receipts and pallet counts: rates above the card, orders billed twice, picks for orders that never shipped, more units received or pallets stored than counted, and charges not on the card. Drafts the invoice dispute; never pays.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

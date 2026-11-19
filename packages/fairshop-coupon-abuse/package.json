@@ -1,6 +1,7 @@
 {
   "name": "fairshop-coupon-abuse",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-coupon-abuse",
   "description": "Checks every order that used a discount code against your code rules: single-use and limited codes used too often, codes used outside their dates or under the minimum order, new-customer codes used by returning shoppers, staff codes used outside staff, and codes you never issued. Drafts a code review; never disables a code or cancels an order.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

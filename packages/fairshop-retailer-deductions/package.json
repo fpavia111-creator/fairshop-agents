@@ -1,6 +1,7 @@
 {
   "name": "fairshop-retailer-deductions",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-retailer-deductions",
   "description": "Checks deductions retailers take from wholesale remittances against your invoices and proof of delivery: shortages your signed POD disproves, promotional allowances above what you agreed, deductions taken twice, compliance fines needing evidence, small ones to write off and ones past the dispute window. Drafts a dispute per retailer; never submits it.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

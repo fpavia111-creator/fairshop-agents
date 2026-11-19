@@ -1,6 +1,7 @@
 {
   "name": "fairshop-carrier-adjustments",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-carrier-adjustments",
   "description": "Checks carrier adjustments (UPS, FedEx, USPS) against the weights and dimensions you entered on the label: adjustments your own data disproves, with a dispute-by date, adjustments that are right because your product data is wrong (and the SKUs that keep causing them), address corrections, and adjustments past their window. Drafts the dispute; never files it or pays.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

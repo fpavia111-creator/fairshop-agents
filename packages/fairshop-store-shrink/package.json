@@ -1,6 +1,7 @@
 {
   "name": "fairshop-store-shrink",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-store-shrink",
   "description": "Works out shrink by store and category from inventory adjustments and sales: stores above your shrink target, stores where most loss has no explained reason, and SKUs written off again and again. Drafts a loss-prevention review; never posts an adjustment or touches staff records.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

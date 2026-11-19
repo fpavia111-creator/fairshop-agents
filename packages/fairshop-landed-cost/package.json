@@ -1,6 +1,7 @@
 {
   "name": "fairshop-landed-cost",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-landed-cost",
   "description": "Spreads freight, duty, broker and other import costs over the SKUs of each shipment (by weight or value, as you set) to get a landed unit cost, compares it with the cost recorded in your store, and lists shipments with no costs and costs with no shipment. Drafts cost updates; never changes a cost.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

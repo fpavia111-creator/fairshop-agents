@@ -1,6 +1,7 @@
 {
   "name": "fairshop-inventory-listings",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-inventory-listings",
   "description": "Compares stock by location (warehouse, 3PL, FBA) with the quantities listed on each channel: listings above what their locations can ship, listings at zero while stock sits on the shelf, inactive listings with stock, listings for SKUs you do not stock, and stock listed nowhere. Drafts quantity corrections; never changes a listing.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

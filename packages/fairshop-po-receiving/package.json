@@ -1,6 +1,7 @@
 {
   "name": "fairshop-po-receiving",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-po-receiving",
   "description": "Three-way match of supplier purchase orders, receipts and invoices: units billed but not received, invoices billed twice, prices above the PO, short and over shipments, late deliveries and POs past due with nothing received. Drafts a supplier claim; never pays or cancels a PO.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

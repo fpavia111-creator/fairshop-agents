@@ -1,6 +1,7 @@
 {
   "name": "fairshop-product-data",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-product-data",
   "description": "Checks product data before it goes to a channel: missing GTIN, brand, weight, price or images, titles over the channel limit you set, GTINs with a wrong check digit or shared by two SKUs, zero weights and prices, and thin descriptions. Drafts the fix list; never changes a listing.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

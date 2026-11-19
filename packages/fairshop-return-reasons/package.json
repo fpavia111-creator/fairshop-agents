@@ -1,6 +1,7 @@
 {
   "name": "fairshop-return-reasons",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-return-reasons",
   "description": "Reads return reasons by SKU and by customer: SKUs returned far more than the rest and why (listing, size, quality, fulfilment), and customers who return most of what they buy, with customer names and e-mails masked. Drafts a listing review; never blocks a customer or changes a listing.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

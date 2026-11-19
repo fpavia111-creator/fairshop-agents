@@ -1,6 +1,7 @@
 {
   "name": "fairshop-stockouts",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-stockouts",
   "description": "Reads daily stock snapshots and orders per SKU: orders taken while out of stock, days out of stock and an estimate of the sales lost, and SKUs that will run out before a reorder could arrive, with a suggested quantity. Drafts the purchase order; never sends it to a supplier.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

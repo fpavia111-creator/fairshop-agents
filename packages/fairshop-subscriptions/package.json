@@ -1,6 +1,7 @@
 {
   "name": "fairshop-subscriptions",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-subscriptions",
   "description": "Reads subscription and payment exports (Recharge, Stripe Billing, Shopify subscriptions) for failed payments: not retried, retries used up, cards about to expire, active plans with no payment, and churn split into voluntary and payment-failure. Drafts dunning messages; never charges a card or cancels a plan.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

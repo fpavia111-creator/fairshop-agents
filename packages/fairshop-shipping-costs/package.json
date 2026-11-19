@@ -1,6 +1,7 @@
 {
   "name": "fairshop-shipping-costs",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-shipping-costs",
   "description": "Compares what each order charged for shipping with the labels bought for it: labels costing more than was charged, free shipping under your threshold, two labels on one order, voided labels not refunded, and labels with no order. Drafts a label refund request; never buys or voids a label.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

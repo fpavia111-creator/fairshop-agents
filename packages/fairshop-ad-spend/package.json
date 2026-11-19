@@ -1,6 +1,7 @@
 {
   "name": "fairshop-ad-spend",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-ad-spend",
   "description": "Reads ad platform exports (Amazon Ads, Google Ads, Meta) against your orders and stock: campaigns under your target return, spend with no sales, campaigns over budget, ads for SKUs that are out of stock, and platforms that claim more sales than the SKU sold. Drafts a campaign review; never pauses a campaign or changes a budget.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

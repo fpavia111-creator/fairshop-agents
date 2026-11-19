@@ -1,6 +1,7 @@
 {
   "name": "fairshop-map-pricing",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-map-pricing",
   "description": "Checks advertised prices from your own channels and from resellers against your minimum advertised price (MAP) list: your own listings below MAP first, resellers below it (and repeat ones), authorised exceptions, and SKUs not on the list. Drafts a notice per reseller; never changes a price or suspends a reseller.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

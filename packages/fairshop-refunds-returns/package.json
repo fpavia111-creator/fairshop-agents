@@ -1,6 +1,7 @@
 {
   "name": "fairshop-refunds-returns",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-refunds-returns",
   "description": "Matches refunds to returns received: refunds whose item never came back, returns received but never refunded, refunds paid twice or above the price paid, and full refunds on returns received damaged. Drafts return reminders; never refunds or emails anyone.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

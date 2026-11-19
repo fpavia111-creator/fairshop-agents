@@ -1,6 +1,7 @@
 {
   "name": "fairshop-processor-reserves",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-processor-reserves",
   "description": "Tracks reserves and holds in Stripe, PayPal and Shopify balance exports against the reserve terms you confirm: releases overdue, holds above your terms, releases coming up, and dispute holds open too long. Drafts a release inquiry per processor; never moves money.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

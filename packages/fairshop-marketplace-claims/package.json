@@ -1,6 +1,7 @@
 {
   "name": "fairshop-marketplace-claims",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-marketplace-claims",
   "description": "Lines up Amazon A-to-z, eBay, Walmart and Etsy claims with your shipment and delivery records: respond-by dates, which claims your tracking can defend, which need a signature or photos, which are likely refunds, and which are overdue. Drafts each response; never submits it or refunds.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

@@ -1,6 +1,7 @@
 {
   "name": "fairshop-fba-storage-fees",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-fba-storage-fees",
   "description": "Checks Amazon FBA storage fees against the storage rates you confirm, warns before inventory lots cross into the next aged-inventory bracket, lists lots already paying an aged surcharge, and SKUs whose storage costs more than their margin. Drafts a removal or sell-through plan; never creates removal orders.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

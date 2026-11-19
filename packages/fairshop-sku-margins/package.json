@@ -1,6 +1,7 @@
 {
   "name": "fairshop-sku-margins",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-sku-margins",
   "description": "Works out contribution margin per SKU and channel from sales, fees, shipping labels and unit costs: SKUs that lose money on a channel, SKUs under your margin floor, and SKUs with no cost on file. Drafts a pricing review; never changes a price.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

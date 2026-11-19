@@ -1,6 +1,7 @@
 {
   "name": "fairshop-nexus-thresholds",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-nexus-thresholds",
   "description": "Tracks sales and order counts by state against the economic nexus thresholds you confirm, over the period each state uses in your settings: states crossed where you are not registered (with the date), states approaching, and states with sales but no threshold set. Drafts a memo for your tax adviser; never registers or files.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

@@ -1,6 +1,7 @@
 {
   "name": "fairshop-affiliate-commissions",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-affiliate-commissions",
   "description": "Checks affiliate commission statements against your orders and terms: commission on refunded or cancelled orders, orders not found, rates above your terms, sale amounts above the order, the same order paid twice, and affiliates buying through their own link. Drafts the reversal request; never approves a payout.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.fpavia111-creator/fairshop-carrier-adjustments",
+  "title": "Fairshop Carrier Adjustments",
+  "description": "Checks carrier adjustments (UPS, FedEx, USPS) against the weights and dimensions you entered on…",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/fpavia111-creator/fairshop-agents",
+    "source": "github",
+    "subfolder": "packages/fairshop-carrier-adjustments"
+  },
+  "websiteUrl": "https://fair-agents.com/fairshop.html",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "fairshop-carrier-adjustments",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "named",
+          "name": "--root",
+          "description": "Folder holding the exports this agent may read and write (it cannot reach outside it)",
+          "isRequired": true,
+          "format": "filepath",
+          "valueHint": "exports_folder"
+        }
+      ]
+    }
+  ]
+}

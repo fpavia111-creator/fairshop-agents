@@ -1,6 +1,7 @@
 {
   "name": "fairshop-gift-cards",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-gift-cards",
   "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",

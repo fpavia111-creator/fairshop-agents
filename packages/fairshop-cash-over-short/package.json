@@ -1,6 +1,7 @@
 {
   "name": "fairshop-cash-over-short",
   "version": "0.1.0",
+  "mcpName": "io.github.fpavia111-creator/fairshop-cash-over-short",
   "description": "Reads register closeouts and bank deposits for physical stores: drawers over or short beyond your tolerance, deposits missing or different from the counted cash, and cashiers with repeated shortages (names masked). Drafts a review note for the store manager; never deducts pay or moves money.",
   "type": "module",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "evals",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "server.json"
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",
