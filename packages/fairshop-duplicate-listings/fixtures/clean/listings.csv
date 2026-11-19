@@ -1,0 +1,7 @@
+channel,listing_id,sku,title,gtin,price,status
+Amazon,B0EX001,MUG-1,Speckled Ceramic Mug 12 oz,9520000000011,18.00,active
+Amazon,B0EX003,MUG-2,Speckled Ceramic Espresso Cup 3 oz,9520000000035,18.00,active
+eBay,EB-10,MUG-1,Speckled ceramic mug,9520000000011,17.00,active
+eBay,EB-11,BOWL-3,Stoneware Bowl,9520000000097,22.00,active
+Etsy,ET-20,VASE-9,Tall Vase,,30.00,active
+Etsy,ET-21,MUG-1,Handmade mug,,18.00,inactive

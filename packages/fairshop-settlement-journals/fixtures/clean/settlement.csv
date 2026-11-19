@@ -1,0 +1,13 @@
+settlement_id,posted_date,type,description,amount,order_id
+S-100,2026-11-01,Order,Principal,100.00,O1
+S-100,2026-11-01,Order,Tax,8.25,O1
+S-100,2026-11-01,Order,MarketplaceFacilitatorTax-Principal,-8.25,O1
+S-100,2026-11-01,Order,Commission,-15.00,O1
+S-100,2026-11-01,Order,FBAPerUnitFulfillmentFee,-3.22,O1
+S-100,2026-11-02,Order,Principal,50.00,O2
+S-100,2026-11-02,Order,Commission,-7.50,O2
+S-100,2026-11-03,Refund,Principal,-20.00,O3
+S-100,2026-11-03,Refund,Commission,3.00,O3
+S-100,2026-11-05,other-transaction,Subscription Fee,-39.99,
+S-200,2026-11-10,Order,Principal,80.00,O4
+S-200,2026-11-10,Order,Commission,-12.00,O4

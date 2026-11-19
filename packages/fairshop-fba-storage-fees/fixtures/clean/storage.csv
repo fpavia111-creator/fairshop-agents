@@ -1,0 +1,6 @@
+month,sku,size_tier,avg_qty,unit_volume,fee
+2026-09,LAMP-1,Standard,100,0.5,39.00
+2026-10,LAMP-1,Standard,100,0.5,120.00
+2026-10,RUG-2,Oversize,20,3.0,45.00
+2026-10,CUP-3,Standard,50,0.2,24.00
+2026-10,BOX-4,Standard,10,1.0,24.00

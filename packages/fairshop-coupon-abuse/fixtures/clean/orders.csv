@@ -1,0 +1,16 @@
+order_id,order_date,customer_email,ship_address,ship_zip,discount_code,discount_amount,subtotal
+2001,2026-09-05,ana.weller@example.test,12 Birch Lane,78701,,0,40.00
+2002,2026-10-02,ana.weller@example.test,12 Birch Lane,78701,,0,45.00
+2003,2026-10-03,bo.rains@example.test,40 Cedar Court,73301,WELCOME10,3.50,35.00
+2004,2026-10-04,b.rains+2@example.test,40 Cedar Ct,73301,,0,32.00
+2005,2026-10-05,cy.dunmore@example.test,9 Elm St,10001,WELCOME10,2.00,32.00
+2006,2026-10-06,dee.harlow@example.test,3 Oak Ave,60601,VIP50,50.00,120.00
+2007,2026-10-07,eli.marsh@example.test,8 Pine Rd,94105,,0,130.00
+2008,2026-09-10,fay.oduya@example.test,5 Ash Way,30301,FALL20,10.00,60.00
+2009,2026-09-11,gus.penrose@example.test,6 Fir Pl,02108,FALL20,12.00,70.00
+2010,2026-09-12,hal.quist@example.test,7 Yew Ct,98101,FALL20,11.00,65.00
+2011,2026-09-13,ida.renn@example.test,2 Bay St,33101,,0,55.00
+2012,2026-11-02,jo.sato@example.test,4 Elm Ct,85001,,0,58.00
+2013,2026-10-20,kai.lund@examplegoods.test,1 Sea Rd,97201,STAFF30,15.00,50.00
+2014,2026-10-21,mia.cole@examplegoods.test,10 Main St,78701,STAFF30,12.00,40.00
+2015,2026-10-22,ned.fry@example.test,11 Main St,78702,,0,60.00

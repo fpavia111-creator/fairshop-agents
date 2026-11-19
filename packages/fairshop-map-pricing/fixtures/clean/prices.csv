@@ -1,0 +1,8 @@
+date,seller,channel,sku,advertised_price,is_own
+2026-11-01,Example Goods,Shopify,LAMP-1,49.99,yes
+2026-11-01,Example Goods,Amazon,LAMP-1,49.99,yes
+2026-11-02,Brightway Home,Amazon,LAMP-1,49.99,no
+2026-11-09,Brightway Home,Amazon,LAMP-1,49.99,no
+2026-11-03,Northgate Supply,eBay,RUG-2,129.00,no
+2026-11-04,Northgate Supply,eBay,LAMP-1,49.99,no
+2026-11-05,Clearwater Outlet,Walmart,RUG-2,125.00,no

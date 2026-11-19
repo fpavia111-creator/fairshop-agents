@@ -1,0 +1,11 @@
+order_id,order_date,channel,ship_state,subtotal,shipping,tax_collected,exempt,exemption_id
+T1,2026-10-02,Shopify,TX,200.00,0,16.50,,
+T2,2026-10-03,Shopify,Texas,100.00,20.00,9.90,,
+T3,2026-10-04,Shopify,TX,50.00,0,4.13,,
+T4,2026-10-05,Shopify,WA,80.00,10.00,9.00,,
+T5,2026-10-06,Shopify,CA,120.00,0,0,,
+T6,2026-10-07,Shopify,NY,60.00,0,0,,
+T7,2026-10-08,Amazon,TX,90.00,0,7.43,,
+T8,2026-10-09,Etsy,TX,40.00,0,0,,
+T9,2026-10-10,Shopify,TX,300.00,0,0,yes,EX-77
+T10,2026-10-11,Shopify,TX,150.00,0,0,yes,EX-77

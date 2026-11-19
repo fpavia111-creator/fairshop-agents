@@ -65,16 +65,21 @@ export function findReimbursements({ adjustments = [], reimbursements = [], retu
   const values = Object.fromEntries(Object.entries(settings.unit_values || {}).map(([k, v]) => [skuKey(k), v])); const low = settings.low_pct ?? 20;
   const items = [];
   const reimb = reimbursements.map((r) => ({ id: str(r.reimbursement_id), date: isoDate(r.date), sku: skuKey(r.sku), reason: str(r.reason), qty: Math.abs(num(r.quantity) || 0), amount: round2(num(r.amount) || 0), order_id: str(r.order_id) }));
-  const warehouseReimb = new Map(); for (const r of reimb) if (!r.order_id && /lost|damag|warehouse|misplac|inbound/i.test(r.reason)) warehouseReimb.set(r.sku, (warehouseReimb.get(r.sku) || 0) + r.qty);
+  // Warehouse reimbursements per SKU and kind: a damaged-unit reimbursement pays damaged units first, a lost-unit one lost units
+  // (final pass: a lost unit was reported as damaged when a damaged reimbursement had been spent on it by date order).
+  const warehouseReimb = new Map();
+  for (const r of reimb) if (!r.order_id && /lost|damag|warehouse|misplac|inbound/i.test(r.reason)) { const c = /damag/i.test(r.reason) ? 'damaged' : /lost|misplac/i.test(r.reason) ? 'lost' : 'other'; const m = warehouseReimb.get(r.sku) || warehouseReimb.set(r.sku, { lost: 0, damaged: 0, other: 0 }).get(r.sku); m[c] += r.qty; }
   const bySku = new Map();
   for (const a of adjustments) { const k = skuKey(a.sku); if (!k) continue; (bySku.get(k) || bySku.set(k, []).get(k)).push({ date: isoDate(a.date), cls: reasonClass(a.reason, settings), qty: num(a.quantity) || 0, fnsku: str(a.fnsku), tx: str(a.transaction_id) }); }
   for (const [sku, evs] of [...bySku.entries()].sort(([a], [b]) => (a < b ? -1 : 1))) {
     const sorted = evs.slice().sort((x, y) => (`${x.date}|${x.cls}|${x.qty}|${x.tx}` < `${y.date}|${y.cls}|${y.qty}|${y.tx}` ? -1 : 1));
     const open = sorted.filter((e) => e.cls === 'lost' || e.cls === 'damaged').map((e) => ({ ...e, left: Math.abs(e.qty) }));
     let found = sorted.filter((e) => e.cls === 'found').reduce((s, e) => s + Math.abs(e.qty), 0);
-    let paid = warehouseReimb.get(sku) || 0;
+    const paid = { ...(warehouseReimb.get(sku) || { lost: 0, damaged: 0, other: 0 }) };
     for (const e of open.filter((x) => x.cls === 'lost')) { const u = Math.min(e.left, found); e.left -= u; found -= u; }
-    for (const e of open) { const u = Math.min(e.left, paid); e.left -= u; paid -= u; }
+    for (const e of open) { const u = Math.min(e.left, paid[e.cls]); e.left -= u; paid[e.cls] -= u; }
+    let rest = paid.lost + paid.damaged + paid.other;
+    for (const e of open) { const u = Math.min(e.left, rest); e.left -= u; rest -= u; }
     const unit = values[sku] ?? null; const f = []; let claimable = 0, waiting = 0, closed = 0; let claimBy = null;
     for (const e of open.filter((x) => x.left > 0)) {
       const by = e.date ? addDays(e.date, win) : null; const age = e.date ? daysBetween(e.date, day) : null;

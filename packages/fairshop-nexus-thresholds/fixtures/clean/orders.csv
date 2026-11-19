@@ -1,0 +1,13 @@
+order_id,order_date,ship_state,channel,amount,status
+N1,2026-02-10,TX,Shopify,300000.00,paid
+N2,2026-07-10,TX,Shopify,220000.00,paid
+N3,2026-03-01,WA,Shopify,60000.00,paid
+N4,2026-06-15,WA,Shopify,10000.00,paid
+N5,2025-05-01,CA,Shopify,300000.00,paid
+N6,2026-04-01,CO,Shopify,40000.00,paid
+N7,2026-05-01,CO,Amazon,90000.00,paid
+N8,2026-01-05,NY,Shopify,5000.00,paid
+N9,2026-02-05,NY,Shopify,5000.00,paid
+N10,2026-03-05,NY,Shopify,5000.00,paid
+N11,2026-04-05,NY,Shopify,5000.00,paid
+N13,2026-09-01,WA,Shopify,9000.00,cancelled

@@ -1,0 +1,8 @@
+card_id,issued_date,issued_amount,source,order_id,customer_email,balance
+GC-1001,2026-10-01,50.00,sale,3001,lia.brook@example.test,20.00
+GC-1002,2026-06-15,100.00,sale,3002,max.dale@example.test,100.00
+GC-1003,2025-09-01,75.00,sale,3003,nora.finch@example.test,65.00
+GC-1004,2026-09-20,250.00,sale,3004,omar.gale@example.test,250.00
+GC-1005,2026-08-10,40.00,sale,3005,pam.hart@example.test,15.00
+GC-1006,2026-10-10,30.00,sale,3006,quin.ives@example.test,0.00
+GC-1007,2026-11-01,20.00,promo,,rae.joss@example.test,20.00

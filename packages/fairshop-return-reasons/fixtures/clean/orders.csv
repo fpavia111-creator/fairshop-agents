@@ -1,0 +1,9 @@
+order_id,sku,qty,order_date,customer_email
+D1,DRESS-1,1,2026-09-02,kit.larkspur@example.test
+D2,DRESS-1,1,2026-09-10,kit.larkspur@example.test
+D3,DRESS-1,1,2026-09-20,kit.larkspur@example.test
+S1,SHOE-2,1,2026-09-25,kit.larkspur@example.test
+D4,DRESS-1,1,2026-09-12,otto.vance@example.test
+D5,DRESS-1,6,2026-09-14,pia.sorel@example.test
+S2,SHOE-2,19,2026-09-15,lena.morrow@example.test
+M1,MUG-3,5,2026-09-16,quinn.abara@example.test

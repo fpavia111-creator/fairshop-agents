@@ -1,0 +1,7 @@
+date,platform,campaign,sku,spend,clicks,impressions,attributed_sales
+2026-10-05,Amazon Ads,Lamp exact,LAMP-1,200.00,400,20000,900.00
+2026-10-12,Amazon Ads,Lamp exact,LAMP-1,150.00,300,15000,600.00
+2026-10-05,Google Ads,Shopping lamps,LAMP-1,100.00,500,30000,300.00
+2026-10-05,Meta Ads,Rug prospecting,RUG-2,120.00,200,40000,400.00
+2026-10-06,Google Ads,Vase brand,VASE-3,90.00,80,5000,400.00
+2026-10-20,Amazon Ads,Mug auto,MUG-4,600.00,900,50000,2600.00

@@ -1,0 +1,5 @@
+shipment_id,cost_type,amount
+SH-1,Freight,1000.00
+SH-1,Duty,700.00
+SH-1,Broker,140.00
+SH-2,Freight,600.00

@@ -41,3 +41,13 @@ test('the case lists claims and low reimbursements with an attach marker', () =>
   const d = caseText(r.items, {}); assert.equal(d.total, 20); assert.deepEqual(d.claims, ['SKU:A']);
   assert.match(d.text, /\[TO CONFIRM merchant token\]/); assert.match(d.text, /\[ATTACH proof of cost/);
 });
+
+test('a damaged-unit reimbursement pays damaged units first, so the unit still owed keeps its own kind (final pass)', () => {
+  const r = run({ adjustments: [adj({ date: '2026-10-01', reason: 'M', quantity: '-1' }), adj({ date: '2026-10-05', reason: 'E', quantity: '-2' })], reimbursements: [{ approval_date: '2026-10-20', reimbursement_id: 'R-1', sku: 'A', reason: 'Damaged_Warehouse', quantity: '2', amount: '20.00' }] });
+  const it = r.items.find((i) => i.id === 'SKU:A');
+  assert.deepEqual(it.findings.map((f) => f.code), ['lost_not_reimbursed']);
+  assert.equal(it.units, 1);
+  // A reimbursement with no kind in its reason still pays whatever is open.
+  const r2 = run({ adjustments: [adj({ reason: 'M', quantity: '-1' })], reimbursements: [{ reimbursement_id: 'R-2', sku: 'A', reason: 'Inbound', quantity: '1', amount: '10.00' }] });
+  assert.equal(r2.items.find((i) => i.id === 'SKU:A').status, 'ok');
+});

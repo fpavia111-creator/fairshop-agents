@@ -1,0 +1,14 @@
+order_id,channel,order_date,total,refunded,status,gateway
+#1001,Shopify,2026-10-28,120.00,0,paid,Shopify Payments
+#1002,Shopify,2026-10-29,89.50,0,paid,Shopify Payments
+#1003,Shopify,2026-11-14,45.00,0,paid,Shopify Payments
+#1004,Shopify,2026-10-30,200.00,50.00,partially_refunded,Shopify Payments
+#1005,Shopify,2026-10-31,64.00,64.00,refunded,Shopify Payments
+#1006,Shopify,2026-11-01,150.00,0,paid,Shopify Payments
+#1007,Shopify,2026-11-02,75.00,0,voided,Shopify Payments
+#1008,Shopify,2026-11-02,30.00,0,paid,Manual
+112-0000001-0000001,Amazon,2026-10-20,58.99,0,shipped,Amazon
+112-0000002-0000002,Amazon,2026-10-21,42.00,0,shipped,Amazon
+112-0000003-0000003,Amazon,2026-10-22,99.99,0,shipped,Amazon
+E-3001,Etsy,2026-11-03,35.00,0,paid,Etsy Payments
+E-3002,Etsy,2026-11-04,52.00,0,paid,Etsy Payments

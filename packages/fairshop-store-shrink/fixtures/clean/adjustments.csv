@@ -1,0 +1,6 @@
+date,store,sku,category,qty,unit_cost,reason,counted_by
+2026-10-02,Downtown,CANDLE-1,Home,-4,6.00,Damaged,Wren Halloway
+2026-10-05,Downtown,LIPBALM-2,Beauty,-4,2.50,Damaged,Ilse Marchetti
+2026-10-20,Downtown,MUG-3,Home,2,5.00,Found,Wren Halloway
+2026-10-03,Uptown,CANDLE-1,Home,-2,6.00,Damaged,Bram Okonkwo
+2026-10-11,Uptown,SOAP-4,Beauty,-3,3.00,Vendor return,Bram Okonkwo

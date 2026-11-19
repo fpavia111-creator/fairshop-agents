@@ -1,0 +1,6 @@
+action_id,affiliate,order_id,order_date,sale_amount,commission,status,affiliate_email
+AC-1,Brightside Blog,5001,2026-10-02,100.00,10.00,pending,partners@brightside.example.test
+AC-3,Coupon Cove,5003,2026-10-04,60.00,6.00,pending,deals@couponcove.example.test
+AC-6,Lind Lifestyle,5004,2026-10-07,50.00,5.00,paid,petra.lind@example.test
+AC-7,Brightside Blog,5005,2026-10-08,100.00,10.00,paid,partners@brightside.example.test
+AC-8,Trailhead Reviews,5006,2026-10-09,20.00,2.00,pending,hello@trailhead.example.test
