@@ -54,7 +54,7 @@ Every agent reads files the seller already exports, writes a worklist (CSV with 
 
 ## Not checked yet (say this out loud)
 
-- **Export layouts.** The 36 named exports (Shopify, WooCommerce, BigCommerce, Amazon Seller Central reports, eBay, Etsy, Walmart, Stripe, PayPal, Recharge, Shippo, UPS and USPS adjustments, Square, Shopify POS, ad platforms, a generic 3PL invoice and affiliate network) were written from knowledge of those exports. None was checked against vendor documentation or a live account. The first setup confirms them with `inspect`; `fairshop-sources.json` fixes any miss.
+- **Export layouts.** The 36 named exports (Shopify, WooCommerce, BigCommerce, Amazon Seller Central reports, eBay, Etsy, Walmart, Stripe, PayPal, Recharge, Shippo, UPS and USPS adjustments, Square, Shopify POS, ad platforms, a generic 3PL invoice and affiliate network) were written from knowledge of those exports. None was checked against vendor documentation or a live account. The first setup confirms them with `inspect`; `fairshop-sources.json` fixes any miss. (Final pass: 38 layouts now, 3 of them run on the vendor's own published sample file; see below.)
 - **Rules.** Fee schedules, reserve terms, FBA reason codes and claim windows, storage rates and aged brackets, dim divisors, dispute windows, sales tax rates, marketplace facilitator rules and nexus thresholds are all settings. The fixtures hold fictional values only. A tax adviser should read the sales-tax and nexus settings design before a client relies on it; the sales-tax agent uses one combined rate per state (no local jurisdictions).
 - **Node 20 and 22, and Linux:** only Node 24 on Windows was run here. The CI workflow covers Node 20, 22, 24 on Linux and Windows once the repo is pushed.
 - **`npm run mcp:check`** (official MCP SDK client) was not run: it needs `npm i --no-save @modelcontextprotocol/sdk ajv ajv-formats`, which this session did not install. The zero-dependency stdio server is the same code the other families pass with.
@@ -78,3 +78,62 @@ Every agent reads files the seller already exports, writes a worklist (CSV with 
 ## For the main session
 
 Publish order: `fairshop-core` first, then the 30 agents. Site page assumed to be `fairshop.html` (used for `server.json`). `sales/site.json` follows the brief's shape exactly.
+
+## Final pass (19 Nov 2026)
+
+Kurt's final pass (`BUILD-BRIEF.md` "Final pass" and "Final review questions", `FINAL-PASS-REQUEST.md`). Every number below is from a **fresh clone** of this folder (`git clone` into `%TEMP%\fp-fairshop`, with `core.autocrlf=true`, so Windows line-ending conversion was on), `npm install --offline`, Windows 10, Node 24.20.0.
+
+### The checklist
+
+1. **Names.** `grep -ri` for the old themed words and other families' names outside history: one example name left in a core code comment and one in a core test helper; both now `fairshop-…`.
+2. **Each README read as a buyer.** Every agent README opens with what it checks and what it never does, lists every tool with "refused" or "one named click" beside it, and tables the columns it needs. Three were out of date after this pass's fixes and were updated (product data layouts, inventory "no SKU", return reasons `ignore_skus`); the affiliate README now says affiliate names are masked.
+3. **Honest copy.** No compliance, certification, savings or advice claim in READMEs, `site.json`, the pricing page or sample reports (release check scan below). The sales copy said names are "masked in anything sent to the AI model"; it now says what is masked and that free-text notes are sent as typed, and that three layouts were run on vendor sample files.
+4. **Binding actions.** Every pay, send, file, post, change or delete is refused or one named click, even in Auto (family check and release check below).
+5. **The full bar from a clean install:** see "Final numbers".
+6. **Fixtures fictional.** The product fixtures used the well-known example barcodes from Wikipedia and GS1 pages, which are real products' codes; they now use the GS1 prefix 952, which GS1 keeps for demonstrations and examples. People and businesses are invented (`Example Goods`, `Dana Example`, `Brightway Home`, …; e-mails at `example.test`); a search for real small businesses with the same generic names was not done. Masking is on by default.
+7. **`site.json`, pricing page, agents, sample reports.** 10 packages with the same names and prices on both; the 30 group entries name all 30 agents; the one-store packs add up to 30 agents. Sample reports regenerated: unchanged.
+8. **Secrets, state, stray files.** Release check below (secret scan, `npm pack` contents). `scripts/sources-doc.mjs`, an unused leftover from the Lodestar copy that rewrote README sections owned by `readme-sections.mjs`, was removed.
+
+Also fixed for a fresh Windows clone: the `--check` scripts compared files byte for byte with generated LF text, so a CRLF checkout looked stale (Fairtable's note). `.gitattributes` now checks text out with LF (the legacy-encoded test exports and `.ics` calendars stay byte-exact) and the scripts compare with CRLF turned into LF. `release-check.mjs` builds module URLs with `pathToFileURL`. The "same file for two arguments" core bug from Fairdrive's note does not apply: every Fairshop agent names the source kind on each read.
+
+### What this pass changed in the agents
+
+- **fairshop-fba-reimbursements (found by a mutation case):** a reimbursement for damaged units was spent on lost units first, by date, so a lost unit still owed was reported as damaged. Reimbursements now pay units of their own kind first.
+- **fairshop-product-data (found on Shopify's and WooCommerce's own sample files):** the current Shopify product layout and the WooCommerce product export are recognised; Shopify's title, description, vendor and type are filled down from a product's first row to its variant rows (every variant row had been reported as missing its title and brand, in the classic layout too); images are counted per product; products that do not ship are not asked for a weight; WooCommerce variations take the parent's weight, description and images when blank; barcode cells such as `ean:…; upc:…` and hyphenated ISBNs are read; 8-digit UPC-E codes are accepted (found while checking real barcodes).
+- **fairshop-inventory-listings (Shopify's inventory template):** a stock row or listing with no SKU was reported as a SKU named "". It is now reported once, by product name (`stock_no_sku`, `listing_no_sku`).
+- **fairshop-return-reasons (UCI real shop data):** `ignore_skus` leaves line codes that are not products out of every count.
+- **fairshop-affiliate-commissions:** affiliate names were sent to the model in clear; an affiliate is often one person, so they are now masked as `AFF-…` pseudonyms (new `partner` kind in the core masker; the worklist and draft files keep the names).
+- **Core:** a `prepare` hook lets an export layout see raw rows before mapping; layouts can be marked "run on the vendor's published sample" with source and date; every main check result names the settings files it used with their sha256 (`settings_files`); the demo uses a fixed masking key for its fictional data, so README demo output is the same on every run.
+- **New records:** `docs/accuracy-2026-11-19.md`, `docs/model-view-2026-11-19.md`, `docs/realdata-2026-11-19.md`, `docs/rules-2026-11-19.md`, each made by a script in `scripts/`; `fixtures/clean/` in 28 agents; `sales/final-pass.json` (`node scripts/final-pass.mjs`).
+
+### Kurt's five questions
+
+1. **Accuracy** (`npm run accuracy`, per agent in `docs/accuracy-2026-11-19.md`): **158 of 158 planted problems found** in 30 agents, 0 unplanned findings on the planted files, 0 of 64 planted near-misses (inside a window, under a threshold, exempt) flagged, **0 findings on 380 clean rows** (28 agents; marketplace claims and carrier adjustments have no clean set, because every open claim or adjustment gets a finding that says how to answer it), **82 of 82 one-field mutation cases caught** (they raised 14 other findings beside the expected one). One mutation case found a real bug (FBA reimbursements, above). The planted lists were written from each fixtures README by the person who wrote the fixtures and the rules, so these numbers show the rules do what they are written to do; they do not measure how often a real store's data trips a rule wrongly. The real-data runs below are the first evidence of that.
+2. **Security: what reaches the model** (`npm run model-view`, per agent in `docs/model-view-2026-11-19.md`): 9 of 30 agents read personal data (shopper e-mails, names and addresses, staff names, affiliate names and e-mails), all masked; **58 planted fictional values and every masked column were looked for in the results: 0 leaks.** Amounts, quantities, dates, rates, SKUs, order, listing and tracking numbers, finding codes and text such as product titles, campaign, seller and vendor names are sent in clear; free text (return and cancel reasons, claim reasons, notes) is sent as typed, except that a name already read from a personal column is also replaced inside free text. Results are sent to whatever model the user's assistant uses; for shopper or staff data, use a local model or one covered by your own agreements. No compliance claim is made. Hostile checks re-run: below.
+3. **Compatibility:** 38 export layouts. **3 run on the vendor's own published sample file** (Shopify product export, current layout; Shopify inventory export; WooCommerce product export), **35 written from knowledge of the vendors' documented exports** and not compared column by column with current documentation, **0 run on a real store's export**. Per layout in `sales/final-pass.json` (`formats`) and in each agent README's "Columns it reads".
+4. **Commercial traction:** no paying customers; no checkout is live (main session's answer for the suite).
+5. **Support:** `docs/rules-2026-11-19.md` lists every rule that changes over time. Thirteen kinds of rule (fee schedules, storage rates, tax rates and registrations, nexus thresholds, reserve terms, payout timing, MAP lists, affiliate and 3PL rates, retailer allowances, account maps, listing rules, signature rule) exist only in the seller's settings and ship with no real value. Eleven built-in defaults mirror a vendor rule as of November 2026 and were not checked against the vendors' current pages (FBA wait, claim and return windows; dim divisor 139; carrier dispute window 30 days; claim answer 3 days; dispute hold 75 days; label refund 30 days; retailer dispute window 90 days; title limit 200; gift card dormancy 365 days). A customer changes any of them in the agent's settings file; each result names the settings files it used. Support can change the defaults in a release; the customer's file always wins.
+
+### Real data (`npm run realdata`, `docs/realdata-2026-11-19.md`)
+
+| Source (licence) | Agent | Result |
+|---|---|---|
+| UCI Online Retail, a real UK online shop, 541,909 rows (CC BY 4.0) | return reasons | 127 SKUs and 183 customers flagged; **0 disagreements** with an independent re-count. 2 flagged codes were not products, so `ignore_skus` was added; 2 were single order-entry mistakes (80,995 and 74,215 units) |
+| Same, 3,812 product titles | duplicate listings | 32 near-duplicate titles; **0 disagreements** with a brute-force check of 7.3 million pairs; all are titles a shopper cannot tell apart, most likely variants |
+| Shopify product and inventory CSV templates (Shopify's samples) | product data, inventory | 4 kinds of wrong finding found and fixed; after the fix every finding checked by hand, **0 wrong** |
+| WooCommerce `sample_products.csv` (GPL-3.0) | product data | 2 kinds of wrong finding found and fixed (price and weight names, variations and virtual products); **0 wrong** after |
+| Open Food Facts, 400 real barcodes (ODbL) | product data | 2 invalid barcodes, 17 products without name or brand; **0 disagreements** with an independent check-digit re-count |
+
+No public data in a real format exists for the other 26 agents' inputs (payouts, marketplace fees, FBA reimbursements and storage fees, processor reserves, settlements, marketplace claims, refunds, coupons, gift cards, subscriptions, affiliates, sales tax, nexus, stockouts, MAP prices, SKU margins, ad spend, shipping labels, carrier adjustments, 3PL invoices, purchase orders, landed cost, retailer deductions, cash drawers and shrink): they were tested on fictional files only.
+
+### Final numbers
+
+⟨BAR⟩
+
+### For Kurt to decide
+
+- **Wording of "written from documentation".** The site's format list allows three labels. 35 Fairshop layouts were written from knowledge of the vendors' documented exports but not compared with the current documentation; if the site shows "written from documentation", it should not suggest more than that.
+- **Affiliate names are now masked** in what the model sees. The model can still group by affiliate (`AFF-…`), and the files on disk keep the names; say if you would rather keep business names in clear.
+- Nothing else waits on Kurt: no prices, claims or scope changed in this pass.
+
+Still not done: no live store export; Node 20 and 22 and Linux only through CI once pushed; `npm run mcp:check` (needs the MCP SDK installed); translations not read by native speakers; Open Food Facts refused one of five pages while busy (400 of 500 products read).
