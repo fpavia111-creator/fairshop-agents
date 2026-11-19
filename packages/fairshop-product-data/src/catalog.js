@@ -35,6 +35,7 @@ export function checkCatalog(rows, s = {}) {
   const rules = Object.fromEntries(Object.entries(s.channels || {}).map(([k, v]) => [k === 'default' ? 'default' : channelKey(k), v]));
   const ruleFor = (ch) => ({ ...DEFAULT, ...(rules.default || {}), ...(rules[ch] || {}) });
   const gtins = new Map(); for (const r of rows) { const g = str(r.gtin).replace(/[\s-]/g, ''); if (g) (gtins.get(g) || gtins.set(g, new Set()).get(g)).add(skuKey(r.sku)); }
+  const gsorted = new Map([...gtins.entries()].map(([g, set]) => [g, [...set].sort()]));
   const items = [];
   for (const r of sortBy(rows.map((r) => ({ ...r, id: `${channelLabel(channelKey(r.channel)) || 'all'}:${skuKey(r.sku)}` })))) {
     const ch = channelKey(r.channel); const rule = ruleFor(ch); const sku = skuKey(r.sku); const f = [];
@@ -43,7 +44,8 @@ export function checkCatalog(rows, s = {}) {
     const title = str(r.title); if (title && title.length > rule.title_max) f.push(finding('title_too_long', null, `${sku}: title is ${title.length} characters; your limit for ${channelLabel(ch) || 'this channel'} is ${rule.title_max}.`));
     const g = str(r.gtin).replace(/[\s-]/g, '');
     if (g && !gtinValid(g)) f.push(finding('gtin_invalid', null, `${sku}: GTIN ${g} has a wrong check digit or length.`));
-    if (g && (gtins.get(g) || new Set()).size > 1 && [...gtins.get(g)].sort()[0] !== sku) f.push(finding('gtin_shared', null, `${sku}: GTIN ${g} is also used by ${[...gtins.get(g)].filter((x) => x !== sku).sort().join(', ')}.`));
+    const gl = g ? gsorted.get(g) || [] : [];
+    if (gl.length > 1 && gl[0] !== sku) { const others = []; for (const x of gl) { if (x !== sku) others.push(x); if (others.length > 5) break; } f.push(finding('gtin_shared', null, `${sku}: GTIN ${g} is also used by ${gl.length - 1} other SKU(s): ${others.slice(0, 5).join(', ')}${gl.length - 1 > 5 ? ', …' : ''}.`)); }
     if (present('weight') && num(r.weight) <= 0) f.push(finding('weight_zero', null, `${sku}: weight is ${r.weight}.`));
     if (present('price') && num(r.price) <= 0) f.push(finding('price_zero', null, `${sku}: price is ${r.price}.`));
     if (num(r.image_count) !== null && num(r.image_count) < rule.min_images) f.push(finding('images_below_min', null, `${sku}: ${num(r.image_count)} image(s); your minimum is ${rule.min_images}.`));

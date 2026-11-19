@@ -25,16 +25,20 @@ const words = (s) => String(s).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').tr
 export function findDuplicates(listings, catalog = null, s = {}) {
   const sim = s.title_similarity ?? 0.9; const known = catalog ? new Set(catalog.map((c) => skuKey(c.sku)).filter(Boolean)) : null;
   const rows = sortBy(listings.map((l) => ({ ch: channelKey(l.channel), id: `${channelLabel(channelKey(l.channel))}:${str(l.listing_id)}`, listing_id: str(l.listing_id), sku: skuKey(l.sku), title: str(l.title), gtin: str(l.gtin).replace(/[\s-]/g, ''), price: num(l.price), active: !/inactive|ended|closed|paused/i.test(str(l.status)) })));
-  const items = []; const firstBySku = new Map(); const kept = [];
+  const items = []; const firstBySku = new Map(); let keptN = 0; const prefixIndex = new Map();
+  // Prefix filtering: two word sets with Jaccard >= sim share a word among the first |x| - ceil(sim * |x|) + 1 words of each (words sorted).
+  const tok = (t) => [...new Set(words(t).split(' ').filter(Boolean))].sort();
+  const pre = (ts) => ts.slice(0, Math.max(1, ts.length - Math.ceil(sim * ts.length) + 1));
   for (const l of rows) {
     const f = [];
     if (l.active && l.sku) {
       const k = `${l.ch}|${l.sku}`; const first = firstBySku.get(k);
       if (first) f.push(finding('duplicate_sku_listing', null, `${l.sku} is listed twice on ${channelLabel(l.ch)}: ${first.listing_id} and ${l.listing_id}${first.price !== null && l.price !== null && first.price !== l.price ? ` at different prices (${first.price} and ${l.price})` : ''}.`));
       else firstBySku.set(k, l);
-      const twin = kept.find((x) => x.ch === l.ch && x.sku !== l.sku && x.title && l.title && tokenSetSimilarity(words(x.title), words(l.title)) >= sim);
+      const ts = tok(l.title); let twin = null;
+      if (ts.length) for (const w of pre(ts)) for (const x of prefixIndex.get(`${l.ch}|${w}`) || []) { if (twin && x.n >= twin.n) break; if (x.sku !== l.sku && tokenSetSimilarity(x.words, ts.join(' ')) >= sim) { twin = x; break; } }
       if (twin && !first) f.push(finding('near_duplicate_title', null, `"${l.title}" (${l.sku}) reads like "${twin.title}" (${twin.sku}) on ${channelLabel(l.ch)}.`));
-      kept.push(l);
+      if (ts.length) { const e = { ...l, n: keptN++, words: ts.join(' ') }; for (const w of pre(ts)) (prefixIndex.get(`${l.ch}|${w}`) || prefixIndex.set(`${l.ch}|${w}`, []).get(`${l.ch}|${w}`)).push(e); }
     }
     if (known && l.sku && !known.has(l.sku)) f.push(finding('orphan_listing', null, `${l.listing_id} on ${channelLabel(l.ch)} is for ${l.sku}, which is not in your catalog.`));
     const code = f.map((x) => x.code);

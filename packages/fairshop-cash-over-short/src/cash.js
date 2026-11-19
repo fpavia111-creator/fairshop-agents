@@ -29,13 +29,22 @@ export const CASH_SETTINGS_SCHEMA = Object.freeze({
 /** Statuses: chase (deposit), review (over/short, repeats), ok. */
 export function checkCash(closeouts, deposits, s = {}) {
   const tol = s.tolerance ?? 2; const rep = s.repeat_min ?? 3; const lag = s.deposit_days ?? 2;
-  const deps = sortBy(deposits.map((d, i) => ({ date: isoDate(d.date), store: str(d.store).toLowerCase(), amount: round2(num(d.amount) || 0), ref: str(d.reference), used: false, id: `${isoDate(d.date)}|${str(d.store)}|${num(d.amount)}|${i}` })));
+  // Day numbers and two indexes (store + amount in cents; store sorted by day), so matching stays fast at 10,000 rows.
+  const dayNo = (d) => (d ? Math.round(Date.parse(`${d}T00:00:00Z`) / 86400000) : NaN);
+  const cents = (v) => Math.round(v * 100);
+  const deps = sortBy(deposits.map((d, i) => ({ date: isoDate(d.date), store: str(d.store).toLowerCase(), amount: round2(num(d.amount) || 0), ref: str(d.reference), used: false, id: `${isoDate(d.date)}|${str(d.store)}|${num(d.amount)}|${i}` })).map((d) => ({ ...d, dn: dayNo(d.date) })), (d) => `${d.date}|${d.id}`);
+  const byAmount = new Map(); const byStore = new Map();
+  for (const d of deps) { for (const k of [`${d.store}|${cents(d.amount)}`, `${d.store}|${cents(d.amount) - 1}`, `${d.store}|${cents(d.amount) + 1}`]) (byAmount.get(k) || byAmount.set(k, []).get(k)).push(d); (byStore.get(d.store) || byStore.set(d.store, []).get(d.store)).push(d); }
   const cos = sortBy(closeouts.map((c) => ({ ...c, id: `${isoDate(c.date)}|${str(c.store)}|${str(c.register)}` })));
-  const inWin = (c, d) => d.store === str(c.store).toLowerCase() && d.date >= isoDate(c.date) && daysBetween(isoDate(c.date), d.date) <= lag;
   const due = (c) => round2((num(c.counted_cash) || 0) - (num(c.float) || 0));
+  const inWin = (c, d) => { const cd = dayNo(isoDate(c.date)); return d.dn >= cd && d.dn - cd <= lag; };
   const match = new Map();
-  for (const c of cos) { const d = deps.find((x) => !x.used && inWin(c, x) && Math.abs(x.amount - due(c)) <= 0.01); if (d) { d.used = true; match.set(c.id, d); } }
-  for (const c of cos) if (!match.has(c.id)) { const cands = deps.filter((x) => !x.used && inWin(c, x)).sort((a, b) => Math.abs(a.amount - due(c)) - Math.abs(b.amount - due(c)) || (a.id < b.id ? -1 : 1)); if (cands[0]) { cands[0].used = true; match.set(c.id, cands[0]); } }
+  for (const c of cos) { const d = (byAmount.get(`${str(c.store).toLowerCase()}|${cents(due(c))}`) || []).find((x) => !x.used && inWin(c, x) && Math.abs(x.amount - due(c)) <= 0.01); if (d) { d.used = true; match.set(c.id, d); } }
+  for (const c of cos) if (!match.has(c.id)) {
+    const list = byStore.get(str(c.store).toLowerCase()) || []; const cd = dayNo(isoDate(c.date)); let lo = 0, hi = list.length; while (lo < hi) { const m = (lo + hi) >> 1; if (list[m].dn < cd) lo = m + 1; else hi = m; }
+    let best = null; for (let i = lo; i < list.length && list[i].dn - cd <= lag; i++) { const x = list[i]; if (x.used) continue; if (!best || Math.abs(x.amount - due(c)) < Math.abs(best.amount - due(c)) || (Math.abs(x.amount - due(c)) === Math.abs(best.amount - due(c)) && x.id < best.id)) best = x; }
+    if (best) { best.used = true; match.set(c.id, best); }
+  }
   const items = []; const shortBy = new Map();
   for (const c of cos) {
     const diff = round2((num(c.counted_cash) || 0) - (num(c.expected_cash) || 0)); const f = []; let status = 'ok'; const d = match.get(c.id); const want = due(c);
