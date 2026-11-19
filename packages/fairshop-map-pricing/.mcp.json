@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-map-pricing": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-map-pricing@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

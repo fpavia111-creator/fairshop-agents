@@ -1,4 +1,4 @@
-定期購入ID,customer_email,ステータス,plan,価格,started,cancelled_at,cancel_reason,次回請求日,card_expiry
+定期購入ID,メールアドレス,ステータス,ライセンス,価格,入社日,退職日,理由,次回請求日,有効期限
 SUB-1,alma.reyes@example.test,active,Coffee monthly,30.00,2026/01/10,,,2026/12/10,2028-04
 SUB-2,ben.tamura@example.test,active,Coffee monthly,30.00,2026/03/05,,,2026/11/05,2027-09
 SUB-3,cara.velez@example.test,past_due,Tea box,25.00,2026/02/01,,,2026/11/01,2027-01

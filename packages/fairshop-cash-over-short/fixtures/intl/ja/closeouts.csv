@@ -1,4 +1,4 @@
-日付,店舗,レジ,cashier,理論在高,実在高,float
+日付,店舗,レジ,社員名,理論在高,実在高,float
 2026/11/01,Downtown,R1,Wren Halloway,812.40,812.40,200.00
 2026/11/01,Downtown,R2,Ilse Marchetti,455.00,445.00,200.00
 2026/11/02,Downtown,R2,Ilse Marchetti,390.00,384.50,200.00

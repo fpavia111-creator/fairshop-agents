@@ -1,4 +1,4 @@
-Rechnungsnummer;Bestellnummer;Kunde;Betrag;units_shipped;Versanddatum
+Rechnungsnummer;Bestellnummer;Kunde;Betrag;Menge;Versanddatum
 INV-100;RPO-1;Example Mart;5.000,00;500;01.09.2026
 INV-101;RPO-2;Example Mart;3.000,00;300;10.09.2026
 INV-102;RPO-3;Corner Grocers;2.000,00;200;15.09.2026

@@ -1,4 +1,4 @@
-Bestellnummer;Datum;Kanal;Artikelnummer;Menge;revenue;Versandkosten berechnet;Gebühr
+Bestellnummer;Datum;Kanal;Artikelnummer;Menge;Brutto;Versandkosten berechnet;Gebühr
 S1;01.10.2026;Shopify;MUG-1;2;40,00;5,00;1,50
 S2;02.10.2026;Amazon;MUG-1;1;20,00;0,00;4,50
 S3;03.10.2026;Amazon;BOWL-2;1;15,00;0,00;3,50

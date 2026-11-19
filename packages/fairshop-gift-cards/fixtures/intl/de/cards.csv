@@ -1,4 +1,4 @@
-Kennung;issued_date;Ausgegeben;source;Bestellnummer;customer_email;Saldo
+Kennung;Datum;Ausgegeben;source;Bestellnummer;E-Mail-Adresse;Saldo
 GC-1001;01.10.2026;50,00;sale;3001;lia.brook@example.test;20,00
 GC-1002;15.06.2026;100,00;sale;3002;max.dale@example.test;100,00
 GC-1003;01.09.2025;75,00;sale;3003;nora.finch@example.test;75,00

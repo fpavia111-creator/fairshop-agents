@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fulfillment invoice audit</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1c1a;--mut:#6b6760;--line:#e4e0d8;--ok:#1f7a4d;--bad:#b42318;--warn:#a15c07;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161514;--fg:#ecebe8;--mut:#a29d94;--line:#34312d;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--card:#1f1e1c}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,"Hiragino Sans","Yu Gothic UI","Microsoft YaHei","PingFang SC","Malgun Gothic","Apple SD Gothic Neo","Noto Sans CJK",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px}
+.mut{color:var(--mut)}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tiles{display:flex;gap:12px;flex-wrap:wrap}.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
+.tile b{display:block;font-size:22px}code{font-size:13px;overflow-wrap:anywhere}pre{overflow-x:auto}
+.wrap{overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}figure{margin:16px 0}p,li,h1,h2,h3{overflow-wrap:break-word}
+</style></head><body><main>
+<h1>Fulfillment invoice audit</h1>
+<p class="mut">9 invoice line(s), 456.3 billed: 5 to dispute (52), 1 to ask about, 3 as your card gives.</p>
+<h2>By fee type</h2><div class="wrap"><table><thead><tr><th scope="col">fee type</th><th scope="col">count</th><th scope="col">amount</th><th scope="col">over</th></tr></thead><tbody>
+<tr><td>packaging_mailer</td><td>1</td><td>0.3</td><td>0</td></tr>
+<tr><td>pick</td><td>5</td><td>16</td><td>7</td></tr>
+<tr><td>receiving</td><td>1</td><td>125</td><td>5</td></tr>
+<tr><td>special project fee</td><td>1</td><td>75</td><td>0</td></tr>
+<tr><td>storage</td><td>1</td><td>240</td><td>40</td></tr>
+</tbody></table></div>
+<h2>By finding</h2><div class="wrap"><table><thead><tr><th scope="col">code</th><th scope="col">count</th><th scope="col">amount</th></tr></thead><tbody>
+<tr><td>duplicate_order_charge</td><td>1</td><td>3.5</td></tr>
+<tr><td>not_on_rate_card</td><td>1</td><td>0</td></tr>
+<tr><td>order_not_shipped</td><td>1</td><td>2.5</td></tr>
+<tr><td>rate_above_card</td><td>1</td><td>1</td></tr>
+<tr><td>receiving_units_over</td><td>1</td><td>5</td></tr>
+<tr><td>storage_pallets_over</td><td>1</td><td>40</td></tr>
+</tbody></table></div>
+<h2>All rows (6)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">charge type</th><th scope="col">reference</th><th scope="col">qty</th><th scope="col">amount</th><th scope="col">expected</th><th scope="col">status</th><th scope="col">over</th><th scope="col">reasons</th></tr></thead><tbody>
+<tr><td>Pick and pack</td><td>1002</td><td>3</td><td>3.5</td><td></td><td>dispute</td><td>3.5</td><td>Order 1002 is charged for picking 2 times.</td></tr>
+<tr><td>Pick and pack</td><td>1003</td><td>2</td><td>4</td><td>3</td><td>dispute</td><td>1</td><td>Picking 2 unit(s) on order 1003 costs 3 on your card; billed 4.</td></tr>
+<tr><td>Pick and pack</td><td>1099</td><td>1</td><td>2.5</td><td></td><td>dispute</td><td>2.5</td><td>Order 1099 is not in your shipped orders.</td></tr>
+<tr><td>Receiving</td><td>ASN-5</td><td>500</td><td>125</td><td>125</td><td>dispute</td><td>5</td><td>500 unit(s) billed as received on ASN-5; your receipts show 480.</td></tr>
+<tr><td>Special project fee</td><td></td><td>1</td><td>75</td><td></td><td>review</td><td>0</td><td>&quot;Special project fee&quot; (75) is not on your rate card. Ask what it is for.</td></tr>
+<tr><td>Storage</td><td>2026-10</td><td>12</td><td>240</td><td>240</td><td>dispute</td><td>40</td><td>12 pallet(s) billed for 2026-10; you counted 10.</td></tr>
+</tbody></table></div>
+<h2>Limits</h2><ul><li>Reads only the files you export and give it. It does not log in to a store, marketplace, payment processor, carrier, 3PL or bank, and changes nothing there.</li><li>Amounts are checked against the rate card or contract file you supply. It is not a tariff service and does not know your provider&#39;s current rules.</li><li>Minimums, surcharges and special projects in your agreement are not modelled unless they are in the rate card.</li><li>Not legal, tax or accounting advice. A person decides what to claim, refund, dispute, pay or change.</li></ul>
+<p class="mut" style="margin-top:32px">Written by a Fairshop agent from your files. Nothing was sent or paid.</p>
+</main></body></html>

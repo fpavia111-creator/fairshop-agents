@@ -1,0 +1,6 @@
+id,kind,order_id,channel,charged,label_cost,labels,tracking,status,at_stake,findings,reasons,decision
+LABEL:1ZEX0009,label,9999,,0,8,1,1ZEX0009,review,8,label_no_order,"Label 1ZEX0009 (8) names order 9999, which is not in your orders.",
+LABEL:9400EX0007,label,1006,,0,5,1,9400EX0007,claim,5,void_not_refunded,"Label 9400EX0007 (5) was voided on 2026-10-06 and is ""pending"" after 30 days.",
+1003,order,1003,Shopify,0,7.5,1,9400EX0003,review,7.5,free_below_threshold,"Order 1003 shipped free on a 30 subtotal, under your 50 threshold; the label cost 7.5.",
+1004,order,1004,Shopify,7.99,15.4,1,1ZEX0004,review,7.41,label_over_charged,Order 1004 charged 7.99 for shipping and its label cost 15.4.,
+1005,order,1005,Shopify,5.99,12.2,2,9400EX0005 9400EX0006,claim,6.1,duplicate_label label_over_charged,"Order 1005 has 2 labels (9400EX0005, 9400EX0006). If only one shipped, void and claim the rest. Order 1005 charged 5.99 for shipping and its label cost 12.2.",

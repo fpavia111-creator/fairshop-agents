@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0 (Fairshop ver 1, 18 Nov 2026, unreleased)
+
+First version of fairshop-core, from lodestar-core (Fairhaul) with the 18 Nov Windows fixes.
+
+Added: customer and staff data masking (`pii.js`, `--pii`), commerce helpers (`commerce.js`), the `shopAgent` builder and `shopDemo` (`agent.js`), 36 e-commerce export layouts, e-commerce column words and report headings in nine languages, the canary check in `agentContract`.
+Removed: the freight EDI readers (`x12.js`, `freight-sources.js`).
+Fixed: case-only header matches are re-keyed (found by the Fairmake session).
+
+The entries below are the Lodestar core history this version starts from.
+
 ## Unreleased (MCP quality pass, 2026-11-16)
 
 Added

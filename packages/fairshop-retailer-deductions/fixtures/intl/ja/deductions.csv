@@ -1,4 +1,4 @@
-顧客,remit_id,請求書番号,発注番号,deduction_type,deduction_code,金額,deduction_date
+顧客,参照番号,請求書番号,発注番号,種類,理由コード,金額,日付
 Example Mart,RM-1,INV-100,RPO-1,Shortage,SH01,200.00,2026/10/01
 Example Mart,RM-1,INV-101,RPO-2,Shortage,SH01,100.00,2026/10/05
 Example Mart,RM-2,INV-100,RPO-1,Promo allowance,PR05,400.00,2026/10/10

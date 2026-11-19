@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-product-data",
+  "version": "0.1.0",
+  "description": "Checks product data before it goes to a channel: missing GTIN, brand, weight, price or images, titles over the channel limit you set, GTINs with a wrong check digit or shared by two SKUs, zero weights and prices, and thin descriptions. Drafts the fix list; never changes a listing.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-product-data#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "product-data",
+    "catalog",
+    "gtin",
+    "listing-quality"
+  ]
+}

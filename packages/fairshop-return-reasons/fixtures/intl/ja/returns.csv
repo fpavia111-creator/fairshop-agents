@@ -1,4 +1,4 @@
-注文番号,品番,return_date,理由,数量,customer_email,customer_name
+注文番号,品番,日付,理由,数量,メールアドレス,顧客
 D1,DRESS-1,2026/09/12,Not as described,1,kit.larkspur@example.test,Kit Larkspur
 D2,DRESS-1,2026/09/20,Colour looks different from photos,1,kit.larkspur@example.test,Kit Larkspur
 D3,DRESS-1,2026/09/30,Too small,1,kit.larkspur@example.test,Kit Larkspur

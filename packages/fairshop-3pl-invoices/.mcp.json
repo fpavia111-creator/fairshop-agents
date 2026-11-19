@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-3pl-invoices": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-3pl-invoices@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

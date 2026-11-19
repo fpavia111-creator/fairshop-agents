@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-duplicate-listings",
+  "version": "0.1.0",
+  "description": "Finds duplicate and orphan listings across channels: the same SKU listed twice on one channel (and at different prices), near-identical titles under different SKUs, one GTIN shared by several SKUs, and listings for SKUs not in your catalog. Drafts a clean-up list; never ends or merges a listing.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-duplicate-listings#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "duplicate-listings",
+    "catalog",
+    "listings",
+    "marketplaces"
+  ]
+}

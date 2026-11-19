@@ -1,4 +1,4 @@
-請求書番号,仕入先,発注番号,品番,qty_billed,単価,請求日
+請求書番号,仕入先,発注番号,品番,数量,単価,請求日
 NW-901,Northwind Ceramics,PO-1,MUG-1,100,4.00,2026/10/21
 NW-901,Northwind Ceramics,PO-1,BOWL-2,50,6.00,2026/10/21
 HT-55,Harbor Textiles,PO-2,TOWEL-3,220,3.20,2026/10/26

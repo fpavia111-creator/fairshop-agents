@@ -1,7 +1,7 @@
 # MCP quality checklist for Fairshop agents
 
 The rules below were first written for the Mythos family and are applied here to the
-30 Fairshop freight agents built on `fairshop-core`.
+30 Fairshop e-commerce and retail agents built on `fairshop-core`.
 
 ## What the check found on the 30 Fairshop agents (2026-11-16, ver 2)
 

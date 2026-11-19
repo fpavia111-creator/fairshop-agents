@@ -1,4 +1,4 @@
-注文番号,品番,refund_date,金額,数量,チャネル,customer_email
+注文番号,品番,日付,金額,数量,チャネル,メールアドレス
 1001,TEE-1,2026/10/01,25.00,1,Shopify,avery.quill@example.test
 1002,TEE-1,2026/10/05,25.00,1,Shopify,bram.holloway@example.test
 1003,MUG-2,2026/11/10,18.00,1,Shopify,celia.marsh@example.test

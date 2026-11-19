@@ -1,0 +1,8 @@
+id,tracking,carrier,sku,order_id,date,reason,dispute_by,status,amount,findings,reasons,decision
+1ZA1|Dimensional weight|6.4,1ZA1,UPS,LAMP-1,5001,2026-11-01,Dimensional weight,2026-12-01,dispute,6.4,disputable,"1ZA1 was re-billed at 12 lb; your label (5 lb, 12×10×8) gives 7 lb. Dispute by 2026-12-01.",
+1ZA2|Dimensional weight|4.1,1ZA2,UPS,BOX-2,5002,2026-11-03,Dimensional weight,,fix_data,4.1,label_data_low,1ZA2 (BOX-2): the adjustment to 14 lb matches the dimensions on your label; the entered weight 9 lb was too low. Enter dimensions when buying the label.,
+1ZA3|Dimensional weight|4.1,1ZA3,UPS,BOX-2,5003,2026-11-04,Dimensional weight,,fix_data,4.1,label_data_low,1ZA3 (BOX-2): the adjustment to 14 lb matches the dimensions on your label; the entered weight 9 lb was too low. Enter dimensions when buying the label.,
+1ZA5|Dimensional weight|5,1ZA5,UPS,CUP-4,5005,2026-09-20,Dimensional weight,2026-10-20,window_closed,5,disputable,"1ZA5 was re-billed at 10 lb; your label (2 lb, 8×6×4) gives 2 lb. Dispute by 2026-10-20.",
+1ZA6|Address correction|18.5,1ZA6,UPS,LAMP-1,5006,2026-11-06,Address correction,,review,18.5,address_correction,Address correction of 18.5 on 1ZA6. Check the address book entry for order 5006.,
+9400B4|Weight correction|3.25,9400B4,USPS,MUG-3,5004,2026-11-05,Weight correction,,review,3.25,no_declared_dims,"9400B4 has no dimensions on the label, so the 3.25 adjustment cannot be checked.",
+SKU:BOX-2,,,BOX-2,,,,,fix_data,8.2,repeat_sku,BOX-2 was adjusted 2 times with your own label data agreeing. Update its weight and box size in your shipping software.,

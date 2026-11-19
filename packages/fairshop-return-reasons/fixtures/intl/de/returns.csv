@@ -1,4 +1,4 @@
-Bestellnummer;Artikelnummer;return_date;Grund;Menge;customer_email;customer_name
+Bestellnummer;Artikelnummer;Datum;Grund;Menge;E-Mail-Adresse;Kunde
 D1;DRESS-1;12.09.2026;Not as described;1;kit.larkspur@example.test;Kit Larkspur
 D2;DRESS-1;20.09.2026;Colour looks different from photos;1;kit.larkspur@example.test;Kit Larkspur
 D3;DRESS-1;30.09.2026;Too small;1;kit.larkspur@example.test;Kit Larkspur

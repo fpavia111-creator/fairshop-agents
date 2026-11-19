@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-store-shrink": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-store-shrink@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

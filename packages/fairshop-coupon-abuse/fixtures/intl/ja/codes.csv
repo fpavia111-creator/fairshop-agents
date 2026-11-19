@@ -1,4 +1,4 @@
-クーポンコード,種類,max_uses,starts,ends,min_order
+クーポンコード,種類,max_uses,入社日,退職日,min_order
 WELCOME10,new_customer,,2026/01/01,2026/12/31,30.00
 VIP50,single_use,1,2026/10/01,2026/12/31,0.00
 FALL20,limited,3,2026/09/01,2026/10/31,50.00

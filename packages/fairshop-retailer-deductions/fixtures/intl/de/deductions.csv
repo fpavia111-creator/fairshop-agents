@@ -1,4 +1,4 @@
-Kunde;remit_id;Rechnungsnummer;Bestellnummer;deduction_type;deduction_code;Betrag;deduction_date
+Kunde;Referenz;Rechnungsnummer;Bestellnummer;Typ;Grundcode;Betrag;Datum
 Example Mart;RM-1;INV-100;RPO-1;Shortage;SH01;200,00;01.10.2026
 Example Mart;RM-1;INV-101;RPO-2;Shortage;SH01;100,00;05.10.2026
 Example Mart;RM-2;INV-100;RPO-1;Promo allowance;PR05;400,00;10.10.2026

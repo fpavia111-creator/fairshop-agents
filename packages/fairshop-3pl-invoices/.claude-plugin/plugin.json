@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-3pl-invoices",
+  "version": "0.1.0",
+  "description": "Audits a 3PL invoice line by line against your rate card, shipped orders, receipts and pallet counts: rates above the card, orders billed twice, picks for orders that never shipped, more units received or pallets stored than counted, and charges not on the card. Drafts the invoice dispute; never pays.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-3pl-invoices#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "3pl",
+    "fulfillment",
+    "warehouse-invoice",
+    "rate-card"
+  ]
+}

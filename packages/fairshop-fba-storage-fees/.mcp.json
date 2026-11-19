@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-fba-storage-fees": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-fba-storage-fees@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

@@ -1,4 +1,4 @@
-定期購入ID,日付,金額,ステータス,failure_reason
+定期購入ID,日付,金額,ステータス,理由
 SUB-1,2026/10/10,30.00,succeeded,
 SUB-1,2026/11/10,30.00,succeeded,
 SUB-2,2026/10/05,30.00,succeeded,

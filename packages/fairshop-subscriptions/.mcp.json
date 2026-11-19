@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-subscriptions": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-subscriptions@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

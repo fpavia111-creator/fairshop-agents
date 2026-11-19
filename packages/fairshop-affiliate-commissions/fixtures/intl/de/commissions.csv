@@ -1,4 +1,4 @@
-action_id;affiliate;Bestellnummer;Bestelldatum;sale_amount;Provision;Zustand;affiliate_email
+Kennung;affiliate;Bestellnummer;Bestelldatum;Brutto;Provision;Zustand;E-Mail
 AC-1;Brightside Blog;5001;02.10.2026;100,00;10,00;pending;partners@brightside.example.test
 AC-2;Brightside Blog;5002;03.10.2026;80,00;8,00;pending;partners@brightside.example.test
 AC-3;Coupon Cove;5003;04.10.2026;60,00;9,00;pending;deals@couponcove.example.test

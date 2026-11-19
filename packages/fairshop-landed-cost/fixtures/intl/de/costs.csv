@@ -1,4 +1,4 @@
-Sendungs-ID;cost_type;Betrag
+Sendungs-ID;Leistungsbeschreibung;Betrag
 SH-1;Freight;1.000,00
 SH-1;Duty;700,00
 SH-1;Broker;140,00

@@ -1,4 +1,4 @@
-Bestellnummer;Bestelldatum;Kanal;Versandkosten berechnet;subtotal;ship_method
+Bestellnummer;Bestelldatum;Kanal;Versandkosten berechnet;Betrag;Service
 1001;01.10.2026;Shopify;5,99;40,00;Ground
 1002;02.10.2026;Shopify;0,00;80,00;Free
 1003;03.10.2026;Shopify;0,00;30,00;Free

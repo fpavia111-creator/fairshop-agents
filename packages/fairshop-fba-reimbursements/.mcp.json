@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-fba-reimbursements": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-fba-reimbursements@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

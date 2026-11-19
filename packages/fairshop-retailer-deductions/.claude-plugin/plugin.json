@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-retailer-deductions",
+  "version": "0.1.0",
+  "description": "Checks deductions retailers take from wholesale remittances against your invoices and proof of delivery: shortages your signed POD disproves, promotional allowances above what you agreed, deductions taken twice, compliance fines needing evidence, small ones to write off and ones past the dispute window. Drafts a dispute per retailer; never submits it.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-retailer-deductions#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "retailer-deductions",
+    "chargebacks",
+    "wholesale",
+    "edi-deductions"
+  ]
+}

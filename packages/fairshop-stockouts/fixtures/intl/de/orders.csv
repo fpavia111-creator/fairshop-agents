@@ -1,4 +1,4 @@
-Bestellnummer;Bestelldatum;Artikelnummer;Menge;Preis;Zustand;cancel_reason
+Bestellnummer;Bestelldatum;Artikelnummer;Menge;Preis;Zustand;Grund
 R1;01.11.2026;ROPE-1;2;15,00;paid;
 R2;02.11.2026;ROPE-1;2;15,00;paid;
 R3;03.11.2026;ROPE-1;2;15,00;paid;

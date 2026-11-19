@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-cash-over-short",
+  "version": "0.1.0",
+  "description": "Reads register closeouts and bank deposits for physical stores: drawers over or short beyond your tolerance, deposits missing or different from the counted cash, and cashiers with repeated shortages (names masked). Drafts a review note for the store manager; never deducts pay or moves money.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-cash-over-short#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "pos",
+    "cash-over-short",
+    "register",
+    "deposits",
+    "retail-stores"
+  ]
+}

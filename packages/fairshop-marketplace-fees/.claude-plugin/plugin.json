@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-marketplace-fees",
+  "version": "0.1.0",
+  "description": "Checks every marketplace fee line (Amazon, eBay, Etsy, Walmart) against the fee schedule you confirm: fees above the schedule, fee types not in it, percent fees with no sale amount, and fee rates that changed month to month. Drafts a fee dispute per channel; never files it.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-marketplace-fees#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "marketplace-fees",
+    "amazon-fees",
+    "etsy-fees",
+    "ebay-fees",
+    "fee-audit"
+  ]
+}

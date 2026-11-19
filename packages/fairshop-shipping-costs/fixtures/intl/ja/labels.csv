@@ -1,4 +1,4 @@
-注文番号,出荷日,運送会社,サービス,ラベル費用,追跡番号,voided,refund_status
+注文番号,出荷日,運送会社,サービス,ラベル費用,追跡番号,voided,ステータス
 1001,2026/10/01,USPS,Ground Advantage,6.20,9400EX0001,no,
 1002,2026/10/02,UPS,Ground,9.10,1ZEX0002,no,
 1003,2026/10/03,USPS,Ground Advantage,7.50,9400EX0003,no,

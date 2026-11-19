@@ -1,4 +1,4 @@
-Bestellnummer;Betrag;Zustand;Erstattet;customer_email
+Bestellnummer;Betrag;Zustand;Erstattet;E-Mail-Adresse
 5001;100,00;paid;0,00;ula.marsh@example.test
 5002;80,00;refunded;80,00;vic.noor@example.test
 5003;60,00;paid;0,00;wes.oaks@example.test

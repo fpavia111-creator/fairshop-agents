@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-return-reasons",
+  "version": "0.1.0",
+  "description": "Reads return reasons by SKU and by customer: SKUs returned far more than the rest and why (listing, size, quality, fulfilment), and customers who return most of what they buy, with customer names and e-mails masked. Drafts a listing review; never blocks a customer or changes a listing.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-return-reasons#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "return-reasons",
+    "return-rate",
+    "serial-returners",
+    "listings"
+  ]
+}

@@ -14,7 +14,7 @@ const run = (a, ctx) => matchRefunds(ctx.records(a.refunds, 'refunds'), ctx.reco
 const line = (r) => `${r.lines} order line(s): ${r.chase} refunded and not returned (${r.at_risk} at risk), ${r.owed} returned and not refunded (${r.owed_to_customers} owed to customers), ${r.review} to review, ${r.waiting} still inside the window, ${r.ok} matched.`;
 
 export const manifest = shopAgent({
-  pkg, prefix: 'refunds', label: 'Fairshop Refunds and Returns',
+  pkg, prefix: 'refunds', label: 'Fairshop Refunds Returns',
   description: 'Matches refunds to returns received: refunds whose item never came back, returns received but not refunded, refunds paid twice or above the price, and full refunds on damaged returns. Drafts return reminders; a person sends them and decides every refund.',
   files, required: ['refunds', 'returns'],
   sources: { refunds: { label: 'Refunds', args: ['refunds'], fields: REFUND_FIELDS }, returns: { label: 'Returns received', args: ['returns'], fields: RETURN_FIELDS }, orders: { label: 'Order lines', args: ['orders'], fields: ORDER_LINE_FIELDS } },

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketplace claims as of 2026-11-16</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1c1a;--mut:#6b6760;--line:#e4e0d8;--ok:#1f7a4d;--bad:#b42318;--warn:#a15c07;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161514;--fg:#ecebe8;--mut:#a29d94;--line:#34312d;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--card:#1f1e1c}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,"Hiragino Sans","Yu Gothic UI","Microsoft YaHei","PingFang SC","Malgun Gothic","Apple SD Gothic Neo","Noto Sans CJK",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px}
+.mut{color:var(--mut)}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tiles{display:flex;gap:12px;flex-wrap:wrap}.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
+.tile b{display:block;font-size:22px}code{font-size:13px;overflow-wrap:anywhere}pre{overflow-x:auto}
+.wrap{overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}figure{margin:16px 0}p,li,h1,h2,h3{overflow-wrap:break-word}
+</style></head><body><main>
+<h1>Marketplace claims as of 2026-11-16</h1>
+<p class="mut">6 claim(s), 980 at stake: 4 to answer (2 due today or tomorrow), 1 overdue, 1 closed. Open: 1 your tracking can defend, 1 weak, 1 need photos and messages, 2 likely refunds.</p>
+<h2>By channel</h2><div class="wrap"><table><thead><tr><th scope="col">channel</th><th scope="col">count</th><th scope="col">amount</th></tr></thead><tbody>
+<tr><td>Amazon</td><td>2</td><td>865</td></tr>
+<tr><td>Walmart</td><td>1</td><td>25</td></tr>
+<tr><td>eBay</td><td>2</td><td>90</td></tr>
+</tbody></table></div>
+<h2>By finding</h2><div class="wrap"><table><thead><tr><th scope="col">code</th><th scope="col">count</th><th scope="col">amount</th></tr></thead><tbody>
+<tr><td>delivered_with_proof</td><td>1</td><td>0</td></tr>
+<tr><td>evidence_needed</td><td>1</td><td>0</td></tr>
+<tr><td>late_response</td><td>1</td><td>0</td></tr>
+<tr><td>no_signature_over_threshold</td><td>1</td><td>820</td></tr>
+<tr><td>no_tracking</td><td>1</td><td>25</td></tr>
+<tr><td>not_delivered</td><td>1</td><td>30</td></tr>
+</tbody></table></div>
+<h2>All rows (5)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">id</th><th scope="col">channel</th><th scope="col">order id</th><th scope="col">respond by</th><th scope="col">advice</th><th scope="col">delivered</th><th scope="col">status</th><th scope="col">amount</th><th scope="col">reasons</th></tr></thead><tbody>
+<tr><td>EB-2</td><td>eBay</td><td>22-10002-00002</td><td>2026-11-11</td><td>refund_likely</td><td></td><td>overdue</td><td>30</td><td>Tracking 9400EXAMPLE004 shows no delivery before the claim was opened. The respond-by date 2026-11-11 has passed.</td></tr>
+<tr><td>AZ-2</td><td>Amazon</td><td>111-1000002-0000002</td><td>2026-11-16</td><td>weak</td><td>2026-11-07</td><td>respond</td><td>820</td><td>Delivered 2026-11-07 by FedEx, but the order is 820 and has no signature (your rule: 750 and over).</td></tr>
+<tr><td>AZ-1</td><td>Amazon</td><td>111-1000001-0000001</td><td>2026-11-17</td><td>defend</td><td>2026-11-08</td><td>respond</td><td>45</td><td>Delivered 2026-11-08 (UPS 1ZEXAMPLE0001) before the claim was opened 2026-11-14.</td></tr>
+<tr><td>EB-1</td><td>eBay</td><td>22-10001-00001</td><td>2026-11-18</td><td>gather_evidence</td><td>2026-11-06</td><td>respond</td><td>60</td><td>&quot;Item not as described&quot;: attach the listing as it was, your messages with the buyer and photos of what was sent.</td></tr>
+<tr><td>WM-1</td><td>Walmart</td><td>WM-5001</td><td>2026-11-18</td><td>refund_likely</td><td></td><td>respond</td><td>25</td><td>No tracking on file for order WM-5001; a not-received claim is hard to defend.</td></tr>
+</tbody></table></div>
+<h2>Limits</h2><ul><li>Reads only the files you export and give it. It does not log in to a store, marketplace, payment processor, carrier, 3PL or bank, and changes nothing there.</li><li>Respond-by dates come from the export or from your respond_days settings; check each on the marketplace before relying on it.</li><li>The advice is a reading of your own records, not a prediction of the marketplace decision.</li><li>Not legal, tax or accounting advice. A person decides what to claim, refund, dispute, pay or change.</li></ul>
+<p class="mut" style="margin-top:32px">Written by a Fairshop agent from your files. Nothing was sent or paid.</p>
+</main></body></html>

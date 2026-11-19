@@ -1,0 +1,223 @@
+{
+  "product": "Fairshop",
+  "industry": "E-commerce and retail",
+  "kicker": "E-commerce and retail back office: payouts, fees, returns, sales tax, inventory and shipping",
+  "lede": "Thirty small agents that check an online or multichannel store's back office from the files it already exports, payouts, marketplace fees, returns, sales tax, inventory, shipping and purchasing, and wait for one named person before anything is sent, filed or changed.",
+  "from": "$1,000",
+  "packages": [
+    [
+      "$1,000 · One store",
+      "Payouts check",
+      "Every order matched to its payout, money held in processor reserves, and one journal entry per marketplace settlement (3 agents)"
+    ],
+    [
+      "$2,000 · One Amazon seller",
+      "Marketplace money back",
+      "FBA reimbursements with claim-by dates, storage and aged-inventory fees, fees against your schedule, A-to-z and other claims (4 agents)"
+    ],
+    [
+      "$2,000 · One store",
+      "Returns and promotions",
+      "Refunds against returns received, return reasons, discount codes, gift card liability, failed subscription payments, affiliate commissions (6 agents)"
+    ],
+    [
+      "$1,500 · One store",
+      "Sales tax pack",
+      "Tax collected against the rates and rules you confirm by state, marketplace orders kept apart, and sales against the nexus thresholds you set (2 agents)"
+    ],
+    [
+      "$2,500 · One store",
+      "Inventory and listings",
+      "Stock against channel listings, stockouts, product data, duplicate listings, MAP prices, SKU margins and ad spend (7 agents)"
+    ],
+    [
+      "$2,500 · One business",
+      "Shipping and purchasing",
+      "Label cost against shipping charged, carrier adjustments, 3PL invoices, PO receiving, landed cost and retailer deductions (6 agents)"
+    ],
+    [
+      "$1,000 · Up to 3 shops",
+      "Store cash and shrink",
+      "Register drawers and bank deposits, and shrink by store and category (2 agents)"
+    ],
+    [
+      "$7,500 · One business",
+      "Whole shop",
+      "All 30 agents, mapped to your exports and set to the rules you confirm, one training session"
+    ],
+    [
+      "$10,500 · 2 to 4 brands or stores",
+      "Multi-brand business",
+      "Whole shop for each brand, store or marketplace account, each one's exports mapped and settings confirmed separately"
+    ],
+    [
+      "$15,000 · Up to 15 clients",
+      "Partner rollout",
+      "For e-commerce bookkeepers, Amazon agencies and operations consultants serving many sellers: all 30 agents, one shared setup, every client's exports mapped with its own settings"
+    ]
+  ],
+  "support": "Support after setup: $200 a month for one pack, $450 a month for the whole shop, $250 a month per brand or per client for multi-brand businesses and partner rollouts. Includes export changes, settings updates when a marketplace or carrier changes its terms, new versions and a monthly check-in.",
+  "notes": [
+    "Reads the files you export; it does not log in to your store, a marketplace, a payment processor, a carrier, your 3PL or your bank.",
+    "Fee schedules, reserve terms, rate cards, MAP lists, claim and dispute windows are settings you confirm; the agents do not know a marketplace's or carrier's current terms.",
+    "Sales tax rates, marketplace facilitator rules and nexus thresholds are settings you confirm with your adviser; nothing here is tax advice and no agent files a return or registers with a state.",
+    "Export layouts for Shopify, WooCommerce, BigCommerce, Amazon Seller Central, eBay, Etsy, Walmart, Stripe, PayPal, Square, ShipStation, Shippo and the ad platforms were written from knowledge of those exports and not checked against live accounts; the first setup confirms them on your files.",
+    "Lost sales, reimbursement values and aged-inventory surcharges are estimates from your own files and are marked as such.",
+    "Not legal, tax or accounting advice.",
+    "Report pages come in nine languages, translated by Claude and not yet reviewed by native speakers."
+  ],
+  "warn": "Your files and reports stay on your computer. Shopper names, e-mails, phone numbers, addresses and staff names are masked in anything sent to the AI model. No agent refunds, charges, pays, reprices, changes a listing or a discount code, files a tax return, registers with a state, opens a marketplace case or messages anyone: drafts wait for one named person.",
+  "groups": [
+    [
+      "Payouts, fees and marketplace money",
+      [
+        [
+          "Payouts",
+          "Orders against payout lines by channel: never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate."
+        ],
+        [
+          "Marketplace Fees",
+          "Every marketplace fee line against the fee schedule you confirm, and fee rates that moved month to month."
+        ],
+        [
+          "FBA Reimbursements",
+          "Lost and damaged FBA units, refunds with no return and low reimbursements, each with a claim-by date."
+        ],
+        [
+          "FBA Storage Fees",
+          "Storage fees against your rates, and inventory lots about to cross into the next aged-inventory bracket."
+        ],
+        [
+          "Processor Reserves",
+          "Stripe, PayPal and Shopify reserves: releases overdue, holds above your terms, releases coming up."
+        ],
+        [
+          "Settlement Journals",
+          "One balanced journal entry per marketplace settlement from your account map, matched to the bank deposit."
+        ],
+        [
+          "Marketplace Claims",
+          "A-to-z, eBay, Walmart and Etsy claims against your tracking: respond-by dates and what your records prove."
+        ]
+      ]
+    ],
+    [
+      "Returns, refunds and customers",
+      [
+        [
+          "Refunds Returns",
+          "Refunds whose item never came back, returns never refunded, refunds paid twice or above the price."
+        ],
+        [
+          "Return Reasons",
+          "Why things come back, by SKU, and customers who return most of what they buy (masked)."
+        ],
+        [
+          "Coupon Abuse",
+          "Discount codes used past their limit, out of date, under the minimum, or by returning shoppers."
+        ],
+        [
+          "Gift Cards",
+          "Gift card and store credit liability by age, and cards whose balances do not add up."
+        ],
+        [
+          "Subscriptions",
+          "Failed payments not retried, retries used up, cards about to expire, and churn by cause."
+        ],
+        [
+          "Affiliate Commissions",
+          "Commissions on refunded or missing orders, above your rate, paid twice, or on own-link purchases."
+        ]
+      ]
+    ],
+    [
+      "Sales tax",
+      [
+        [
+          "Sales Tax",
+          "Tax collected on each order against the rates and rules you confirm, by state, with marketplace orders apart."
+        ],
+        [
+          "Nexus Thresholds",
+          "Sales and orders by state against the thresholds you confirm, with the date each was met."
+        ]
+      ]
+    ],
+    [
+      "Inventory, listings and pricing",
+      [
+        [
+          "Inventory Listings",
+          "Stock by location against what each channel lists: oversell risk, missed sales and stock listed nowhere."
+        ],
+        [
+          "Stockouts",
+          "Days out of stock, orders taken with nothing on hand, and SKUs to reorder before they run out."
+        ],
+        [
+          "Product Data",
+          "Missing GTINs, brands, weights and images, titles over your limits and GTINs with a wrong check digit."
+        ],
+        [
+          "Duplicate Listings",
+          "The same SKU listed twice, look-alike titles, shared GTINs and listings for SKUs you do not carry."
+        ],
+        [
+          "MAP Pricing",
+          "Advertised prices against your MAP list: your own listings first, then resellers and repeat ones."
+        ],
+        [
+          "SKU Margins",
+          "Contribution margin per SKU and channel after fees, labels and unit cost."
+        ],
+        [
+          "Ad Spend",
+          "Campaigns under your target return, spend with no sales, ads on out-of-stock SKUs, and over-attribution."
+        ]
+      ]
+    ],
+    [
+      "Shipping, fulfilment and purchasing",
+      [
+        [
+          "Shipping Costs",
+          "Shipping charged against labels bought: losses, free shipping under your threshold, duplicate and unrefunded labels."
+        ],
+        [
+          "Carrier Adjustments",
+          "Carrier adjustments your own label data disproves, and SKUs whose packaging data keeps causing them."
+        ],
+        [
+          "3PL Invoices",
+          "A 3PL invoice against your rate card and your own order, receipt and pallet counts."
+        ],
+        [
+          "PO Receiving",
+          "Purchase orders, receipts and supplier invoices matched: billed not received, billed twice, price above the PO."
+        ],
+        [
+          "Landed Cost",
+          "Freight, duty and broker costs spread over each shipment's SKUs, against the cost recorded in your store."
+        ],
+        [
+          "Retailer Deductions",
+          "Retailer deductions your proof of delivery or agreements disprove, with dispute dates."
+        ]
+      ]
+    ],
+    [
+      "Physical stores",
+      [
+        [
+          "Cash Over Short",
+          "Register drawers over or short, and deposits missing or different from the counted cash."
+        ],
+        [
+          "Store Shrink",
+          "Shrink by store and category against sales, unexplained losses and SKUs written off again and again."
+        ]
+      ]
+    ]
+  ],
+  "closing": "Each one does one job, on your computer, from a file you export. Nothing is refunded, paid, repriced, filed or sent until a named person says so. Pairs with G6daddy's e-commerce AI agent for the shop front and 11:11 Websites' store package; these check the back office."
+}

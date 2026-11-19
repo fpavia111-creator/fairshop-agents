@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payouts against orders</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1c1a;--mut:#6b6760;--line:#e4e0d8;--ok:#1f7a4d;--bad:#b42318;--warn:#a15c07;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161514;--fg:#ecebe8;--mut:#a29d94;--line:#34312d;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--card:#1f1e1c}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,"Hiragino Sans","Yu Gothic UI","Microsoft YaHei","PingFang SC","Malgun Gothic","Apple SD Gothic Neo","Noto Sans CJK",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px}
+.mut{color:var(--mut)}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tiles{display:flex;gap:12px;flex-wrap:wrap}.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
+.tile b{display:block;font-size:22px}code{font-size:13px;overflow-wrap:anywhere}pre{overflow-x:auto}
+.wrap{overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}figure{margin:16px 0}p,li,h1,h2,h3{overflow-wrap:break-word}
+</style></head><body><main>
+<h1>Payouts against orders</h1>
+<p class="mut">13 order(s) on 3 channel(s): 3 to chase (191.49 not paid out or short), 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.</p>
+<h2>By channel</h2><div class="wrap"><table><thead><tr><th scope="col">channel</th><th scope="col">count</th><th scope="col">expected</th><th scope="col">received</th><th scope="col">fees</th><th scope="col">owed</th></tr></thead><tbody>
+<tr><td>Amazon</td><td>3</td><td>200.98</td><td>98.99</td><td>15.45</td><td>101.99</td></tr>
+<tr><td>Etsy</td><td>2</td><td>87</td><td>87</td><td>8.28</td><td>0</td></tr>
+<tr><td>Shopify</td><td>8</td><td>554.5</td><td>552</td><td>22.16</td><td>89.5</td></tr>
+</tbody></table></div>
+<h2>By finding</h2><div class="wrap"><table><thead><tr><th scope="col">code</th><th scope="col">count</th><th scope="col">amount</th></tr></thead><tbody>
+<tr><td>fee_above_rate</td><td>1</td><td>1.58</td></tr>
+<tr><td>no_matching_order</td><td>1</td><td>18</td></tr>
+<tr><td>not_paid_out</td><td>2</td><td>189.49</td></tr>
+<tr><td>paid_short</td><td>1</td><td>2</td></tr>
+<tr><td>paid_twice</td><td>1</td><td>150</td></tr>
+<tr><td>payout_adjustment</td><td>1</td><td>0</td></tr>
+<tr><td>refund_not_deducted</td><td>1</td><td>0</td></tr>
+</tbody></table></div>
+<h2>All rows (11)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">order id</th><th scope="col">channel</th><th scope="col">order date</th><th scope="col">expected</th><th scope="col">received</th><th scope="col">fees</th><th scope="col">status</th><th scope="col">owed</th><th scope="col">reasons</th></tr></thead><tbody>
+<tr><td>112-0000002-0000002</td><td>Amazon</td><td>2026-10-21</td><td>42</td><td>40</td><td>6.3</td><td>chase</td><td>2</td><td>Expected 42 for order 112-0000002-0000002, payouts show 40. 2 is missing.</td></tr>
+<tr><td>112-0000003-0000003</td><td>Amazon</td><td>2026-10-22</td><td>99.99</td><td>0</td><td>0</td><td>chase</td><td>99.99</td><td>No payout line for order 112-0000003-0000003 on Amazon; it was due by 2026-11-05 (14 day(s) after the order).</td></tr>
+<tr><td>E-3001</td><td>Etsy</td><td>2026-11-03</td><td>35</td><td>35</td><td>4.9</td><td>review</td><td>0</td><td>Fees 4.9 on 35 are 14%, above your 9.5% for Etsy.</td></tr>
+<tr><td>#1002</td><td>Shopify</td><td>2026-10-29</td><td>89.5</td><td>0</td><td>0</td><td>chase</td><td>89.5</td><td>No payout line for order #1002 on Shopify; it was due by 2026-11-01 (3 day(s) after the order).</td></tr>
+<tr><td>#1003</td><td>Shopify</td><td>2026-11-14</td><td>45</td><td>0</td><td>0</td><td>waiting</td><td>0</td><td></td></tr>
+<tr><td>#1005</td><td>Shopify</td><td>2026-10-31</td><td>0</td><td>64</td><td>2.16</td><td>review</td><td>0</td><td>Refund of 64 on order #1005 is not in any payout yet; expect 64 to be deducted from a later payout.</td></tr>
+<tr><td>#1006</td><td>Shopify</td><td>2026-11-01</td><td>150</td><td>300</td><td>9.3</td><td>review</td><td>0</td><td>Order #1006 was paid in 2 payouts (P-2001, P-2002). The extra 150 may be taken back later; keep it until the channel confirms.</td></tr>
+<tr><td>#1007</td><td>Shopify</td><td>2026-11-02</td><td>75</td><td>0</td><td>0</td><td>skipped</td><td>0</td><td></td></tr>
+<tr><td>#1008</td><td>Shopify</td><td>2026-11-02</td><td>30</td><td>0</td><td>0</td><td>skipped</td><td>0</td><td></td></tr>
+<tr><td>9999</td><td>Shopify</td><td></td><td>0</td><td>18</td><td>0.82</td><td>review</td><td>0</td><td>Payout P-2003 pays 18 for order 9999, which is not in the orders file. Check the date range of the orders export, or whether it is another store&#39;s order.</td></tr>
+<tr><td></td><td>Shopify</td><td></td><td>0</td><td>-100</td><td>0</td><td>review</td><td>0</td><td>Payout P-2003 has a reserve of -100 with no order (a reserve, hold, chargeback or fee). Match it to the channel&#39;s statement.</td></tr>
+</tbody></table></div>
+<h2>Limits</h2><ul><li>Reads only the files you export and give it. It does not log in to a store, marketplace, payment processor, carrier, 3PL or bank, and changes nothing there.</li><li>An order paid by a method that does not go through these payouts (manual, cash, gift card) is skipped; set skip_gateways for your own.</li><li>Payout timing and fee rates are the ones in your settings file. A marketplace may hold money in a reserve; reserve lines are listed as adjustments.</li><li>Not legal, tax or accounting advice. A person decides what to claim, refund, dispute, pay or change.</li></ul>
+<p class="mut" style="margin-top:32px">Written by a Fairshop agent from your files. Nothing was sent or paid.</p>
+</main></body></html>

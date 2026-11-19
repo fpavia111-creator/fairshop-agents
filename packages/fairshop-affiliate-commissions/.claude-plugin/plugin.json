@@ -1,0 +1,20 @@
+{
+  "name": "fairshop-affiliate-commissions",
+  "version": "0.1.0",
+  "description": "Checks affiliate commission statements against your orders and terms: commission on refunded or cancelled orders, orders not found, rates above your terms, sale amounts above the order, the same order paid twice, and affiliates buying through their own link. Drafts the reversal request; never approves a payout.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-affiliate-commissions#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "affiliates",
+    "affiliate-commissions",
+    "partner-marketing"
+  ]
+}

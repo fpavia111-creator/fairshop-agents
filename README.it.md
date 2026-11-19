@@ -1,0 +1,101 @@
+# Fairshop: agenti per il back-office di e-commerce e negozi
+
+> Tradotto da Claude; non ancora rivisto da un madrelingua. In caso di differenze vale il README inglese. Le descrizioni degli agenti sono in inglese.
+
+[English](README.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · **Italiano** · [日本語](README.ja.md) · [简体中文](README.zh-Hans.md) · [한국어](README.ko.md)
+
+30 piccoli agenti per chi vende online e per i negozi con cassa. Ognuno svolge un compito di back-office, sul vostro computer, da file che già esportate: Shopify, WooCommerce, BigCommerce, Amazon Seller Central, eBay, Etsy, Walmart Marketplace, Stripe, PayPal, Square, ShipStation, Shippo e le fatture del vostro operatore logistico. Ognuno scrive una lista di lavoro (CSV con una colonna decisione vuota e una pagina HTML) e, quando qualcosa va inviato, una bozza che aspetta una persona indicata per nome.
+
+Il software è gratuito (MIT). Mythos Machines offre una configurazione a prezzo fisso sui vostri file: vedi [fair-agents.com](https://fair-agents.com).
+
+## Che cosa nessun agente fa
+
+Nessun agente rimborsa, addebita, paga, cambia prezzi o inserzioni, disattiva codici, presenta dichiarazioni fiscali, si registra presso uno stato, invia messaggi o registra in contabilità. Questi passaggi sono rifiutati o aspettano il clic di una persona indicata per nome, anche in modalità Auto. Ogni chiamata è scritta in un registro di audit concatenato.
+
+## Dati di clienti e personale
+
+Nomi, e-mail, telefoni e indirizzi dei clienti e nomi del personale sono sostituiti da pseudonimi stabili in tutto ciò che vede il modello di IA. I file scritti sul vostro disco mantengono i valori reali per chi lavora le liste.
+
+## File da altri paesi
+
+Le esportazioni da sistemi di Germania, Francia, Spagna, Brasile, Italia, Giappone, Cina e Corea sono lette dal nucleo comune: nomi di colonna locali, Windows-1252, Shift_JIS, GBK ed EUC-KR, importi `1.234,56` e date con giorno o anno prima. Le pagine dei report esistono in nove lingue con `--lang de|fr|es|pt|it|ja|zh|ko`; risultati degli strumenti e CSV restano in inglese.
+
+> Aliquote, regole dei marketplace e soglie di nexus sono impostazioni che confermate con il vostro consulente. Niente qui è consulenza fiscale, legale o contabile.
+
+## Gli agenti
+
+### Accrediti, commissioni e denaro dei marketplace
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Payouts](packages/fairshop-payouts) | `fairshop-payouts` | Orders against payout lines by channel: never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate. |
+| [Fairshop Marketplace Fees](packages/fairshop-marketplace-fees) | `fairshop-marketplace-fees` | Every marketplace fee line against the fee schedule you confirm, and fee rates that moved month to month. |
+| [Fairshop FBA Reimbursements](packages/fairshop-fba-reimbursements) | `fairshop-fba-reimbursements` | Lost and damaged FBA units, refunds with no return and low reimbursements, each with a claim-by date. |
+| [Fairshop FBA Storage Fees](packages/fairshop-fba-storage-fees) | `fairshop-fba-storage-fees` | Storage fees against your rates, and inventory lots about to cross into the next aged-inventory bracket. |
+| [Fairshop Processor Reserves](packages/fairshop-processor-reserves) | `fairshop-processor-reserves` | Stripe, PayPal and Shopify reserves: releases overdue, holds above your terms, releases coming up. |
+| [Fairshop Settlement Journals](packages/fairshop-settlement-journals) | `fairshop-settlement-journals` | One balanced journal entry per marketplace settlement from your account map, matched to the bank deposit. |
+| [Fairshop Marketplace Claims](packages/fairshop-marketplace-claims) | `fairshop-marketplace-claims` | A-to-z, eBay, Walmart and Etsy claims against your tracking: respond-by dates and what your records prove. |
+
+### Resi, rimborsi e clienti
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Refunds Returns](packages/fairshop-refunds-returns) | `fairshop-refunds-returns` | Refunds whose item never came back, returns never refunded, refunds paid twice or above the price. |
+| [Fairshop Return Reasons](packages/fairshop-return-reasons) | `fairshop-return-reasons` | Why things come back, by SKU, and customers who return most of what they buy (masked). |
+| [Fairshop Coupon Abuse](packages/fairshop-coupon-abuse) | `fairshop-coupon-abuse` | Discount codes used past their limit, out of date, under the minimum, or by returning shoppers. |
+| [Fairshop Gift Cards](packages/fairshop-gift-cards) | `fairshop-gift-cards` | Gift card and store credit liability by age, and cards whose balances do not add up. |
+| [Fairshop Subscriptions](packages/fairshop-subscriptions) | `fairshop-subscriptions` | Failed payments not retried, retries used up, cards about to expire, and churn by cause. |
+| [Fairshop Affiliate Commissions](packages/fairshop-affiliate-commissions) | `fairshop-affiliate-commissions` | Commissions on refunded or missing orders, above your rate, paid twice, or on own-link purchases. |
+
+### Imposta sulle vendite (USA)
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Sales Tax](packages/fairshop-sales-tax) | `fairshop-sales-tax` | Tax collected on each order against the rates and rules you confirm, by state, with marketplace orders apart. |
+| [Fairshop Nexus Thresholds](packages/fairshop-nexus-thresholds) | `fairshop-nexus-thresholds` | Sales and orders by state against the thresholds you confirm, with the date each was met. |
+
+### Giacenze, inserzioni e prezzi
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Inventory Listings](packages/fairshop-inventory-listings) | `fairshop-inventory-listings` | Stock by location against what each channel lists: oversell risk, missed sales and stock listed nowhere. |
+| [Fairshop Stockouts](packages/fairshop-stockouts) | `fairshop-stockouts` | Days out of stock, orders taken with nothing on hand, and SKUs to reorder before they run out. |
+| [Fairshop Product Data](packages/fairshop-product-data) | `fairshop-product-data` | Missing GTINs, brands, weights and images, titles over your limits and GTINs with a wrong check digit. |
+| [Fairshop Duplicate Listings](packages/fairshop-duplicate-listings) | `fairshop-duplicate-listings` | The same SKU listed twice, look-alike titles, shared GTINs and listings for SKUs you do not carry. |
+| [Fairshop MAP Pricing](packages/fairshop-map-pricing) | `fairshop-map-pricing` | Advertised prices against your MAP list: your own listings first, then resellers and repeat ones. |
+| [Fairshop SKU Margins](packages/fairshop-sku-margins) | `fairshop-sku-margins` | Contribution margin per SKU and channel after fees, labels and unit cost. |
+| [Fairshop Ad Spend](packages/fairshop-ad-spend) | `fairshop-ad-spend` | Campaigns under your target return, spend with no sales, ads on out-of-stock SKUs, and over-attribution. |
+
+### Spedizioni, logistica e acquisti
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Shipping Costs](packages/fairshop-shipping-costs) | `fairshop-shipping-costs` | Shipping charged against labels bought: losses, free shipping under your threshold, duplicate and unrefunded labels. |
+| [Fairshop Carrier Adjustments](packages/fairshop-carrier-adjustments) | `fairshop-carrier-adjustments` | Carrier adjustments your own label data disproves, and SKUs whose packaging data keeps causing them. |
+| [Fairshop 3PL Invoices](packages/fairshop-3pl-invoices) | `fairshop-3pl-invoices` | A 3PL invoice against your rate card and your own order, receipt and pallet counts. |
+| [Fairshop PO Receiving](packages/fairshop-po-receiving) | `fairshop-po-receiving` | Purchase orders, receipts and supplier invoices matched: billed not received, billed twice, price above the PO. |
+| [Fairshop Landed Cost](packages/fairshop-landed-cost) | `fairshop-landed-cost` | Freight, duty and broker costs spread over each shipment's SKUs, against the cost recorded in your store. |
+| [Fairshop Retailer Deductions](packages/fairshop-retailer-deductions) | `fairshop-retailer-deductions` | Retailer deductions your proof of delivery or agreements disprove, with dispute dates. |
+
+### Negozi fisici
+
+| Agent | Package | |
+|---|---|---|
+| [Fairshop Cash Over Short](packages/fairshop-cash-over-short) | `fairshop-cash-over-short` | Register drawers over or short, and deposits missing or different from the counted cash. |
+| [Fairshop Store Shrink](packages/fairshop-store-shrink) | `fairshop-store-shrink` | Shrink by store and category against sales, unexplained losses and SKUs written off again and again. |
+
+## Provarlo
+
+```bash
+npx -y fairshop-payouts demo
+npx -y fairshop-payouts mcp --root /path/to/your/exports
+npx -y fairshop-payouts call payouts_audit '{"orders":"orders.csv","payouts":"payouts.csv"}' --lang de
+```
+
+## Come è verificato
+
+Ogni verifica con i suoi numeri è in [REVIEW-ver1.md](REVIEW-ver1.md) (in inglese). Tutti i dati di questo repository sono fittizi.
+
+## Licenza
+
+MIT. Realizzato da Mythos Machines.

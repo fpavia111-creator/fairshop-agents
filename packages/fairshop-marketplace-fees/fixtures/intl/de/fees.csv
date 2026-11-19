@@ -1,4 +1,4 @@
-Bestellnummer;Kanal;Datum;Gebührenart;Gebühr;sale_amount;Kategorie;Artikelnummer
+Bestellnummer;Kanal;Datum;Gebührenart;Gebühr;Brutto;Kategorie;Artikelnummer
 A-1001;Amazon;05.09.2026;Commission;-4,50;30,00;home;HM-100
 A-1002;Amazon;12.09.2026;Commission;-3,00;20,00;home;HM-101
 A-1003;Amazon;03.10.2026;Commission;-6,00;30,00;home;HM-100

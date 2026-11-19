@@ -1,4 +1,4 @@
-Rabattcode;Typ;max_uses;starts;ends;min_order
+Rabattcode;Typ;max_uses;Eintrittsdatum;Austrittsdatum;min_order
 WELCOME10;new_customer;;01.01.2026;31.12.2026;30,00
 VIP50;single_use;1;01.10.2026;31.12.2026;0,00
 FALL20;limited;3;01.09.2026;31.10.2026;50,00

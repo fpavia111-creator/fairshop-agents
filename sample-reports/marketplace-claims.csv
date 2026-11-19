@@ -1,0 +1,6 @@
+id,channel,order_id,reason,respond_by,advice,tracking,delivered,status,amount,findings,reasons,decision
+EB-2,eBay,22-10002-00002,Item not received,2026-11-11,refund_likely,9400EXAMPLE004,,overdue,30,not_delivered late_response,Tracking 9400EXAMPLE004 shows no delivery before the claim was opened. The respond-by date 2026-11-11 has passed.,
+AZ-2,Amazon,111-1000002-0000002,Item not received,2026-11-16,weak,7700EXAMPLE02,2026-11-07,respond,820,no_signature_over_threshold,"Delivered 2026-11-07 by FedEx, but the order is 820 and has no signature (your rule: 750 and over).",
+AZ-1,Amazon,111-1000001-0000001,Item not received,2026-11-17,defend,1ZEXAMPLE0001,2026-11-08,respond,45,delivered_with_proof,Delivered 2026-11-08 (UPS 1ZEXAMPLE0001) before the claim was opened 2026-11-14.,
+EB-1,eBay,22-10001-00001,Item not as described,2026-11-18,gather_evidence,9400EXAMPLE003,2026-11-06,respond,60,evidence_needed,"""Item not as described"": attach the listing as it was, your messages with the buyer and photos of what was sent.",
+WM-1,Walmart,WM-5001,Never arrived,2026-11-18,refund_likely,,,respond,25,no_tracking,No tracking on file for order WM-5001; a not-received claim is hard to defend.,

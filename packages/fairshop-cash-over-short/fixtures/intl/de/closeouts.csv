@@ -1,4 +1,4 @@
-Datum;Filiale;Kasse;cashier;Soll-Bargeld;Gezähltes Bargeld;float
+Datum;Filiale;Kasse;Mitarbeiter;Soll-Bargeld;Gezähltes Bargeld;float
 01.11.2026;Downtown;R1;Wren Halloway;812,40;812,40;200,00
 01.11.2026;Downtown;R2;Ilse Marchetti;455,00;445,00;200,00
 02.11.2026;Downtown;R2;Ilse Marchetti;390,00;384,50;200,00

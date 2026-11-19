@@ -1,0 +1,467 @@
+{
+  "name": "fairshop-ecommerce",
+  "owner": {
+    "name": "Fairshop"
+  },
+  "metadata": {
+    "description": "Thirty e-commerce and retail back-office agents. Each reads your exported files, writes reports locally and waits for a named person before anything that moves money, sends a message or changes a live system."
+  },
+  "plugins": [
+    {
+      "name": "fairshop-3pl-invoices",
+      "source": "./packages/fairshop-3pl-invoices",
+      "description": "Audits a 3PL invoice line by line against your rate card, shipped orders, receipts and pallet counts: rates above the card, orders billed twice, picks for orders that never shipped, more units received or pallets stored than counted, and charges not on the card. Drafts the invoice dispute; never pays.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "3pl",
+        "fulfillment",
+        "warehouse-invoice",
+        "rate-card"
+      ]
+    },
+    {
+      "name": "fairshop-ad-spend",
+      "source": "./packages/fairshop-ad-spend",
+      "description": "Reads ad platform exports (Amazon Ads, Google Ads, Meta) against your orders and stock: campaigns under your target return, spend with no sales, campaigns over budget, ads for SKUs that are out of stock, and platforms that claim more sales than the SKU sold. Drafts a campaign review; never pauses a campaign or changes a budget.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "ad-spend",
+        "roas",
+        "acos",
+        "amazon-ads",
+        "google-ads"
+      ]
+    },
+    {
+      "name": "fairshop-affiliate-commissions",
+      "source": "./packages/fairshop-affiliate-commissions",
+      "description": "Checks affiliate commission statements against your orders and terms: commission on refunded or cancelled orders, orders not found, rates above your terms, sale amounts above the order, the same order paid twice, and affiliates buying through their own link. Drafts the reversal request; never approves a payout.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "affiliates",
+        "affiliate-commissions",
+        "partner-marketing"
+      ]
+    },
+    {
+      "name": "fairshop-carrier-adjustments",
+      "source": "./packages/fairshop-carrier-adjustments",
+      "description": "Checks carrier adjustments (UPS, FedEx, USPS) against the weights and dimensions you entered on the label: adjustments your own data disproves, with a dispute-by date, adjustments that are right because your product data is wrong (and the SKUs that keep causing them), address corrections, and adjustments past their window. Drafts the dispute; never files it or pays.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "carrier-adjustments",
+        "dim-weight",
+        "usps-apv",
+        "ups",
+        "fedex"
+      ]
+    },
+    {
+      "name": "fairshop-cash-over-short",
+      "source": "./packages/fairshop-cash-over-short",
+      "description": "Reads register closeouts and bank deposits for physical stores: drawers over or short beyond your tolerance, deposits missing or different from the counted cash, and cashiers with repeated shortages (names masked). Drafts a review note for the store manager; never deducts pay or moves money.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "pos",
+        "cash-over-short",
+        "register",
+        "deposits",
+        "retail-stores"
+      ]
+    },
+    {
+      "name": "fairshop-coupon-abuse",
+      "source": "./packages/fairshop-coupon-abuse",
+      "description": "Checks every order that used a discount code against your code rules: single-use and limited codes used too often, codes used outside their dates or under the minimum order, new-customer codes used by returning shoppers, staff codes used outside staff, and codes you never issued. Drafts a code review; never disables a code or cancels an order.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "coupons",
+        "discount-codes",
+        "promo-abuse",
+        "promotions"
+      ]
+    },
+    {
+      "name": "fairshop-duplicate-listings",
+      "source": "./packages/fairshop-duplicate-listings",
+      "description": "Finds duplicate and orphan listings across channels: the same SKU listed twice on one channel (and at different prices), near-identical titles under different SKUs, one GTIN shared by several SKUs, and listings for SKUs not in your catalog. Drafts a clean-up list; never ends or merges a listing.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "duplicate-listings",
+        "catalog",
+        "listings",
+        "marketplaces"
+      ]
+    },
+    {
+      "name": "fairshop-fba-reimbursements",
+      "source": "./packages/fairshop-fba-reimbursements",
+      "description": "Finds Amazon FBA reimbursements owed: units lost or damaged in Amazon's warehouses and not found or reimbursed, refunds with no customer return, and reimbursements below your unit value, each with a claim-by date. Drafts the case text; a person files it in Seller Central.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "fba",
+        "amazon-reimbursements",
+        "lost-inventory",
+        "fba-claims"
+      ]
+    },
+    {
+      "name": "fairshop-fba-storage-fees",
+      "source": "./packages/fairshop-fba-storage-fees",
+      "description": "Checks Amazon FBA storage fees against the storage rates you confirm, warns before inventory lots cross into the next aged-inventory bracket, lists lots already paying an aged surcharge, and SKUs whose storage costs more than their margin. Drafts a removal or sell-through plan; never creates removal orders.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "fba",
+        "storage-fees",
+        "aged-inventory",
+        "amazon"
+      ]
+    },
+    {
+      "name": "fairshop-gift-cards",
+      "source": "./packages/fairshop-gift-cards",
+      "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "gift-cards",
+        "store-credit",
+        "liability",
+        "breakage"
+      ]
+    },
+    {
+      "name": "fairshop-inventory-listings",
+      "source": "./packages/fairshop-inventory-listings",
+      "description": "Compares stock by location (warehouse, 3PL, FBA) with the quantities listed on each channel: listings above what their locations can ship, listings at zero while stock sits on the shelf, inactive listings with stock, listings for SKUs you do not stock, and stock listed nowhere. Drafts quantity corrections; never changes a listing.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "inventory",
+        "multichannel",
+        "overselling",
+        "listings"
+      ]
+    },
+    {
+      "name": "fairshop-landed-cost",
+      "source": "./packages/fairshop-landed-cost",
+      "description": "Spreads freight, duty, broker and other import costs over the SKUs of each shipment (by weight or value, as you set) to get a landed unit cost, compares it with the cost recorded in your store, and lists shipments with no costs and costs with no shipment. Drafts cost updates; never changes a cost.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "landed-cost",
+        "import-costs",
+        "duty",
+        "cogs"
+      ]
+    },
+    {
+      "name": "fairshop-map-pricing",
+      "source": "./packages/fairshop-map-pricing",
+      "description": "Checks advertised prices from your own channels and from resellers against your minimum advertised price (MAP) list: your own listings below MAP first, resellers below it (and repeat ones), authorised exceptions, and SKUs not on the list. Drafts a notice per reseller; never changes a price or suspends a reseller.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "map-pricing",
+        "minimum-advertised-price",
+        "resellers",
+        "brand-protection"
+      ]
+    },
+    {
+      "name": "fairshop-marketplace-claims",
+      "source": "./packages/fairshop-marketplace-claims",
+      "description": "Lines up Amazon A-to-z, eBay, Walmart and Etsy claims with your shipment and delivery records: respond-by dates, which claims your tracking can defend, which need a signature or photos, which are likely refunds, and which are overdue. Drafts each response; never submits it or refunds.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "a-to-z",
+        "ebay-cases",
+        "marketplace-claims",
+        "dispute-evidence"
+      ]
+    },
+    {
+      "name": "fairshop-marketplace-fees",
+      "source": "./packages/fairshop-marketplace-fees",
+      "description": "Checks every marketplace fee line (Amazon, eBay, Etsy, Walmart) against the fee schedule you confirm: fees above the schedule, fee types not in it, percent fees with no sale amount, and fee rates that changed month to month. Drafts a fee dispute per channel; never files it.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "marketplace-fees",
+        "amazon-fees",
+        "etsy-fees",
+        "ebay-fees",
+        "fee-audit"
+      ]
+    },
+    {
+      "name": "fairshop-nexus-thresholds",
+      "source": "./packages/fairshop-nexus-thresholds",
+      "description": "Tracks sales and order counts by state against the economic nexus thresholds you confirm, over the period each state uses in your settings: states crossed where you are not registered (with the date), states approaching, and states with sales but no threshold set. Drafts a memo for your tax adviser; never registers or files.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "nexus",
+        "economic-nexus",
+        "sales-tax-thresholds"
+      ]
+    },
+    {
+      "name": "fairshop-payouts",
+      "source": "./packages/fairshop-payouts",
+      "description": "Matches every order to the payout lines in Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy and Walmart exports, by channel: orders never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate and payout lines with no order. Drafts an inquiry per channel; never contacts support or moves money.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "payouts",
+        "reconciliation",
+        "shopify",
+        "amazon-settlement",
+        "stripe",
+        "paypal"
+      ]
+    },
+    {
+      "name": "fairshop-po-receiving",
+      "source": "./packages/fairshop-po-receiving",
+      "description": "Three-way match of supplier purchase orders, receipts and invoices: units billed but not received, invoices billed twice, prices above the PO, short and over shipments, late deliveries and POs past due with nothing received. Drafts a supplier claim; never pays or cancels a PO.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "purchase-orders",
+        "three-way-match",
+        "receiving",
+        "supplier-invoices"
+      ]
+    },
+    {
+      "name": "fairshop-processor-reserves",
+      "source": "./packages/fairshop-processor-reserves",
+      "description": "Tracks reserves and holds in Stripe, PayPal and Shopify balance exports against the reserve terms you confirm: releases overdue, holds above your terms, releases coming up, and dispute holds open too long. Drafts a release inquiry per processor; never moves money.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "stripe",
+        "paypal",
+        "reserves",
+        "rolling-reserve",
+        "payment-holds"
+      ]
+    },
+    {
+      "name": "fairshop-product-data",
+      "source": "./packages/fairshop-product-data",
+      "description": "Checks product data before it goes to a channel: missing GTIN, brand, weight, price or images, titles over the channel limit you set, GTINs with a wrong check digit or shared by two SKUs, zero weights and prices, and thin descriptions. Drafts the fix list; never changes a listing.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "product-data",
+        "catalog",
+        "gtin",
+        "listing-quality"
+      ]
+    },
+    {
+      "name": "fairshop-refunds-returns",
+      "source": "./packages/fairshop-refunds-returns",
+      "description": "Matches refunds to returns received: refunds whose item never came back, returns received but never refunded, refunds paid twice or above the price paid, and full refunds on returns received damaged. Drafts return reminders; never refunds or emails anyone.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "refunds",
+        "returns",
+        "rma",
+        "returns-reconciliation"
+      ]
+    },
+    {
+      "name": "fairshop-retailer-deductions",
+      "source": "./packages/fairshop-retailer-deductions",
+      "description": "Checks deductions retailers take from wholesale remittances against your invoices and proof of delivery: shortages your signed POD disproves, promotional allowances above what you agreed, deductions taken twice, compliance fines needing evidence, small ones to write off and ones past the dispute window. Drafts a dispute per retailer; never submits it.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "retailer-deductions",
+        "chargebacks",
+        "wholesale",
+        "edi-deductions"
+      ]
+    },
+    {
+      "name": "fairshop-return-reasons",
+      "source": "./packages/fairshop-return-reasons",
+      "description": "Reads return reasons by SKU and by customer: SKUs returned far more than the rest and why (listing, size, quality, fulfilment), and customers who return most of what they buy, with customer names and e-mails masked. Drafts a listing review; never blocks a customer or changes a listing.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "return-reasons",
+        "return-rate",
+        "serial-returners",
+        "listings"
+      ]
+    },
+    {
+      "name": "fairshop-sales-tax",
+      "source": "./packages/fairshop-sales-tax",
+      "description": "Compares the sales tax collected on each order with what the rates and rules you confirm give, by state: under- and over-collection, tax collected where you are not registered, exempt orders with no certificate, and orders a marketplace collects for under your facilitator settings. Drafts a filing worksheet per state; never files or pays.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "sales-tax",
+        "marketplace-facilitator",
+        "tax-reconciliation"
+      ]
+    },
+    {
+      "name": "fairshop-settlement-journals",
+      "source": "./packages/fairshop-settlement-journals",
+      "description": "Turns marketplace settlement reports into one summarized journal entry per settlement using the account map you confirm, matches each settlement to its bank deposit, and lists descriptions with no account. Drafts the entry; posting to your ledger is one human click.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "settlement",
+        "journal-entries",
+        "amazon-settlement",
+        "bookkeeping",
+        "accounting"
+      ]
+    },
+    {
+      "name": "fairshop-shipping-costs",
+      "source": "./packages/fairshop-shipping-costs",
+      "description": "Compares what each order charged for shipping with the labels bought for it: labels costing more than was charged, free shipping under your threshold, two labels on one order, voided labels not refunded, and labels with no order. Drafts a label refund request; never buys or voids a label.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "shipping-costs",
+        "shipstation",
+        "shippo",
+        "label-refunds"
+      ]
+    },
+    {
+      "name": "fairshop-sku-margins",
+      "source": "./packages/fairshop-sku-margins",
+      "description": "Works out contribution margin per SKU and channel from sales, fees, shipping labels and unit costs: SKUs that lose money on a channel, SKUs under your margin floor, and SKUs with no cost on file. Drafts a pricing review; never changes a price.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "margins",
+        "unit-economics",
+        "sku-profitability",
+        "pricing"
+      ]
+    },
+    {
+      "name": "fairshop-stockouts",
+      "source": "./packages/fairshop-stockouts",
+      "description": "Reads daily stock snapshots and orders per SKU: orders taken while out of stock, days out of stock and an estimate of the sales lost, and SKUs that will run out before a reorder could arrive, with a suggested quantity. Drafts the purchase order; never sends it to a supplier.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "stockouts",
+        "overselling",
+        "reorder-point",
+        "inventory-planning"
+      ]
+    },
+    {
+      "name": "fairshop-store-shrink",
+      "source": "./packages/fairshop-store-shrink",
+      "description": "Works out shrink by store and category from inventory adjustments and sales: stores above your shrink target, stores where most loss has no explained reason, and SKUs written off again and again. Drafts a loss-prevention review; never posts an adjustment or touches staff records.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "shrink",
+        "inventory-loss",
+        "loss-prevention",
+        "retail-stores"
+      ]
+    },
+    {
+      "name": "fairshop-subscriptions",
+      "source": "./packages/fairshop-subscriptions",
+      "description": "Reads subscription and payment exports (Recharge, Stripe Billing, Shopify subscriptions) for failed payments: not retried, retries used up, cards about to expire, active plans with no payment, and churn split into voluntary and payment-failure. Drafts dunning messages; never charges a card or cancels a plan.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "subscriptions",
+        "failed-payments",
+        "dunning",
+        "churn",
+        "recharge"
+      ]
+    }
+  ]
+}

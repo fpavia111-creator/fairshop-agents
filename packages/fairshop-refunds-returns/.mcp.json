@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-refunds-returns": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-refunds-returns@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

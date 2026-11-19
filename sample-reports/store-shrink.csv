@@ -1,0 +1,4 @@
+id,store,sku,sales,shrink,shrink_pct,unexplained_pct,writeoffs,status,findings,reasons,decision
+SKU:Downtown|LIPBALM-2,Downtown,LIPBALM-2,,75,,,3,review,repeat_sku,LIPBALM-2 was written off 3 times at Downtown (75). Check where it is kept and how it is counted.,
+STORE:Downtown,Downtown,,6000,89,1.5,75.8,0,review,shrink_above_target unexplained_high,Downtown: shrink 89 is 1.5% of 6000 in sales; your target is 1.2%. Downtown: 75.8% of losses (75 of 99) have no explaining reason.,
+STORE:Uptown,Uptown,,4500,21,0.5,0,0,ok,,,

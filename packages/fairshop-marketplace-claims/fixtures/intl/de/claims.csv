@@ -1,4 +1,4 @@
-Schadensnummer;Kanal;Bestellnummer;Angefordert am;Grund;Betrag;Zustand;Fälligkeitsdatum;buyer_name;buyer_email
+Schadensnummer;Kanal;Bestellnummer;Angefordert am;Grund;Betrag;Zustand;Fälligkeitsdatum;Kunde;E-Mail-Adresse
 AZ-1;Amazon;111-1000001-0000001;14.11.2026;Item not received;45,00;open;;Rowan Pemberly;rowan.pemberly@example.test
 AZ-2;Amazon;111-1000002-0000002;13.11.2026;Item not received;820,00;open;;Juniper Ashcombe;juniper.ashcombe@example.test
 EB-1;eBay;22-10001-00001;12.11.2026;Item not as described;60,00;open;18.11.2026;Thaddeus Wren;thaddeus.wren@example.test

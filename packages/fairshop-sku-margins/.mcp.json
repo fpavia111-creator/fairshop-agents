@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-sku-margins": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-sku-margins@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

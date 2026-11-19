@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-payouts": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-payouts@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

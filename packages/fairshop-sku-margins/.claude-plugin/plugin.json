@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-sku-margins",
+  "version": "0.1.0",
+  "description": "Works out contribution margin per SKU and channel from sales, fees, shipping labels and unit costs: SKUs that lose money on a channel, SKUs under your margin floor, and SKUs with no cost on file. Drafts a pricing review; never changes a price.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-sku-margins#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "margins",
+    "unit-economics",
+    "sku-profitability",
+    "pricing"
+  ]
+}

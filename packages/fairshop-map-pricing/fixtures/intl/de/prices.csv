@@ -1,4 +1,4 @@
-Datum;seller;Kanal;Artikelnummer;Preis;is_own
+Datum;Händler;Kanal;Artikelnummer;Preis;is_own
 01.11.2026;Example Goods;Shopify;LAMP-1;49,99;yes
 01.11.2026;Example Goods;Amazon;LAMP-1;44,99;yes
 02.11.2026;Brightway Home;Amazon;LAMP-1;42,00;no

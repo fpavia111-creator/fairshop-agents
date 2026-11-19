@@ -1,0 +1,6 @@
+id,order_date,channel,state,subtotal,shipping,collected,expected,status,difference,findings,reasons,decision
+T6,2026-10-07,Shopify,NY,60,0,5,,review,0,collected_not_registered,"Collected 5 on order T6 shipped to NY, where your settings say you are not registered.",
+T10,2026-10-11,Shopify,TX,150,0,0,0,review,0,exempt_no_certificate,Order T10 in TX was sold tax-exempt with no certificate on file.,
+T2,2026-10-03,Shopify,TX,100,20,8.25,9.9,short,-1.65,under_collected,"Collected 8.25 on order T2 in TX; your settings (8.25%, shipping taxed) give 9.9.",
+T3,2026-10-04,Shopify,TX,50,0,0,4.13,short,-4.13,under_collected,"Collected 0 on order T3 in TX; your settings (8.25%, shipping taxed) give 4.13.",
+T4,2026-10-05,Shopify,WA,80,10,9.5,9,review,0.5,over_collected,Collected 9.5 on order T4 in WA; your settings give 9. Over-collected tax is usually owed to the state or back to the customer; ask your adviser which.,

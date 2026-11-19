@@ -1,0 +1,7 @@
+id,invoice_number,charge_type,reference,qty,amount,expected,status,over,findings,reasons,decision
+INV-77|Pick and pack|1002|3.5|3,INV-77,Pick and pack,1002,3,3.5,,dispute,3.5,duplicate_order_charge,Order 1002 is charged for picking 2 times.,
+INV-77|Pick and pack|1003|4|2,INV-77,Pick and pack,1003,2,4,3,dispute,1,rate_above_card,Picking 2 unit(s) on order 1003 costs 3 on your card; billed 4.,
+INV-77|Pick and pack|1099|2.5|1,INV-77,Pick and pack,1099,1,2.5,,dispute,2.5,order_not_shipped,Order 1099 is not in your shipped orders.,
+INV-77|Receiving|ASN-5|125|500,INV-77,Receiving,ASN-5,500,125,125,dispute,5,receiving_units_over,500 unit(s) billed as received on ASN-5; your receipts show 480.,
+INV-77|Special project fee||75|1,INV-77,Special project fee,,1,75,,review,0,not_on_rate_card,"""Special project fee"" (75) is not on your rate card. Ask what it is for.",
+INV-77|Storage|2026-10|240|12,INV-77,Storage,2026-10,12,240,240,dispute,40,storage_pallets_over,12 pallet(s) billed for 2026-10; you counted 10.,

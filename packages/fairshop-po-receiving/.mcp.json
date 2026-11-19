@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-po-receiving": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-po-receiving@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

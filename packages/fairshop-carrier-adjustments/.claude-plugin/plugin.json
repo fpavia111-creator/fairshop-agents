@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-carrier-adjustments",
+  "version": "0.1.0",
+  "description": "Checks carrier adjustments (UPS, FedEx, USPS) against the weights and dimensions you entered on the label: adjustments your own data disproves, with a dispute-by date, adjustments that are right because your product data is wrong (and the SKUs that keep causing them), address corrections, and adjustments past their window. Drafts the dispute; never files it or pays.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-carrier-adjustments#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "carrier-adjustments",
+    "dim-weight",
+    "usps-apv",
+    "ups",
+    "fedex"
+  ]
+}

@@ -1,4 +1,4 @@
-注文番号,品番,数量,注文日,customer_email
+注文番号,品番,数量,注文日,メールアドレス
 D1,DRESS-1,1,2026/09/02,kit.larkspur@example.test
 D2,DRESS-1,1,2026/09/10,kit.larkspur@example.test
 D3,DRESS-1,1,2026/09/20,kit.larkspur@example.test

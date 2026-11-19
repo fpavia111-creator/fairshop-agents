@@ -1,0 +1,12 @@
+id,order_id,channel,order_date,expected,received,fees,status,owed,findings,reasons,decision
+112-0000002-0000002,112-0000002-0000002,Amazon,2026-10-21,42,40,6.3,chase,2,paid_short,"Expected 42 for order 112-0000002-0000002, payouts show 40. 2 is missing.",
+112-0000003-0000003,112-0000003-0000003,Amazon,2026-10-22,99.99,0,0,chase,99.99,not_paid_out,No payout line for order 112-0000003-0000003 on Amazon; it was due by 2026-11-05 (14 day(s) after the order).,
+E-3001,E-3001,Etsy,2026-11-03,35,35,4.9,review,0,fee_above_rate,"Fees 4.9 on 35 are 14%, above your 9.5% for Etsy.",
+1002,#1002,Shopify,2026-10-29,89.5,0,0,chase,89.5,not_paid_out,No payout line for order #1002 on Shopify; it was due by 2026-11-01 (3 day(s) after the order).,
+1003,#1003,Shopify,2026-11-14,45,0,0,waiting,0,,,
+1005,#1005,Shopify,2026-10-31,0,64,2.16,review,0,refund_not_deducted,Refund of 64 on order #1005 is not in any payout yet; expect 64 to be deducted from a later payout.,
+1006,#1006,Shopify,2026-11-01,150,300,9.3,review,0,paid_twice,"Order #1006 was paid in 2 payouts (P-2001, P-2002). The extra 150 may be taken back later; keep it until the channel confirms.",
+1007,#1007,Shopify,2026-11-02,75,0,0,skipped,0,,,
+1008,#1008,Shopify,2026-11-02,30,0,0,skipped,0,,,
+P-2003:9999,9999,Shopify,,0,18,0.82,review,0,no_matching_order,"Payout P-2003 pays 18 for order 9999, which is not in the orders file. Check the date range of the orders export, or whether it is another store's order.",
+P-2003:reserve:-100,,Shopify,,0,-100,0,review,0,payout_adjustment,"Payout P-2003 has a reserve of -100 with no order (a reserve, hold, chargeback or fee). Match it to the channel's statement.",

@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-store-shrink",
+  "version": "0.1.0",
+  "description": "Works out shrink by store and category from inventory adjustments and sales: stores above your shrink target, stores where most loss has no explained reason, and SKUs written off again and again. Drafts a loss-prevention review; never posts an adjustment or touches staff records.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-store-shrink#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "shrink",
+    "inventory-loss",
+    "loss-prevention",
+    "retail-stores"
+  ]
+}

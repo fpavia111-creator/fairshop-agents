@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-ad-spend",
+  "version": "0.1.0",
+  "description": "Reads ad platform exports (Amazon Ads, Google Ads, Meta) against your orders and stock: campaigns under your target return, spend with no sales, campaigns over budget, ads for SKUs that are out of stock, and platforms that claim more sales than the SKU sold. Drafts a campaign review; never pauses a campaign or changes a budget.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-ad-spend#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "ad-spend",
+    "roas",
+    "acos",
+    "amazon-ads",
+    "google-ads"
+  ]
+}

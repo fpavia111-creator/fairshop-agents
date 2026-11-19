@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-retailer-deductions": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-retailer-deductions@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

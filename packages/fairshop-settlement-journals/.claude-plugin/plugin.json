@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-settlement-journals",
+  "version": "0.1.0",
+  "description": "Turns marketplace settlement reports into one summarized journal entry per settlement using the account map you confirm, matches each settlement to its bank deposit, and lists descriptions with no account. Drafts the entry; posting to your ledger is one human click.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-settlement-journals#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "settlement",
+    "journal-entries",
+    "amazon-settlement",
+    "bookkeeping",
+    "accounting"
+  ]
+}

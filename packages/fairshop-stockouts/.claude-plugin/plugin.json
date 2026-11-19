@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-stockouts",
+  "version": "0.1.0",
+  "description": "Reads daily stock snapshots and orders per SKU: orders taken while out of stock, days out of stock and an estimate of the sales lost, and SKUs that will run out before a reorder could arrive, with a suggested quantity. Drafts the purchase order; never sends it to a supplier.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-stockouts#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "stockouts",
+    "overselling",
+    "reorder-point",
+    "inventory-planning"
+  ]
+}

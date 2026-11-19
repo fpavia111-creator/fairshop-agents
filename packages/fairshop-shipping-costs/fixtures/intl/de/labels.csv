@@ -1,4 +1,4 @@
-Bestellnummer;Versanddatum;Spediteur;Serviceart;Etikettenkosten;Sendungsnummer;voided;refund_status
+Bestellnummer;Versanddatum;Spediteur;Serviceart;Etikettenkosten;Sendungsnummer;voided;Status
 1001;01.10.2026;USPS;Ground Advantage;6,20;9400EX0001;no;
 1002;02.10.2026;UPS;Ground;9,10;1ZEX0002;no;
 1003;03.10.2026;USPS;Ground Advantage;7,50;9400EX0003;no;

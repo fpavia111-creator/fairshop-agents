@@ -1,4 +1,4 @@
-Datum;fnsku;Artikelnummer;Grund;Menge;transaction_id
+Datum;fnsku;Artikelnummer;Grund;Menge;Referenz
 01.10.2026;X0MUG01;MUG-01;M;-3;TX-9001
 10.10.2026;X0MUG01;MUG-01;F;1;TX-9002
 05.10.2026;X0TEE02;TEE-02;E;-2;TX-9003

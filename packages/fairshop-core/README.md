@@ -1,6 +1,6 @@
 # fairshop-core
 
-The shared core for **Fairshop Machine domain agents**: small MCP agents that each own one business process and cannot act outside it.
+The shared core for the **Fairshop** agents by Mythos Machines: small MCP agents that each own one e-commerce or retail back-office job and cannot act outside it. It is the Lodestar (Fairhaul) core with the 18 Nov 2026 Windows fixes, without the freight EDI readers, plus customer-data masking, commerce helpers and a shared agent builder.
 
 - **Pack manifest** — name, version, a declared model pin, the tool allowlist and the policy. `defineManifest()` fails closed: an unpinned model (`latest`), a tool without a rule, a write marked `allow`, or a one-click action marked `allow` are rejected at load time.
 - **Talos-style policy** — every tool call gets `allow`, `ask` or `block`. Unknown tools are blocked. The default is block.
@@ -20,6 +20,16 @@ The shared core for **Fairshop Machine domain agents**: small MCP agents that ea
 - **Shared helpers** — JSON Schema validation, iCalendar, SARIF 2.1.0, unified diff/patch, Jaro-Winkler and name/address normalisation, entropy, a small ZIP/DOCX reader, and a self-contained HTML page template.
 
 MIT, Node ≥ 20, no runtime dependencies.
+
+## Fairshop additions (ver 1)
+
+- **Customer and staff data masking** (`pii.js`): every tool result passes a masker before the model sees it. Shopper names and e-mails become stable pseudonyms (`CUS-3f2a9c1d`), staff names `STAFF-…`, phones and street addresses `[PHONE]` and `[ADDRESS]`, card numbers that pass the Luhn check `[CARD]`. Fields are found by name or by `pii: 'name' | 'email' | 'phone' | 'address' | 'staff'` on a source field, and their values are also replaced inside free text. Pseudonyms are HMAC-SHA256 with a per-installation key (`<stateDir>/pii.key`); `pii.same(raw, given, kind)` matches a pseudonym the model passes back. `--pii mask|strict|off` (strict also cuts ZIP codes to three digits and pseudonymises order numbers). Files written on your disk keep the real values. It works from field names and patterns; a name typed into an unknown free-text column can get through.
+- **Commerce helpers** (`commerce.js`): `channelKey` (Amazon, eBay, Etsy, Walmart, Shopify, Shopify POS, WooCommerce, BigCommerce, TikTok Shop, Stripe, PayPal, Square), `stateCode` (US states by code or name), `skuKey`, `emailKey` (dots and +tags folded where the provider ignores them), `addressKey`, `monthOf`, `pct`, `ageBucket`, `finding`, `byFinding`, `byStatus`, `sortBy` (results never depend on row order), `rollup`.
+- **Agent builder** (`agent.js`): `shopAgent(spec)` builds the standard tools of a Fairshop agent from its own job: `<prefix>_<verb>` (read), `<prefix>_explain`, `<prefix>_write_report` (CSV + HTML in the report language, optional calendar), a draft and its one-click request, and the tools it refuses by name. `shopDemo` runs the standard demo. The manifest still goes through `defineManifest` and its fail-closed checks.
+- **Exports** (`exports.js`): 36 more named layouts (Shopify, Amazon Seller Central reports, eBay, Etsy, Walmart, Stripe, PayPal, Recharge, Shippo, UPS and USPS adjustments, a generic 3PL invoice, Square, Shopify POS, Google, Meta and Amazon Ads, a generic affiliate network). Written from knowledge of the exports; none was checked against a live account.
+- **Words in nine languages**: e-commerce column words (channel, payout, fee, net, tax collected, state, price, store, register, discount code, campaign, commission, reserve, deduction and more) and report headings for all 30 Fairshop reports.
+- **Contract test**: `agentContract({ canaries })` runs every eval case and fails if a fictional shopper or staff name listed in `fixtures/canaries.json` reaches a result.
+- **Fix from the Fairmake session**: a header that equals a field name in another case ("Item" for `item`) is now re-keyed instead of read as blank.
 
 ## Install
 
@@ -271,7 +281,7 @@ The manifest declares which host model a pack's prompts and evals target. An MCP
 
 ## Packs built on this core
 
-All 30 Fairshop domain agents in the monorepo, from `achernar-of-returns` to `vega-of-detention`. Source: <https://github.com/fpavia111-creator/fairshop-agents>.
+The 30 Fairshop agents in this repository (`fairshop-payouts` to `fairshop-store-shrink`); see the root README.
 
 ## License
 

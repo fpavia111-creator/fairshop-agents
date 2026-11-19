@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-map-pricing",
+  "version": "0.1.0",
+  "description": "Checks advertised prices from your own channels and from resellers against your minimum advertised price (MAP) list: your own listings below MAP first, resellers below it (and repeat ones), authorised exceptions, and SKUs not on the list. Drafts a notice per reseller; never changes a price or suspends a reseller.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-map-pricing#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "map-pricing",
+    "minimum-advertised-price",
+    "resellers",
+    "brand-protection"
+  ]
+}

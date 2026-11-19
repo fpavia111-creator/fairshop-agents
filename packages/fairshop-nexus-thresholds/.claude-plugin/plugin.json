@@ -1,0 +1,20 @@
+{
+  "name": "fairshop-nexus-thresholds",
+  "version": "0.1.0",
+  "description": "Tracks sales and order counts by state against the economic nexus thresholds you confirm, over the period each state uses in your settings: states crossed where you are not registered (with the date), states approaching, and states with sales but no threshold set. Drafts a memo for your tax adviser; never registers or files.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-nexus-thresholds#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "nexus",
+    "economic-nexus",
+    "sales-tax-thresholds"
+  ]
+}

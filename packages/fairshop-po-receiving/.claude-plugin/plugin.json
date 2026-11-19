@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-po-receiving",
+  "version": "0.1.0",
+  "description": "Three-way match of supplier purchase orders, receipts and invoices: units billed but not received, invoices billed twice, prices above the PO, short and over shipments, late deliveries and POs past due with nothing received. Drafts a supplier claim; never pays or cancels a PO.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-po-receiving#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "purchase-orders",
+    "three-way-match",
+    "receiving",
+    "supplier-invoices"
+  ]
+}

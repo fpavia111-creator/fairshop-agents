@@ -1,4 +1,4 @@
-Bestellnummer;Lieferant;Artikelnummer;qty_ordered;Stückkosten;promised_date
+Bestellnummer;Lieferant;Artikelnummer;Menge;Stückkosten;Liefertermin
 PO-1;Northwind Ceramics;MUG-1;100;4,00;20.10.2026
 PO-1;Northwind Ceramics;BOWL-2;50;6,00;20.10.2026
 PO-2;Harbor Textiles;TOWEL-3;200;3,00;25.10.2026

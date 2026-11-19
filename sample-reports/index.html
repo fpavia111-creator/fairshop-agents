@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairshop sample reports</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1c1a;--mut:#6b6760;--line:#e4e0d8;--ok:#1f7a4d;--bad:#b42318;--warn:#a15c07;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#161514;--fg:#ecebe8;--mut:#a29d94;--line:#34312d;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--card:#1f1e1c}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,"Hiragino Sans","Yu Gothic UI","Microsoft YaHei","PingFang SC","Malgun Gothic","Apple SD Gothic Neo","Noto Sans CJK",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px}
+.mut{color:var(--mut)}.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tiles{display:flex;gap:12px;flex-wrap:wrap}.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
+.tile b{display:block;font-size:22px}code{font-size:13px;overflow-wrap:anywhere}pre{overflow-x:auto}
+.wrap{overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}figure{margin:16px 0}p,li,h1,h2,h3{overflow-wrap:break-word}
+</style></head><body><main>
+<h1>Fairshop sample reports</h1>
+<p class="mut">Written by the agents themselves on the fictional files in each agent's <code>fixtures/</code> folder. Every name, store, shopper and number is made up. Each page has a CSV twin with a blank decision column for the person who works the list.</p>
+<ul>
+<li><a href="payouts.html">Payouts against orders</a> <span class="mut">(fairshop-payouts)</span><br><span class="mut">13 order(s) on 3 channel(s): 3 to chase (191.49 not paid out or short), 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.</span></li>
+<li><a href="fba-reimbursements.html">FBA reimbursements owed</a> <span class="mut">(fairshop-fba-reimbursements)</span><br><span class="mut">11 item(s): 2 to claim (36 estimated), 2 still inside the wait, 2 past the window (80 lost), 1 low reimbursement(s) to review, 4 settled.</span></li>
+<li><a href="marketplace-claims.html">Marketplace claims as of 2026-11-16</a> <span class="mut">(fairshop-marketplace-claims)</span><br><span class="mut">6 claim(s), 980 at stake: 4 to answer (2 due today or tomorrow), 1 overdue, 1 closed. Open: 1 your tracking can defend, 1 weak, 1 need photos and messages, 2 likely refunds.</span></li>
+<li><a href="sales-tax.html">Sales tax collected against expected</a> <span class="mut">(fairshop-sales-tax)</span><br><span class="mut">10 order(s): 2 under-collected (5.78), 3 to review, 2 as your settings give, 2 collected by a marketplace, 1 in states where you are not registered.</span></li>
+<li><a href="3pl-invoices.html">Fulfillment invoice audit</a> <span class="mut">(fairshop-3pl-invoices)</span><br><span class="mut">9 invoice line(s), 456.3 billed: 5 to dispute (52), 1 to ask about, 3 as your card gives.</span></li>
+<li><a href="shipping-costs.html">Shipping charged against label cost</a> <span class="mut">(fairshop-shipping-costs)</span><br><span class="mut">6 order(s): 24.47 charged for shipping against 55.2 in labels; 2 to claim (11.1), 3 to review, 3 fine.</span></li>
+<li><a href="carrier-adjustments.html">Carrier adjustments</a> <span class="mut">(fairshop-carrier-adjustments)</span><br><span class="mut">6 adjustment(s), 41.35 in total: 1 your label data disproves (6.4 to dispute), 3 where your product data is wrong, 2 to review, 1 past the window (5).</span></li>
+<li><a href="store-shrink.html">Shrink by store</a> <span class="mut">(fairshop-store-shrink)</span><br><span class="mut">2 store(s): shrink 110 on 10500 in sales (1%); 2 store(s) or SKU(s) to review, 1 fine.</span></li>
+</ul>
+<p class="mut" style="margin-top:32px">Fictional data. Nothing was sent or paid.</p>
+</main></body></html>

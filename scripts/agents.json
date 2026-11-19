@@ -1,0 +1,47 @@
+{
+  "_note": "The Fairshop family: group, package and one plain line per agent. Used by the root README, the site file and the family check.",
+  "groups": [
+    ["Payouts, fees and marketplace money", [
+      ["fairshop-payouts", "Orders against payout lines by channel: never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate."],
+      ["fairshop-marketplace-fees", "Every marketplace fee line against the fee schedule you confirm, and fee rates that moved month to month."],
+      ["fairshop-fba-reimbursements", "Lost and damaged FBA units, refunds with no return and low reimbursements, each with a claim-by date."],
+      ["fairshop-fba-storage-fees", "Storage fees against your rates, and inventory lots about to cross into the next aged-inventory bracket."],
+      ["fairshop-processor-reserves", "Stripe, PayPal and Shopify reserves: releases overdue, holds above your terms, releases coming up."],
+      ["fairshop-settlement-journals", "One balanced journal entry per marketplace settlement from your account map, matched to the bank deposit."],
+      ["fairshop-marketplace-claims", "A-to-z, eBay, Walmart and Etsy claims against your tracking: respond-by dates and what your records prove."]
+    ]],
+    ["Returns, refunds and customers", [
+      ["fairshop-refunds-returns", "Refunds whose item never came back, returns never refunded, refunds paid twice or above the price."],
+      ["fairshop-return-reasons", "Why things come back, by SKU, and customers who return most of what they buy (masked)."],
+      ["fairshop-coupon-abuse", "Discount codes used past their limit, out of date, under the minimum, or by returning shoppers."],
+      ["fairshop-gift-cards", "Gift card and store credit liability by age, and cards whose balances do not add up."],
+      ["fairshop-subscriptions", "Failed payments not retried, retries used up, cards about to expire, and churn by cause."],
+      ["fairshop-affiliate-commissions", "Commissions on refunded or missing orders, above your rate, paid twice, or on own-link purchases."]
+    ]],
+    ["Sales tax", [
+      ["fairshop-sales-tax", "Tax collected on each order against the rates and rules you confirm, by state, with marketplace orders apart."],
+      ["fairshop-nexus-thresholds", "Sales and orders by state against the thresholds you confirm, with the date each was met."]
+    ]],
+    ["Inventory, listings and pricing", [
+      ["fairshop-inventory-listings", "Stock by location against what each channel lists: oversell risk, missed sales and stock listed nowhere."],
+      ["fairshop-stockouts", "Days out of stock, orders taken with nothing on hand, and SKUs to reorder before they run out."],
+      ["fairshop-product-data", "Missing GTINs, brands, weights and images, titles over your limits and GTINs with a wrong check digit."],
+      ["fairshop-duplicate-listings", "The same SKU listed twice, look-alike titles, shared GTINs and listings for SKUs you do not carry."],
+      ["fairshop-map-pricing", "Advertised prices against your MAP list: your own listings first, then resellers and repeat ones."],
+      ["fairshop-sku-margins", "Contribution margin per SKU and channel after fees, labels and unit cost."],
+      ["fairshop-ad-spend", "Campaigns under your target return, spend with no sales, ads on out-of-stock SKUs, and over-attribution."]
+    ]],
+    ["Shipping, fulfilment and purchasing", [
+      ["fairshop-shipping-costs", "Shipping charged against labels bought: losses, free shipping under your threshold, duplicate and unrefunded labels."],
+      ["fairshop-carrier-adjustments", "Carrier adjustments your own label data disproves, and SKUs whose packaging data keeps causing them."],
+      ["fairshop-3pl-invoices", "A 3PL invoice against your rate card and your own order, receipt and pallet counts."],
+      ["fairshop-po-receiving", "Purchase orders, receipts and supplier invoices matched: billed not received, billed twice, price above the PO."],
+      ["fairshop-landed-cost", "Freight, duty and broker costs spread over each shipment's SKUs, against the cost recorded in your store."],
+      ["fairshop-retailer-deductions", "Retailer deductions your proof of delivery or agreements disprove, with dispute dates."]
+    ]],
+    ["Physical stores", [
+      ["fairshop-cash-over-short", "Register drawers over or short, and deposits missing or different from the counted cash."],
+      ["fairshop-store-shrink", "Shrink by store and category against sales, unexplained losses and SKUs written off again and again."]
+    ]]
+  ]
+}

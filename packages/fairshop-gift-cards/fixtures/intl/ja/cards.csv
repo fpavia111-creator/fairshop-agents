@@ -1,4 +1,4 @@
-番号,issued_date,発行額,source,注文番号,customer_email,残高
+番号,日付,発行額,source,注文番号,メールアドレス,残高
 GC-1001,2026/10/01,50.00,sale,3001,lia.brook@example.test,20.00
 GC-1002,2026/06/15,100.00,sale,3002,max.dale@example.test,100.00
 GC-1003,2025/09/01,75.00,sale,3003,nora.finch@example.test,75.00

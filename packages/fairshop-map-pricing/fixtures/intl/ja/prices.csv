@@ -1,4 +1,4 @@
-日付,seller,チャネル,品番,価格,is_own
+日付,支払先,チャネル,品番,価格,is_own
 2026/11/01,Example Goods,Shopify,LAMP-1,49.99,yes
 2026/11/01,Example Goods,Amazon,LAMP-1,44.99,yes
 2026/11/02,Brightway Home,Amazon,LAMP-1,42.00,no

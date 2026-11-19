@@ -1,4 +1,4 @@
-発注番号,仕入先,品番,qty_ordered,単価,promised_date
+発注番号,仕入先,品番,数量,単価,納期
 PO-1,Northwind Ceramics,MUG-1,100,4.00,2026/10/20
 PO-1,Northwind Ceramics,BOWL-2,50,6.00,2026/10/20
 PO-2,Harbor Textiles,TOWEL-3,200,3.00,2026/10/25

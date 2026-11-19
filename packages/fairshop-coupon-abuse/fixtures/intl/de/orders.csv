@@ -1,4 +1,4 @@
-Bestellnummer;Bestelldatum;customer_email;ship_address;PLZ Empfänger;Rabattcode;Rabatt;subtotal
+Bestellnummer;Bestelldatum;E-Mail-Adresse;Adresse;PLZ Empfänger;Rabattcode;Rabatt;Betrag
 2001;05.09.2026;ana.weller@example.test;12 Birch Lane;78701;;0,00;40,00
 2002;02.10.2026;ana.weller@example.test;12 Birch Lane;78701;WELCOME10;4,50;45,00
 2003;03.10.2026;bo.rains@example.test;40 Cedar Court;73301;WELCOME10;3,50;35,00

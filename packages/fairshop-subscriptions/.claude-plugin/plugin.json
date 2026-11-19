@@ -1,0 +1,22 @@
+{
+  "name": "fairshop-subscriptions",
+  "version": "0.1.0",
+  "description": "Reads subscription and payment exports (Recharge, Stripe Billing, Shopify subscriptions) for failed payments: not retried, retries used up, cards about to expire, active plans with no payment, and churn split into voluntary and payment-failure. Drafts dunning messages; never charges a card or cancels a plan.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-subscriptions#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "subscriptions",
+    "failed-payments",
+    "dunning",
+    "churn",
+    "recharge"
+  ]
+}

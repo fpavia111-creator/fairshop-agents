@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fairshop-sales-tax": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fairshop-sales-tax@0.1.0",
+        "mcp"
+      ]
+    }
+  }
+}

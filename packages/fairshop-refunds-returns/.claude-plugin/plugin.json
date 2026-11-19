@@ -1,0 +1,21 @@
+{
+  "name": "fairshop-refunds-returns",
+  "version": "0.1.0",
+  "description": "Matches refunds to returns received: refunds whose item never came back, returns received but never refunded, refunds paid twice or above the price paid, and full refunds on returns received damaged. Drafts return reminders; never refunds or emails anyone.",
+  "author": {
+    "name": "Kurt Francisco"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-refunds-returns#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "ecommerce",
+    "retail",
+    "fairshop",
+    "refunds",
+    "returns",
+    "rma",
+    "returns-reconciliation"
+  ]
+}

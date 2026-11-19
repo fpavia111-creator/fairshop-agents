@@ -1,4 +1,4 @@
-Abonnement-ID;customer_email;Zustand;plan;Preis;started;cancelled_at;cancel_reason;Nächste Abrechnung;card_expiry
+Abonnement-ID;E-Mail-Adresse;Zustand;Lizenz;Preis;Eintrittsdatum;Austrittsdatum;Grund;Nächste Abrechnung;Ablaufdatum
 SUB-1;alma.reyes@example.test;active;Coffee monthly;30,00;10.01.2026;;;10.12.2026;2028-04
 SUB-2;ben.tamura@example.test;active;Coffee monthly;30,00;05.03.2026;;;05.11.2026;2027-09
 SUB-3;cara.velez@example.test;past_due;Tea box;25,00;01.02.2026;;;01.11.2026;2027-01

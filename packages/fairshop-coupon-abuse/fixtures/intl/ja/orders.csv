@@ -1,4 +1,4 @@
-注文番号,注文日,customer_email,ship_address,届け先郵便番号,クーポンコード,割引,subtotal
+注文番号,注文日,メールアドレス,住所,届け先郵便番号,クーポンコード,割引,金額
 2001,2026/09/05,ana.weller@example.test,12 Birch Lane,78701,,0.00,40.00
 2002,2026/10/02,ana.weller@example.test,12 Birch Lane,78701,WELCOME10,4.50,45.00
 2003,2026/10/03,bo.rains@example.test,40 Cedar Court,73301,WELCOME10,3.50,35.00
