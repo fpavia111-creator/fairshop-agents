@@ -4,6 +4,7 @@
   "description": "Fairshop: e-commerce and retail back-office agents monorepo (30 agents), built on fairshop-core.",
   "license": "MIT",
   "workspaces": [
+    "vendor/fair-agent-core",
     "packages/fairshop-core",
     "packages/*"
   ],
