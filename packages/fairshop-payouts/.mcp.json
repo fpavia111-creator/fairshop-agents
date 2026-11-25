@@ -4,7 +4,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "fairshop-payouts@0.1.0",
+        "fairshop-payouts@0.1.1",
         "mcp"
       ]
     }

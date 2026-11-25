@@ -10,7 +10,7 @@ const files = {
   as_of: AS_OF,
 };
 const run = (a, ctx) => reconcilePayouts(ctx.records(a.orders, 'orders'), ctx.records(a.payouts, 'payouts'), { settings: a.settings ? ctx.readJson(a.settings, 'payout_settings') : {}, asOf: a.as_of });
-const line = (r) => `${r.orders} order(s) on ${r.channels} channel(s): ${r.chase} to chase (${r.owed} not paid out or short), ${r.waiting} still inside the payout window, ${r.review} to review, ${r.ok} paid in full, ${r.skipped} skipped.`;
+const line = (r) => `${r.owed} not paid out or short (${r.chase} order(s) to chase). ${r.orders} order(s) on ${r.channels} channel(s): ${r.waiting} still inside the payout window, ${r.review} to review, ${r.ok} paid in full, ${r.skipped} skipped.`;
 
 export const manifest = shopAgent({
   pkg, prefix: 'payouts', label: 'Fairshop Payouts',

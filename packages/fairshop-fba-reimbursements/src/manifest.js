@@ -12,7 +12,7 @@ const files = {
   as_of: AS_OF,
 };
 const run = (a, ctx) => findReimbursements({ adjustments: ctx.records(a.adjustments, 'adjustments'), reimbursements: a.reimbursements ? ctx.records(a.reimbursements, 'reimbursements') : [], returns: a.returns ? ctx.records(a.returns, 'returns') : [], refunds: a.refunds ? ctx.records(a.refunds, 'refunds') : [] }, a.settings ? ctx.readJson(a.settings, 'reimbursement_settings') : {}, { asOf: a.as_of });
-const line = (r) => `${r.items_checked} item(s): ${r.claim} to claim (${r.claimable} estimated)${r.urgent.length ? `, ${r.urgent.length} due within 7 days` : ''}, ${r.waiting} still inside the wait, ${r.window_closed} past the window (${r.lost} lost), ${r.review} low reimbursement(s) to review, ${r.ok} settled.`;
+const line = (r) => `${r.claimable} estimated to claim (${r.claim} item(s)${r.urgent.length ? `, ${r.urgent.length} due within 7 days` : ''}). ${r.items_checked} item(s) checked: ${r.waiting} still inside the wait, ${r.window_closed} past the window (${r.lost} lost), ${r.review} low reimbursement(s) to review, ${r.ok} settled.`;
 
 export const manifest = shopAgent({
   pkg, prefix: 'reimburse', label: 'Fairshop FBA Reimbursements',
