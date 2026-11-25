@@ -118,7 +118,7 @@
       "name": "fairshop-fba-reimbursements",
       "source": "./packages/fairshop-fba-reimbursements",
       "description": "Finds Amazon FBA reimbursements owed: units lost or damaged in Amazon's warehouses and not found or reimbursed, refunds with no customer return, and reimbursements below your unit value, each with a claim-by date. Drafts the case text; a person files it in Seller Central.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "ecommerce",
       "keywords": [
         "ecommerce",
@@ -238,7 +238,7 @@
       "name": "fairshop-payouts",
       "source": "./packages/fairshop-payouts",
       "description": "Matches every order to the payout lines in Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy and Walmart exports, by channel: orders never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate and payout lines with no order. Drafts an inquiry per channel; never contacts support or moves money.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "ecommerce",
       "keywords": [
         "ecommerce",
