@@ -145,21 +145,6 @@
       ]
     },
     {
-      "name": "fairshop-gift-cards",
-      "source": "./packages/fairshop-gift-cards",
-      "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
-      "version": "0.1.0",
-      "category": "ecommerce",
-      "keywords": [
-        "ecommerce",
-        "retail",
-        "gift-cards",
-        "store-credit",
-        "liability",
-        "breakage"
-      ]
-    },
-    {
       "name": "fairshop-inventory-listings",
       "source": "./packages/fairshop-inventory-listings",
       "description": "Compares stock by location (warehouse, 3PL, FBA) with the quantities listed on each channel: listings above what their locations can ship, listings at zero while stock sits on the shelf, inactive listings with stock, listings for SKUs you do not stock, and stock listed nowhere. Drafts quantity corrections; never changes a listing.",
@@ -430,6 +415,21 @@
         "overselling",
         "reorder-point",
         "inventory-planning"
+      ]
+    },
+    {
+      "name": "fairshop-store-credit",
+      "source": "./packages/fairshop-store-credit",
+      "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
+      "version": "0.1.0",
+      "category": "ecommerce",
+      "keywords": [
+        "ecommerce",
+        "retail",
+        "gift-cards",
+        "store-credit",
+        "liability",
+        "breakage"
       ]
     },
     {

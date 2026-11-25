@@ -1,12 +1,12 @@
 {
-  "name": "fairshop-gift-cards",
+  "name": "fairshop-store-credit",
   "version": "0.1.0",
   "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
   "author": {
     "name": "Kurt Francisco"
   },
   "license": "MIT",
-  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-gift-cards#readme",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-store-credit#readme",
   "keywords": [
     "mcp",
     "mcp-server",

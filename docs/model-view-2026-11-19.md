@@ -19,7 +19,7 @@ Results go to whatever model the user's assistant uses. For shopper or staff dat
 | fairshop-duplicate-listings | - | channel, listing_id, sku, status, title | title |
 | fairshop-fba-reimbursements | - | fnsku, order_id, reimbursement_id, sku, transaction_id | - |
 | fairshop-fba-storage-fees | - | month, sku | - |
-| fairshop-gift-cards | customer_email (email) | card_id, source, type | - |
+| fairshop-store-credit | customer_email (email) | card_id, source, type | - |
 | fairshop-inventory-listings | - | channel, fulfillment, listing_id, location, sku, status | - |
 | fairshop-landed-cost | - | shipment_id, sku | - |
 | fairshop-map-pricing | - | channel, seller, sku | seller |

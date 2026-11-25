@@ -197,7 +197,7 @@ export const SPECS = {
     ],
   },
 
-  'fairshop-gift-cards': {
+  'fairshop-store-credit': {
     planted: { 'GC-1003': ['dormant'], 'GC-1004': ['manual_issue_no_order'], 'GC-1005': ['balance_mismatch'], 'GC-1006': ['balance_mismatch', 'overdrawn'] },
     quiet: ['GC-1002', 'GC-1007'],
     clean_note: 'The overdrawn card (GC-1006) is planted with a reported balance of 0 while its activity says -5, so it is counted with both of its findings.',

@@ -33,9 +33,9 @@ Each line is one real tool call, in its own process, on fictional input grown to
 | fairshop-fba-storage-fees | storage_audit | 81 | 472 | 162 | 5.8 | ok |
 | fairshop-fba-storage-fees | storage_explain | 34 | 184 | 130 | 5.4 | ok |
 | fairshop-fba-storage-fees | storage_write_report | 63 | 333 | 175 | 5.3 | ok |
-| fairshop-gift-cards | giftcards_liability | 255 | 2050 | 163 | 8 | ok |
-| fairshop-gift-cards | giftcards_explain | 74 | 695 | 133 | 9.4 | ok |
-| fairshop-gift-cards | giftcards_write_report | 107 | 1041 | 178 | 9.7 | ok |
+| fairshop-store-credit | giftcards_liability | 255 | 2050 | 163 | 8 | ok |
+| fairshop-store-credit | giftcards_explain | 74 | 695 | 133 | 9.4 | ok |
+| fairshop-store-credit | giftcards_write_report | 107 | 1041 | 178 | 9.7 | ok |
 | fairshop-inventory-listings | inventory_audit | 65 | 317 | 154 | 4.9 | ok |
 | fairshop-inventory-listings | inventory_explain | 27 | 1194 | 116 | 44.2 | grows much faster than the input |
 | fairshop-inventory-listings | inventory_write_report | 88 | 282 | 164 | 3.2 | ok |

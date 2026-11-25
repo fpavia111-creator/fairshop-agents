@@ -1,4 +1,4 @@
-# Fairshop Gift Cards (`fairshop-gift-cards`)
+# Fairshop Gift Cards (`fairshop-store-credit`)
 
 > Work out gift card and store credit liability from your card and activity exports, by age, and find the cards to look at: balances that do not match their activity, cards spent past their value, large manual issues, use before issue, and dormant cards. Never changes a card.
 
@@ -19,7 +19,7 @@ The liability is the sum of positive balances, by age from issue (default bucket
 
 ## A demo run
 
-`npx -y fairshop-gift-cards demo` runs the agent on the fictional files in [`fixtures/`](fixtures) in a temporary folder. Captured output:
+`npx -y fairshop-store-credit demo` runs the agent on the fictional files in [`fixtures/`](fixtures) in a temporary folder. Captured output:
 
 ```text
 Fairshop Gift Cards demo (fictional data, as of 2026-11-16), Auto mode on for drafts
@@ -94,7 +94,7 @@ Table inputs can be CSV, TSV, semicolon- or pipe-separated text, Excel `.xlsx`, 
 
 ### Files from other countries
 
-A German export in Windows-1252 with semicolons, `1.234,56` and `03.11.2026`, or a Japanese one in Shift_JIS with `2026/11/03`, is read the same way as the English file. [`fixtures/intl/`](fixtures/intl) has both versions of the demo data, and the eval cases `intl-de-*` and `intl-ja-*` require the same results as the English case. A weight, distance or dimension column found by its translated name with no unit in it is read as metric and converted, and the result says so. Columns named differently? Run `npx fairshop-gift-cards inspect <file>` (names and shapes only, never values) and name them in `fairshop-sources.json`:
+A German export in Windows-1252 with semicolons, `1.234,56` and `03.11.2026`, or a Japanese one in Shift_JIS with `2026/11/03`, is read the same way as the English file. [`fixtures/intl/`](fixtures/intl) has both versions of the demo data, and the eval cases `intl-de-*` and `intl-ja-*` require the same results as the English case. A weight, distance or dimension column found by its translated name with no unit in it is read as metric and converted, and the result says so. Columns named differently? Run `npx fairshop-store-credit inspect <file>` (names and shapes only, never values) and name them in `fairshop-sources.json`:
 
 ```json
 { "files": { "exports/bills.csv": { "columns": { "invoice_number": "Beleg" }, "date_order": "dmy", "units": { "weight": "kg" } } } }
@@ -105,8 +105,8 @@ A German export in Windows-1252 with semicolons, `1.234,56` and `03.11.2026`, or
 Node 20 or newer. No other dependencies.
 
 ```bash
-npx -y fairshop-gift-cards demo
-npx -y fairshop-gift-cards mcp --root /path/to/your/files
+npx -y fairshop-store-credit demo
+npx -y fairshop-store-credit mcp --root /path/to/your/files
 ```
 
 Claude Desktop, Cursor and other MCP hosts:
@@ -114,11 +114,11 @@ Claude Desktop, Cursor and other MCP hosts:
 ```json
 {
   "mcpServers": {
-    "fairshop-gift-cards": {
+    "fairshop-store-credit": {
       "command": "npx",
       "args": [
         "-y",
-        "fairshop-gift-cards",
+        "fairshop-store-credit",
         "mcp",
         "--root",
         "/path/to/your/files"
@@ -128,23 +128,23 @@ Claude Desktop, Cursor and other MCP hosts:
 }
 ```
 
-Claude Code: `claude mcp add fairshop-gift-cards -- npx -y fairshop-gift-cards mcp --root .`, or install the `fairshop-gift-cards` plugin from this repository's marketplace.
+Claude Code: `claude mcp add fairshop-store-credit -- npx -y fairshop-store-credit mcp --root .`, or install the `fairshop-store-credit` plugin from this repository's marketplace.
 
 ## Modes and approvals
 
 - **Review** (`--mode review`): reads and reports only.
-- **Assist** (default): the policy above. A tool that asks returns an `approval_id`; a person approves it once with `fairshop-gift-cards approve <id> --as "Your Name"` (or on the local approvals page, `fairshop-gift-cards approvals`), and the same call is repeated.
-- **Auto** (`--mode auto --auto <tool,...>`): opt-in per tool, with step caps and a kill switch (`fairshop-gift-cards kill`). Paying, sending, posting to a ledger or a live system and accepting a learned fact stay **one named click even in Auto**; an approval is tied to the sha256 of the reviewed draft, so a changed draft needs a new click.
+- **Assist** (default): the policy above. A tool that asks returns an `approval_id`; a person approves it once with `fairshop-store-credit approve <id> --as "Your Name"` (or on the local approvals page, `fairshop-store-credit approvals`), and the same call is repeated.
+- **Auto** (`--mode auto --auto <tool,...>`): opt-in per tool, with step caps and a kill switch (`fairshop-store-credit kill`). Paying, sending, posting to a ledger or a live system and accepting a learned fact stay **one named click even in Auto**; an approval is tied to the sha256 of the reviewed draft, so a changed draft needs a new click.
 
 ## CLI
 
 ```bash
-fairshop-gift-cards tools                 # every tool, its policy and arguments
-fairshop-gift-cards sources               # the columns each input is read from
-fairshop-gift-cards inspect <file>        # how a file would be read (names and shapes, never values)
-fairshop-gift-cards call giftcards_liability '{"cards":"<cards>","activity":"<activity>"}'
-fairshop-gift-cards eval                  # the private eval cases on the fictional fixtures
-fairshop-gift-cards demo
+fairshop-store-credit tools                 # every tool, its policy and arguments
+fairshop-store-credit sources               # the columns each input is read from
+fairshop-store-credit inspect <file>        # how a file would be read (names and shapes, never values)
+fairshop-store-credit call giftcards_liability '{"cards":"<cards>","activity":"<activity>"}'
+fairshop-store-credit eval                  # the private eval cases on the fictional fixtures
+fairshop-store-credit demo
 ```
 
 ## Audit log and data

@@ -145,7 +145,7 @@
     "plus": "amounts, quantities, dates, rates, SKUs, order and listing numbers, and finding codes in clear"
   },
   {
-    "agent": "fairshop-gift-cards",
+    "agent": "fairshop-store-credit",
     "check": "giftcards_liability",
     "masked": [
       "customer_email (email)"

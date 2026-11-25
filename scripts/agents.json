@@ -14,7 +14,7 @@
       ["fairshop-refunds-returns", "Refunds whose item never came back, returns never refunded, refunds paid twice or above the price."],
       ["fairshop-return-reasons", "Why things come back, by SKU, and customers who return most of what they buy (masked)."],
       ["fairshop-coupon-abuse", "Discount codes used past their limit, out of date, under the minimum, or by returning shoppers."],
-      ["fairshop-gift-cards", "Gift card and store credit liability by age, and cards whose balances do not add up."],
+      ["fairshop-store-credit", "Gift card and store credit liability by age, and cards whose balances do not add up."],
       ["fairshop-subscriptions", "Failed payments not retried, retries used up, cards about to expire, and churn by cause."],
       ["fairshop-affiliate-commissions", "Commissions on refunded or missing orders, above your rate, paid twice, or on own-link purchases."]
     ]],
