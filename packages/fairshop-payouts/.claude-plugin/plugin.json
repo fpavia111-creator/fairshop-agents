@@ -1,6 +1,6 @@
 {
   "name": "fairshop-payouts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Matches every order to the payout lines in Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy and Walmart exports, by channel: orders never paid out, paid short, paid twice, refunds not yet deducted, fees above your rate and payout lines with no order. Drafts an inquiry per channel; never contacts support or moves money.",
   "author": {
     "name": "Kurt Francisco"

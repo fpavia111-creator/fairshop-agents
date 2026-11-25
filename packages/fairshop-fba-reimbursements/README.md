@@ -29,7 +29,7 @@ Fairshop FBA Reimbursements demo (fictional data, as of 2026-11-16), Auto mode o
 
 ▶ Check the files
   status: executed  decision: allow
-  11 item(s): 2 to claim (36 estimated), 2 still inside the wait, 2 past the window (80 lost), 1 low reimbursement(s) to review, 4 settled.
+  36 estimated to claim (2 item(s)). 11 item(s) checked: 2 still inside the wait, 2 past the window (80 lost), 1 low reimbursement(s) to review, 4 settled.
     SKU:BAG-04                         window_closed    0       0  
     SKU:CAP-03                         waiting          0       0  
     SKU:MUG-01                         claim            2      24  2026-11-30
@@ -44,7 +44,7 @@ Fairshop FBA Reimbursements demo (fictional data, as of 2026-11-16), Auto mode o
 
 ▶ Write the worklist
   status: executed  decision: allow
-  Report written: 11 item(s): 2 to claim (36 estimated), 2 still inside the wait, 2 past the window (80 lost), 1 low reimbursement(s) to review, 4 settled.
+  Report written: 36 estimated to claim (2 item(s)). 11 item(s) checked: 2 still inside the wait, 2 past the window (80 lost), 1 low reimbursement(s) to review, 4 settled.
 
 ▶ Write a draft (Auto)
   status: executed  decision: allow  (auto)

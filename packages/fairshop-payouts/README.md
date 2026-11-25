@@ -32,7 +32,7 @@ Fairshop Payouts demo (fictional data, as of 2026-11-16), Auto mode on for draft
 
 ▶ Check the files
   status: executed  decision: allow
-  13 order(s) on 3 channel(s): 3 to chase (191.49 not paid out or short), 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.
+  191.49 not paid out or short (3 order(s) to chase). 13 order(s) on 3 channel(s): 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.
     112-0000001-0000001    Amazon   ok             0  
     112-0000002-0000002    Amazon   chase          2  paid_short
     112-0000003-0000003    Amazon   chase      99.99  not_paid_out
@@ -51,7 +51,7 @@ Fairshop Payouts demo (fictional data, as of 2026-11-16), Auto mode on for draft
 
 ▶ Write the worklist
   status: executed  decision: allow
-  Report written: 13 order(s) on 3 channel(s): 3 to chase (191.49 not paid out or short), 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.
+  Report written: 191.49 not paid out or short (3 order(s) to chase). 13 order(s) on 3 channel(s): 1 still inside the payout window, 5 to review, 4 paid in full, 2 skipped.
 
 ▶ Write a draft (Auto)
   status: executed  decision: allow  (auto)

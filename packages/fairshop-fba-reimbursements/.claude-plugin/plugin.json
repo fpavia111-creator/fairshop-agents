@@ -1,6 +1,6 @@
 {
   "name": "fairshop-fba-reimbursements",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Finds Amazon FBA reimbursements owed: units lost or damaged in Amazon's warehouses and not found or reimbursed, refunds with no customer return, and reimbursements below your unit value, each with a claim-by date. Drafts the case text; a person files it in Seller Central.",
   "author": {
     "name": "Kurt Francisco"

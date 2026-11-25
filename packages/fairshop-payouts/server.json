@@ -3,7 +3,7 @@
   "name": "io.github.fpavia111-creator/fairshop-payouts",
   "title": "Fairshop Payouts",
   "description": "Matches every order to the payout lines in Shopify Payments, Stripe, PayPal, Amazon, eBay, Etsy…",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "url": "https://github.com/fpavia111-creator/fairshop-agents",
     "source": "github",
@@ -14,7 +14,7 @@
     {
       "registryType": "npm",
       "identifier": "fairshop-payouts",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "transport": {
         "type": "stdio"
       },
