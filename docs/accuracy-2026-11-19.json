@@ -169,7 +169,7 @@
       "mutation_side_findings": 0
     },
     {
-      "agent": "fairshop-gift-cards",
+      "agent": "fairshop-store-credit",
       "check": "giftcards_liability",
       "planted_total": 5,
       "planted_found": 5,

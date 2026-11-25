@@ -1,7 +1,7 @@
 {
-  "name": "fairshop-gift-cards",
+  "name": "fairshop-store-credit",
   "version": "0.1.0",
-  "mcpName": "io.github.fpavia111-creator/fairshop-gift-cards",
+  "mcpName": "io.github.fpavia111-creator/fairshop-store-credit",
   "description": "Works out gift card and store credit liability from card and activity exports: balances that do not match the ledger, cards spent below zero, large manual issues with no order, redemptions before issue, and dormant cards, by age. Drafts the liability entry; never changes a card.",
   "type": "module",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "fairshop-gift-cards": "bin/fairshop-gift-cards.js"
+    "fairshop-store-credit": "bin/fairshop-store-credit.js"
   },
   "files": [
     "src",
@@ -29,8 +29,8 @@
   ],
   "scripts": {
     "test": "node scripts/run-tests.cjs",
-    "demo": "node bin/fairshop-gift-cards.js demo",
-    "eval": "node bin/fairshop-gift-cards.js eval"
+    "demo": "node bin/fairshop-store-credit.js demo",
+    "eval": "node bin/fairshop-store-credit.js eval"
   },
   "dependencies": {
     "fairshop-core": "^0.1.0"
@@ -38,9 +38,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fpavia111-creator/fairshop-agents.git",
-    "directory": "packages/fairshop-gift-cards"
+    "directory": "packages/fairshop-store-credit"
   },
-  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-gift-cards#readme",
+  "homepage": "https://github.com/fpavia111-creator/fairshop-agents/tree/main/packages/fairshop-store-credit#readme",
   "bugs": {
     "url": "https://github.com/fpavia111-creator/fairshop-agents/issues"
   },

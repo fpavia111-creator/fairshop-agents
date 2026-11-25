@@ -12,7 +12,7 @@ Kurt approved using these prices.
 |---|---|---|
 | Payouts check | fairshop-payouts, fairshop-processor-reserves, fairshop-settlement-journals | $1,000 |
 | Marketplace money back (Amazon and other marketplaces) | fairshop-fba-reimbursements, fairshop-fba-storage-fees, fairshop-marketplace-fees, fairshop-marketplace-claims | $2,000 |
-| Returns and promotions | fairshop-refunds-returns, fairshop-return-reasons, fairshop-coupon-abuse, fairshop-gift-cards, fairshop-subscriptions, fairshop-affiliate-commissions | $2,000 |
+| Returns and promotions | fairshop-refunds-returns, fairshop-return-reasons, fairshop-coupon-abuse, fairshop-store-credit, fairshop-subscriptions, fairshop-affiliate-commissions | $2,000 |
 | Sales tax pack | fairshop-sales-tax, fairshop-nexus-thresholds | $1,500 |
 | Inventory and listings | fairshop-inventory-listings, fairshop-stockouts, fairshop-product-data, fairshop-duplicate-listings, fairshop-map-pricing, fairshop-sku-margins, fairshop-ad-spend | $2,500 |
 | Shipping and purchasing | fairshop-shipping-costs, fairshop-carrier-adjustments, fairshop-3pl-invoices, fairshop-po-receiving, fairshop-landed-cost, fairshop-retailer-deductions | $2,500 |

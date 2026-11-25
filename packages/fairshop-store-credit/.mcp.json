@@ -1,10 +1,10 @@
 {
   "mcpServers": {
-    "fairshop-gift-cards": {
+    "fairshop-store-credit": {
       "command": "npx",
       "args": [
         "-y",
-        "fairshop-gift-cards@0.1.0",
+        "fairshop-store-credit@0.1.0",
         "mcp"
       ]
     }
