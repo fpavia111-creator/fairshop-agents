@@ -2,7 +2,7 @@
 
 > Check every affiliate commission against your orders and program terms before the next payout: refunded or cancelled orders, orders that do not exist, rates above your terms, the same order paid twice, and own-link purchases. Never approves a payout.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

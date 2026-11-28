@@ -2,7 +2,7 @@
 
 > Work out gift card and store credit liability from your card and activity exports, by age, and find the cards to look at: balances that do not match their activity, cards spent past their value, large manual issues, use before issue, and dormant cards. Never changes a card.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

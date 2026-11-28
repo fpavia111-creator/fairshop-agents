@@ -2,7 +2,7 @@
 
 > Check every order that used a discount code against your code rules: limits, dates, minimums, new-customer codes used by returning shoppers, staff codes outside staff, and codes you never issued. Never disables a code or cancels an order.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

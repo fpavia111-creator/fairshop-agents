@@ -2,7 +2,7 @@
 
 > Match refunds to returns received: money refunded for items that never came back, customers still owed a refund, refunds paid twice or above the price, and full refunds on damaged returns. Never refunds or e-mails; reminders are one human click.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

@@ -2,7 +2,7 @@
 
 > Track sales and order counts by state against the economic nexus thresholds you confirm: states where your threshold was met and you are not registered (with the date), states approaching, and states with sales but no threshold set. Never registers or files. Not tax advice.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

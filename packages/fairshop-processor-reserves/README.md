@@ -2,7 +2,7 @@
 
 > Track money that Stripe, PayPal or Shopify Payments is holding: releases overdue, holds above your terms, releases coming up and dispute holds open too long. Never moves money; an inquiry is one human click.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

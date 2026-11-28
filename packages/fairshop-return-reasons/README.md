@@ -2,7 +2,7 @@
 
 > Find out why things come back: SKUs returned far more than the rest and the likely fix, and customers who return most of what they buy, with names and e-mails masked. Never blocks a customer or changes a listing.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

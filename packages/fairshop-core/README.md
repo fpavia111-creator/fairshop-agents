@@ -1,6 +1,6 @@
 # fairshop-core
 
-The shared core for the **Fairshop** agents by Mythos Machines: small MCP agents that each own one e-commerce or retail back-office job and cannot act outside it. It is the Lodestar (Fairhaul) core with the 18 Nov 2026 Windows fixes, without the freight EDI readers, plus customer-data masking, commerce helpers and a shared agent builder.
+The shared core for the **Fairshop** agents by Fair Agents: small MCP agents that each own one e-commerce or retail back-office job and cannot act outside it. It is the Lodestar (Fairhaul) core with the 18 Nov 2026 Windows fixes, without the freight EDI readers, plus customer-data masking, commerce helpers and a shared agent builder.
 
 - **Pack manifest** — name, version, a declared model pin, the tool allowlist and the policy. `defineManifest()` fails closed: an unpinned model (`latest`), a tool without a rule, a write marked `allow`, or a one-click action marked `allow` are rejected at load time.
 - **Talos-style policy** — every tool call gets `allow`, `ask` or `block`. Unknown tools are blocked. The default is block.
@@ -263,14 +263,14 @@ The core reads exports the way systems in Germany, France, Spain, Brazil, Italy,
 
 **Limits.** The translations were written by Claude and have not been reviewed by native speakers; every translated page says so. The encoding guess can be wrong on very short files; set `encoding` when names look garbled. The column dictionaries cover common names, not every system's labels. The agents make no claim about any country's laws, tax rules or filing formats.
 
-## Paid tier (licence keys)
+## Paid tier (license keys)
 
-A tool marked `tier: 'pro'` (optionally with a `feature` name) runs only with a valid licence key. Without one it returns `status: 'needs_license'` with the reason; free tools keep working. The check runs after the policy, so a blocked tool stays blocked, an `ask` tool still asks, nothing is put on Auto and one-click categories are untouched; no approval is requested for a call that cannot run.
+A tool marked `tier: 'pro'` (optionally with a `feature` name) runs only with a valid license key. Without one it returns `status: 'needs_license'` with the reason; free tools keep working. The check runs after the policy, so a blocked tool stays blocked, an `ask` tool still asks, nothing is put on Auto and one-click categories are untouched; no approval is requested for a call that cannot run.
 
 A key is `FAIRSHOP1.<payload>.<Ed25519 signature>` with licensee, plan, agents (`*` or package names), features, issue and expiry dates. It is checked offline against the public keys in `src/license-keys.js` (empty in this release, so nothing can be unlocked yet). There is no environment variable or config file that adds a trusted key.
 
 - Customer: `<pack> license install key.txt` (copies it to `.fairshop/license.key`), `<pack> license status`, or set `FAIRSHOP_LICENSE` / `FAIRSHOP_LICENSE_FILE`. `fairshop_info` shows the plan, expiry and which tools are unlocked, never the key.
-- Seller, on their own computer: `npx -p fairshop-core fairshop-license keygen --out ~/fairshop-licence-keys`, paste the printed public key into `LICENSE_PUBLIC_KEYS`, release, then `fairshop-license issue --key ~/fairshop-licence-keys/private.pem --licensee "Customer" --plan pro --days 365 [--agents polaris-of-bills] --out customer.key` and `fairshop-license verify customer.key --pubkey ~/fairshop-licence-keys/public.pem`. Withdrawn licence ids go in `LICENSE_REVOKED_IDS` and take effect from the next release.
+- Seller, on their own computer: `npx -p fairshop-core fairshop-license keygen --out ~/fairshop-license-keys`, paste the printed public key into `LICENSE_PUBLIC_KEYS`, release, then `fairshop-license issue --key ~/fairshop-license-keys/private.pem --licensee "Customer" --plan pro --days 365 [--agents polaris-of-bills] --out customer.key` and `fairshop-license verify customer.key --pubkey ~/fairshop-license-keys/public.pem`. Withdrawn license ids go in `LICENSE_REVOKED_IDS` and take effect from the next release.
 - `ctx.license` gives a handler `{ status, valid, plan, features, has(feature) }`.
 
 This is not copy protection: the packages are MIT-licensed source and anyone can remove the check. It draws a clear line for honest customers.

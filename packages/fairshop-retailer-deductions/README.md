@@ -2,7 +2,7 @@
 
 > Check the deductions retailers take from your wholesale remittances: shortages your signed proof of delivery disproves, allowances above what you agreed, deductions taken twice, compliance fines needing evidence, small ones to write off, and ones past the window. Never submits a dispute.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

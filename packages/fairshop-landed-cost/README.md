@@ -2,7 +2,7 @@
 
 > Spread freight, duty, broker and other import costs over each shipment's SKUs to get a landed unit cost, compare it with the cost in your store, and find shipments with no costs and costs with no shipment. Never changes a cost.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 // Writes the Claude Code plugin marketplace (.claude-plugin/marketplace.json) and, in every
-// agent package, .claude-plugin/plugin.json plus .mcp.json. Each plugin starts its agent with
-// npx at the pinned version, so it works once that version is on npm.
+// agent package, .claude-plugin/plugin.json. Each plugin carries the agent's Agent Skill
+// (scripts/skill-files.mjs), which runs the agent with npx at the pinned version.
 // Usage: node scripts/plugin-files.mjs [--check]
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -15,7 +15,6 @@ for (const n of pkgs) {
   const p = JSON.parse(readFileSync(join(root, 'packages', n, 'package.json'), 'utf8'));
   const desc = ((s) => s[0].toUpperCase() + s.slice(1))(p.description.replace(/^[A-Z]\w+ of [A-Z]\w+:\s*/, ''));
   want.set(join('packages', n, '.claude-plugin', 'plugin.json'), { name: n, version: p.version, description: desc, author: { name: p.author }, license: p.license, homepage: p.homepage, keywords: p.keywords });
-  want.set(join('packages', n, '.mcp.json'), { mcpServers: { [n]: { command: 'npx', args: ['-y', `${n}@${p.version}`, 'mcp'] } } });
   plugins.push({ name: n, source: `./packages/${n}`, description: desc, version: p.version, category: 'ecommerce', keywords: [...new Set(p.keywords.filter((k) => !['mcp', 'mcp-server', 'fairshop'].includes(k)))] });
 }
 want.set(join('.claude-plugin', 'marketplace.json'), { name: 'fairshop-ecommerce', owner: { name: 'Fairshop' }, metadata: { description: 'Thirty e-commerce and retail back-office agents. Each reads your exported files, writes reports locally and waits for a named person before anything that moves money, sends a message or changes a live system.' }, plugins });

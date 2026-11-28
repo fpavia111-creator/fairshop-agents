@@ -6,7 +6,7 @@
 
 为网店和有收银台的门店准备的 30 个小型智能体。每个只做一项后台工作，在您自己的电脑上，读取您已经导出的文件：Shopify、WooCommerce、BigCommerce、亚马逊卖家中心、eBay、Etsy、Walmart Marketplace、Stripe、PayPal、Square、ShipStation、Shippo 以及第三方仓储的账单。每个智能体都会写出一份工作清单（带空白决定列的 CSV 和一个 HTML 页面）；需要发送的内容则写成草稿，等待一位署名的人处理。
 
-软件免费（MIT）。Mythos Machines 提供基于您自己文件的固定价格部署服务：见 [fair-agents.com](https://fair-agents.com)。
+软件免费（MIT）。Fair Agents 提供基于您自己文件的固定价格部署服务：见 [fair-agents.com](https://fair-agents.com)。
 
 ## 任何智能体都不会做的事
 
@@ -94,8 +94,8 @@ npx -y fairshop-payouts call payouts_audit '{"orders":"orders.csv","payouts":"pa
 
 ## 如何检验
 
-所有检验及其数字见 [REVIEW-ver1.md](REVIEW-ver1.md)（英文）。本仓库中的数据均为虚构。
+所有检验及其数字见 [docs/](docs/)（英文）。本仓库中的数据均为虚构。
 
 ## 许可
 
-MIT。由 Mythos Machines 开发。
+MIT。由 Fair Agents 开发。

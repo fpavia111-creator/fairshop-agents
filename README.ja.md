@@ -6,7 +6,7 @@
 
 ネットショップとレジのある店舗のための小さなエージェントが 30 個あります。どれも一つのバックオフィス業務を、お使いのパソコン上で、すでに書き出しているファイルから行います（Shopify、WooCommerce、BigCommerce、Amazon セラーセントラル、eBay、Etsy、Walmart Marketplace、Stripe、PayPal、Square、ShipStation、Shippo、物流委託先の請求書）。それぞれが作業リスト（判断欄が空の CSV と HTML ページ）を書き、送る必要があるものは、名前のある担当者を待つ下書きにします。
 
-ソフトウェアは無料（MIT）です。Mythos Machines はお客様のファイルでの導入を定額で提供しています。[fair-agents.com](https://fair-agents.com) をご覧ください。
+ソフトウェアは無料（MIT）です。Fair Agents はお客様のファイルでの導入を定額で提供しています。[fair-agents.com](https://fair-agents.com) をご覧ください。
 
 ## どのエージェントもしないこと
 
@@ -94,8 +94,8 @@ npx -y fairshop-payouts call payouts_audit '{"orders":"orders.csv","payouts":"pa
 
 ## 検証方法
 
-すべての検証とその数値は [REVIEW-ver1.md](REVIEW-ver1.md)（英語）にあります。このリポジトリのデータはすべて架空のものです。
+すべての検証とその数値は [docs/](docs/)（英語）にあります。このリポジトリのデータはすべて架空のものです。
 
 ## ライセンス
 
-MIT。Mythos Machines が開発。
+MIT。Fair Agents が開発。
