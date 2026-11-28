@@ -2,7 +2,7 @@
 
 > Check advertised prices against your minimum advertised price (MAP) list: your own listings below MAP first, resellers below it (and repeat ones), exempt sellers and paused dates, and SKUs not on the list. Never changes a price or cuts off a reseller.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

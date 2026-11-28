@@ -2,7 +2,7 @@
 
 > Check product data before it goes to a channel: missing GTIN, brand, weight, price or images, titles over the limit you set, GTINs with a wrong check digit or shared by two SKUs, zero weights and prices, and thin descriptions. Never changes a listing.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

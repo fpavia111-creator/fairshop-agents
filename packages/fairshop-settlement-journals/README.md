@@ -2,7 +2,7 @@
 
 > Turn marketplace settlements into one summarized, balanced journal entry each, from the account map you confirm, and match each one to its bank deposit. Never posts to your ledger; posting is one human click.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

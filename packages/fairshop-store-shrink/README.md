@@ -2,7 +2,7 @@
 
 > Measure shrink by store and category from your inventory adjustments and sales: stores above your target, stores where most loss has no explained reason, and SKUs written off again and again. Never posts an adjustment or touches staff records.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

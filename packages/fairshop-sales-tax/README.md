@@ -2,7 +2,7 @@
 
 > Compare the sales tax collected on every order with what your own confirmed settings give, by state: under- and over-collection, tax collected where you are not registered, exempt orders with no certificate, and marketplace orders. Never files or pays. Not tax advice.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

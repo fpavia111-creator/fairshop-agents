@@ -2,7 +2,7 @@
 
 > Read ad platform exports against your orders and stock: campaigns under your target return, spend with no sales, campaigns over budget, ads for out-of-stock SKUs, and platforms crediting more sales than the SKU sold. Never pauses a campaign or changes a budget.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

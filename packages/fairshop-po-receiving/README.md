@@ -2,7 +2,7 @@
 
 > Match purchase orders, receipts and supplier invoices: units billed but not received, invoices billed twice, prices above the PO, short and over shipments, late deliveries, and POs past due with nothing received. Never pays or cancels.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

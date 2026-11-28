@@ -2,7 +2,7 @@
 
 > Find subscriptions slipping away through failed payments: not retried, retries used up, cards about to expire, active plans with no payment, and churn split into voluntary and payment failure. Never charges a card or cancels a plan.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

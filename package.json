@@ -27,7 +27,9 @@
     "readme:check": "node scripts/readme-sections.mjs --check",
     "accuracy": "node scripts/accuracy.mjs",
     "model-view": "node scripts/model-view.mjs",
-    "realdata": "node --max-old-space-size=4096 scripts/realdata.mjs"
+    "realdata": "node --max-old-space-size=4096 scripts/realdata.mjs",
+    "skills": "node scripts/skill-files.mjs",
+    "skills:check": "node scripts/skill-files.mjs --check"
   },
   "engines": {
     "node": ">=20"

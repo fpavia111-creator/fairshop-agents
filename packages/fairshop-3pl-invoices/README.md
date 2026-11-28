@@ -2,7 +2,7 @@
 
 > Audit a 3PL invoice line by line against your rate card and your own counts: rates above the card, orders billed twice, picks for orders that never shipped, more units received or pallets stored than you counted, and charges not on the card. Never pays.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

@@ -6,7 +6,7 @@
 
 온라인 판매자와 계산대가 있는 매장을 위한 작은 에이전트 30개입니다. 각 에이전트는 이미 내보내고 있는 파일(Shopify, WooCommerce, BigCommerce, Amazon 셀러 센트럴, eBay, Etsy, Walmart Marketplace, Stripe, PayPal, Square, ShipStation, Shippo, 3PL 청구서)로 사용자의 컴퓨터에서 한 가지 백오피스 업무를 합니다. 각자 작업 목록(결정 칸이 빈 CSV와 HTML 페이지)을 쓰고, 보내야 할 것이 있으면 이름 있는 담당자를 기다리는 초안을 씁니다.
 
-소프트웨어는 무료(MIT)입니다. Mythos Machines는 고객의 파일로 하는 정액 설치를 제공합니다. [fair-agents.com](https://fair-agents.com)을 참고하세요.
+소프트웨어는 무료(MIT)입니다. Fair Agents는 고객의 파일로 하는 정액 설치를 제공합니다. [fair-agents.com](https://fair-agents.com)을 참고하세요.
 
 ## 어떤 에이전트도 하지 않는 일
 
@@ -94,8 +94,8 @@ npx -y fairshop-payouts call payouts_audit '{"orders":"orders.csv","payouts":"pa
 
 ## 검증 방법
 
-모든 검증과 수치는 [REVIEW-ver1.md](REVIEW-ver1.md)(영어)에 있습니다. 이 저장소의 데이터는 모두 가상입니다.
+모든 검증과 수치는 [docs/](docs/)(영어)에 있습니다. 이 저장소의 데이터는 모두 가상입니다.
 
 ## 라이선스
 
-MIT. Mythos Machines 개발.
+MIT. Fair Agents 개발.

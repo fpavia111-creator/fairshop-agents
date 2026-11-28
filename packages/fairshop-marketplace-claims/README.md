@@ -2,7 +2,7 @@
 
 > Line up Amazon A-to-z, eBay, Walmart and Etsy claims with your shipment and delivery records: what your tracking can defend, what still needs a signature or photos, what is likely a refund, and what is due when. Never submits a response or refunds; a response is one human click.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key. Card chargebacks are a different process; see `soteria-of-refunds` in the Fairbooks family.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key. Card chargebacks are a different process; see `soteria-of-refunds` in the Fairbooks family.
 
 ## What it checks
 

@@ -6,7 +6,7 @@
 
 30 agentes pequenos para vendedores online e lojas com caixa. Cada um faz uma tarefa de back-office, no seu computador, a partir de arquivos que você já exporta: Shopify, WooCommerce, BigCommerce, Amazon Seller Central, eBay, Etsy, Walmart Marketplace, Stripe, PayPal, Square, ShipStation, Shippo e as faturas do seu operador logístico. Cada um escreve uma lista de trabalho (CSV com uma coluna de decisão vazia e uma página HTML) e, quando algo precisa ser enviado, um rascunho que espera uma pessoa nomeada.
 
-O software é gratuito (MIT). A Mythos Machines oferece uma implantação a preço fixo nos seus próprios arquivos: veja [fair-agents.com](https://fair-agents.com).
+O software é gratuito (MIT). A Fair Agents oferece uma implantação a preço fixo nos seus próprios arquivos: veja [fair-agents.com](https://fair-agents.com).
 
 ## O que nenhum agente faz
 
@@ -94,8 +94,8 @@ npx -y fairshop-payouts call payouts_audit '{"orders":"orders.csv","payouts":"pa
 
 ## Como é verificado
 
-Cada verificação com seus números está em [REVIEW-ver1.md](REVIEW-ver1.md) (em inglês). Todos os dados deste repositório são fictícios.
+Cada verificação com seus números está em [docs/](docs/) (em inglês). Todos os dados deste repositório são fictícios.
 
 ## Licença
 
-MIT. Desenvolvido pela Mythos Machines.
+MIT. Desenvolvido pela Fair Agents.

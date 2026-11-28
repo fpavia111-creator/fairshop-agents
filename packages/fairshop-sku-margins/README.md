@@ -2,7 +2,7 @@
 
 > Work out contribution margin per SKU and channel from sales, fees, shipping labels and unit costs: SKUs that lose money on a channel, SKUs under your margin floor, and SKUs with no cost on file. Never changes a price.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

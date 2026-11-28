@@ -2,7 +2,7 @@
 
 > Find what Amazon still owes for FBA inventory: units lost or damaged in the warehouse, refunds whose return never arrived, and reimbursements below your unit value, each with a claim-by date. Never files a case; filing is one human click.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

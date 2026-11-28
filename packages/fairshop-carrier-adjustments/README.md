@@ -2,7 +2,7 @@
 
 > Check carrier adjustments against the weight and dimensions you entered on each label: disputes your own data supports (with a dispute-by date), adjustments that are right because your product data is wrong, the SKUs that keep causing them, and adjustments past their window. Never files a dispute or pays.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

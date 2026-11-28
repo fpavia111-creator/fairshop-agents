@@ -2,7 +2,7 @@
 
 > Find days out of stock, orders taken or cancelled while out of stock, an estimate of sales lost, and SKUs that will run out before a reorder could arrive, with a suggested quantity. Never sends a purchase order.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

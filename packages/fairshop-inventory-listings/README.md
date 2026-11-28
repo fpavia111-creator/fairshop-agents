@@ -2,7 +2,7 @@
 
 > Compare stock by location with what each channel lists: listings that can oversell, listings at zero while stock sits on the shelf, inactive listings with stock, unknown SKUs, and stock listed nowhere. Never changes a listing.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 

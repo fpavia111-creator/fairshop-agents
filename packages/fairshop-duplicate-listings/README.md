@@ -2,7 +2,7 @@
 
 > Find duplicate and orphan listings across channels: the same SKU listed twice on one channel (and at different prices), look-alike titles under different SKUs, one GTIN shared by several SKUs, and listings for SKUs not in your catalog. Never ends or merges a listing.
 
-Part of [Fairshop](https://fair-agents.com) by Mythos Machines: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
+Part of [Fairshop](https://fair-agents.com) by Fair Agents: one agent, one job, on your computer, from files you export. Built on [`fairshop-core`](../fairshop-core). MIT, Node 20 or newer, no account or API key.
 
 ## What it checks
 
